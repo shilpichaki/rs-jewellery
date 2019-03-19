@@ -8,6 +8,7 @@ class RawMaterial extends Model
 {
     protected $fillable = [
         'type',
-        'description'
+        'description',
+        'unit_of_measurement'
     ];
 }

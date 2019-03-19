@@ -17,6 +17,7 @@ class CreateRawMaterialsTable extends Migration
             $table->bigIncrements('id');
             $table->string('type');
             $table->string('description');
+            $table->string('unit_of_measurement');
             $table->timestamps();
             $table->softDeletes();
         });
