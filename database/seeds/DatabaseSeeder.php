@@ -3,6 +3,7 @@
 use App\Model\RawMaterial\RawMaterial;
 use App\Model\Vendor;
 use App\Stock;
+use App\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -18,7 +19,6 @@ class DatabaseSeeder extends Seeder
         factory(Vendor::class, 10)->create();
 
         Stock::truncate();
-
         for ($i = 0; $i<sizeof(RawMaterial::$rawMaterials); $i++) {
             Stock::create([
                 'raw_material_type' => RawMaterial::$rawMaterials[$i]['type'],
@@ -26,5 +26,8 @@ class DatabaseSeeder extends Seeder
                 'stock_value' => mt_rand(50, 100) * 50
             ]);
         }
+
+        User::truncate();
+        factory(User::class, 10)->create();
     }
 }

@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Stock;
 use Illuminate\Http\Request;
+use Session;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class StockController extends Controller
 {
@@ -12,11 +15,28 @@ class StockController extends Controller
         return view('stock.show')->withStock($stock);
     }
 
-    public function update(Request $request, Stock $stock)
+    public function addStock(Request $request, Stock $stock)
     {
-        $stock->stock_value = $request->stock_value;
+        $validatorRequestData = Validator::make($request->all(), [
+            'stock_value' => 'required|integer|min:1',
+            'vendor_id' => [
+                'required',
+                'integer',
+                'min:1',
+                'exists:vendors,id'
+            ],
+        ]);
+
+        if ($validatorRequestData->fails()) {
+            return redirect()
+                ->route('stock.show', ['stock' => $stock->id])
+                ->withErrors($validatorRequestData);
+        }
+
+        $stock->addStock($request->stock_value);
+        Session::flash('vendor_id', $request->vendor_id);
         $stock->update();
 
-        return response()->json($stock);
+        return redirect()->route('stock.show', ['stock' => $stock->id]);
     }
 }

@@ -31,6 +31,6 @@ class CreateTableStocks extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('table_stocks');
+        Schema::dropIfExists('stocks');
     }
 }
