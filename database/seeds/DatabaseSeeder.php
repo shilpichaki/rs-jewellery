@@ -1,6 +1,8 @@
 <?php
 
 use App\Model\RawMaterial\RawMaterial;
+use App\Model\Vendor;
+use App\Stock;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -12,46 +14,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        RawMaterial::truncate();;
+        Vendor::truncate();
+        factory(Vendor::class, 10)->create();
 
-        RawMaterial::create([
-            'type' => \App\Model\RawMaterial\AmericanDiamond::$type,
-            'description' => \App\Model\RawMaterial\AmericanDiamond::$description
-        ]);
+        Stock::truncate();
 
-        RawMaterial::create([
-            'type' => \App\Model\RawMaterial\BrassMetal::$type,
-            'description' => \App\Model\RawMaterial\BrassMetal::$description
-        ]);
-
-        RawMaterial::create([
-            'type' => \App\Model\RawMaterial\Chemical::$type,
-            'description' => \App\Model\RawMaterial\Chemical::$description
-        ]);
-
-        RawMaterial::create([
-            'type' => \App\Model\RawMaterial\InvestmentPowder::$type,
-            'description' => \App\Model\RawMaterial\InvestmentPowder::$description
-        ]);
-
-        RawMaterial::create([
-            'type' => \App\Model\RawMaterial\PackagingMaterial::$type,
-            'description' => \App\Model\RawMaterial\PackagingMaterial::$description
-        ]);
-
-        RawMaterial::create([
-            'type' => \App\Model\RawMaterial\Rubber::$type,
-            'description' => \App\Model\RawMaterial\Rubber::$description
-        ]);
-
-        RawMaterial::create([
-            'type' => \App\Model\RawMaterial\Tools::$type,
-            'description' => \App\Model\RawMaterial\Tools::$description
-        ]);
-
-        RawMaterial::create([
-            'type' => \App\Model\RawMaterial\Wax::$type,
-            'description' => \App\Model\RawMaterial\Wax::$description
-        ]);
+        for ($i = 0; $i<sizeof(RawMaterial::$rawMaterials); $i++) {
+            Stock::create([
+                'raw_material_type' => RawMaterial::$rawMaterials[$i]['type'],
+                'threshold_value' => (mt_rand(1, 5) * 50),
+                'stock_value' => mt_rand(50, 100) * 50
+            ]);
+        }
     }
 }

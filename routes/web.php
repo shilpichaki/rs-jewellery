@@ -1,5 +1,7 @@
 <?php
 
+Auth::loginUsingId(2);
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,3 +20,6 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/stock/{stock}', 'StockController@show');
+Route::put('/stock/{stock}', 'StockController@update');
