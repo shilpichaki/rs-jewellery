@@ -5,6 +5,17 @@
 <h3>This stock was modified by: </h3>
 <ul>
     @foreach($stock->transactions as $transaction)
-        <li>{{$transaction->name}} at {{$transaction->updated_at->diffForhumans()}}</li>
+        <li>{{$transaction->name}} at {{$transaction->pivot->updated_at->diffForHumans()}}</li>
     @endforeach
 </ul>
+
+@if ($errors->any())
+<h1>Errors</h1>
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
