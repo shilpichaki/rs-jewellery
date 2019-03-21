@@ -1,7 +1,7 @@
 <?php
 
 use App\Model\RawMaterial\RawMaterial;
-use App\Model\Vendor;
+use App\Vendor;
 use App\User;
 use Illuminate\Support\Str;
 use Faker\Generator as Faker;
