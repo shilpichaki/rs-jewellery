@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Session;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use Auth;
 
 class StockController extends Controller
 {
@@ -34,8 +35,18 @@ class StockController extends Controller
             ->withUnitOfMeasurement($this->unitOfMeasurement);
     }
 
-    public function addStock(Request $request, Stock $stock)
+    public function addStock(Request $request)
     {
+        $stock = Stock::exists($request->material_type);
+        Session::flash('vendor_id', $request->vendor_id);
+
+        if($stock) {
+            $stock->addStock($request->stock_value);
+        } else {
+            Stock::createNewStockWithGivenStockValue($request)
+                ->logStockEntry($request);
+        }
+        /*
         $validatorRequestData = Validator::make($request->all(), [
             'stock_value' => 'required|integer|min:1',
             'vendor_id' => [
@@ -57,6 +68,7 @@ class StockController extends Controller
         $stock->update();
 
         return redirect()->route('stock.show', ['stock' => $stock->id]);
+        */
     }
 
     private function addRawMaterials()
@@ -79,5 +91,11 @@ class StockController extends Controller
         array_push($this->unitOfMeasurement, UnitOfMeasurement::lt);
         array_push($this->unitOfMeasurement, UnitOfMeasurement::ml);
         array_push($this->unitOfMeasurement, UnitOfMeasurement::pcs);
+    }
+
+    public function addStockValue(int $newStockValue, Stock $stock)
+    {
+        $stock->stock_value += $newStockValue;
+        return $stock;
     }
 }

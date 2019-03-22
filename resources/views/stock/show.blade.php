@@ -5,7 +5,11 @@
 <h3>This stock was modified by: </h3>
 <ul>
     @foreach($stock->transactions as $transaction)
-        <li>{{$transaction->name}} at {{$transaction->pivot->updated_at->diffForHumans()}}</li>
+        <li>
+            {{$transaction->name}} at {{$transaction->pivot->updated_at->diffForHumans()}}
+            <p>Before: {{$transaction->pivot->before}}</p>
+            <p>After: {{$transaction->pivot->after}}</p>
+        </li>
     @endforeach
 </ul>
 

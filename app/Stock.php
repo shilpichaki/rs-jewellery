@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Auth;
+use Illuminate\Http\Request;
 use Session;
 
 class Stock extends Model
@@ -28,21 +29,53 @@ class Stock extends Model
         parent::boot();
 
         static::updating(function ($stock) {
-            $stock->transactions()->attach(Auth::user()->id, ['vendor_id' => Session::get('vendor_id')]);
+            $stock->transactions()->attach(Auth::user()->id, [
+                'vendor_id' => Session::get('vendor_id'),
+                'before' => json_encode(array_intersect_key($stock->fresh()->toArray(), $stock->getDirty())),
+                'after' => json_encode($stock->getDirty())
+            ]);
         });
+    }
+
+    public static function exists($materialType)
+    {
+        $stock = Stock::where('raw_material_type', $materialType)->first();
+
+        return $stock == null ? null : $stock;
+    }
+
+    public static function createNewStockWithGivenStockValue(Request $request)
+    {
+        $newStock = Stock::create([
+            'raw_material_type' => $request->material_type,
+            'threshold_value' => $request->threshold_value,
+            'stock_value' => $request->stock_value,
+        ]);
+
+        return $newStock;
+    }
+
+    public function logStockEntry(Request $request)
+    {
+        $this->transactions()->attach(Auth::user()->id, [
+            'vendor_id' => $request->vendor_id,
+            'before' => null,
+            'after' => json_encode($this)
+        ]);
     }
 
     public function transactions()
     {
         return $this->belongsToMany(User::class, 'raw_material_stock_transactions')
-            ->withPivot('vendor_id')
+            ->withPivot(['vendor_id', 'before', 'after'])
             ->withTimestamps()
             ->latest('pivot_updated_at');
     }
 
-    public function addStock(int $stock_value)
+    public function addStock(int $newStockValue)
     {
-        $this->stock_value += $stock_value;
+        $this->stock_value += $newStockValue;
+        $this->update();
         return $this;
     }
 
@@ -57,4 +90,6 @@ class Stock extends Model
         
         return null;
     }
+
+
 }
