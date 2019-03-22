@@ -29,5 +29,6 @@ Route::get('/dashboard', function () {
  * Stock
  * show, add-stock
  */
+Route::get('/stock/create', 'StockController@create')->name('stock.create');
 Route::get('/stock/{stock}', 'StockController@show')->name('stock.show');
 Route::patch('/stock/{stock}/add-stock', 'StockController@addStock');
