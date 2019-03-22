@@ -1,9 +1,9 @@
 @extends('layouts.master')
 
-@section('title')
-    Dashboard Content
+{{--@section('title')--}}
+    {{--Dashboard Content--}}
 
-@endsection
+{{--@endsection--}}
 
 @section('content')
     <p>Dashboard Content</p>
