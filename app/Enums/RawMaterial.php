@@ -13,5 +13,5 @@ abstract class RawMaterial
     const TOOLS = 'TOOLS';
     const CHEMICAL = 'CHEMICAL';
     const PACKAGING_MATERIAL = 'PACKAGING MATERIAL';
-    const RUBBER = 'Rubber';
+    const RUBBER = 'RUBBER';
 }
