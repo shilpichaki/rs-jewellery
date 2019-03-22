@@ -1,0 +1,12 @@
+<html>
+<head>
+<title>
+    @yield('title')
+</title>
+</head>
+<body>
+    <h1>Before</h1>
+    @yield('content')
+    <h1>After</h1>
+</body>
+</html>
