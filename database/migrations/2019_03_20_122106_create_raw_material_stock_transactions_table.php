@@ -16,8 +16,10 @@ class CreateRawMaterialStockTransactionsTable extends Migration
         Schema::create('raw_material_stock_transactions', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('stock_id')->index()->unsigned();
-            $table->bigInteger('vendor_id')->index()->unsigned();
+            $table->bigInteger('vendor_id')->index()->unsigned()->nullable();
             $table->bigInteger('user_id')->index()->unsigned();
+            $table->text('before')->nullable();
+            $table->text('after')->nullable();
 
             $table->timestamps();
         });

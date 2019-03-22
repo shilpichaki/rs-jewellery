@@ -14,7 +14,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/login');
 });
 
 Auth::routes();
@@ -31,4 +31,4 @@ Route::get('/dashboard', function () {
  */
 Route::get('/stock/create', 'StockController@create')->name('stock.create');
 Route::get('/stock/{stock}', 'StockController@show')->name('stock.show');
-Route::patch('/stock/{stock}/add-stock', 'StockController@addStock');
+Route::post('/stock/add-stock', 'StockController@addStock')->name('stock.addstock');
