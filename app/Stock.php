@@ -90,6 +90,4 @@ class Stock extends Model
         
         return null;
     }
-
-
 }

@@ -1,6 +1,6 @@
 <?php
 
-//Auth::loginUsingId(2);
+Auth::loginUsingId(2);
 
 /*
 |--------------------------------------------------------------------------
@@ -33,6 +33,8 @@ Route::get('/design-aadhar', function () {
  * Stock
  * show, add-stock
  */
+
+Route::get('/stock', 'StockController@index')->name('stock.index');
 Route::get('/stock/add-stock', 'StockController@create')->name('stock.create');
-Route::get('/stock/{stock}', 'StockController@show')->name('stock.show');
 Route::post('/stock/add-stock', 'StockController@addStock')->name('stock.addstock');
+Route::get('/stock/{stock}', 'StockController@show')->name('stock.show');
