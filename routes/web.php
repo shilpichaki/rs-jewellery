@@ -38,3 +38,10 @@ Route::get('/stock', 'StockController@index')->name('stock.index');
 Route::get('/stock/add-stock', 'StockController@create')->name('stock.create');
 Route::post('/stock/add-stock', 'StockController@addStock')->name('stock.addstock');
 Route::get('/stock/{stock}', 'StockController@show')->name('stock.show');
+
+/**
+ * Design
+ * show, add-stock
+ */
+Route::get('/design/add-design', 'DesignController@addDesign')->name('design.add-design');
+Route::post('/design/add-design', 'DesignController@store')->name('design.store-design');
