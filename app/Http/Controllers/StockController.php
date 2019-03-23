@@ -25,7 +25,7 @@ class StockController extends Controller
     public function index()
     {
         $stocks = Stock::with('transactions')->get();
-        // return $stocks;
+//         return $stocks;
         return view('stock.index')->withStocks($stocks);
     }
 
