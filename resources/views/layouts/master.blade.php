@@ -27,6 +27,7 @@
     <link rel="stylesheet" type="text/css" href="{{asset('css/jquery.mCustomScrollbar.css')}}">
 
     <script src="{{asset('js/jquery.min.js')}}"></script>
+    @yield('css')
 </head>
 
 <body>

@@ -1,33 +1,90 @@
-<form action="{{route('stock.addstock')}}" method="post">
-    {{csrf_field()}}
-    <lable>Material Type</lable>
-    <select name="material_type" id="">
-        @foreach ($rawMaterial as $material)
-            <option value="{{$material}}">{{$material}}</option>
-        @endforeach
-    </select>
+@extends('layouts.master')
 
-    <lable>Material Type</lable>
-    <select name="" id="">
-        @foreach ($unitOfMeasurement as $unit)
-            <option value="{{$unit}}">{{$unit}}</option>
-        @endforeach
-    </select>
+@section('css')
+    <!--forms-wizard css-->
+    <link rel="stylesheet" type="text/css" href="{{asset('css/jquery.steps.css')}}">
+@endsection
 
-    <lable>Threshold value</lable>
-    <input type="number">
+@section('content')
+    <div class="row">
 
-    <label for="">Amount you want to add</label>
-    <input type="number" name="stock_value">
+        <div class="offset-lg-2 col-lg-8">
 
-    <label for="">Today's rate</label>
-    <input type="number">
+            <div class="card">
 
-    <label for="">Price</label>
-    <input type="number">
+                <div class="card-header">
+                    <h4>Stock entry</h4>
+                    <span>Application form for <code>Stock entry</code></span>
 
-    <button>Submit</button>
-</form>
+                </div>
+                <div class="card-block">
+
+                    <form action="{{route('stock.addstock')}}" method="post">
+                        {{csrf_field()}}
+                        <div class="row form-group">
+                            <div class="col-sm-4">
+                                <label class="col-form-label">Material Type</label>
+                            </div>
+                            <div class="col-sm-8">
+                                <select class="form-control form-control-primary"name="material_type" id="">
+                                    @foreach ($rawMaterial as $material)
+                                        <option value="{{$material}}">{{$material}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-sm-4">
+                                <label class="col-form-label">Unit of Measurement</label>
+                            </div>
+                            <div class="col-sm-8">
+                                <select name="" class="form-control form-control-primary">
+                                    @foreach ($unitOfMeasurement as $unit)
+                                        <option value="{{$unit}}">{{$unit}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-sm-4">
+                                <label class="col-form-label">Threshold value</label>
+                            </div>
+                            <div class="col-sm-8">
+                                <input type="number" class="form-control autonumber form-control-primary">
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-sm-4">
+                                <label class="col-form-label">Amount you want to add</label>
+                            </div>
+                            <div class="col-sm-8">
+                                <input type="number" class="form-control autonumber form-control-primary"
+                                       name="stock_value">
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-sm-4">
+                                <label class="col-form-label">Today's rate</label>
+                            </div>
+                            <div class="col-sm-8">
+                                <input type="number" class="form-control autonumber form-control-primary">
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-sm-4">
+                                <label class="col-form-label">Price</label>
+                            </div>
+                            <div class="col-sm-8">
+                                <input type="number" class="form-control autonumber form-control-primary">
+                            </div>
+                        </div>
+                            <button type="submit" class="btn btn-primary ml-auto">Submit</button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
 
 @if ($errors->any())
     <h1>Errors</h1>
@@ -39,3 +96,17 @@
         </ul>
     </div>
 @endif
+@endsection
+
+@section('js')
+    <!--Forms - Wizard js-->
+    <script src="{{asset('js/jquery.cookie.js')}}" type="506c7ecb9b519216be21f8d6-text/javascript"></script>
+    <script src="{{asset('js/jquery.steps.js')}}" type="506c7ecb9b519216be21f8d6-text/javascript"></script>
+    <script src="{{asset('js/jquery.validate.js')}}" type="506c7ecb9b519216be21f8d6-text/javascript"></script>
+    <!-- Validation js -->
+    <script src="{{asset('js/underscore-min.js')}}" type="506c7ecb9b519216be21f8d6-text/javascript"></script>
+    <script src="{{asset('js/moment.min.js')}}" type="506c7ecb9b519216be21f8d6-text/javascript"></script>
+    <script type="506c7ecb9b519216be21f8d6-text/javascript" src="{{asset('js/validate.js')}}"></script>
+    <!-- Custom js -->
+    <script src="{{asset('js/form-wizard.js')}}" type="506c7ecb9b519216be21f8d6-text/javascript"></script>
+@endsection
