@@ -22,6 +22,12 @@ class StockController extends Controller
         $this->addunitOfMeasurement();
     }
 
+    public function index()
+    {
+        $stocks = Stock::with('transactions')->get();
+        // return $stocks;
+        return view('stock.index')->withStocks($stocks);
+    }
 
     public function show(Stock $stock)
     {
