@@ -14,19 +14,30 @@ Auth::loginUsingId(2);
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/login');
 });
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware('auth');
+
+Route::get('/design-aadhar', function () {
+    return view('design-aadhar');
+});
+
 /**
  * Stock
  * show, add-stock
  */
+
+Route::get('/stock', 'StockController@index')->name('stock.index');
+Route::get('/stock/add-stock', 'StockController@create')->name('stock.create');
+Route::post('/stock/add-stock', 'StockController@addStock')->name('stock.addstock');
 Route::get('/stock/{stock}', 'StockController@show')->name('stock.show');
-Route::patch('/stock/{stock}/add-stock', 'StockController@addStock');
 
 /**
  * Design
@@ -34,9 +45,3 @@ Route::patch('/stock/{stock}/add-stock', 'StockController@addStock');
  */
 Route::get('/design/add-design', 'DesignController@addDesign')->name('design.add-design');
 Route::post('/design/add-design', 'DesignController@store')->name('design.store-design');
-
-// Route::post('/design/add-design', function() {
-// 	request()->file('picture')->store('pictures');
-
-// 	return redirect()->back();
-// });
