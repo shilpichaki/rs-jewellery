@@ -27,3 +27,16 @@ Route::get('/home', 'HomeController@index')->name('home');
  */
 Route::get('/stock/{stock}', 'StockController@show')->name('stock.show');
 Route::patch('/stock/{stock}/add-stock', 'StockController@addStock');
+
+/**
+ * Design
+ * show, add-stock
+ */
+Route::get('/design/add-design', 'DesignController@addDesign')->name('design.add-design');
+Route::post('/design/add-design', 'DesignController@store')->name('design.store-design');
+
+// Route::post('/design/add-design', function() {
+// 	request()->file('picture')->store('pictures');
+
+// 	return redirect()->back();
+// });
