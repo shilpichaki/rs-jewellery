@@ -35,6 +35,8 @@ class Stock extends Model
         static::updating(function ($stock) {
             $stock->transactions()->attach(Auth::user()->id, [
                 'vendor_id' => Session::get('vendor_id'),
+                'rate' => Session::get('rate'),
+                'price' => Session::get('price'),
                 'before' => json_encode(array_intersect_key($stock->fresh()->toArray(), $stock->getDirty())),
                 'after' => json_encode($stock->getDirty())
             ]);
@@ -64,14 +66,16 @@ class Stock extends Model
         $this->transactions()->attach(Auth::user()->id, [
             'vendor_id' => $request->vendor_id,
             'before' => null,
-            'after' => json_encode($this)
+            'after' => json_encode($this),
+            'rate' => $request->today_rate,
+            'price' => $request->price,
         ]);
     }
 
     public function transactions()
     {
         return $this->belongsToMany(User::class, 'raw_material_stock_transactions')
-            ->withPivot(['vendor_id', 'before', 'after'])
+            ->withPivot(['vendor_id', 'before', 'after', 'rate', 'price'])
             ->withTimestamps()
             ->latest('pivot_updated_at');
     }
@@ -80,6 +84,12 @@ class Stock extends Model
     {
         $this->stock_value += $newStockValue;
         $this->update();
+        return $this;
+    }
+
+    public function updateThresholdValue(int $newThresholdValue)
+    {
+        $this->threshold_value = $newThresholdValue;
         return $this;
     }
 

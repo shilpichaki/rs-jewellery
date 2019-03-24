@@ -17,6 +17,8 @@ class CreateRawMaterialStockTransactionsTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('stock_id')->index()->unsigned();
             $table->bigInteger('vendor_id')->index()->unsigned()->nullable();
+            $table->double('rate', 8, 2)->unsigned();
+            $table->double('price', 8, 2)->unsigned();
             $table->bigInteger('user_id')->index()->unsigned();
             $table->text('before')->nullable();
             $table->text('after')->nullable();

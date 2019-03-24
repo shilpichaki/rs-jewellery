@@ -100,7 +100,7 @@
                             </div>
                         </div>
 
-                        <button type="submit" class="btn btn-primary ml-auto" disabled="true">Submit</button>
+                        <button type="submit" id="submit_btn" class="btn btn-primary ml-auto" disabled="true">Submit</button>
                     </form>
                 </div>
             </div>
@@ -155,6 +155,7 @@
                         $("#vendor_id").prop('disabled', false);
                         $("#today_rate").prop('disabled', false);
                         $("#price").prop('disabled', false);
+                        $("#submit_btn").prop('disabled', false);                       
 
                     }
                 });
