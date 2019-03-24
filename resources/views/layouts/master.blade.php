@@ -225,6 +225,8 @@
 <script type="bfb364435a0da5b32f23294b-text/javascript" src="{{asset('js/script.min.js')}}"></script>
 
 <script src="{{asset('js/rocket-loader.min.js')}}" data-cf-settings="bfb364435a0da5b32f23294b-|49" defer=""></script>
-
+<script>
+    @yield('js')
+</script>
 </body>
 </html>
