@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Enums\RawMaterial;
 use App\Enums\UnitOfMeasurement;
 use App\Stock;
+use App\Vendor;
 use Illuminate\Http\Request;
 use Session;
 use Illuminate\Support\Facades\Validator;
@@ -38,11 +39,41 @@ class StockController extends Controller
     {
         return view('stock.create')
             ->withRawMaterial($this->rawMaterials)
-            ->withUnitOfMeasurement($this->unitOfMeasurement);
+            ->withUnitOfMeasurement($this->unitOfMeasurement)
+            ->withVendors(Vendor::all());
     }
 
     public function addStock(Request $request)
     {
+        $errorMessages = [
+            'in'      => 'The :attribute must be one of the following types: :values',
+            'stock_value.required' => 'Please enter the amount of stock you want to add.',
+        ];
+
+        $validatorRequestData = Validator::make($request->all(), [
+            'material_type' => 'required|string',
+            'vendor_id' => [
+                'required',
+                'integer',
+                'min:1',
+                'exists:vendors,id'
+            ],
+            'unit_of_measurement' => [
+                'required',
+                Rule::in($this->unitOfMeasurement),
+            ],
+            'threshold_value' => 'integer|min:1',
+            'stock_value' => 'required|integer|min:1',
+            'today_rate' => 'required|integer|min:1',
+            'price' => 'required|integer|min:1',
+        ], $errorMessages);
+
+        if ($validatorRequestData->fails()) {
+            return redirect()
+                ->back()
+                ->withErrors($validatorRequestData);
+        }
+
         $stock = Stock::exists($request->material_type);
         Session::flash('vendor_id', $request->vendor_id);
 
@@ -52,29 +83,6 @@ class StockController extends Controller
             Stock::createNewStockWithGivenStockValue($request)
                 ->logStockEntry($request);
         }
-        /*
-        $validatorRequestData = Validator::make($request->all(), [
-            'stock_value' => 'required|integer|min:1',
-            'vendor_id' => [
-                'required',
-                'integer',
-                'min:1',
-                'exists:vendors,id'
-            ],
-        ]);
-
-        if ($validatorRequestData->fails()) {
-            return redirect()
-                ->route('stock.show', ['stock' => $stock->id])
-                ->withErrors($validatorRequestData);
-        }
-
-        $stock->addStock($request->stock_value);
-        Session::flash('vendor_id', $request->vendor_id);
-        $stock->update();
-
-        return redirect()->route('stock.show', ['stock' => $stock->id]);
-        */
     }
 
     private function addRawMaterials()

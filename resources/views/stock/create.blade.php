@@ -26,7 +26,7 @@
                                 <label class="col-form-label">Material Type</label>
                             </div>
                             <div class="col-sm-8">
-                                <select class="form-control form-control-primary"name="material_type" id="">
+                                <select class="form-control form-control-primary"name="material_type" id="material_type">
                                     @foreach ($rawMaterial as $material)
                                         <option value="{{$material}}">{{$material}}</option>
                                     @endforeach
@@ -38,7 +38,7 @@
                                 <label class="col-form-label">Unit of Measurement</label>
                             </div>
                             <div class="col-sm-8">
-                                <select name="" class="form-control form-control-primary">
+                                <select name="unit_of_measurement" id="unit_of_measurement" class="form-control form-control-primary" disabled="true">
                                     @foreach ($unitOfMeasurement as $unit)
                                         <option value="{{$unit}}">{{$unit}}</option>
                                     @endforeach
@@ -50,7 +50,16 @@
                                 <label class="col-form-label">Threshold value</label>
                             </div>
                             <div class="col-sm-8">
-                                <input type="number" class="form-control autonumber form-control-primary">
+                                <input type="number" class="form-control autonumber form-control-primary" id="threshold_value" name="threshold_value" disabled="true">
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-sm-4">
+                                <label class="col-form-label">Cuurent stock value of <span id="current_stock_name">WAX<span></label>
+                            </div>
+                            <div class="col-sm-8">
+                                <input type="number" class="form-control autonumber form-control-primary"
+                                       id="current_stock_value" disabled="true">
                             </div>
                         </div>
                         <div class="row form-group">
@@ -59,7 +68,19 @@
                             </div>
                             <div class="col-sm-8">
                                 <input type="number" class="form-control autonumber form-control-primary"
-                                       name="stock_value">
+                                       name="stock_value" id="stock_value" disabled="true">
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-sm-4">
+                                <label class="col-form-label">Vendor</label>
+                            </div>
+                            <div class="col-sm-8">
+                                <select class="form-control form-control-primary" name="vendor_id" id="vendor_id" disabled="true">
+                                    @foreach ($vendors as $vendor)
+                                        <option value="{{$vendor->id}}">{{$vendor->company_name}}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                         <div class="row form-group">
@@ -67,7 +88,7 @@
                                 <label class="col-form-label">Today's rate</label>
                             </div>
                             <div class="col-sm-8">
-                                <input type="number" class="form-control autonumber form-control-primary">
+                                <input type="number" name="today_rate" id="today_rate" class="form-control autonumber form-control-primary" disabled="true">
                             </div>
                         </div>
                         <div class="row form-group">
@@ -75,10 +96,11 @@
                                 <label class="col-form-label">Price</label>
                             </div>
                             <div class="col-sm-8">
-                                <input type="number" class="form-control autonumber form-control-primary">
+                                <input type="number" name="price" id="price" class="form-control autonumber form-control-primary" disabled="true">
                             </div>
                         </div>
-                            <button type="submit" class="btn btn-primary ml-auto">Submit</button>
+
+                        <button type="submit" class="btn btn-primary ml-auto" disabled="true">Submit</button>
                     </form>
                 </div>
             </div>
@@ -109,4 +131,36 @@
     <script type="506c7ecb9b519216be21f8d6-text/javascript" src="{{asset('js/validate.js')}}"></script>
     <!-- Custom js -->
     <script src="{{asset('js/form-wizard.js')}}" type="506c7ecb9b519216be21f8d6-text/javascript"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#material_type").on('change click', function(){
+                var rawMaterial = $(this).val();
+                $.ajax({
+                    url: '{{env('ROOT_URL')}}/api/stock/'+rawMaterial,
+                    type: "GET",
+                    error: function () {
+                        console.log('Stock not found! Will add a new type of material in stock!');
+                    },
+                    success: function (data) {
+                        // update values
+                        $("#current_stock_name").html(data.data.raw_material_type);
+                        $("#current_stock_value").val(data.data.stock_value);
+                        $("#threshold_value").val(data.data.threshold_value);
+
+                        // enable input fields
+                        $("#threshold_value").prop('disabled', false);
+                        $("#unit_of_measurement").prop('disabled', false);
+                        $("#stock_value").prop('disabled', false);
+                        $("#vendor_id").prop('disabled', false);
+                        $("#today_rate").prop('disabled', false);
+                        $("#price").prop('disabled', false);
+
+                    }
+                });
+            });
+            
+            
+        });
+    </script>
 @endsection
