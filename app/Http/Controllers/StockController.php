@@ -76,8 +76,11 @@ class StockController extends Controller
 
         $stock = Stock::exists($request->material_type);
         Session::flash('vendor_id', $request->vendor_id);
+        Session::flash('rate', $request->today_rate);
+        Session::flash('price', $request->price);
 
         if($stock) {
+            $stock->updateThresholdValue($request->threshold_value);
             $stock->addStock($request->stock_value);
         } else {
             Stock::createNewStockWithGivenStockValue($request)

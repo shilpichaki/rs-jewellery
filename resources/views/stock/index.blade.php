@@ -48,17 +48,14 @@
                     <tr class="toggleview" id="toggleview-{{$counter}}">
                         <th colspan="4">
                             @foreach($stock->transactions as $transaction)
-                                <h5>Updated by: {{$transaction->name}}</h5>
-                                <h6>Changes: </h6>
+                            <h5>Updated by: {{$transaction->name}}</h5>
                             <div class="row">
                                 <div class="col-lg-6 before">
                                 <p>Before:</p>
                                 <ul>
                                     @foreach(json_decode($transaction->pivot->before) as $key => $value)
                                         <li>
-                                            @if($key == 'stock_value')
-                                                Stock value
-                                            @endif
+                                            @prettifykey($key)
                                             : {{$value}}
                                         </li>
                                     @endforeach
@@ -69,9 +66,7 @@
                                 <ul>
                                     @foreach(json_decode($transaction->pivot->after) as $key => $value)
                                         <li>
-                                            @if($key == 'stock_value')
-                                                Stock value
-                                            @endif
+                                            @prettifykey($key)
                                             : {{$value}}
                                         </li>
                                     @endforeach
@@ -111,12 +106,14 @@
 @endsection
 
 @section('js')
-    $(document).ready(function () {
-        $(".btntoggleview").click(function(){
-            var dataCounter = $(this).attr('data-counter');
-            var toggleView = 'toggleview-' + dataCounter;
-            console.log(toggleView);
-            $("#"+ toggleView).toggle();
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".btntoggleview").click(function(){
+                var dataCounter = $(this).attr('data-counter');
+                var toggleView = 'toggleview-' + dataCounter;
+                console.log(toggleView);
+                $("#"+ toggleView).toggle();
+            });
         });
-    });
+    </script>
 @endsection
