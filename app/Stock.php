@@ -24,6 +24,10 @@ class Stock extends Model
         'deleted_at'
     ];
 
+    public function getRouteKeyName() {
+        return 'raw_material_type';
+    }
+
     public static function boot()
     {
         parent::boot();
