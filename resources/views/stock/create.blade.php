@@ -26,7 +26,7 @@
                                 <label class="col-form-label">Material Type</label>
                             </div>
                             <div class="col-sm-8">
-                                <select class="form-control form-control-primary"name="material_type" id="">
+                                <select class="form-control form-control-primary"name="material_type" id="material_type">
                                     @foreach ($rawMaterial as $material)
                                         <option value="{{$material}}">{{$material}}</option>
                                     @endforeach
@@ -50,7 +50,16 @@
                                 <label class="col-form-label">Threshold value</label>
                             </div>
                             <div class="col-sm-8">
-                                <input type="number" class="form-control autonumber form-control-primary">
+                                <input type="number" class="form-control autonumber form-control-primary" id="threshold_value" name="threshold_value">
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-sm-4">
+                                <label class="col-form-label">Cuurent stock value of <span id="current_stock_name">WAX<span></label>
+                            </div>
+                            <div class="col-sm-8">
+                                <input type="number" class="form-control autonumber form-control-primary"
+                                       id="current_stock_value" disabled="true">
                             </div>
                         </div>
                         <div class="row form-group">
@@ -109,4 +118,26 @@
     <script type="506c7ecb9b519216be21f8d6-text/javascript" src="{{asset('js/validate.js')}}"></script>
     <!-- Custom js -->
     <script src="{{asset('js/form-wizard.js')}}" type="506c7ecb9b519216be21f8d6-text/javascript"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#material_type").on('change click', function(){
+                var rawMaterial = $(this).val();
+                $.ajax({
+                    url: '{{env('ROOT_URL')}}/api/stock/'+rawMaterial,
+                    type: "GET",
+                    error: function () {
+                        alert("An error ocurred.");
+                    },
+                    success: function (data) {
+                        $("#current_stock_name").html(data.data.raw_material_type);
+                        $("#current_stock_value").val(data.data.stock_value);
+                        $("#threshold_value").val(data.data.threshold_value);
+                    }
+                });
+            });
+            
+            
+        });
+    </script>
 @endsection
