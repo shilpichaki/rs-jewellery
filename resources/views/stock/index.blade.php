@@ -66,9 +66,7 @@
                                 <ul>
                                     @foreach(json_decode($transaction->pivot->after) as $key => $value)
                                         <li>
-                                            @if($key == 'stock_value')
-                                                Stock value
-                                            @endif
+                                            @prettifykey($key)
                                             : {{$value}}
                                         </li>
                                     @endforeach
