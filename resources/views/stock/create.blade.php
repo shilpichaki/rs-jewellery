@@ -26,11 +26,17 @@
                                 <label class="col-form-label">Material Type</label>
                             </div>
                             <div class="col-sm-8">
-                                <select class="form-control form-control-primary"name="material_type" id="material_type">
+
+                                <select class="form-control form-control-primary{{ $errors->has('material_type') ? ' is-invalid' : '' }}" name="material_type" id="material_type" value="{{ old('material_type') }}" required>
                                     @foreach ($rawMaterial as $material)
                                         <option value="{{$material}}">{{$material}}</option>
                                     @endforeach
                                 </select>
+                                @if ($errors->has('material_type'))
+                                    <span class="invalid-feedback" role="alert">
+		<strong>{{ $errors->first('material_type') }}</strong>
+	</span>  @endif
+                                <span class="form-bar"></span>
                             </div>
                         </div>
                         <div class="row form-group">
@@ -38,11 +44,17 @@
                                 <label class="col-form-label">Unit of Measurement</label>
                             </div>
                             <div class="col-sm-8">
-                                <select name="unit_of_measurement" id="unit_of_measurement" class="form-control form-control-primary" disabled="true">
+
+                                <select name="unit_of_measurement" id="unit_of_measurement" class="form-control form-control-primary{{ $errors->has('unit_of_measurement') ? ' is-invalid' : '' }}" value="{{ old('material_type') }}" required disabled="true">
                                     @foreach ($unitOfMeasurement as $unit)
                                         <option value="{{$unit}}">{{$unit}}</option>
                                     @endforeach
                                 </select>
+                                @if ($errors->has('unit_of_measurement'))
+                                    <span class="invalid-feedback" role="alert">
+		<strong>{{ $errors->first('unit_of_measurement') }}</strong>
+	</span>@endif
+                                <span class="form-bar"></span>
                             </div>
                         </div>
                         <div class="row form-group">
@@ -50,7 +62,13 @@
                                 <label class="col-form-label">Threshold value</label>
                             </div>
                             <div class="col-sm-8">
-                                <input type="number" class="form-control autonumber form-control-primary" id="threshold_value" name="threshold_value" disabled="true">
+
+                                <input type="number" class="form-control autonumber form-control-primary{{ $errors->has('threshold_value') ? ' is-invalid' : '' }}" value="{{ old('threshold_value') }}" required id="threshold_value" name="threshold_value" disabled="true">
+                                @if ($errors->has('threshold_value'))
+                                    <span class="invalid-feedback" role="alert">
+		<strong>{{ $errors->first('threshold_value') }}</strong>
+	</span>@endif
+                                <span class="form-bar"></span>
                             </div>
                         </div>
                         <div class="row form-group">
@@ -58,8 +76,17 @@
                                 <label class="col-form-label">Cuurent stock value of <span id="current_stock_name">WAX<span></label>
                             </div>
                             <div class="col-sm-8">
-                                <input type="number" class="form-control autonumber form-control-primary"
+                                @if ($errors->has('current_stock_value'))
+                                    <span class="invalid-feedback" role="alert">
+		<strong>{{ $errors->first('current_stock_value') }}</strong>
+	</span>  @endif
+                                <input type="number" name="current_stock_value" class="form-control autonumber form-control-primary{{ $errors->has('current_stock_value') ? ' is-invalid' : '' }}" value="{{ old('current_stock_value') }}" required
                                        id="current_stock_value" disabled="true">
+                                    @if ($errors->has('current_stock_value'))
+                                        <span class="invalid-feedback" role="alert">
+		<strong>{{ $errors->first('current_stock_value') }}</strong>
+	</span>  @endif
+                                <span class="form-bar"></span>
                             </div>
                         </div>
                         <div class="row form-group">
@@ -67,8 +94,14 @@
                                 <label class="col-form-label">Amount you want to add</label>
                             </div>
                             <div class="col-sm-8">
-                                <input type="number" class="form-control autonumber form-control-primary"
+
+                                <input type="number" class="form-control autonumber form-control-primary{{ $errors->has('stock_value') ? ' is-invalid' : '' }}" value="{{ old('stock_value') }}" required
                                        name="stock_value" id="stock_value" disabled="true">
+                                @if ($errors->has('stock_value'))
+                                    <span class="invalid-feedback" role="alert">
+		<strong>{{ $errors->first('stock_value') }}</strong>
+	</span>@endif
+                                <span class="form-bar"></span>
                             </div>
                         </div>
                         <div class="row form-group">
@@ -76,11 +109,17 @@
                                 <label class="col-form-label">Vendor</label>
                             </div>
                             <div class="col-sm-8">
-                                <select class="form-control form-control-primary" name="vendor_id" id="vendor_id" disabled="true">
+
+                                <select class="form-control form-control-primary{{ $errors->has('vendor_id') ? ' is-invalid' : '' }}" value="{{ old('vendor_id') }}" required name="vendor_id" id="vendor_id" disabled="true">
                                     @foreach ($vendors as $vendor)
                                         <option value="{{$vendor->id}}">{{$vendor->company_name}}</option>
                                     @endforeach
                                 </select>
+                                @if ($errors->has('vendor_id'))
+                                    <span class="invalid-feedback" role="alert">
+		<strong>{{ $errors->first('vendor_id') }}</strong>
+	</span>@endif
+                                <span class="form-bar"></span>
                             </div>
                         </div>
                         <div class="row form-group">
@@ -88,7 +127,13 @@
                                 <label class="col-form-label">Today's rate</label>
                             </div>
                             <div class="col-sm-8">
-                                <input type="number" name="today_rate" id="today_rate" class="form-control autonumber form-control-primary" disabled="true">
+
+                                <input type="number" name="today_rate" id="today_rate" class="form-control autonumber form-control-primary{{ $errors->has('today_rate') ? ' is-invalid' : '' }}" value="{{ old('today_rate') }}" required disabled="true">
+                                @if ($errors->has('today_rate'))
+                                    <span class="invalid-feedback" role="alert">
+		<strong>{{ $errors->first('today_rate') }}</strong>
+	</span> @endif
+                                    <span class="form-bar"></span>
                             </div>
                         </div>
                         <div class="row form-group">
@@ -96,7 +141,13 @@
                                 <label class="col-form-label">Price</label>
                             </div>
                             <div class="col-sm-8">
-                                <input type="number" name="price" id="price" class="form-control autonumber form-control-primary" disabled="true">
+
+                                <input type="number" name="price" id="price" class="form-control autonumber form-control-primary{{ $errors->has('price') ? ' is-invalid' : '' }}" value="{{ old('price') }}" required disabled="true">
+                                @if ($errors->has('price'))
+                                    <span class="invalid-feedback" role="alert">
+		<strong>{{ $errors->first('price') }}</strong>
+	</span> @endif
+                                <span class="form-bar"></span>
                             </div>
                         </div>
 
@@ -108,16 +159,16 @@
         </div>
     </div>
 
-@if ($errors->any())
-    <h1>Errors</h1>
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
+{{--@if ($errors->any())--}}
+    {{--<h1>Errors</h1>--}}
+    {{--<div class="alert alert-danger">--}}
+        {{--<ul>--}}
+            {{--@foreach ($errors->all() as $error)--}}
+                {{--<li>{{ $error }}</li>--}}
+            {{--@endforeach--}}
+        {{--</ul>--}}
+    {{--</div>--}}
+{{--@endif--}}
 @endsection
 
 @section('js')
@@ -135,6 +186,7 @@
     <script type="text/javascript">
         $(document).ready(function() {
             $("#material_type").on('change click', function(){
+                //Loader show
                 var rawMaterial = $(this).val();
                 $.ajax({
                     url: '{{env('ROOT_URL')}}/api/stock/'+rawMaterial,
@@ -143,6 +195,7 @@
                         console.log('Stock not found! Will add a new type of material in stock!');
                     },
                     success: function (data) {
+                        //loader hide
                         // update values
                         $("#current_stock_name").html(data.data.raw_material_type);
                         $("#current_stock_value").val(data.data.stock_value);

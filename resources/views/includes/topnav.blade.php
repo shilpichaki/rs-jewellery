@@ -7,7 +7,7 @@
                 <i class="feather icon-menu"></i>
             </a>
             <a href="index-2.html">
-                RS-Jewellery
+                RPS-Jewellery
             </a>
             <a class="mobile-options">
                 <i class="feather icon-more-horizontal"></i>
