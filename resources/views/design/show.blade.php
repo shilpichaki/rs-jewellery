@@ -78,8 +78,9 @@
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <button  class="button btn button-small edit">Edit
-                    </button>
+                    <a href="{{route('design.edit', ['design' => $design->design_no])}}" class="btn btn-primary pull-right add-row">
+                        <i class="fa fa-pencil"></i>&nbsp;&nbsp; Edit
+                        </a>
                 </div>
             </div>
         </div>
