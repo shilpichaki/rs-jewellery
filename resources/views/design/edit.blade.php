@@ -77,7 +77,7 @@
                                     <td><input type="text" name="stones[{{$counter}}][quantity][4]" value="{{$stone->quantity[4]}}"></td>
                                     <td><input type="text" name="stones[{{$counter}}][price]" value="{{$stone->price}}"></td>
                                     <td>
-                                        <button class="button button-small edit" title="Delete">
+                                        <button class="btn button button-small edit" title="Delete">
                                             <i class="fa fa-trash"></i>
                                         </button>
                                     </td>
@@ -94,9 +94,9 @@
 
             <div class="row">
                 <div class="col-md-12">
-                    <button class="button btn button-small edit">Submit
+                    <button class="btn btn-primary button button-small edit">Submit
                     </button>
-                    <button type="button" class="btn btn-default pull-right add-row" id="rowAddButton">
+                    <button type="button" class="btn btn-primary pull-right add-row" id="rowAddButton">
                         <i class="fa fa-plus"></i>&nbsp;&nbsp; Add
                         Row</button>
                 </div>

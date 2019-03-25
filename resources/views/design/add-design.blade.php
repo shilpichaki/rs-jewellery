@@ -86,9 +86,9 @@
 
 		<div class="row">
 			<div class="col-md-12">
-				<button class="button btn button-small edit">Submit
+				<button class="btn btn-primary button button-small edit">Submit
 				</button>
-				<button type="button" class="btn btn-default pull-right add-row" id="rowAddButton">
+				<button type="button" class="btn btn-primary pull-right add-row" id="rowAddButton">
 					<i class="fa fa-plus"></i>&nbsp;&nbsp; Add
 					Row</button>
 			</div>
