@@ -201,10 +201,7 @@
                     },
                     success: function (data) {
                         //loader hide
-                        setTimeout(function() {
-                            $('#loaderDiv').hide();
-                            }, 1500)
-                        // $("#loaderDiv").hide();
+                        $("#loaderDiv").hide();
                         // update values
                         $("#current_stock_name").html(data.data.raw_material_type);
                         $("#current_stock_value").val(data.data.stock_value);
