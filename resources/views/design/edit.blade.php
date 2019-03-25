@@ -5,8 +5,9 @@
     <link rel="stylesheet" href="{{asset('css/design-aadhar.style.css')}}">
 @endsection
 @section('content')
-    <form action="{{route('design.update-design')}}" method="POST" enctype="multipart/form-data">
+    <form action="{{route('design.update-design', ['design' => $design->design_no])}}" method="POST" enctype="multipart/form-data">
         @csrf
+        @method('put')
         <div class="container">
             <div class="row">
                 <div class="col-md-4">

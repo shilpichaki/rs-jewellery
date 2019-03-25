@@ -47,4 +47,4 @@ Route::get('/design/add-design', 'DesignController@addDesign')->name('design.add
 Route::post('/design/add-design', 'DesignController@store')->name('design.store-design');
 Route::get('/design/{design}', 'DesignController@show')->name('design.show');
 Route::get('/design/{design}/edit', 'DesignController@edit')->name('design.edit');
-Route::post('/design/update-design', 'DesignController@update')->name('design.update-design');
+Route::put('/design/{design}/update', 'DesignController@update')->name('design.update-design');
