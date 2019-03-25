@@ -45,3 +45,4 @@ Route::get('/stock/{stock}', 'StockController@show')->name('stock.show');
  */
 Route::get('/design/add-design', 'DesignController@addDesign')->name('design.add-design');
 Route::post('/design/add-design', 'DesignController@store')->name('design.store-design');
+Route::get('/design/{design}', 'DesignController@show')->name('design.show');

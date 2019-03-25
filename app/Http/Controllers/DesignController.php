@@ -35,6 +35,12 @@ class DesignController extends Controller
             ->withData($data);
     }
 
+    public function show(Design $design)
+    {
+        $design['stones'] = json_decode($design['stones']);
+        return $design;
+    }
+
     public function store(DesignAadhaarRequest $request)
     {
         $file = request()->file('picture');
