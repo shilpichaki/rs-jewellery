@@ -73,9 +73,9 @@ class DesignController extends Controller
     }
 
     public function update(Design $design, DesignAadhaarRequest $request) {
-//        dd($request->stones);
         $design->stones = json_encode($request->stones);
         $design->update();
+        
         return redirect()->back();
     }
 }
