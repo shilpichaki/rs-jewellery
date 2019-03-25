@@ -71,7 +71,7 @@
 							<td><input type="text" name="stones[0][quantity][4]"></td>
 							<td><input type="text" name="stones[0][price]"></td>
 							<td>
-								<button type="button" class="btn button button-small edit" title="Delete">
+								<button type="button" class="btn btn-primary button button-small" title="Delete">
 									<i class="fa fa-trash"></i>
 								</button>
 							</td>
@@ -86,7 +86,7 @@
 
 		<div class="row">
 			<div class="col-md-12">
-				<button class="btn btn-primary button button-small edit">Submit
+				<button class="btn btn-primary edit">Submit
 				</button>
 				<button type="button" class="btn btn-primary pull-right add-row" id="rowAddButton">
 					<i class="fa fa-plus"></i>&nbsp;&nbsp; Add

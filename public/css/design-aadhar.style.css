@@ -42,7 +42,7 @@ td:last-child .button {
     padding: 0px;
     margin-bottom: 0px;
     margin-right: 5px;
-    background-color: #FFF;
+    /* background-color: #FFF; */
 }
 
 td:last-child .button .fa {
