@@ -3,6 +3,7 @@
 @section('css')
     <!--forms-wizard css-->
     <link rel="stylesheet" type="text/css" href="{{asset('css/jquery.steps.css')}}">
+
 @endsection
 
 @section('content')
@@ -38,6 +39,9 @@
 	</span>  @endif
                                 <span class="form-bar"></span>
                             </div>
+                        </div>
+                        <div class="row">
+                            <div id="loaderDiv"></div>
                         </div>
                         <div class="row form-group">
                             <div class="col-sm-4">
@@ -187,6 +191,7 @@
         $(document).ready(function() {
             $("#material_type").on('change click', function(){
                 //Loader show
+                $("#loaderDiv").show();
                 var rawMaterial = $(this).val();
                 $.ajax({
                     url: '{{env('ROOT_URL')}}/api/stock/'+rawMaterial,
@@ -196,6 +201,10 @@
                     },
                     success: function (data) {
                         //loader hide
+                        setTimeout(function() {
+                            $('#loaderDiv').hide();
+                            }, 1500)
+                        // $("#loaderDiv").hide();
                         // update values
                         $("#current_stock_name").html(data.data.raw_material_type);
                         $("#current_stock_value").val(data.data.stock_value);
