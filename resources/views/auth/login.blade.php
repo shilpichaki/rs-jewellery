@@ -47,7 +47,7 @@
                     @csrf
                     <div class="text-center">
                         {{--<img src="../files/assets/images/logo.png" alt="logo.png">--}}
-                        <h4 class="text-white"><b>RS-JEWELLERY</b></h4>
+                        <h4 class="text-white"><b>RPS-JEWELLERY</b></h4>
                     </div>
                     <div class="auth-box card">
                         <div class="card-block">
