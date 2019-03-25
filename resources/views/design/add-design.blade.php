@@ -15,7 +15,7 @@
 						<tbody>
 						<tr>
 							<td>Design Number:</td>
-							<td><input type="text" name="design_no"></td>
+							<td><input type="number" name="design_no" required></td>
 						</tr>
 						</tbody>
 					</table>
@@ -34,7 +34,7 @@
 				<div class="row">
 					<div class="preview img-wrapper"></div>
 					<div class="file-upload-wrapper">
-						<input type="file" name="picture" class="file-upload-native" accept="image/*" />
+						<input type="file" name="picture" class="file-upload-native" id="picture"/>
 						<input type="text" disabled placeholder="upload image" class="file-upload-text" />
 					</div>
 				</div>
@@ -58,7 +58,12 @@
 						<tbody id="append_parent">
 						<tr>
 							<td><input type="text" name="stones[0][size]"></td>
-							<td><input type="text" name="stones[0][type]"></td>
+							<td>
+								<select name="stones[0][type]" id="">
+									<option value="BIG">BIG</option>
+									<option value="ROUND">ROUND</option>
+								</select>
+							</td>
 							<td><input type="text" name="stones[0][quantity][0]"></td>
 							<td><input type="text" name="stones[0][quantity][1]"></td>
 							<td><input type="text" name="stones[0][quantity][2]"></td>
@@ -66,7 +71,7 @@
 							<td><input type="text" name="stones[0][quantity][4]"></td>
 							<td><input type="text" name="stones[0][price]"></td>
 							<td>
-								<button class="button button-small edit" title="Delete">
+								<button type="button" class="btn button button-small edit" title="Delete">
 									<i class="fa fa-trash"></i>
 								</button>
 							</td>
@@ -111,10 +116,28 @@
         var counter = 1;
         $("#rowAddButton").click(function () {
             var content = '<tr><td><input type="text" name="stones[' + counter +
-                '][size]"></td><td><input type="text" name="stones['+ counter +'][type]"></td> <td><input type="text" name="stones['+ counter +'][quantity][0]"></td><td><input type="text" name="stones['+ counter +'][quantity][1]"></td><td><input type="text" name="stones['+ counter +'][quantity][2]"></td><td><input type="text" name="stones['+ counter +'][quantity][3]"></td><td><input type="text" name="stones['+ counter +'][quantity][4]"></td><td><input type="text" name="stones['+ counter +'][price]"></td><td><a class="button button-small edit" title="Delete"><i class="fa fa-trash"></i></a></td></tr>';
+                '][size]"></td><td><select name="stones['+counter+'][type]" id=""><option value="BIG">BIG</option><option value="ROUND">ROUND</option></select></td> <td><input type="text" name="stones['+ counter +'][quantity][0]"></td><td><input type="text" name="stones['+ counter +'][quantity][1]"></td><td><input type="text" name="stones['+ counter +'][quantity][2]"></td><td><input type="text" name="stones['+ counter +'][quantity][3]"></td><td><input type="text" name="stones['+ counter +'][quantity][4]"></td><td><input type="text" name="stones['+ counter +'][price]"></td><td><a class="button button-small edit" title="Delete"><i class="fa fa-trash"></i></a></td></tr>';
             $("#append_parent").append(content);
             counter++;
         });
+    });
+</script>
+<script>
+    function readURL(input) {
+
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function(e) {
+                $('.preview').attr('style', 'background-image:url('+e.target.result+');background-size: cover; background-position:center;');
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $("#picture").change(function() {
+        readURL(this);
     });
 </script>
 @endsection
