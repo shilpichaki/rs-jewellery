@@ -15,7 +15,7 @@ table {
 }
 
 .table-bordered td {
-    width: 100px;
+    /*width: 100px;*/
 }
 
 td input[type=text],
@@ -56,7 +56,7 @@ td:last-child .button .fa {
     display: block;
     width: 100%;
     height: 200px;
-    box-shadow: 0px 0px 0px 2px rgb(175, 172, 172);
+    box-shadow: 0px 0px 0px 1px rgb(216, 208, 208);
     overflow: hidden;
 }
 
@@ -79,7 +79,7 @@ td:last-child .button .fa {
     width: 100%;
     height: 100%;
     cursor: pointer;
-    color: rgba(255, 255, 255, 0.8);
+    color: rgba(255, 255, 255);
 }
 
 input[type="file"]::-webkit-file-upload-button {
@@ -102,7 +102,7 @@ input[type="file"]::-webkit-file-upload-button {
     letter-spacing: 1px;
     text-overflow: ellipsis;
     border: 0;
-    background-color: transparent;
+    background-color: #ca4545;
 }
 
 .file-upload-native {

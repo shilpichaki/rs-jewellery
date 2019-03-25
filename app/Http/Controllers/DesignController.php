@@ -38,7 +38,17 @@ class DesignController extends Controller
     public function show(Design $design)
     {
         $design['stones'] = json_decode($design['stones']);
-        return $design;
+//        return $design;
+        return view('design.show')
+            ->with(['design' => $design]);
+    }
+
+    public function edit(Design $design)
+    {
+        $design['stones'] = json_decode($design['stones']);
+//        return $design;
+        return view('design.edit')
+            ->with(['design' => $design]);
     }
 
     public function store(DesignAadhaarRequest $request)
@@ -60,5 +70,12 @@ class DesignController extends Controller
         ]);
 
         return $design;
+    }
+
+    public function update(Design $design, DesignAadhaarRequest $request) {
+//        dd($request->stones);
+        $design->stones = json_encode($request->stones);
+        $design->update();
+        return redirect()->back();
     }
 }

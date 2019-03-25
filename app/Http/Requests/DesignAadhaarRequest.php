@@ -25,8 +25,8 @@ class DesignAadhaarRequest extends FormRequest
     public function rules()
     {
         $rules = [
-            'picture' => 'mimetypes:image/jpeg,image/png|image|required|max:8192',
-            'design_no' => 'required|integer|unique:designs',
+            'picture' => 'mimetypes:image/jpeg,image/png|image|max:8192',
+            'design_no' => 'integer|unique:designs',
             'stones.*.size' => 'required',
             'stones.*.type' => [
                 'required',
