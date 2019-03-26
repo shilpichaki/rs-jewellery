@@ -15,7 +15,7 @@
 
                 <div class="card-header">
                     <h4>Stock entry</h4>
-                    <span>Application form for <code>Stock entry</code></span>
+                    {{--<span>Application form for <code>Stock entry</code></span>--}}
 
                 </div>
                 <div class="card-block">
@@ -79,7 +79,7 @@
                         </div>
                         <div class="row form-group">
                             <div class="col-sm-4">
-                                <label class="col-form-label">Cuurent stock value of <span id="current_stock_name">WAX<span></label>
+                                <label class="col-form-label">Current stock value of <span id="current_stock_name">WAX<span></label>
                             </div>
                             <div class="col-sm-8">
                                 @if ($errors->has('current_stock_value'))

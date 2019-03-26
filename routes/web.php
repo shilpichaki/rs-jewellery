@@ -25,10 +25,6 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware('auth');
 
-Route::get('/design-aadhar', function () {
-    return view('design-aadhar');
-});
-
 /**
  * Stock
  * show, add-stock
@@ -53,3 +49,7 @@ Route::put('/design/{design}/update', 'DesignController@update')->name('design.u
  * Order
  * show, add-order
  */
+//Route::get('/order/create', 'OrderController@addOrder')->name('order.create');
+Route::get('/order/create', function () {
+    return view('order.create');
+})->name('order.create');
