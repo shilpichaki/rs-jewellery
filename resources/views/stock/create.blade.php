@@ -41,7 +41,7 @@
                             </div>
                         </div>
                         <div class="d-flex justify-content-center">
-                            <div class="row" style="position: absolute;left: 50%;top: 40%;transform: translate(-50%);">
+                            <div class="row" style="position: absolute;left: 50%;top: 40%;transform: translate(-50%); z-index: 100;">
                                 <div id="loaderDiv"></div>
                             </div>
                         </div>
@@ -191,10 +191,9 @@
 
     <script type="text/javascript">
         $(document).ready(function() {
-            $("#material_type").on('change click', function(){
+            $("#material_type").on('change', function(){
                 //Loader show
                 $("#loaderDiv").show();
-                $(".card").css({"background-color" : "#d4d4d6"});
                 var rawMaterial = $(this).val();
                 $.ajax({
                     url: '{{env('ROOT_URL')}}/api/stock/'+rawMaterial,
@@ -204,8 +203,9 @@
                     },
                     success: function (data) {
                         //loader hide
-                        $("#loaderDiv").hide();
-                        $(".card").css({"background-color" : "#fff"});
+                        setTimeout(function() {
+                            $("#loaderDiv").hide()
+                        }, 1000);
                         // update values
                         $("#current_stock_name").html(data.data.raw_material_type);
                         $("#current_stock_value").val(data.data.stock_value);

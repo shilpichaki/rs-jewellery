@@ -11,6 +11,11 @@ use App\Http\Requests\DesignAadhaarUpdateRequest;
 
 class DesignController extends Controller
 {
+    public function index()
+    {
+        return view('design.index')
+            ->withDesigns(Design::all());
+    }
     public function addDesign()
     {
     	return view('design.add-design');
@@ -28,12 +33,15 @@ class DesignController extends Controller
     {
         $design['stones'] = json_decode($design['stones']);
 
+        end($design['stones']);
+        $lastKey = key($design['stones']) + 1;
+
         return view('design.edit')
-            ->with(['design' => $design]);
+            ->with(['design' => $design, 'lastKey' => $lastKey]);
     }
 
     public function store(DesignAadhaarRequest $request)
-    {
+    {        
         $file = request()->file('picture');
 
         $ext = $file->extension();
