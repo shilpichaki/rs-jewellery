@@ -11,7 +11,7 @@
 
         <div class="offset-lg-2 col-lg-8">
 
-            <div class="card">
+            <div class="card" style="position: relative">
 
                 <div class="card-header">
                     <h4>Stock entry</h4>
@@ -40,8 +40,10 @@
                                 <span class="form-bar"></span>
                             </div>
                         </div>
-                        <div class="row">
-                            <div id="loaderDiv"></div>
+                        <div class="d-flex justify-content-center">
+                            <div class="row" style="position: absolute;left: 50%;top: 40%;transform: translate(-50%);">
+                                <div id="loaderDiv"></div>
+                            </div>
                         </div>
                         <div class="row form-group">
                             <div class="col-sm-4">
@@ -192,6 +194,7 @@
             $("#material_type").on('change click', function(){
                 //Loader show
                 $("#loaderDiv").show();
+                $(".card").css({"background-color" : "#d4d4d6"});
                 var rawMaterial = $(this).val();
                 $.ajax({
                     url: '{{env('ROOT_URL')}}/api/stock/'+rawMaterial,
@@ -202,6 +205,7 @@
                     success: function (data) {
                         //loader hide
                         $("#loaderDiv").hide();
+                        $(".card").css({"background-color" : "#fff"});
                         // update values
                         $("#current_stock_name").html(data.data.raw_material_type);
                         $("#current_stock_value").val(data.data.stock_value);

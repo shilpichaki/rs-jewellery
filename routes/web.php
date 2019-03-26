@@ -41,10 +41,15 @@ Route::get('/stock/{stock}', 'StockController@show')->name('stock.show');
 
 /**
  * Design
- * show, add-stock
+ * show, add-design
  */
 Route::get('/design/add-design', 'DesignController@addDesign')->name('design.add-design');
 Route::post('/design/add-design', 'DesignController@store')->name('design.store-design');
 Route::get('/design/{design}', 'DesignController@show')->name('design.show');
 Route::get('/design/{design}/edit', 'DesignController@edit')->name('design.edit');
 Route::put('/design/{design}/update', 'DesignController@update')->name('design.update-design');
+
+/**
+ * Order
+ * show, add-order
+ */

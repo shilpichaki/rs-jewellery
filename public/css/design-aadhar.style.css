@@ -68,6 +68,7 @@ td:last-child .button .fa {
     height: 30px;
     margin: 25px auto;
     border-radius: 0px;
+    cursor: pointer;
 }
 
 .file-upload-native,
