@@ -32,10 +32,13 @@ class DesignController extends Controller
     public function edit(Design $design)
     {
         $design['stones'] = json_decode($design['stones']);
+        $lastKey = 0;
 
-        end($design['stones']);
-        $lastKey = key($design['stones']) + 1;
-
+        foreach ($design['stones'] as $key => $value) {
+            $lastKey = $key;
+        }
+        $lastKey++;
+         
         return view('design.edit')
             ->with(['design' => $design, 'lastKey' => $lastKey]);
     }
