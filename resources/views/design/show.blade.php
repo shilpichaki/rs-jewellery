@@ -3,6 +3,11 @@
 @section('css')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{{asset('css/design-aadhar.style.css')}}">
+    <style>
+        .table-bordered td {
+            width: 60px !important;
+        }
+    </style>
 @endsection
 @section('content')
     <form action="{{route('design.store-design')}}" method="POST" enctype="multipart/form-data">
@@ -30,12 +35,44 @@
 
 
             <div class="row">
-                <div class="col-md-2">
+                <div class="col-md-3">
                     <div class="row">
                         <div class="preview img-wrapper" style="background-image: url({{asset($design->picture)}});background-size: cover; background-position:center"></div>
                     </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="row text-left">
+                                <label class="col-form-label ml-0"><b>Rhodium</b></label>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="row">
+                                <input type="value" class="form-control form-control-primary" value="" required="" id="rhodium" name="rhodium" disabled>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="row text-left">
+                                <label class="col-form-label ml-0"><b>Price(5 pcs)</b></label>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="row">
+                                <input type="value" class="form-control form-control-primary" value="500" required="" id="price_5cs" name="price_5cs" disabled>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="row text-left">
+                                <label class="col-form-label ml-0"><b>Unit Avg. Price</b></label>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="row">
+                                <input type="value" class="form-control form-control-primary" value="100" required="" id="unit_avg_price" name="unit_avg_price" disabled>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-10">
+                <div class="col-md-9">
                     <div class="row">
                         <table class="table table-bordered" id="editableTable">
                             <thead>
