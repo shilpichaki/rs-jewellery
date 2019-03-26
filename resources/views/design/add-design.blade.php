@@ -86,7 +86,7 @@
 							</td>
 							<td><input type="text" name="stones[0][price]" required pattern="\d+.\d{2}" title="Example: 500.00, 1000.70"></td>
 							<td>
-								<button type="button" class="btn btn-primary button button-small" title="Delete">
+								<button type="button" id="delete" class="btn btn-primary button button-small" title="Delete">
 									<i class="fa fa-trash"></i>
 								</button>
 							</td>
@@ -101,7 +101,8 @@
 
 		<div class="row">
 			<div class="col-md-12">
-				<button class="btn btn-primary edit" id="submit_btn">Submit</button>
+				<button class="btn btn-primary edit" id="submit_btn"><i class="fa fa-paper-plane"></i>&nbsp;&nbsp; Submit
+				</button>
 				<button type="button" class="btn btn-primary pull-right add-row" id="rowAddButton">
 					<i class="fa fa-plus"></i>&nbsp;&nbsp; Add
 					Row</button>
@@ -130,7 +131,7 @@
         var counter = 1;
         $("#rowAddButton").click(function () {
             var content = '<tr><td><input type="text" name="stones[' + counter +
-                '][size]"></td><td><select name="stones['+counter+'][type]" id=""><option value="BIG">BIG</option><option value="ROUND">ROUND</option></select></td> <td><input type="text" name="stones['+ counter +'][quantity][0]"></td><td><input type="text" name="stones['+ counter +'][quantity][1]"></td><td><input type="text" name="stones['+ counter +'][quantity][2]"></td><td><input type="text" name="stones['+ counter +'][quantity][3]"></td><td><input type="text" name="stones['+ counter +'][quantity][4]"></td><td><input type="text" name="stones['+ counter +'][price]"></td><td><a class="button button-small edit" title="Delete"><i class="fa fa-trash"></i></a></td></tr>';
+                '][size]"></td><td><select name="stones['+counter+'][type]" id=""><option value="BIG">BIG</option><option value="ROUND">ROUND</option></select></td> <td><input type="text" name="stones['+ counter +'][quantity][0]"></td><td><input type="text" name="stones['+ counter +'][quantity][1]"></td><td><input type="text" name="stones['+ counter +'][quantity][2]"></td><td><input type="text" name="stones['+ counter +'][quantity][3]"></td><td><input type="text" name="stones['+ counter +'][quantity][4]"></td><td><input type="text" name="stones['+ counter +'][price]"></td><td><button type="button" class="btn btn-primary button button-small" title="Delete"><i class="fa fa-trash"></i></button></td></tr>';
             $("#append_parent").append(content);
             counter++;
         });

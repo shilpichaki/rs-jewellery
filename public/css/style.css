@@ -10,14 +10,17 @@ body{background-color:#f3f3f3;font-size:.875em;overflow-x:hidden;color:#353c4e;f
 
 #loaderDiv {
     display: block;
-    background-image: url(../image/ajax-loader.gif);
+    background-image: url(../image/material-loader.gif);
     background-repeat: no-repeat;
     background-position: center;
-    width: 124px;
-    height: 124px;
+    width: 154px;
+    height: 154px;
     margin: 0 auto;
+    background-color: transparent;
+    background-size: cover;
+    z-index: 11;
 }
 /* Hide all the children of the 'loading' element */
 #loaderDiv {
-    display: none;  
+    display: none;
 }
