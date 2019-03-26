@@ -21,7 +21,7 @@
                     </li>
                 </ul>
             </li>
-            <li class="pcoded-hasmenu active pcoded-trigger">
+            <li class="pcoded-hasmenu">
                 <a href="javascript:void(0)">
                     <span class="pcoded-micon"><i class="feather icon-home"></i></span>
                     <span class="pcoded-mtext">Design Aadhaar</span>
@@ -32,9 +32,14 @@
                             <span class="pcoded-mtext">Add Design</span>
                         </a>
                     </li>
+                    <li class="active">
+                        <a href="{{route('design.index')}}">
+                            <span class="pcoded-mtext">All Design</span>
+                        </a>
+                    </li>
                 </ul>
             </li>
-            <li class="pcoded-hasmenu active pcoded-trigger">
+            <li class="pcoded-hasmenu">
                 <a href="javascript:void(0)">
                     <span class="pcoded-micon"><i class="feather icon-home"></i></span>
                     <span class="pcoded-mtext">Order Aadhaar</span>

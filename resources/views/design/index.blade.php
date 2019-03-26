@@ -5,8 +5,8 @@
 <div class="page-wrapper">
 	<div class="card">
 	    <div class="card-header">
-	        <h5>Hover Table</h5>
-	        <span>use class <code>table-hover</code> inside table element</span>
+	        <h4>Hover Table</h4>
+	        {{--<span>use class <code>table-hover</code> inside table element</span>--}}
 
 	    </div>
 	    <div class="card-block table-border-style">
