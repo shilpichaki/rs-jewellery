@@ -70,6 +70,6 @@ class DesignController extends Controller
         $design->stones = json_encode($request->stones);
         $design->update();
         
-        return redirect()->back();
+        return redirect()->route('design.show', ['design' => $design->design_no]);
     }
 }

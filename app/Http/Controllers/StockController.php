@@ -86,6 +86,8 @@ class StockController extends Controller
             Stock::createNewStockWithGivenStockValue($request)
                 ->logStockEntry($request);
         }
+
+        return redirect()->back();
     }
 
     private function addRawMaterials()
