@@ -3,6 +3,11 @@
 @section('css')
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="{{asset('css/design-aadhar.style.css')}}">
+	<style>
+		.table-bordered td {
+		    width: 60px !important;
+		}
+	</style>
 @endsection
 @section('content')
 	<form action="{{route('design.store-design')}}" method="POST" enctype="multipart/form-data">
@@ -16,7 +21,7 @@
 						<tr>
 							<td>Design number:</td>
 							<td>
-								<input type="text" name="design_no" id="design_no" pattern="[0-9]{3}" title="Design number should be an integer!" required>
+								<input class="form-control form-control-primary" type="text" name="design_no" id="design_no" pattern="[0-9]{3}" title="Design number should be an integer!" required>
 								<a href="#" id="design_no_tooltip" data-toggle="tooltip" data-placement="top" title="Design number already in use!" style="display: none; font-size: 22px; color: red">!</a>
 							</td>
 						</tr>
@@ -33,16 +38,50 @@
 
 
 		<div class="row">
-			<div class="col-md-2">
+			<div class="col-md-3">
 				<div class="row">
 					<div class="preview img-wrapper"></div>
-					<div class="file-upload-wrapper">
-						<input type="file" name="picture" class="file-upload-native" id="picture" required />
-						<input type="text" disabled placeholder="upload image" class="file-upload-text" />
+					<div class="">
+						<br>
+						<input type="file" name="picture" id="picture" required />
+						<br>
+						<br>
 					</div>
 				</div>
+				<div class="row">
+					<div class="col-sm-12">
+                        <div class="row text-left">
+                        	<label class="col-form-label ml-0"><b>Rhodium</b></label>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                    	<div class="row">
+                    		<input type="text" class="form-control form-control-primary" value="" required="" id="rhodium" name="rhodium">
+                    	</div>
+                    </div>
+					<div class="col-sm-12">
+                        <div class="row text-left">
+		                    <label class="col-form-label ml-0"><b>Price(5 pcs)</b></label>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                    	<div class="row">
+		                    <input type="text" class="form-control form-control-primary" value="" required="" id="price_5cs" name="price_5cs">
+                    	</div>
+                    </div>
+					<div class="col-sm-12">
+                        <div class="row text-left">
+		                    <label class="col-form-label ml-0"><b>Unit Avg. Price</b></label>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                    	<div class="row">
+	                    	<input type="text" class="form-control form-control-primary" value="" required="" id="unit_avg_price" name="unit_avg_price">
+                    	</div>
+                    </div>
+				</div>
 			</div>
-			<div class="col-md-10">
+			<div class="col-md-9">
 				<div class="row">
 					<table class="table table-bordered" id="editableTable">
 						<thead>
@@ -59,54 +98,58 @@
 						</tr>
 						</thead>
 						<tbody id="append_parent">
-						<tr>
+						<tr id="add_stone_row_0">
 							<td>
-								<input type="text" name="stones[0][size]" pattern="\d+.\d{2}" title="Example: 1.26, 1.80" required>
+								<input class="form-control form-control-primary" type="text" name="stones[0][size]" pattern="\d+.\d{2}" title="Example: 1.26, 1.80" required>
 							</td>
 							<td>
-								<select name="stones[0][type]" id="">
+								<select class="form-control form-control-primary" name="stones[0][type]" id="">
 									<option value="BIG">BIG</option>
 									<option value="ROUND">ROUND</option>
 								</select>
 							</td>
 							<td>
-								<input type="text" name="stones[0][quantity][0]" required pattern="\d+" title="">
+								<input class="form-control form-control-primary" type="text" name="stones[0][quantity][0]" required pattern="\d+" title="">
 							</td>
 							<td>
-								<input type="text" name="stones[0][quantity][1]" required pattern="\d+">
+								<input class="form-control form-control-primary" type="text" name="stones[0][quantity][1]" required pattern="\d+">
 							</td>
 							<td>
-								<input type="text" name="stones[0][quantity][2]" required pattern="\d+">
+								<input class="form-control form-control-primary" type="text" name="stones[0][quantity][2]" required pattern="\d+">
 							</td>
 							<td>
-								<input type="text" name="stones[0][quantity][3]" required pattern="\d+">
+								<input class="form-control form-control-primary" type="text" name="stones[0][quantity][3]" required pattern="\d+">
 							</td>
 							<td>
-								<input type="text" name="stones[0][quantity][4]" required pattern="\d+">
+								<input class="form-control form-control-primary" type="text" name="stones[0][quantity][4]" required pattern="\d+">
 							</td>
-							<td><input type="text" name="stones[0][price]" required pattern="\d+.\d{2}" title="Example: 500.00, 1000.70"></td>
+							<td><input class="form-control form-control-primary" type="text" name="stones[0][price]" required pattern="\d+.\d{2}" title="Example: 500.00, 1000.70"></td>
 							<td>
-								<button type="button" id="delete" class="btn btn-primary button button-small" title="Delete">
+								<button type="button" data-id="0" class="delete_row_btn btn btn-primary button button-small" title="Delete">
 									<i class="fa fa-trash"></i>
 								</button>
 							</td>
 						</tr>
-
 						</tbody>
 					</table>
+					<br><br>
+					<div class="col-sm-12">
+						<div class="row">
+							<div class="col-md-12">
+								<button class="btn btn-primary edit" id="submit_btn"><i class="fa fa-paper-plane"></i>&nbsp;&nbsp; Submit</button>
+								<button type="button" class="btn btn-primary pull-right add-row" id="rowAddButton">
+									<i class="fa fa-plus"></i>&nbsp;&nbsp; Add Row
+								</button>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
 
 
 		<div class="row">
-			<div class="col-md-12">
-				<button class="btn btn-primary edit" id="submit_btn"><i class="fa fa-paper-plane"></i>&nbsp;&nbsp; Submit
-				</button>
-				<button type="button" class="btn btn-primary pull-right add-row" id="rowAddButton">
-					<i class="fa fa-plus"></i>&nbsp;&nbsp; Add
-					Row</button>
-			</div>
+			
 		</div>
 	</div>
 	</form>
@@ -130,8 +173,7 @@
     $(document).ready(function () {
         var counter = 1;
         $("#rowAddButton").click(function () {
-            var content = '<tr><td><input type="text" name="stones[' + counter +
-                '][size]"></td><td><select name="stones['+counter+'][type]" id=""><option value="BIG">BIG</option><option value="ROUND">ROUND</option></select></td> <td><input type="text" name="stones['+ counter +'][quantity][0]"></td><td><input type="text" name="stones['+ counter +'][quantity][1]"></td><td><input type="text" name="stones['+ counter +'][quantity][2]"></td><td><input type="text" name="stones['+ counter +'][quantity][3]"></td><td><input type="text" name="stones['+ counter +'][quantity][4]"></td><td><input type="text" name="stones['+ counter +'][price]"></td><td><button type="button" class="btn btn-primary button button-small" title="Delete"><i class="fa fa-trash"></i></button></td></tr>';
+            var content = '<tr id="add_stone_row_'+counter+'"><td><input class="form-control form-control-primary" type="text" name="stones['+counter+'][size]" pattern="\\d+.\\d{2}" title="Example: 1.26, 1.80" required></td><td><select class="form-control form-control-primary" name="stones['+counter+'][type]" id=""><option value="BIG">BIG</option><option value="ROUND">ROUND</option></select></td><td><input class="form-control form-control-primary" type="text" name="stones['+counter+'][quantity][0]" required pattern="\\d+" title=""></td><td><input class="form-control form-control-primary" type="text" name="stones['+counter+'][quantity][1]" required pattern="\\d+"></td><td><input class="form-control form-control-primary" type="text" name="stones['+counter+'][quantity][2]" required pattern="\\d+"></td><td><input class="form-control form-control-primary" type="text" name="stones['+counter+'][quantity][3]" required pattern="\\d+"></td><td><input class="form-control form-control-primary" type="text" name="stones['+counter+'][quantity][4]" required pattern="\\d+"></td><td><input class="form-control form-control-primary" type="text" name="stones['+counter+'][price]" required pattern="\\d+.\\d{2}" title="Example: 500.00, 1000.70"></td><td><button type="button" data-id="'+counter+'" class="delete_row_btn btn btn-primary button button-small" title="Delete"><i class="fa fa-trash"></i></button></td></tr>';
             $("#append_parent").append(content);
             counter++;
         });
@@ -180,6 +222,17 @@
             });
     		}
         });
+	});
+
+	// delete row
+	$(document).ready(function() {
+		var dataId  = 0; 
+		$('body').on('click','.delete_row_btn',function(){
+		// $('.delete_row_btn').click(function() {
+			dataId = $(this).attr('data-id');
+			console.log(dataId);
+			$("#add_stone_row_"+dataId).remove();
+		});
 	});
 </script>
 @endsection

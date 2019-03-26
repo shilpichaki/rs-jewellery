@@ -54,11 +54,11 @@
                             </thead>
                             <tbody id="append_parent">
                             <?php $counter=0; ?>
-                            @foreach($design->stones as $stone)
-                                <tr>
-                                    <td><input type="text" name="stones[{{$counter}}][size]" value="{{$stone->size}}"></td>
+                            @foreach($design->stones as $key => $stone)
+                                <tr id="add_stone_row_{{$key}}">
+                                    <td><input type="text" name="stones[{{$key}}][size]" value="{{$stone->size}}" pattern="\d+.\d{2}" title="Example: 1.26, 1.80" required></td>
                                     <td>
-                                        <select name="stones[{{$counter}}][type]" id="">
+                                        <select name="stones[{{$key}}][type]" id="">
                                             <option value="BIG"
                                                     @if($stone->type == "BIG")
                                                     selected
@@ -71,14 +71,14 @@
                                             >ROUND</option>
                                         </select>
                                     </td>
-                                    <td><input type="text" name="stones[{{$counter}}][quantity][0]" value="{{$stone->quantity[0]}}"></td>
-                                    <td><input type="text" name="stones[{{$counter}}][quantity][1]" value="{{$stone->quantity[1]}}"></td>
-                                    <td><input type="text" name="stones[{{$counter}}][quantity][2]" value="{{$stone->quantity[2]}}"></td>
-                                    <td><input type="text" name="stones[{{$counter}}][quantity][3]" value="{{$stone->quantity[3]}}"></td>
-                                    <td><input type="text" name="stones[{{$counter}}][quantity][4]" value="{{$stone->quantity[4]}}"></td>
-                                    <td><input type="text" name="stones[{{$counter}}][price]" value="{{$stone->price}}"></td>
+                                    <td><input type="text" name="stones[{{$key}}][quantity][0]" value="{{$stone->quantity[0]}}"  required pattern="\d+" title=""></td>
+                                    <td><input type="text" name="stones[{{$key}}][quantity][1]" value="{{$stone->quantity[1]}}"  required pattern="\d+" title=""></td>
+                                    <td><input type="text" name="stones[{{$key}}][quantity][2]" value="{{$stone->quantity[2]}}"  required pattern="\d+" title=""></td>
+                                    <td><input type="text" name="stones[{{$key}}][quantity][3]" value="{{$stone->quantity[3]}}"  required pattern="\d+" title=""></td>
+                                    <td><input type="text" name="stones[{{$key}}][quantity][4]" value="{{$stone->quantity[4]}}"  required pattern="\d+" title=""></td>
+                                    <td><input type="text" name="stones[{{$key}}][price]" value="{{$stone->price}}" required pattern="\d+.\d{2}" title="Example: 500.00, 1000.70"></td>
                                     <td>
-                                        <button class="btn button button-small edit" title="Delete">
+                                        <button type="button" data-id="{{$key}}" class="delete_row_btn btn btn-primary button button-small" title="Delete">
                                             <i class="fa fa-trash"></i>
                                         </button>
                                     </td>
@@ -120,14 +120,26 @@
 @endsection
 
 @section('js')
-    <script>
+    <script type="text/javascript">
         $(document).ready(function () {
-            var counter = 1;
+            var counter = {{$lastKey}};
             $("#rowAddButton").click(function () {
-                var content = '<tr><td><input type="text" name="stones[' + counter +
-                    '][size]"></td><td><input type="text" name="stones['+ counter +'][type]"></td> <td><input type="text" name="stones['+ counter +'][quantity][0]"></td><td><input type="text" name="stones['+ counter +'][quantity][1]"></td><td><input type="text" name="stones['+ counter +'][quantity][2]"></td><td><input type="text" name="stones['+ counter +'][quantity][3]"></td><td><input type="text" name="stones['+ counter +'][quantity][4]"></td><td><input type="text" name="stones['+ counter +'][price]"></td><td><a class="button button-small edit" title="Delete"><i class="fa fa-trash"></i></a></td></tr>';
+                var content = '<tr id="add_stone_row_'+counter+'"><td><input type="text" name="stones['+counter+'][size]" pattern="\\d+.\\d{2}" title="Example: 1.26, 1.80" required></td><td><select name="stones['+counter+'][type]" id=""><option value="BIG">BIG</option><option value="ROUND">ROUND</option></select></td><td><input type="text" name="stones['+counter+'][quantity][0]" required pattern="\\d+" title=""></td><td><input type="text" name="stones['+counter+'][quantity][1]" required pattern="\\d+"></td><td><input type="text" name="stones['+counter+'][quantity][2]" required pattern="\\d+"></td><td><input type="text" name="stones['+counter+'][quantity][3]" required pattern="\\d+"></td><td><input type="text" name="stones['+counter+'][quantity][4]" required pattern="\\d+"></td><td><input type="text" name="stones['+counter+'][price]" required pattern="\\d+.\\d{2}" title="Example: 500.00, 1000.70"></td><td><button type="button" data-id="'+counter+'" class="delete_row_btn btn btn-primary button button-small" title="Delete"><i class="fa fa-trash"></i></button></td></tr>';
                 $("#append_parent").append(content);
                 counter++;
+            });
+        });
+    </script>
+
+    <script type="text/javascript">
+        // delete row
+        $(document).ready(function() {
+            var dataId  = 0; 
+            $('body').on('click','.delete_row_btn',function(){
+            // $('.delete_row_btn').click(function() {
+                dataId = $(this).attr('data-id');
+                console.log(dataId);
+                $("#add_stone_row_"+dataId).remove();
             });
         });
     </script>
