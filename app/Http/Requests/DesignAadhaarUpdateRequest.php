@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class DesignAadhaarRequest extends FormRequest
+class DesignAadhaarUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,8 +25,8 @@ class DesignAadhaarRequest extends FormRequest
     public function rules()
     {
         $rules = [
-            'picture' => 'mimetypes:image/jpeg,image/png|required|image|max:8192',
-            'design_no' => 'required|integer|unique:designs',
+            'picture' => 'mimetypes:image/jpeg,image/png|image|max:8192',
+            'design_no' => 'integer|unique:designs',
             'stones.*.size' => 'required',
             'stones.*.type' => [
                 'required',
