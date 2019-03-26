@@ -56,7 +56,7 @@
                     </div>
                     <div class="col-sm-12">
                     	<div class="row">
-                    		<input type="text" class="form-control form-control-primary" value="" required="" id="rhodium" name="rhodium">
+                    		<input type="text" class="form-control form-control-primary" value="" id="rhodium" name="rhodium">
                     	</div>
                     </div>
 					<div class="col-sm-12">
@@ -66,7 +66,7 @@
                     </div>
                     <div class="col-sm-12">
                     	<div class="row">
-		                    <input type="text" class="form-control form-control-primary" value="" required="" id="price_5cs" name="price_5cs">
+		                    <input type="text" class="form-control form-control-primary" value="" id="price_5cs" name="price_5cs">
                     	</div>
                     </div>
 					<div class="col-sm-12">
@@ -76,7 +76,7 @@
                     </div>
                     <div class="col-sm-12">
                     	<div class="row">
-	                    	<input type="text" class="form-control form-control-primary" value="" required="" id="unit_avg_price" name="unit_avg_price">
+	                    	<input type="text" class="form-control form-control-primary" value="" id="unit_avg_price" name="unit_avg_price">
                     	</div>
                     </div>
 				</div>
@@ -209,13 +209,13 @@
                 type: "GET",
                 error: function () {
                 	$('#design_no').removeClass('border-danger');
-                    $('#design_no_tooltip').hide();
+                    // $('#design_no_tooltip').hide();
                 	$('#submit_btn').prop('disabled', false);
                 },
                 success: function (data) {
                     if(data.code == 200) {
                     	$('#design_no').addClass('border-danger');
-                    	$('#design_no_tooltip').show();
+                    	// $('#design_no_tooltip').show();
                     	$('#submit_btn').prop('disabled', true);
                     }
                 }

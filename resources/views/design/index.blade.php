@@ -26,11 +26,13 @@
 		                        <th scope="row" style="max-width: 30px;" class="text-right">{{$design->design_no}}</th>
 		                        <td>
 		                        	<div style="width: 60px; height: 60px">
-		                        		<img src="{{asset($design->picture)}}" alt="Design" style="width: 100%; border-radius: 5px; overflow: hidden;">
+		                        		<a href="{{route('design.show', ['design' => $design->design_no])}}">
+		                        			<img src="{{asset($design->picture)}}" alt="Design" style="width: 100%; border-radius: 5px; overflow: hidden;">
+		                        		</a>
 		                        	</div>
 		                        </td>
-		                        <td>Otto</td>
-		                        <td>@mdo</td>
+		                        <td></td>
+		                        <td></td>
 		                    </tr>
 	                    @endforeach
 	                </tbody>
