@@ -11,6 +11,7 @@ class DesignController extends Controller
     public function show(Design $design)
     {
     	if($design != null) {
+            $design['stones'] = json_decode($design['stones']);
     		return response()->json([
     			'data' => $design,
     			'code' => 200
