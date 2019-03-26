@@ -14,8 +14,11 @@
 					<table class="table table-bordered" id="">
 						<tbody>
 						<tr>
-							<td>Design Number:</td>
-							<td><input type="number" name="design_no" required></td>
+							<td>Design number:</td>
+							<td>
+								<input type="text" name="design_no" id="design_no" pattern="[0-9]{3}" title="Design number should be an integer!" required>
+								<a href="#" id="design_no_tooltip" data-toggle="tooltip" data-placement="top" title="Design number already in use!" style="display: none; font-size: 22px; color: red">!</a>
+							</td>
 						</tr>
 						</tbody>
 					</table>
@@ -34,7 +37,7 @@
 				<div class="row">
 					<div class="preview img-wrapper"></div>
 					<div class="file-upload-wrapper">
-						<input type="file" name="picture" class="file-upload-native" id="picture"/>
+						<input type="file" name="picture" class="file-upload-native" id="picture" required />
 						<input type="text" disabled placeholder="upload image" class="file-upload-text" />
 					</div>
 				</div>
@@ -57,19 +60,31 @@
 						</thead>
 						<tbody id="append_parent">
 						<tr>
-							<td><input type="text" name="stones[0][size]"></td>
+							<td>
+								<input type="text" name="stones[0][size]" pattern="\d+.\d{2}" title="Example: 1.26, 1.80" required>
+							</td>
 							<td>
 								<select name="stones[0][type]" id="">
 									<option value="BIG">BIG</option>
 									<option value="ROUND">ROUND</option>
 								</select>
 							</td>
-							<td><input type="text" name="stones[0][quantity][0]"></td>
-							<td><input type="text" name="stones[0][quantity][1]"></td>
-							<td><input type="text" name="stones[0][quantity][2]"></td>
-							<td><input type="text" name="stones[0][quantity][3]"></td>
-							<td><input type="text" name="stones[0][quantity][4]"></td>
-							<td><input type="text" name="stones[0][price]"></td>
+							<td>
+								<input type="text" name="stones[0][quantity][0]" required pattern="\d+" title="">
+							</td>
+							<td>
+								<input type="text" name="stones[0][quantity][1]" required pattern="\d+">
+							</td>
+							<td>
+								<input type="text" name="stones[0][quantity][2]" required pattern="\d+">
+							</td>
+							<td>
+								<input type="text" name="stones[0][quantity][3]" required pattern="\d+">
+							</td>
+							<td>
+								<input type="text" name="stones[0][quantity][4]" required pattern="\d+">
+							</td>
+							<td><input type="text" name="stones[0][price]" required pattern="\d+.\d{2}" title="Example: 500.00, 1000.70"></td>
 							<td>
 								<button type="button" id="delete" class="btn btn-primary button button-small" title="Delete">
 									<i class="fa fa-trash"></i>
@@ -86,7 +101,7 @@
 
 		<div class="row">
 			<div class="col-md-12">
-				<button class="btn btn-primary edit"><i class="fa fa-paper-plane"></i>&nbsp;&nbsp; Submit
+				<button class="btn btn-primary edit" id="submit_btn"><i class="fa fa-paper-plane"></i>&nbsp;&nbsp; Submit
 				</button>
 				<button type="button" class="btn btn-primary pull-right add-row" id="rowAddButton">
 					<i class="fa fa-plus"></i>&nbsp;&nbsp; Add
@@ -139,5 +154,32 @@
     $("#picture").change(function() {
         readURL(this);
     });
+
+    $(document).ready(function() {
+    	var design_no = '';
+    	$('#design_no').on('keyup', function() {
+    		design_no = $(this).val();
+    		design_no_length = design_no.toString().length;
+
+    		if(design_no_length === 3) {
+    			$.ajax({
+                url: '{{env('ROOT_URL')}}/api/design/'+design_no,
+                type: "GET",
+                error: function () {
+                	$('#design_no').removeClass('border-danger');
+                    $('#design_no_tooltip').hide();
+                	$('#submit_btn').prop('disabled', false);
+                },
+                success: function (data) {
+                    if(data.code == 200) {
+                    	$('#design_no').addClass('border-danger');
+                    	$('#design_no_tooltip').show();
+                    	$('#submit_btn').prop('disabled', true);
+                    }
+                }
+            });
+    		}
+        });
+	});
 </script>
 @endsection
