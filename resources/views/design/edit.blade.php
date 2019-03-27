@@ -15,7 +15,7 @@
     @method('put')
     <div class="container">
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <div class="row">
                     <table class="table table-bordered" id="">
                         <tbody>
@@ -29,7 +29,7 @@
                     </table>
                 </div>
             </div>
-            <div class="col-md-8 text-center" style="border: 1px solid #dee2e6">
+            <div class="col-md-6 text-center" style="border: 1px solid #aba2d6;background-color: #eaffab;">
                 <div class="row">
                     <h6 class="pt-3">Bangle Design</h6>
                 </div>
