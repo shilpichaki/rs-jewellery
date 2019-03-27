@@ -57,7 +57,7 @@
                         </div>
                         <div class="col-sm-12">
                             <div class="row">
-                                <input type="value" class="form-control form-control-primary" value="500" required="" id="price_5cs" name="price_5cs" disabled>
+                                <input type="value" class="form-control form-control-primary" value="{{$design->price_5pcs}}" required="" id="price_5cs" name="price_5cs" disabled>
                             </div>
                         </div>
                         <div class="col-sm-12">
@@ -67,7 +67,7 @@
                         </div>
                         <div class="col-sm-12">
                             <div class="row">
-                                <input type="value" class="form-control form-control-primary" value="100" required="" id="unit_avg_price" name="unit_avg_price" disabled>
+                                <input type="value" class="form-control form-control-primary" value="{{$design->unit_avg_price}}" required="" id="unit_avg_price" name="unit_avg_price" disabled>
                             </div>
                         </div>
                     </div>

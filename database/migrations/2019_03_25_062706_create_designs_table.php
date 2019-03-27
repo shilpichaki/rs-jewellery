@@ -18,6 +18,9 @@ class CreateDesignsTable extends Migration
             $table->integer('design_no')->unique()->unsigned();
             $table->text('stones');
             $table->string('picture')->nullable();
+            $table->string('rhodium')->nullable();
+            $table->double('price_5pcs', 8, 2)->nullable();
+            $table->double('unit_avg_price', 8, 2)->nullable();
             $table->timestamps();
         });
     }

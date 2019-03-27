@@ -10,6 +10,9 @@ class Design extends Model
     	'design_no',
 		'stones',
 		'picture',
+        'rhodium',
+        'price_5pcs',
+        'unit_avg_price'
     ];
 
     protected $hidden = [

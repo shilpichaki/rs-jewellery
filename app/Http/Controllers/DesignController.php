@@ -58,7 +58,10 @@ class DesignController extends Controller
         $design = Design::create([
             'picture' => $path,
             'design_no' => $request->design_no,
-            'stones' => json_encode($request->stones)
+            'stones' => json_encode($request->stones),
+            'rhodium' => $request->rhodium,
+            'price_5pcs' => $request->price_5pcs,
+            'unit_avg_price' => $request->unit_avg_price,
         ]);
 
         return redirect()->route('design.show', ['design' => $design->design_no]);

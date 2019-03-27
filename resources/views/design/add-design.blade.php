@@ -66,7 +66,7 @@
                     </div>
                     <div class="col-sm-12">
                     	<div class="row">
-		                    <input type="text" class="form-control form-control-primary" value="" id="price_5cs" name="price_5cs">
+		                    <input type="text" class="form-control form-control-primary" value="" id="price_5pcs" name="price_5pcs">
                     	</div>
                     </div>
 					<div class="col-sm-12">
