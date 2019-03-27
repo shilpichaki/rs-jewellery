@@ -7,6 +7,7 @@
 @endsection
 
 @section('content')
+
     <div class="row">
 
         <div class="offset-lg-2 col-lg-8">
