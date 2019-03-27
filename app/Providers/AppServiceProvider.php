@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Blade;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
@@ -25,5 +26,9 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
+
+        Blade::directive('prettifykey', function ($expression) {
+            return "<?php echo (ucwords(str_replace('_', ' ', $expression))); ?>";
+        });
     }
 }
