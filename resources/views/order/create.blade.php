@@ -114,6 +114,18 @@
                                         <h6 class="text-white m-b-0">All Earnings</h6>
                                     </div>
                                     <div class="col-4 text-right">
+                                        <input type="hidden" name="design[1][design_no]" value="">
+                                        <input type="hidden" name="design[1][oqs][0]" value="">
+                                        <input type="hidden" name="design[1][oqs][1]" value="">
+                                        <input type="hidden" name="design[1][oqs][2]" value="">
+                                        <input type="hidden" name="design[1][oqs][3]" value="">
+                                        <input type="hidden" name="design[1][oqs][4]" value="">
+                                        <input type="hidden" name="design[1][oqp][0]" value="">
+                                        <input type="hidden" name="design[1][oqp][1]" value="">
+                                        <input type="hidden" name="design[1][oqp][2]" value="">
+                                        <input type="hidden" name="design[1][oqp][3]" value="">
+                                        <input type="hidden" name="design[1][oqp][4]" value="">
+                                        <input type="hidden" name="design[1][stone_count][0]">
                                     </div>
                                 </div>
                             </div>
@@ -201,6 +213,7 @@
                 var content = '';
                 cardContainerwidth = $(".attachDesignCon").width();
                 cardContainerwidth = Math.round(cardContainerwidth);
+                var totalStones = 0;
 
                 design_no = $(this).val();
                     $.ajax({
@@ -208,13 +221,17 @@
                         type: "GET",
                         success: function (data) {
                             if(data.code == 200) {
-                                content += '<div class="container"><div class="row"><div class="col-md-4"><div class="row"><table class="table table-bordered" id=""><tbody><tr><td>Design Number:</td><td>'+data.data.design_no+'</td></tr></tbody></table></div></div><div class="col-md-8 text-center" style="border: 1px solid #8577cc;background-color: #eaffab;"><div class="row"><h6 class="pt-3">Bangle Design</h6></div></div></div><div class="row"><div class="col-md-2"><div class="row"><div data-imgurl="'+rootUrl+'/'+data.data.picture+'" id="img_preview" class="preview img-wrapper" style="background-image: url('+rootUrl+'/'+data.data.picture+');background-size: cover; background-position:center"></div></div></div><div class="col-md-10"><div class="row"><table class="table table-bordered" id="editableTable"><thead><tr><th>Stone Size</th><th>Stone Type</th><th>2.2</th><th>2.4</th><th>2.6</th><th>2.8</th><th>2.10</th><th class="text-left">Stone count</th></tr></thead><tbody>';
+                                console.log(data.data);
+
+                                totalStones = Object.keys(data.data.stones).length;
+
+                                content += '<div class="container"><div class="row"><div class="col-md-4"><div class="row"><table class="table table-bordered" id=""><tbody><tr><td>Design Number:</td><td id="get_design_no" data-design_no='+data.data.design_no+'>'+data.data.design_no+'</td></tr></tbody></table></div></div><div class="col-md-8 text-center" style="border: 1px solid #8577cc;background-color: #eaffab;"><div class="row"><h6 class="pt-3">Bangle Design</h6></div></div></div><div class="row"><div class="col-md-2"><div class="row"><div data-imgurl="'+rootUrl+'/'+data.data.picture+'" id="img_preview" class="preview img-wrapper" style="background-image: url('+rootUrl+'/'+data.data.picture+');background-size: cover; background-position:center"></div></div></div><div class="col-md-10"><div class="row"><table class="table table-bordered" id="editableTable"><thead><tr><th>Stone Size</th><th>Stone Type</th><th>2.2</th><th>2.4</th><th>2.6</th><th>2.8</th><th>2.10</th><th class="text-left" id="total_stone_count" data-totalStoneCount="'+totalStones+'">Stone count</th></tr></thead><tbody>';
 
                                 $.each(data.data.stones, function (index, value) {
-                                    content += '<tr><td>'+value.size+'</td><td><span class="label label-danger">'+value.type+'</span></td><td>'+value.quantity[0]+'</td><td>'+value.quantity[1]+'</td><td>'+value.quantity[2]+'</td><td>'+value.quantity[3]+'</td><td>'+value.quantity[4]+'</td><td><input class="form-control form-control-primary" type="text" name="stones[0][quantity][0]" required="" pattern="\d+" title=""></td></tr>';
+                                    content += '<tr><td>'+value.size+'</td><td><span class="label label-danger">'+value.type+'</span></td><td>'+value.quantity[0]+'</td><td>'+value.quantity[1]+'</td><td>'+value.quantity[2]+'</td><td>'+value.quantity[3]+'</td><td>'+value.quantity[4]+'</td><td><input id="stone_count_'+index+'" class="form-control form-control-primary" type="text" required="" pattern="\d+" title=""></td></tr>';
                                 });
 
-                                content += '<tr><td colspan="2">Order Quantity Set.</td><td><input class="form-control form-control-primary" type="text" required="" pattern="\d+" title=""></td><td><input class="form-control form-control-primary" type="text" required="" pattern="\d+" title=""></td><td><input class="form-control form-control-primary" type="text" required="" pattern="\d+" title=""></td><td><input class="form-control form-control-primary" type="text" name="stones[0][quantity][0]" required="" pattern="\d+" title=""></td><td><input class="form-control form-control-primary" type="text" name="stones[0][quantity][0]" required="" pattern="\d+" title=""></td><td>6.60</td></tr><tr><td colspan="2">Order Quantity Pcs.</td><td><input class="form-control form-control-primary" type="text" name="stones[0][quantity][0]" required="" pattern="\d+" title=""></td><td><input class="form-control form-control-primary" type="text" name="stones[0][quantity][0]" required="" pattern="\d+" title=""></td><td><input class="form-control form-control-primary" type="text" name="stones[0][quantity][0]" required="" pattern="\d+" title=""></td><td><input class="form-control form-control-primary" type="text" name="stones[0][quantity][0]" required="" pattern="\d+" title=""></td><td><input class="form-control form-control-primary" type="text" name="stones[0][quantity][0]" required="" pattern="\d+" title=""></td><td>6.60</td></tr>';
+                                content += '<tr><td colspan="2">Order Quantity Set.</td><td><input class="form-control form-control-primary" type="text" required="" title="" id="oqs22"></td><td><input class="form-control form-control-primary" type="text" required="" title="" id="oqs2.4"></td><td><input id="oqs2.6" class="form-control form-control-primary" type="text" required="" title=""></td><td><input id="oqs2.8" class="form-control form-control-primary" type="text" required="" title=""></td><td><input id="oqs2.10" class="form-control form-control-primary" type="text" required="" title=""></td><td></td></tr><tr><td colspan="2">Order Quantity Pcs.</td><td><input  id="oqp2.2" class="form-control form-control-primary" type="text" required="" title=""></td><td><input id="oqp2.4" class="form-control form-control-primary" type="text"  required="" title=""></td><td><input id="oqp2.6" class="form-control form-control-primary" type="text" required="" title=""></td><td><input id="oqp2.8" class="form-control form-control-primary" type="text" required="" title=""></td><td><input id="oqp2.10" class="form-control form-control-primary" type="text"  required="" title=""></td><td></td></tr>';
 
                                 // $.each(data.data.stones, function(index, value) {
                                 //     content += '<tr><td>Stone count '+value.size+'</td><td colspan="6"><input class="form-control form-control-primary" type="text" name="stones[0][quantity][0]" required="" pattern="\d+" title=""></td></tr>'
@@ -247,11 +264,25 @@
                     scrollTop: $(".btnAddDesign").offset().top
                 }, 500);
                 
+                var contentToDump = '';
                 var img_preview_url = $("#img_preview").attr('data-imgurl');
+                var get_design_no = $("#get_design_no").attr('data-design_no');
+                var total_stone_count =$("#total_stone_count").attr('data-totalStoneCount');
+                var oqs = $("#oqs22").val();
 
+                contentToDump += '<div class="mycards" style="background-image: url('+img_preview_url+')" ><div class="card-block"><div class="row align-items-end"><div class="col-8"><h4 class="text-white">#'+get_design_no+'</h4><h6 class="text-white m-b-0"></h6></div><div class="col-4 text-right">';
+                alert(oqs);
+                contentToDump += '<input type="hidden" name="design['+get_design_no+'][design_no]" value="'+get_design_no+'"><input type="hidden" name="design['+get_design_no+'][oqs][0]" value="'+oqs+'"><input type="hidden" name="design['+get_design_no+'][oqs][1]" value="'+$("#oqs2.4").val()+'"><input type="hidden" name="design['+get_design_no+'][oqs][2]" value="'+$("#oqs2.6").val()+'"><input type="hidden" name="design['+get_design_no+'][oqs][3]" value="'+$("#oqs2.8").val()+'"><input type="hidden" name="design['+get_design_no+'][oqs][4]" value="'+$("#oqs2.10").val()+'"><input type="hidden" name="design['+get_design_no+'][oqp][0]" value="'+$("#oqp2.2").val()+'"><input type="hidden" name="design['+get_design_no+'][oqp][1]" value="'+$("#oqp2.4").val()+'"><input type="hidden" name="design['+get_design_no+'][oqp][2]" value="'+$("#oqp2.6").val()+'"><input type="hidden" name="design['+get_design_no+'][oqp][3]" value="'+$("#oqp2.8").val()+'"><input type="hidden" name="design['+get_design_no+'][oqp][4]" value="'+$("#oqp2.10").val()+'">';
+
+                for (var i = 0; i < total_stone_count; i++) {
+                    contentToDump += '<input type="hidden" name="design['+get_design_no+'][stone_count]['+i+']">';
+                }
+
+                contentToDump +='</div></div></div><div class="card-footer"><p class="text-white m-b-0"></p></div></div>';
+                alert(contentToDump);
                 $('#dumpcontent').html('');
                 
-                $('.attachDesignCon').append('<div class="mycards" style="background-image: url('+img_preview_url+')" ><div class="card-block"><div class="row align-items-end"><div class="col-8"><h4 class="text-white">$30200</h4><h6 class="text-white m-b-0">All Earnings</h6></div><div class="col-4 text-right"></div></div></div><div class="card-footer"><p class="text-white m-b-0"><i class="feather icon-clock text-white f-14 m-r-10"></i>update : 2:15 am</p></div></div>');
+                $('.attachDesignCon').append(contentToDump);
 
                 if((cardCount*onCardTakesWidth) > cardContainerwidth) {
                     $('.attachDesign').css('overflow-x', 'scroll');
