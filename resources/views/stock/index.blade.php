@@ -40,10 +40,10 @@
                         <th>{{$stock->threshold_value}}</th>
                         <th>{{$stock->stock_value}}</th>
                         <th class="d-flex justify-content-center">
-                            <button class="btn btn-primary btntoggleview" data-counter="{{$counter}}">
+                            <button class="btn btn-primary btntoggleview mx-1" data-counter="{{$counter}}">
                                 <i class="fa fa-angle-down"></i>
                             </button>
-                            <a href="{{'/stock/add-stock'}}" class="btn btn-primary">
+                            <a href="{{route('stock.addstock')}}" class="btn btn-primary mx-1">
                                 <i class="fa fa-external-link"></i>
                             </a>
                         </th>

@@ -14,7 +14,7 @@
                             <span class="pcoded-mtext">Add Stock</span>
                         </a>
                     </li>
-                    <li class="">
+                    <li class="active">
                         <a href="{{route('stock.index')}}">
                             <span class="pcoded-mtext">All Stocks</span>
                         </a>
