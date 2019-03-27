@@ -47,3 +47,12 @@ body{background-color:#f3f3f3;font-size:.875em;overflow-x:hidden;color:#4330a2;f
 .table-bordered td, .table-bordered th {
     border: 1px solid #aba2d6 !important;
 }
+.bg-c-yellow a,.bg-c-green a,.bg-c-pink a,.bg-c-blue a {
+    color: #fff;
+}
+.bg-c-yellow a:hover,.bg-c-green a:hover,.bg-c-pink a:hover,.bg-c-blue a:hover {
+    color: rgba(0, 0, 0, 0.37);
+}
+.bg-c-yellow .fa,.bg-c-green .fa,.bg-c-pink .fa,.bg-c-blue .fa {
+    font-size: 2rem !important;
+}

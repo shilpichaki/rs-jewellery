@@ -34,7 +34,7 @@
                     </li>
                     <li class="active">
                         <a href="{{route('design.index')}}">
-                            <span class="pcoded-mtext">All Design</span>
+                            <span class="pcoded-mtext">All Designs</span>
                         </a>
                     </li>
                 </ul>
