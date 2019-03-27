@@ -29,7 +29,7 @@
 					</table>
 				</div>
 			</div>
-			<div class="col-md-8 text-center" style="border: 1px solid #dee2e6">
+			<div class="col-md-8 text-center" style="border: 1px solid #dee2e6;background-color: #eaffab;">
 				<div class="row">
 					<h6 class="pt-3">Bangle Design</h6>
 				</div>

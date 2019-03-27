@@ -29,6 +29,7 @@
                             <div class="col-sm-8">
 
                                 <select class="form-control form-control-primary{{ $errors->has('material_type') ? ' is-invalid' : '' }}" name="material_type" id="material_type" value="{{ old('material_type') }}" required>
+                                    <option value="">Select one</option>
                                     @foreach ($rawMaterial as $material)
                                         <option value="{{$material}}">{{$material}}</option>
                                     @endforeach
@@ -192,36 +193,50 @@
     <script type="text/javascript">
         $(document).ready(function() {
             $("#material_type").on('change', function(){
-                //Loader show
-                $("#loaderDiv").show();
                 var rawMaterial = $(this).val();
-                $.ajax({
-                    url: '{{env('ROOT_URL')}}/api/stock/'+rawMaterial,
-                    type: "GET",
-                    error: function () {
-                        console.log('Stock not found! Will add a new type of material in stock!');
-                    },
-                    success: function (data) {
-                        //loader hide
-                        setTimeout(function() {
-                            $("#loaderDiv").hide()
-                        }, 1000);
-                        // update values
-                        $("#current_stock_name").html(data.data.raw_material_type);
-                        $("#current_stock_value").val(data.data.stock_value);
-                        $("#threshold_value").val(data.data.threshold_value);
+                if(rawMaterial != '') {
+                    //Loader show
+                    $("#loaderDiv").show();
 
-                        // enable input fields
-                        $("#threshold_value").prop('disabled', false);
-                        $("#unit_of_measurement").prop('disabled', false);
-                        $("#stock_value").prop('disabled', false);
-                        $("#vendor_id").prop('disabled', false);
-                        $("#today_rate").prop('disabled', false);
-                        $("#price").prop('disabled', false);
-                        $("#submit_btn").prop('disabled', false);                       
+                    $.ajax({
+                        url: '{{env('ROOT_URL')}}/api/stock/'+rawMaterial,
+                        type: "GET",
+                        error: function () {
+                            console.log('Stock not found! Will add a new type of material in stock!');
+                        },
+                        success: function (data) {
+                            //loader hide
+                            setTimeout(function() {
+                                $("#loaderDiv").hide()
+                            }, 1000);
+                            // update values
+                            $("#current_stock_name").html(data.data.raw_material_type);
+                            $("#current_stock_value").val(data.data.stock_value);
+                            $("#threshold_value").val(data.data.threshold_value);
 
-                    }
-                });
+                            // enable input fields
+                            $("#threshold_value").prop('disabled', false);
+                            $("#unit_of_measurement").prop('disabled', false);
+                            $("#stock_value").prop('disabled', false);
+                            $("#vendor_id").prop('disabled', false);
+                            $("#today_rate").prop('disabled', false);
+                            $("#price").prop('disabled', false);
+                            $("#submit_btn").prop('disabled', false);
+
+                        }
+                    });
+                }else {
+
+                    // disble input fields
+                    $("#threshold_value").prop('disabled', true);
+                    $("#unit_of_measurement").prop('disabled', true);
+                    $("#stock_value").prop('disabled', true);
+                    $("#vendor_id").prop('disabled', true);
+                    $("#today_rate").prop('disabled', true);
+                    $("#price").prop('disabled', true);
+                    $("#submit_btn").prop('disabled', true);
+                }
+
             });
             
             

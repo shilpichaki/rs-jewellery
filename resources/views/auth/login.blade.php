@@ -20,7 +20,9 @@
     <meta name="author" content="#">
     <!-- Favicon icon -->
     <link rel="icon" href="https://colorlib.com/polygon/adminty/files/assets/images/favicon.ico" type="image/x-icon">
-    <!-- Google font--><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,800" rel="stylesheet">
+    <!-- Google font-->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,800" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Romanesco" rel="stylesheet">
     <!-- Required Fremwork -->
     <link rel="stylesheet" type="text/css" href="{{asset('css/bootstrap.min.css')}}">
     <!-- themify-icons line icon -->
@@ -47,7 +49,10 @@
                     @csrf
                     <div class="text-center">
                         {{--<img src="../files/assets/images/logo.png" alt="logo.png">--}}
-                        <h4 class="text-white"><b>RPS-JEWELLERY</b></h4>
+                        <h4 class="text-white" style="font-family: 'Romanesco', cursive;        background: linear-gradient(to right, #f2ec32 0%, #f3c958 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 5vw;"><b>RPS-JEWELLERY</b></h4>
                     </div>
                     <div class="auth-box card">
                         <div class="card-block">
