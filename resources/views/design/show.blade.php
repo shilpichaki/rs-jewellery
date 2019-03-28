@@ -74,42 +74,44 @@
                 </div>
                 <div class="col-md-9">
                     <div class="row">
-                        <table class="table table-bordered" id="editableTable">
-                            <thead>
-                            <tr>
-                                <th>Stone Size</th>
-                                <th>Stone Type</th>
-                                <th>2.2</th>
-                                <th>2.4</th>
-                                <th>2.6</th>
-                                <th>2.8</th>
-                                <th>2.10</th>
-                                <th>Price</th>
-                            </tr>
-                            </thead>
-                            <tbody id="append_parent">
-                            @foreach($design->stones as $stone)
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="editableTable">
+                                <thead>
                                 <tr>
-                                    <td>{{$stone->size}}</td>
-                                    <td>
-                                        @if($stone->type == "BIG")
-                                            <span class="label label-primary">BIG</span>
-                                            @elseif($stone->type == "ROUND")
-                                            <span class="label label-danger">ROUND</span>
-                                        @endif
-
-                                    </td>
-                                    <td>{{$stone->quantity[0]}}</td>
-                                    <td>{{$stone->quantity[1]}}</td>
-                                    <td>{{$stone->quantity[2]}}</td>
-                                    <td>{{$stone->quantity[3]}}</td>
-                                    <td>{{$stone->quantity[4]}}</td>
-                                    <td>{{$stone->price}}</td>
+                                    <th>Stone Size</th>
+                                    <th>Stone Type</th>
+                                    <th>2.2</th>
+                                    <th>2.4</th>
+                                    <th>2.6</th>
+                                    <th>2.8</th>
+                                    <th>2.10</th>
+                                    <th>Price</th>
                                 </tr>
-                            @endforeach
+                                </thead>
+                                <tbody id="append_parent">
+                                @foreach($design->stones as $stone)
+                                    <tr>
+                                        <td>{{$stone->size}}</td>
+                                        <td>
+                                            @if($stone->type == "BIG")
+                                                <span class="label label-primary">BIG</span>
+                                            @elseif($stone->type == "ROUND")
+                                                <span class="label label-danger">ROUND</span>
+                                            @endif
 
-                            </tbody>
-                        </table>
+                                        </td>
+                                        <td>{{$stone->quantity[0]}}</td>
+                                        <td>{{$stone->quantity[1]}}</td>
+                                        <td>{{$stone->quantity[2]}}</td>
+                                        <td>{{$stone->quantity[3]}}</td>
+                                        <td>{{$stone->quantity[4]}}</td>
+                                        <td>{{$stone->price}}</td>
+                                    </tr>
+                                @endforeach
+
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>

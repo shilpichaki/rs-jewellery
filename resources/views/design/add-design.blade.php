@@ -83,55 +83,57 @@
 			</div>
 			<div class="col-md-9">
 				<div class="row">
-					<table class="table table-bordered" id="editableTable">
-						<thead>
-						<tr>
-							<th>Stone Size</th>
-							<th>Stone Type</th>
-							<th>2.2</th>
-							<th>2.4</th>
-							<th>2.6</th>
-							<th>2.8</th>
-							<th>2.10</th>
-							<th>Price</th>
-							<th></th>
-						</tr>
-						</thead>
-						<tbody id="append_parent">
-						<tr id="add_stone_row_0">
-							<td>
-								<input class="form-control form-control-primary" type="text" name="stones[0][size]" pattern="\d+.\d{2}" title="Example: 1.26, 1.80" required>
-							</td>
-							<td>
-								<select class="form-control form-control-primary" name="stones[0][type]" id="">
-									<option value="BIG">BIG</option>
-									<option value="ROUND">ROUND</option>
-								</select>
-							</td>
-							<td>
-								<input class="form-control form-control-primary" type="text" name="stones[0][quantity][0]" required pattern="\d+" title="">
-							</td>
-							<td>
-								<input class="form-control form-control-primary" type="text" name="stones[0][quantity][1]" required pattern="\d+">
-							</td>
-							<td>
-								<input class="form-control form-control-primary" type="text" name="stones[0][quantity][2]" required pattern="\d+">
-							</td>
-							<td>
-								<input class="form-control form-control-primary" type="text" name="stones[0][quantity][3]" required pattern="\d+">
-							</td>
-							<td>
-								<input class="form-control form-control-primary" type="text" name="stones[0][quantity][4]" required pattern="\d+">
-							</td>
-							<td><input class="form-control form-control-primary" type="text" name="stones[0][price]" required pattern="\d+.\d{2}" title="Example: 500.00, 1000.70"></td>
-							<td>
-								<button type="button" data-id="0" class="delete_row_btn btn btn-primary button button-small" title="Delete">
-									<i class="fa fa-trash"></i>
-								</button>
-							</td>
-						</tr>
-						</tbody>
-					</table>
+					<div class="table-responsive">
+						<table class="table table-bordered" id="editableTable">
+							<thead>
+							<tr>
+								<th>Stone Size</th>
+								<th>Stone Type</th>
+								<th>2.2</th>
+								<th>2.4</th>
+								<th>2.6</th>
+								<th>2.8</th>
+								<th>2.10</th>
+								<th>Price</th>
+								<th></th>
+							</tr>
+							</thead>
+							<tbody id="append_parent">
+							<tr id="add_stone_row_0">
+								<td>
+									<input class="form-control form-control-primary" type="text" name="stones[0][size]" pattern="\d+.\d{2}" title="Example: 1.26, 1.80" required>
+								</td>
+								<td>
+									<select class="form-control form-control-primary" name="stones[0][type]" id="">
+										<option value="BIG">BIG</option>
+										<option value="ROUND">ROUND</option>
+									</select>
+								</td>
+								<td>
+									<input class="form-control form-control-primary" type="text" name="stones[0][quantity][0]" required pattern="\d+" title="">
+								</td>
+								<td>
+									<input class="form-control form-control-primary" type="text" name="stones[0][quantity][1]" required pattern="\d+">
+								</td>
+								<td>
+									<input class="form-control form-control-primary" type="text" name="stones[0][quantity][2]" required pattern="\d+">
+								</td>
+								<td>
+									<input class="form-control form-control-primary" type="text" name="stones[0][quantity][3]" required pattern="\d+">
+								</td>
+								<td>
+									<input class="form-control form-control-primary" type="text" name="stones[0][quantity][4]" required pattern="\d+">
+								</td>
+								<td><input class="form-control form-control-primary" type="text" name="stones[0][price]" required pattern="\d+.\d{2}" title="Example: 500.00, 1000.70"></td>
+								<td>
+									<button type="button" data-id="0" class="delete_row_btn btn btn-primary button button-small" title="Delete">
+										<i class="fa fa-trash"></i>
+									</button>
+								</td>
+							</tr>
+							</tbody>
+						</table>
+					</div>
 					<br><br>
 					<div class="col-sm-12">
 						<div class="row">
