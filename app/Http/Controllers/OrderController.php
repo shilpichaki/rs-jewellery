@@ -12,4 +12,12 @@ class OrderController extends Controller
 		return view('order.create')
 			->withDesigns(Design::all());
 	}
+
+	public function store(Request $request)
+	{
+		dd($request);
+		// echo '<pre>';
+		// print_r($request->design);
+		// echo '</pre>';
+	}
 }
