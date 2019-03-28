@@ -24,7 +24,17 @@ class OrderController extends Controller
 			->withDesigns(Design::all());
 	}
 
-	public function store(Request $request)
+	public function allocation()
+  {
+      return view('order.allocation');
+  }
+
+  public function receive()
+  {
+      return view('order.receive');
+  }
+	
+  public function store(Request $request)
 	{
 		// dd($request);
 		// echo '<pre>';
