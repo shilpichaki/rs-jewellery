@@ -111,7 +111,7 @@
      <div class="col-xl-3 col-md-6"> 
          <div class="card bg-c-green text-white"> 
          <div class="card-block"> 
-                         <a href=" "> 
+                         <a href="{{route('order.allocation')}}">
                  <div class="row align-items-center"> 
                      <div class="col"> 
                          <h5 class="m-b-0">Order Allocation</h5> 
@@ -143,7 +143,7 @@
      <div class="col-xl-3 col-md-6"> 
          <div class="card bg-c-blue text-white"> 
          <div class="card-block"> 
-                         <a href=" "> 
+                         <a href="{{route('order.receive')}}">
                  <div class="row align-items-center"> 
                      <div class="col"> 
                          <h5 class="m-b-0">Recive Order</h5> 

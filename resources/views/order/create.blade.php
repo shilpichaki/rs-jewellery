@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="{{asset('css/design-aadhar.style.css')}}">
     <!--forms-wizard css-->
     <link rel="stylesheet" type="text/css" href="{{asset('css/jquery.steps.css')}}">
+    <!--jquery-ui css-->
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <style>
        .addDesign {
@@ -41,7 +42,7 @@
 @section('content')
     <div class="row">
         <div class="offset-lg-1 col-lg-10">
-            <div class="row">
+            <div class="">
                 <div class="card">
                 <div class="card-header w-100">
                     <h4>Order aadhaar</h4>

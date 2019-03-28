@@ -50,6 +50,16 @@
                             <span class="pcoded-mtext">Add Order</span>
                         </a>
                     </li>
+                    <li class="active">
+                        <a href="{{route('order.allocation')}}">
+                            <span class="pcoded-mtext">Order Allocation</span>
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="{{route('order.receive')}}">
+                            <span class="pcoded-mtext">Receive order</span>
+                        </a>
+                    </li>
                 </ul>
             </li>
         </ul>

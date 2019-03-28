@@ -34,6 +34,7 @@ body{background-color:#f3f3f3;font-size:.875em;overflow-x:hidden;color:#4330a2;f
 }
 .table {
     background-color: #eaffab !important;
+    margin-bottom: 0px !important;
 }
 .table-bordered {
     border: 1px solid #88a0f3 !important;

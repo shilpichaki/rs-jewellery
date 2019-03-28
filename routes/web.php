@@ -52,3 +52,7 @@ Route::put('/design/{design}/update', 'DesignController@update')->name('design.u
  */
 //Route::get('/order/create', 'OrderController@addOrder')->name('order.create');
 Route::get('/order/create', 'OrderController@create')->name('order.create');
+
+Route::get('/order/allocation', 'OrderController@allocation')->name('order.allocation');
+
+Route::get('/order/receive', 'OrderController@receive')->name('order.receive');

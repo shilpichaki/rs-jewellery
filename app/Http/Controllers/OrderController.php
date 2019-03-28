@@ -12,4 +12,14 @@ class OrderController extends Controller
 		return view('order.create')
 			->withDesigns(Design::all());
 	}
+
+	public function allocation()
+    {
+        return view('order.allocation');
+    }
+
+    public function receive()
+    {
+        return view('order.receive');
+    }
 }
