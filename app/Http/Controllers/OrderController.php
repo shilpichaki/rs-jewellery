@@ -8,6 +8,16 @@ use App\Order;
 
 class OrderController extends Controller
 {
+	public function show(Order $order)
+	{
+		$order['designs'] = json_decode($order['designs']);
+
+		return response()->json([
+					'data' => $order,
+					'code' => 200
+				]); 
+	}
+
 	public function create()
 	{
 		return view('order.create')
