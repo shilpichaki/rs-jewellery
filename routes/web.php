@@ -50,6 +50,6 @@ Route::put('/design/{design}/update', 'DesignController@update')->name('design.u
  * Order
  * show, add-order
  */
-Route::get('/order/{order}', 'OrderController@show')->name('order.show');
 Route::get('/order/create', 'OrderController@create')->name('order.create');
+Route::get('/order/{order}', 'OrderController@show')->name('order.show');
 Route::post('/order', 'OrderController@store')->name('order.store');
