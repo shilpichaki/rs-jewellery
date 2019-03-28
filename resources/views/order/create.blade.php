@@ -28,13 +28,12 @@
             background-size: cover;
             float: left;
             display: inline-block;
-            margin: 10px; 
+            margin: 10px;
 
             border-radius: 5px;
             -webkit-box-shadow: 0 1px 20px 0 rgba(69,90,100,0.08);
             box-shadow: 0 1px 20px 0 rgba(69,90,100,0.08);
             border: none;
-            margin-bottom: 30px;
         }
     </style>
 @endsection
@@ -43,134 +42,88 @@
         <div class="offset-lg-1 col-lg-10">
             <div class="row">
                 <div class="card">
-                <div class="card-header w-100">
-                    <h4>Order aadhaar</h4>
-                    {{--<span>Form for <code>Job card</code></span>--}}
-                </div>
-                <div class="card-block w-100">
-                    <form action="" method="post">
-                        @csrf
-                        <div class="row form-group">
-                            <div class="col-sm-2">
-                                <label class="col-form-label">Order No.</label>
-                            </div>
-                            <div class="col-sm-4">
-
-                                <input type="number" class="form-control autonumber form-control-primary" value="" required="" id="" name="">
-                                <span class="form-bar"></span>
-                            </div>
-                            <div class="col-sm-2">
-                                <label class="col-form-label">Party Name</label>
-                            </div>
-                            <div class="col-sm-4">
-
-                                <input type="text" class="form-control autonumber form-control-primary" value="" required="" id="" name="">
-                                <span class="form-bar"></span>
-                            </div>
+                    <form action="{{route('order.store')}}" method="post">
+                    @csrf
+                        <div class="card-header w-100">
+                            <h4>Order aadhaar</h4>
                         </div>
-                        <div class="row form-group">
-                            <div class="col-sm-2">
-                                <label class="col-form-label">Order Issue Date</label>
-                            </div>
-                            <div class="col-sm-4">
-
-                                <input type="text" class="form-control autonumber form-control-primary" value="" required="" id="datepicker" name="">
-                                <span class="form-bar"></span>
-                            </div>
-                            <div class="col-sm-2">
-                                <label class="col-form-label">Order Delivery Date</label>
-                            </div>
-                            <div class="col-sm-4">
-
-                                <input type="text" class="form-control autonumber form-control-primary" value="" required="" id="datepicker_1" name="">
-                                <span class="form-bar"></span>
-                            </div>
-                        </div>
-                </div>
-            </div>
-            <div class="attachDesign">
-                    <!-- <div class="card update-card" style="background-image: url('http://127.0.0.1:8000/storage/pictures/11553668368.jpeg'); background-position: center; background-size: cover;">
-                        <div class="card-block">
-                            <div class="row align-items-end">
-                                <div class="col-8">
-                                    <h4 class="text-white">$30200</h4>
-                                    <h6 class="text-white m-b-0">All Earnings</h6>
+                        <div class="card-block w-100">
+                            <div class="row form-group">
+                                <div class="col-sm-2">
+                                    <label class="col-form-label">Order No.</label>
                                 </div>
-                                <div class="col-4 text-right"><iframe class="chartjs-hidden-iframe" tabindex="-1" style="display: block; overflow: hidden; border: 0px; margin: 0px; top: 0px; left: 0px; bottom: 0px; right: 0px; height: 100%; width: 100%; position: absolute; pointer-events: none; z-index: -1;"></iframe>
-                                    <canvas id="update-chart-1" height="50" width="38" style="display: block; width: 38px; height: 50px;"></canvas>
+                                <div class="col-sm-4">
+                                    <input type="number" class="form-control autonumber form-control-primary" value="" required="" id="" name="order_no">
+                                    <span class="form-bar"></span>
+                                </div>
+                                <div class="col-sm-2">
+                                    <label class="col-form-label">Party Name</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control autonumber form-control-primary" value="" required="" id="" name="party_name">
+                                    <span class="form-bar"></span>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-sm-2">
+                                    <label class="col-form-label">Order Issue Date</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control autonumber form-control-primary" value="" required="" id="datepicker" name="issue_date">
+                                    <span class="form-bar"></span>
+                                </div>
+                                <div class="col-sm-2">
+                                    <label class="col-form-label">Order Delivery Date</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control autonumber form-control-primary" value="" required="" id="datepicker_1" name="delivery_date">
+                                    <span class="form-bar"></span>
                                 </div>
                             </div>
                         </div>
-                        <div class="card-footer">
-                            <p class="text-white m-b-0"><i class="feather icon-clock text-white f-14 m-r-10"></i>update : 2:15 am</p>
-                        </div>
-                    </div> -->
-                    <div class="attachDesignCon">
-                        <!-- <div class="mycards">
-                            <div class="card-block">
-                                <div class="row align-items-end">
-                                    <div class="col-8">
-                                        <h4 class="text-white">$30200</h4>
-                                        <h6 class="text-white m-b-0">All Earnings</h6>
-                                    </div>
-                                    <div class="col-4 text-right">
-                                        <input type="hidden" name="design[1][design_no]" value="">
-                                        <input type="hidden" name="design[1][oqs][0]" value="">
-                                        <input type="hidden" name="design[1][oqs][1]" value="">
-                                        <input type="hidden" name="design[1][oqs][2]" value="">
-                                        <input type="hidden" name="design[1][oqs][3]" value="">
-                                        <input type="hidden" name="design[1][oqs][4]" value="">
-                                        <input type="hidden" name="design[1][oqp][0]" value="">
-                                        <input type="hidden" name="design[1][oqp][1]" value="">
-                                        <input type="hidden" name="design[1][oqp][2]" value="">
-                                        <input type="hidden" name="design[1][oqp][3]" value="">
-                                        <input type="hidden" name="design[1][oqp][4]" value="">
-                                        <input type="hidden" name="design[1][stone_count][0]">
-                                    </div>
-                                </div>
+                        <button type="submit" style="width: 170px;" class="btn btn-success pull-right add-row ml-3 mr-3 my-3">
+                            <i class="fa fa-paper-plane"></i>&nbsp;&nbsp; Submit
+                        </button>
+                        <div class="attachDesign" data-designs="">
+                            <div class="attachDesignCon">
                             </div>
-                            <div class="card-footer">
-                                <p class="text-white m-b-0"><i class="feather icon-clock text-white f-14 m-r-10"></i>update : 2:15 am</p>
-                            </div>
-                        </div> -->
-                    </div>
-            </div>
-        </div>
-
-            <div class="row form-group">
-                <div class="col-md-12 mb-3 addDesignDiv">
-                    <button type="button" class="btn btn-primary pull-right add-row btnAddDesign">
-                        <i class="fa fa-plus"></i>&nbsp;&nbsp; Add design
-                    </button>
-                </div>
-            </div>
-            <div class="addDesign">
-                <div class="card">
-                    <div class="card-block w-100">
-                        <div class="row form-group">
-                            <div class="col-sm-2">
-                                <label class="col-form-label">Design No.</label>
-                            </div>
-                            <div class="col-sm-4">
-                                <select class="form-control form-control-primary" name="" id="designNo">
-                                    <option value="">Select one</option>
-                                    @foreach($designs as $design)
-                                        <option value="{{$design->design_no}}">{{$design->design_no}}</option>
-                                    @endforeach
-                                </select>
-                                <span class="form-bar"></span>
-                            </div>
-                            <div class="col-sm-2">
-                                <label class="col-form-label">Design Rate (Unit Avg. Price)</label>
-                            </div>
-                            <div class="col-sm-4">
-                                <input type="number" class="form-control autonumber form-control-primary" value="" required="" id="" name="">
-                                <span class="form-bar"></span>
-                            </div>
-                        </div>
                         </div>
                     </form>
-            </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-12 mb-3 addDesignDiv">
+                        <button type="button" class="btn btn-primary pull-right add-row btnAddDesign">
+                            <i class="fa fa-plus"></i>&nbsp;&nbsp; Add design
+                        </button>
+                    </div>
+                </div>
+                <div class="addDesign">
+                    <div class="card">
+                        <div class="card-block w-100">
+                            <div class="row form-group">
+                                <div class="col-sm-2">
+                                    <label class="col-form-label">Design No.</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <select class="form-control form-control-primary" name="" id="designNo">
+                                        <option value="">Select one</option>
+                                        @foreach($designs as $design)
+                                            <option value="{{$design->design_no}}">{{$design->design_no}}</option>
+                                        @endforeach
+                                    </select>
+                                    <span class="form-bar"></span>
+                                </div>
+                                <div class="col-sm-2">
+                                    <label class="col-form-label">Design Rate (Unit Avg. Price)</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="number" class="form-control autonumber form-control-primary" value="" required="" id="" name="">
+                                    <span class="form-bar"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -226,12 +179,14 @@
                                 totalStones = Object.keys(data.data.stones).length;
 
                                 content += '<div class="container"><div class="row"><div class="col-md-4"><div class="row"><table class="table table-bordered" id=""><tbody><tr><td>Design Number:</td><td id="get_design_no" data-design_no='+data.data.design_no+'>'+data.data.design_no+'</td></tr></tbody></table></div></div><div class="col-md-8 text-center" style="border: 1px solid #8577cc;background-color: #eaffab;"><div class="row"><h6 class="pt-3">Bangle Design</h6></div></div></div><div class="row"><div class="col-md-2"><div class="row"><div data-imgurl="'+rootUrl+'/'+data.data.picture+'" id="img_preview" class="preview img-wrapper" style="background-image: url('+rootUrl+'/'+data.data.picture+');background-size: cover; background-position:center"></div></div></div><div class="col-md-10"><div class="row"><table class="table table-bordered" id="editableTable"><thead><tr><th>Stone Size</th><th>Stone Type</th><th>2.2</th><th>2.4</th><th>2.6</th><th>2.8</th><th>2.10</th><th class="text-left" id="total_stone_count" data-totalStoneCount="'+totalStones+'">Stone count</th></tr></thead><tbody>';
-
+                                var input_index_counter = 0;
                                 $.each(data.data.stones, function (index, value) {
-                                    content += '<tr><td>'+value.size+'</td><td><span class="label label-danger">'+value.type+'</span></td><td>'+value.quantity[0]+'</td><td>'+value.quantity[1]+'</td><td>'+value.quantity[2]+'</td><td>'+value.quantity[3]+'</td><td>'+value.quantity[4]+'</td><td><input id="stone_count_'+index+'" class="form-control form-control-primary" type="text" required="" pattern="\d+" title=""></td></tr>';
+                                    content += '<tr><td>'+value.size+'</td><td><span class="label label-danger">'+value.type+'</span></td><td>'+value.quantity[0]+'</td><td>'+value.quantity[1]+'</td><td>'+value.quantity[2]+'</td><td>'+value.quantity[3]+'</td><td>'+value.quantity[4]+'</td><td><input id="stone_count_'+input_index_counter+'" class="form-control form-control-primary" type="text" required="" title=""></td></tr>';
+
+                                    input_index_counter++;
                                 });
 
-                                content += '<tr><td colspan="2">Order Quantity Set.</td><td><input class="form-control form-control-primary" type="text" required="" title="" id="oqs22"></td><td><input class="form-control form-control-primary" type="text" required="" title="" id="oqs2.4"></td><td><input id="oqs2.6" class="form-control form-control-primary" type="text" required="" title=""></td><td><input id="oqs2.8" class="form-control form-control-primary" type="text" required="" title=""></td><td><input id="oqs2.10" class="form-control form-control-primary" type="text" required="" title=""></td><td></td></tr><tr><td colspan="2">Order Quantity Pcs.</td><td><input  id="oqp2.2" class="form-control form-control-primary" type="text" required="" title=""></td><td><input id="oqp2.4" class="form-control form-control-primary" type="text"  required="" title=""></td><td><input id="oqp2.6" class="form-control form-control-primary" type="text" required="" title=""></td><td><input id="oqp2.8" class="form-control form-control-primary" type="text" required="" title=""></td><td><input id="oqp2.10" class="form-control form-control-primary" type="text"  required="" title=""></td><td></td></tr>';
+                                content += '<tr><td colspan="2">Order Quantity Set.</td><td><input class="form-control form-control-primary" type="text" required="" title="" id="oqs22"></td><td><input class="form-control form-control-primary" type="text" required="" title="" id="oqs24"></td><td><input id="oqs26" class="form-control form-control-primary" type="text" required="" title=""></td><td><input id="oqs28" class="form-control form-control-primary" type="text" required="" title=""></td><td><input id="oqs210" class="form-control form-control-primary" type="text" required="" title=""></td><td></td></tr><tr><td colspan="2">Order Quantity Pcs.</td><td><input  id="oqp22" class="form-control form-control-primary" type="text" required="" title=""></td><td><input id="oqp24" class="form-control form-control-primary" type="text"  required="" title=""></td><td><input id="oqp26" class="form-control form-control-primary" type="text" required="" title=""></td><td><input id="oqp28" class="form-control form-control-primary" type="text" required="" title=""></td><td><input id="oqp210" class="form-control form-control-primary" type="text"  required="" title=""></td><td></td></tr>';
 
                                 // $.each(data.data.stones, function(index, value) {
                                 //     content += '<tr><td>Stone count '+value.size+'</td><td colspan="6"><input class="form-control form-control-primary" type="text" name="stones[0][quantity][0]" required="" pattern="\d+" title=""></td></tr>'
@@ -268,30 +223,44 @@
                 var img_preview_url = $("#img_preview").attr('data-imgurl');
                 var get_design_no = $("#get_design_no").attr('data-design_no');
                 var total_stone_count =$("#total_stone_count").attr('data-totalStoneCount');
-                var oqs = $("#oqs22").val();
 
                 contentToDump += '<div class="mycards" style="background-image: url('+img_preview_url+')" ><div class="card-block"><div class="row align-items-end"><div class="col-8"><h4 class="text-white">#'+get_design_no+'</h4><h6 class="text-white m-b-0"></h6></div><div class="col-4 text-right">';
-                alert(oqs);
-                contentToDump += '<input type="hidden" name="design['+get_design_no+'][design_no]" value="'+get_design_no+'"><input type="hidden" name="design['+get_design_no+'][oqs][0]" value="'+oqs+'"><input type="hidden" name="design['+get_design_no+'][oqs][1]" value="'+$("#oqs2.4").val()+'"><input type="hidden" name="design['+get_design_no+'][oqs][2]" value="'+$("#oqs2.6").val()+'"><input type="hidden" name="design['+get_design_no+'][oqs][3]" value="'+$("#oqs2.8").val()+'"><input type="hidden" name="design['+get_design_no+'][oqs][4]" value="'+$("#oqs2.10").val()+'"><input type="hidden" name="design['+get_design_no+'][oqp][0]" value="'+$("#oqp2.2").val()+'"><input type="hidden" name="design['+get_design_no+'][oqp][1]" value="'+$("#oqp2.4").val()+'"><input type="hidden" name="design['+get_design_no+'][oqp][2]" value="'+$("#oqp2.6").val()+'"><input type="hidden" name="design['+get_design_no+'][oqp][3]" value="'+$("#oqp2.8").val()+'"><input type="hidden" name="design['+get_design_no+'][oqp][4]" value="'+$("#oqp2.10").val()+'">';
+                
+
+                contentToDump += '<input type="hidden" name="design['+get_design_no+'][design_no]" value="'+get_design_no+'"><input type="hidden" name="design['+get_design_no+'][oc][0][oqs]" value="'+$("#oqs22").val()+'"><input type="hidden" name="design['+get_design_no+'][oc][1][oqs]" value="'+$("#oqs24").val()+'"><input type="hidden" name="design['+get_design_no+'][oc][2][oqs]" value="'+$("#oqs26").val()+'"><input type="hidden" name="design['+get_design_no+'][oc][3][oqs]" value="'+$("#oqs28").val()+'"><input type="hidden" name="design['+get_design_no+'][oc][4][oqs]" value="'+$("#oqs210").val()+'"><input type="hidden" name="design['+get_design_no+'][oc][0][oqp]" value="'+$("#oqp22").val()+'"><input type="hidden" name="design['+get_design_no+'][oc][1][oqp]" value="'+$("#oqp24").val()+'"><input type="hidden" name="design['+get_design_no+'][oc][2][oqp]" value="'+$("#oqp26").val()+'"><input type="hidden" name="design['+get_design_no+'][oc][3][oqp]" value="'+$("#oqp28").val()+'"><input type="hidden" name="design['+get_design_no+'][oc][4][oqp]" value="'+$("#oqp210").val()+'">';
 
                 for (var i = 0; i < total_stone_count; i++) {
-                    contentToDump += '<input type="hidden" name="design['+get_design_no+'][stone_count]['+i+']">';
+                    contentToDump += '<input type="hidden" name="design['+get_design_no+'][stone_count]['+i+']" value="'+$("#stone_count_"+i).val()+'">';
                 }
 
-                contentToDump +='</div></div></div><div class="card-footer"><p class="text-white m-b-0"></p></div></div>';
-                alert(contentToDump);
+                contentToDump +='</div></div></div></div>';
+
                 $('#dumpcontent').html('');
-                
-                $('.attachDesignCon').append(contentToDump);
 
-                if((cardCount*onCardTakesWidth) > cardContainerwidth) {
-                    $('.attachDesign').css('overflow-x', 'scroll');
-                    $(".attachDesignCon").css('min-width', (cardCount*onCardTakesWidth));
+                if(isDesignAlreadyAdded(get_design_no) == false) {
+                    
+                    $('.attachDesignCon').append(contentToDump);
+
+                    if((cardCount*onCardTakesWidth) > cardContainerwidth) {
+                        $('.attachDesign').css('overflow-x', 'scroll');
+                        $(".attachDesignCon").css('min-width', (cardCount*onCardTakesWidth));
+                    }
+                    cardCount++;
                 }
-                cardCount++;
             });
         });
+        function isDesignAlreadyAdded (design_no) {
+            var added_designs = $(".attachDesign").attr("data-designs");
+            var added_designs = added_designs.split(',')
 
+            if ($.inArray(design_no, added_designs) != -1) {
+                return true;
+            } else {
+                added_designs.push(design_no); 
+                $(".attachDesign").attr("data-designs", added_designs);
+                return false;
+            }
+        }
     </script>
     <script>
         $(document).ready(function() {
