@@ -7,6 +7,7 @@
 @endsection
 
 @section('content')
+    <h2 class="text-center py-3">Add Stock</h2>
 
     <div class="row">
 

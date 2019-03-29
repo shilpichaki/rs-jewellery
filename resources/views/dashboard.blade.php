@@ -24,7 +24,7 @@
  <div class="row"> 
 
      <!-- statustic-card start --> 
-     <div class="col-xl-3 col-md-6"> 
+     <div class="col-xl-6 col-md-6">
          <div class="card bg-c-yellow text-white"> 
              <div class="card-block"> 
                          <a href="{{route('stock.create')}}"> 
@@ -40,7 +40,7 @@
              </div> 
          </div> 
      </div> 
-     <div class="col-xl-3 col-md-6"> 
+     <div class="col-xl-6 col-md-6">
          <div class="card bg-c-green text-white"> 
          <div class="card-block"> 
                          <a href="{{route('stock.index')}}"> 
@@ -55,8 +55,10 @@
                          </a> 
              </div> 
          </div>
-     </div> 
-     <div class="col-xl-3 col-md-6"> 
+     </div>
+ </div>
+ <div class="row">
+     <div class="col-xl-6 col-md-6">
          <div class="card bg-c-pink text-white"> 
          <div class="card-block"> 
                          <a href="{{route('design.add-design')}}"> 
@@ -72,7 +74,7 @@
              </div> 
          </div> 
      </div> 
-     <div class="col-xl-3 col-md-6"> 
+     <div class="col-xl-6 col-md-6">
          <div class="card bg-c-blue text-white"> 
          <div class="card-block"> 
                          <a href="{{route('design.index')}}"> 
@@ -92,7 +94,7 @@
  <div class="row"> 
 
             <!-- statustic-card start -->
-     <div class="col-xl-3 col-md-6"> 
+     <div class="col-xl-6 col-md-6">
          <div class="card bg-c-yellow text-white"> 
          <div class="card-block"> 
                          <a href="{{route('order.create')}}"> 
@@ -108,7 +110,7 @@
              </div>
          </div> 
      </div> 
-     <div class="col-xl-3 col-md-6"> 
+     <div class="col-xl-6 col-md-6">
          <div class="card bg-c-green text-white"> 
          <div class="card-block"> 
                          <a href="{{route('order.allocation')}}">
@@ -123,8 +125,10 @@
                  </a> 
              </div> 
          </div> 
-     </div> 
-     <div class="col-xl-3 col-md-6"> 
+     </div>
+ </div>
+ <div class="row">
+     <div class="col-xl-6 col-md-6">
          <div class="card bg-c-pink text-white"> 
          <div class="card-block"> 
                          <a href=" ">
@@ -140,13 +144,13 @@
              </div>
          </div> 
      </div> 
-     <div class="col-xl-3 col-md-6"> 
+     <div class="col-xl-6 col-md-6">
          <div class="card bg-c-blue text-white"> 
          <div class="card-block"> 
                          <a href="{{route('order.receive')}}">
                  <div class="row align-items-center"> 
                      <div class="col"> 
-                         <h5 class="m-b-0">Recive Order</h5> 
+                         <h5 class="m-b-0">Receive Order</h5>
                           
                      </div> 
                      <div class="col col-auto text-right"> 
