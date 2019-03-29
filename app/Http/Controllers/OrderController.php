@@ -58,6 +58,8 @@ class OrderController extends Controller
 			'designs' => json_encode($request->designs),
 		]);
 
+		return redirect()->route('order.show', ['order' => $order->order_no]);
+
 		return response()->json([
 					'data' => $order,
 					'code' => 201
