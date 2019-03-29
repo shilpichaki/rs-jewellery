@@ -14,13 +14,42 @@
        html {
             scroll-behavior: smooth;
         }
+        .attBox{
+            width: 100%;
+            position: relative;
+        }
         .attachDesign{
             overflow-x: hidden;
             width: 100%;
             display: block;
+
+            /* hide scrollbar for mozila*/
+            overflow-y: scroll;
+            /*scrollbar-color:  red blue;*/
+            scrollbar-width: none;
+            /*position: relative;*/
+        }
+        .attachDesign::-webkit-scrollbar{
+            display:none;
         }
         .attachDesignCon{
             min-width: 100%;
+        }
+        .designScroller{
+            position: absolute;
+            height: 100%;
+            width: 40px;
+            top: 0;
+            z-index: 10;
+            cursor: pointer;
+        }
+        .scrollRight{
+            right: 0;
+            background: linear-gradient(to left, rgba(0, 0, 0, .6), rgba(0, 0, 0, 0));
+        }
+        .scrollLeft{
+            left: 0;
+            background: linear-gradient(to right, rgba(0, 0, 0, .6), rgba(0, 0, 0, 0));
         }
         .mycards{
             height: 140px;
@@ -39,98 +68,104 @@
     </style>
 @endsection
 @section('content')
-    <div class="row">
-        <div class="offset-lg-1 col-lg-10">
-            <div class="">
-                <div class="card">
+<div class="row">
+    <div class="offset-lg-1 col-lg-10">
+        <div class="row">
+            <div class="card">
+                <div class="card-header w-100">
+                    <h4>Order aadhaar</h4>
+                </div>
+                <div class="card-block w-100">
                     <form action="{{route('order.store')}}" method="post">
                     @csrf
-                        <div class="card-header w-100">
-                            <h4>Order aadhaar</h4>
-                        </div>
-                        <div class="card-block w-100">
-                            <div class="row form-group">
-                                <div class="col-sm-2">
-                                    <label class="col-form-label">Order No.</label>
-                                </div>
-                                <div class="col-sm-4">
-                                    <input type="number" class="form-control autonumber form-control-primary" value="" required="" id="" name="order_no">
-                                    <span class="form-bar"></span>
-                                </div>
-                                <div class="col-sm-2">
-                                    <label class="col-form-label">Party Name</label>
-                                </div>
-                                <div class="col-sm-4">
-                                    <input type="text" class="form-control autonumber form-control-primary" value="" required="" id="" name="party_name">
-                                    <span class="form-bar"></span>
-                                </div>
+                        <div class="row form-group">
+                            <div class="col-sm-2">
+                                <label class="col-form-label">Order No.</label>
                             </div>
-                            <div class="row form-group">
-                                <div class="col-sm-2">
-                                    <label class="col-form-label">Order Issue Date</label>
-                                </div>
-                                <div class="col-sm-4">
-                                    <input type="text" class="form-control autonumber form-control-primary" value="" required="" id="datepicker" name="issue_date">
-                                    <span class="form-bar"></span>
-                                </div>
-                                <div class="col-sm-2">
-                                    <label class="col-form-label">Order Delivery Date</label>
-                                </div>
-                                <div class="col-sm-4">
-                                    <input type="text" class="form-control autonumber form-control-primary" value="" required="" id="datepicker_1" name="delivery_date">
-                                    <span class="form-bar"></span>
-                                </div>
+                            <div class="col-sm-4">
+                                <input type="number" class="form-control autonumber form-control-primary" value="" required="" id="" name="">
+                                <span class="form-bar"></span>
+                            </div>
+                            <div class="col-sm-2">
+                                <label class="col-form-label">Party Name</label>
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control autonumber form-control-primary" value="" required="" id="" name="">
+                                <span class="form-bar"></span>
                             </div>
                         </div>
-                        <button type="submit" style="width: 170px;" class="btn btn-success pull-right add-row ml-3 mr-3 my-3">
-                            <i class="fa fa-paper-plane"></i>&nbsp;&nbsp; Submit
-                        </button>
-                        <div class="attachDesign" data-designs="">
-                            <div class="attachDesignCon">
+                        <div class="row form-group">
+                            <div class="col-sm-2">
+                                <label class="col-form-label">Order Issue Date</label>
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control autonumber form-control-primary" value="" required="" id="datepicker" name="">
+                                <span class="form-bar"></span>
+                            </div>
+                            <div class="col-sm-2">
+                                <label class="col-form-label">Order Delivery Date</label>
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control autonumber form-control-primary" value="" required="" id="datepicker_1" name="">
+                                <span class="form-bar"></span>
+                            </div>
+                            <div class="col-sm-12">
+                                <button type="submit" style="width: 170px;" class="btn btn-success pull-right add-row">
+                                    <i class="fa fa-paper-plane"></i>&nbsp;&nbsp; Submit
+                                </button>
                             </div>
                         </div>
                     </form>
                 </div>
-                <div class="row form-group">
-                    <div class="col-md-12 mb-3 addDesignDiv">
-                        <button type="button" class="btn btn-primary pull-right add-row btnAddDesign">
-                            <i class="fa fa-plus"></i>&nbsp;&nbsp; Add design
-                        </button>
-                    </div>
-                </div>
-                <div class="addDesign">
-                    <div class="card">
-                        <div class="card-block w-100">
-                            <div class="row form-group">
-                                <div class="col-sm-2">
-                                    <label class="col-form-label">Design No.</label>
-                                </div>
-                                <div class="col-sm-4">
-                                    <select class="form-control form-control-primary" name="" id="designNo">
-                                        <option value="">Select one</option>
-                                        @foreach($designs as $design)
-                                            <option value="{{$design->design_no}}">{{$design->design_no}}</option>
-                                        @endforeach
-                                    </select>
-                                    <span class="form-bar"></span>
-                                </div>
-                                <div class="col-sm-2">
-                                    <label class="col-form-label">Design Rate (Unit Avg. Price)</label>
-                                </div>
-                                <div class="col-sm-4">
-                                    <input type="number" class="form-control autonumber form-control-primary" value="" required="" id="" name="">
-                                    <span class="form-bar"></span>
-                                </div>
-                            </div>
+                <div class="attBox">
+                    <div class="attachDesign" data-designs="">
+                        <div class="attachDesignCon">
                         </div>
+                        <div class="designScroller scrollRight"></div>
+                        <div class="designScroller scrollLeft"></div>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="row form-group">
+            <div class="col-md-12 mb-3 addDesignDiv">
+                <button type="button" class="btn btn-primary pull-right add-row btnAddDesign">
+                    <i class="fa fa-plus"></i>&nbsp;&nbsp; Add design
+                </button>
+            </div>
+        </div>
     </div>
-    <div id="dumpcontent">
+    <div class="addDesign">
+        <div class="card">
+            <div class="card-block w-100">
+                <div class="row form-group">
+                    <div class="col-sm-2">
+                        <label class="col-form-label">Design No.</label>
+                    </div>
+                    <div class="col-sm-4">
+                        <select class="form-control form-control-primary" name="" id="designNo">
+                            <option value="">Select one</option>
+                            @foreach($designs as $design)
+                                <option value="{{$design->design_no}}">{{$design->design_no}}</option>
+                            @endforeach
+                        </select>
+                        <span class="form-bar"></span>
+                    </div>
+                    <div class="col-sm-2">
+                        <label class="col-form-label">Design Rate (Unit Avg. Price)</label>
+                    </div>
+                    <div class="col-sm-4">
+                        <input type="number" class="form-control autonumber form-control-primary" value="" required="" id="" name="">
+                        <span class="form-bar"></span>
+                    </div>
+                </div>
+                </div>
+        </div>
+    </div>
+</div>
+<div id="dumpcontent">
 
-    </div>
+</div>
 
     <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
@@ -158,6 +193,8 @@
         var cardCount = 1;
         var onCardTakesWidth = 220;
         var cardContainerwidth = 0;
+        var scrollerPosition = 0;
+        var firstScrollerWidth = Math.round($(".attachDesign").width());
 
         $(document).ready(function() {
             var design_no = '';
@@ -210,7 +247,8 @@
 
             // onclick of confirm
             $('body').on('click', '#choosing_complete', function() {
-                alert('confirmed');
+                $("#choosing_more").trigger('click');
+                $(".addDesign").hide();
             });
 
             // onclick of addMore
@@ -267,6 +305,26 @@
         $(document).ready(function() {
             $('.btnAddDesign').on("click", function(){
                 $('.addDesign').show();
+            });
+
+            // on scroll left
+            $(".scrollRight").click(function() {
+                if((scrollerPosition+220) < firstScrollerWidth){
+                    scrollerPosition += 220
+                    $('.attachDesign').animate({
+                        scrollLeft: scrollerPosition
+                    }, 300);
+                }
+                console.log(scrollerPosition+'  '+firstScrollerWidth+'    '+cardContainerwidth);
+            });
+            $(".scrollLeft").click(function() {
+                if(scrollerPosition >= 220) {
+                    scrollerPosition -= 220
+                    $('.attachDesign').animate({
+                        scrollLeft: scrollerPosition
+                    }, 300);
+                }
+                console.log(scrollerPosition+'  '+firstScrollerWidth+'    '+cardContainerwidth);                
             });
         });
     </script>

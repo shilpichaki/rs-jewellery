@@ -6,7 +6,7 @@
             <a class="mobile-menu" id="mobile-collapse" href="#!">
                 <i class="feather icon-menu"></i>
             </a>
-            <a href="index-2.html">
+            <a href="/dashboard">
                 RPS-Jewellery
             </a>
             <a class="mobile-options">

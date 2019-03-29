@@ -77,7 +77,8 @@ class Stock extends Model
         return $this->belongsToMany(User::class, 'raw_material_stock_transactions')
             ->withPivot(['vendor_id', 'before', 'after', 'rate', 'price'])
             ->withTimestamps()
-            ->latest('pivot_updated_at');
+            ->latest('pivot_updated_at')
+            ->limit(1);
     }
 
     public function addStock(int $newStockValue)
