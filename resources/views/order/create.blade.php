@@ -101,14 +101,14 @@
                                 <label class="col-form-label">Order Issue Date</label>
                             </div>
                             <div class="col-sm-4">
-                                <input type="date" class="form-control autonumber form-control-primary" value="" required="" id="datepicker" name="issue_date">
+                                <input type="date" class="form-control autonumber form-control-primary" value="" required="" id="" name="issue_date">
                                 <span class="form-bar"></span>
                             </div>
                             <div class="col-sm-2">
                                 <label class="col-form-label">Order Delivery Date</label>
                             </div>
                             <div class="col-sm-4">
-                                <input type="date" class="form-control autonumber form-control-primary" value="" required="" id="datepicker_1" name="delivery_date">
+                                <input type="date" class="form-control autonumber form-control-primary" value="" required="" id="" name="delivery_date">
                                 <span class="form-bar"></span>
                             </div>
                             <div class="col-sm-12">                                
