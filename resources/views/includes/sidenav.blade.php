@@ -45,14 +45,14 @@
                     <span class="pcoded-mtext">Order Aadhaar</span>
                 </a>
                 <ul class="pcoded-submenu">
+                    <li class="@if($routeAction == 'create' && $routeName == 'order' ) active @endif">
+                        <a href="{{route('order.create')}}">
+                            <span class="pcoded-mtext">Add Orders</span>
+                        </a>
+                    </li>
                     <li class="@if($routeAction == 'index' && $routeName == 'order' ) active @endif">
                         <a href="{{route('order.index')}}">
                             <span class="pcoded-mtext">All Order</span>
-                        </a>
-                    </li>
-                    <li class="@if($routeAction == 'create' && $routeName == 'order' ) active @endif">
-                        <a href="{{route('order.create')}}">
-                            <span class="pcoded-mtext">Add Order</span>
                         </a>
                     </li>
                     <li class="@if($routeAction == 'allocation' && $routeName == 'order' ) active @endif">
