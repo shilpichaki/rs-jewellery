@@ -70,7 +70,7 @@
 @section('content')
 <div class="row">
     <div class="offset-lg-1 col-lg-10">
-        <div class="row">
+        <div class="">
             <div class="card">
                 <div class="card-header w-100">
                     <h4>Order aadhaar</h4>
@@ -135,6 +135,7 @@
             </div>
         </div>
     </div>
+    <div class="offset-lg-1 col-lg-10">
     <div class="addDesign">
         <div class="card">
             <div class="card-block w-100">
@@ -161,6 +162,7 @@
                 </div>
                 </div>
         </div>
+    </div>
     </div>
 </div>
 <div id="dumpcontent">
