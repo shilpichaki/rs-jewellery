@@ -165,30 +165,6 @@
                 </div>
             </div>
 
-            <div id="allocateBtnTableOpen">
-            <div class="row text-center" style="border: 1px solid #aba2d6;background-color: #eaffab;">
-                <h6 class="mx-auto pt-3">Receive No. Bangle Size(In Pcs.)</h6>
-            </div>
-            <div class="row">
-                <div class="table-responsive">
-                    <table class="table table-bordered" id="editableTable">
-                        <thead>
-                        <tr>
-                            <th>2.2</th>
-                            <th>2.4</th>
-                            <th>2.6</th>
-                            <th>2.8</th>
-                            <th>2.10</th>
-                            <th>Received Date</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr id="dumpcontent_1"><td><input class="form-control form-control-primary" type="text" name="order[0].quantity[0]" required="" pattern="" title="" value="" placeholder="23"></td><td><input class="form-control form-control-primary" type="text" name="order[0].quantity[1]" required="" pattern="" title="" value="" placeholder="34"></td><td><input class="form-control form-control-primary" type="text" name="order[0].quantity[2]" required="" pattern="" title="" value="" placeholder="38"></td><td><input class="form-control form-control-primary" type="text" name="order[0].quantity[3]" required="" pattern="" title="" value="" placeholder="123"></td><td><input class="form-control form-control-primary" type="text" name="order[0].quantity[4]" required="" pattern="" title="" value="65"></td><td><input class="form-control form-control-primary" type="text" name="order[0].[date]" required="" pattern="" title="" value="" placeholder="DD/MM/YYYY"></td></tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            </div>
 
 
         </div>
@@ -206,7 +182,6 @@
         $(document).ready(function(){
             $("#allocateBtn").hide();
             $("#allocationtable").hide();
-            $("#allocateBtnTableOpen").hide();
             $('#orderNo').on('change', function() {
                 var content = '';
 
@@ -218,9 +193,6 @@
                     $("#dumpcontent").html(content);
                     $("#allocationtable").show();
                     $("#allocateBtn").show();
-                    $('#submit_btn').click(function () {
-                        $("#allocateBtnTableOpen").show();
-                    });
                 }});
             });
         });

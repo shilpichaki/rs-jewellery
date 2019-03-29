@@ -1,7 +1,7 @@
 
 <nav class="pcoded-navbar">
     <div class="pcoded-inner-navbar main-menu">
-        <div class="pcoded-navigatio-lavel">Navigation</div>
+        <a href="{{route('dashboard.dashboard')}}" class="text-white pcoded-item p-3">Dashboard</a>
         <ul class="pcoded-item pcoded-left-item">
             <li class="pcoded-hasmenu @if($routeName == 'stock' ) active pcoded-trigger @endif">
                 <a href="javascript:void(0)">

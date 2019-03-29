@@ -10,6 +10,7 @@
     </style>
 @endsection
 @section('content')
+    <h2 class="text-center py-3">Design No: #{{$design->design_no}}</h2>
     <form action="{{route('design.store-design')}}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="container">
@@ -19,7 +20,7 @@
                         <table class="table table-bordered" id="">
                             <tbody>
                             <tr>
-                                <td>Design Number:</td>
+                                <td class="ts">Design Number:</td>
                                 <td>{{$design->design_no}}</td>
                             </tr>
                             </tbody>
@@ -28,7 +29,7 @@
                 </div>
                 <div class="col-md-6 text-center" style="border: 1px solid #aba2d6;background-color: #eaffab;">
                     <div class="row">
-                        <h6 class="pt-3">Bangle Design</h6>
+                        <h6 class="pt-3 ts">Bangle Design</h6>
                     </div>
                 </div>
             </div>
@@ -36,8 +37,8 @@
 
             <div class="row">
                 <div class="col-md-3">
-                    <div class="row">
-                        <div class="preview img-wrapper" style="background-image: url({{asset($design->picture)}});background-size: cover; background-position:center"></div>
+                    <div class="row p-2">
+                        <div class="preview img-wrapper rounded" style="background-image: url({{asset($design->picture)}});background-size: cover; background-position:center"></div>
                     </div>
                     <div class="row">
                         <div class="col-sm-12">
@@ -113,13 +114,13 @@
                             </table>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <a href="{{route('design.edit', ['design' => $design->design_no])}}" class="btn btn-primary pull-right add-row">
-                        <i class="fa fa-pencil"></i>&nbsp;&nbsp; Edit
-                        </a>
+                    <div class="row py-3">
+                        <div class="col-md-12">
+                            <a href="{{route('design.edit', ['design' => $design->design_no])}}" class="btn btn-primary pull-right add-row">
+                                <i class="fa fa-pencil"></i>&nbsp;&nbsp; Edit
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
