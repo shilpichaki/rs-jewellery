@@ -1,6 +1,7 @@
 @extends('layouts.master')
 
 @section('css')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!--forms-wizard css-->
     <link rel="stylesheet" type="text/css" href="{{asset('css/jquery.steps.css')}}">
 
@@ -72,7 +73,7 @@
                             </div>
                             <div class="col-sm-8">
 
-                                <input type="number" class="form-control autonumber form-control-primary{{ $errors->has('threshold_value') ? ' is-invalid' : '' }}" value="{{ old('threshold_value') }}" required id="threshold_value" name="threshold_value" disabled="true">
+                                <input type="number" class="form-control autonumber form-control-primary{{ $errors->has('threshold_value') ? ' is-invalid' : '' }}" value="{{ old('threshold_value') }}"  id="threshold_value" name="threshold_value" disabled="true">
                                 @if ($errors->has('threshold_value'))
                                     <span class="invalid-feedback" role="alert">
 		<strong>{{ $errors->first('threshold_value') }}</strong>
@@ -104,7 +105,7 @@
                             </div>
                             <div class="col-sm-8">
 
-                                <input type="number" class="form-control autonumber form-control-primary{{ $errors->has('stock_value') ? ' is-invalid' : '' }}" value="{{ old('stock_value') }}" required
+                                <input type="text" class="form-control autonumber form-control-primary{{ $errors->has('stock_value') ? ' is-invalid' : '' }}" value="{{ old('stock_value') }}" required
                                        name="stock_value" id="stock_value" disabled="true">
                                 @if ($errors->has('stock_value'))
                                     <span class="invalid-feedback" role="alert">
@@ -137,7 +138,7 @@
                             </div>
                             <div class="col-sm-8">
 
-                                <input type="number" name="today_rate" id="today_rate" class="form-control autonumber form-control-primary{{ $errors->has('today_rate') ? ' is-invalid' : '' }}" value="{{ old('today_rate') }}" required disabled="true">
+                                <input type="text" name="today_rate" id="today_rate" class="form-control autonumber form-control-primary{{ $errors->has('today_rate') ? ' is-invalid' : '' }}" value="{{ old('today_rate') }}" required disabled="true">
                                 @if ($errors->has('today_rate'))
                                     <span class="invalid-feedback" role="alert">
 		<strong>{{ $errors->first('today_rate') }}</strong>
@@ -160,7 +161,7 @@
                             </div>
                         </div>
 
-                        <button type="submit" id="submit_btn" class="btn btn-primary ml-auto" disabled="true">Submit</button>
+                        <button type="submit" id="submit_btn" class="btn btn-primary ml-auto" disabled="true"><i class="fa fa-paper-plane"></i>Submit</button>
                     </form>
                 </div>
             </div>
