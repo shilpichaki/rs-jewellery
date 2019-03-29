@@ -7,6 +7,7 @@
 @endsection
 
 @section('content')
+    <h2 class="text-center py-3">Receive Order</h2>
     <div class="row">
         <div class="offset-lg-1 col-lg-10">
             <div class="">
@@ -66,7 +67,7 @@
 
 
             <div class="col-lg-12" id="allocationtable">
-                <div class="row text-center" style="border: 1px solid #aba2d6;background-color: #eaffab;"><h6 class="mx-auto pt-3">Receive No. Bangle Size(In Pcs.)</h6></div><div class="row"><div class="table-responsive"><table class="table table-bordered" id="editableTable"><thead><tr><th>Design No</th><th>2.2</th><th>2.4</th><th>2.6</th><th>2.8</th><th>2.10</th><th>Allocation Date</th><th>Round</th><th>Big</th></tr></thead><tbody id="dumpcontent_1">
+                <div class="row text-center" style="border: 1px solid #aba2d6;background-color: #eaffab;"><h6 class="mx-auto pt-3 ts">Receive No. Bangle Size(In Pcs.)</h6></div><div class="row"><div class="table-responsive"><table class="table table-bordered" id="editableTable"><thead><tr><th>Design No</th><th>2.2</th><th>2.4</th><th>2.6</th><th>2.8</th><th>2.10</th><th>Allocation Date</th><th>Round</th><th>Big</th></tr></thead><tbody id="dumpcontent_1">
 
                             </tbody></table></div></div>
             </div>
