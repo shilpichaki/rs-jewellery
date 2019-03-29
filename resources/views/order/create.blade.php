@@ -69,13 +69,14 @@
     </style>
 @endsection
 @section('content')
+    <h2 class="text-center py-3">Add Order</h2>
 <div class="row">
     <div class="offset-lg-1 col-lg-10">
         <div class="">
             <div class="card">
-                <div class="card-header w-100">
-                    <h4>Order aadhaar</h4>
-                </div>
+                {{--<div class="card-header w-100">--}}
+                    {{--<h4>Order aadhaar</h4>--}}
+                {{--</div>--}}
                 <div class="card-block w-100">
                     <form action="{{route('order.store')}}" method="post">
                     @csrf
@@ -221,7 +222,7 @@
 
                                 totalStones = Object.keys(data.data.stones).length;
 
-                                content += '<div class="container"><div class="row"><div class="col-md-4"><div class="row"><table class="table table-bordered" id=""><tbody><tr><td>Design Number:</td><td id="get_design_no" data-design_no='+data.data.design_no+'>'+data.data.design_no+'</td></tr></tbody></table></div></div><div class="col-md-8 text-center" style="border: 1px solid #8577cc;background-color: #eaffab;"><div class="row"><h6 class="pt-3">Bangle Design</h6></div></div></div><div class="row"><div class="col-md-2"><div class="row"><div data-imgurl="'+rootUrl+'/'+data.data.picture+'" id="img_preview" class="preview img-wrapper" style="background-image: url('+rootUrl+'/'+data.data.picture+');background-size: cover; background-position:center"></div></div></div><div class="col-md-10"><div class="row"><table class="table table-bordered" id="editableTable"><thead><tr><th>Stone Size</th><th>Stone Type</th><th>2.2</th><th>2.4</th><th>2.6</th><th>2.8</th><th>2.10</th><th class="text-left" id="total_stone_count" data-totalStoneCount="'+totalStones+'">Stone count</th></tr></thead><tbody>';
+                                content += '<div class="container"><div class="row"><div class="col-md-5"><div class="row"><table class="table table-bordered" id=""><tbody><tr><td class="ts">Design Number:</td><td id="get_design_no" data-design_no='+data.data.design_no+'>'+data.data.design_no+'</td></tr></tbody></table></div></div><div class="col-md-7 text-center" style="border: 1px solid #8577cc;background-color: #eaffab;"><div class="row"><h6 class="pt-3 ts">Bangle Design</h6></div></div></div><div class="row"><div class="col-md-3"><div class="row p-2"><div data-imgurl="'+rootUrl+'/'+data.data.picture+'" id="img_preview" class="preview img-wrapper rounded" style="background-image: url('+rootUrl+'/'+data.data.picture+');background-size: cover; background-position:center"></div></div></div><div class="col-md-9"><div class="row"><table class="table table-bordered" id="editableTable"><thead><tr><th>Stone Size</th><th>Stone Type</th><th>2.2</th><th>2.4</th><th>2.6</th><th>2.8</th><th>2.10</th><th class="text-left" id="total_stone_count" data-totalStoneCount="'+totalStones+'">Stone count</th></tr></thead><tbody>';
                                 var input_index_counter = 0;
                                 $.each(data.data.stones, function (index, value) {
                                     content += '<tr><td>'+value.size+'</td><td><span class="label label-danger">'+value.type+'</span></td><td>'+value.quantity[0]+'</td><td>'+value.quantity[1]+'</td><td>'+value.quantity[2]+'</td><td>'+value.quantity[3]+'</td><td>'+value.quantity[4]+'</td><td><input id="stone_count_'+input_index_counter+'" class="form-control form-control-primary" type="text" required="" title=""></td></tr>';
@@ -235,7 +236,7 @@
                                 //     content += '<tr><td>Stone count '+value.size+'</td><td colspan="6"><input class="form-control form-control-primary" type="text" name="stones[0][quantity][0]" required="" pattern="\d+" title=""></td></tr>'
                                 // });
 
-                                content += '</tbody></table><button style="margin-top:15px; margin-left:10px;" class="btn btn-success" id="choosing_complete">Confirm</button><button style="margin-top:15px; margin-left:10px;" class="btn btn-primary" id="choosing_more">Add more design</button></div></div></div></div><br><br></div>';
+                                content += '</tbody></table><button style="margin-top:15px; margin-left:10px;" class="btn btn-success" id="choosing_complete"><i class="fa fa-paper-plane"></i>Confirm</button><button style="margin-top:15px; margin-left:10px;" class="btn btn-primary" id="choosing_more"><i class="fa fa-plus"></i>Add more design</button></div></div></div></div><br><br></div>';
 
                                 // $('#dumpcontent').html('');
                                 $('#dumpcontent').html(content);

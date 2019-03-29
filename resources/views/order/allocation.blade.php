@@ -7,14 +7,15 @@
 @endsection
 
 @section('content')
+    <h2 class="text-center py-3">Order Allocation</h2>
     <div class="row">
         <div class="offset-lg-1 col-lg-10">
             <div class="">
                 <div class="card">
-                    <div class="card-header w-100">
-                        <h4>Order Allocation</h4>
+                    {{--<div class="card-header w-100">--}}
+                        {{--<h4>Order Allocation</h4>--}}
 
-                    </div>
+                    {{--</div>--}}
                     <div class="card-block w-100">
                         <form action="" method="post">
                             @csrf
@@ -66,7 +67,7 @@
 
             <div class="col-lg-12" id="allocationtable">
                 <div class="row text-center" style="border: 1px solid #aba2d6;background-color: #eaffab;">
-                        <h6 class="mx-auto pt-3">Allocation Table</h6>
+                        <h6 class="mx-auto pt-3 ts">Allocation Table</h6>
                 </div>
                 <div class="row">
                     <div class="table-responsive">
