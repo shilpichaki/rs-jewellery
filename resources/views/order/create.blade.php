@@ -109,6 +109,16 @@
                                 <input type="text" class="form-control autonumber form-control-primary" value="" required="" id="datepicker_1" name="">
                                 <span class="form-bar"></span>
                             </div>
+                            <div class="col-sm-12">                                
+                                <div class="attBox">
+                                    <div class="attachDesign" data-designs="">
+                                        <div class="attachDesignCon">
+                                        </div>
+                                        <div class="designScroller scrollRight"></div>
+                                        <div class="designScroller scrollLeft"></div>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="col-sm-12">
                                 <button type="submit" style="width: 170px;" class="btn btn-success pull-right add-row">
                                     <i class="fa fa-paper-plane"></i>&nbsp;&nbsp; Submit
@@ -116,14 +126,6 @@
                             </div>
                         </div>
                     </form>
-                </div>
-                <div class="attBox">
-                    <div class="attachDesign" data-designs="">
-                        <div class="attachDesignCon">
-                        </div>
-                        <div class="designScroller scrollRight"></div>
-                        <div class="designScroller scrollLeft"></div>
-                    </div>
                 </div>
             </div>
         </div>
