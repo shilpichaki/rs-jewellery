@@ -42,6 +42,7 @@
             top: 0;
             z-index: 10;
             cursor: pointer;
+            display: none;
         }
         .scrollRight{
             right: 0;
@@ -83,14 +84,14 @@
                                 <label class="col-form-label">Order No.</label>
                             </div>
                             <div class="col-sm-4">
-                                <input type="number" class="form-control autonumber form-control-primary" value="" required="" id="" name="">
+                                <input type="number" class="form-control autonumber form-control-primary" value="" required="" id="" name="order_no">
                                 <span class="form-bar"></span>
                             </div>
                             <div class="col-sm-2">
                                 <label class="col-form-label">Party Name</label>
                             </div>
                             <div class="col-sm-4">
-                                <input type="text" class="form-control autonumber form-control-primary" value="" required="" id="" name="">
+                                <input type="text" class="form-control autonumber form-control-primary" value="" required="" id="" name="party_name">
                                 <span class="form-bar"></span>
                             </div>
                         </div>
@@ -99,14 +100,14 @@
                                 <label class="col-form-label">Order Issue Date</label>
                             </div>
                             <div class="col-sm-4">
-                                <input type="text" class="form-control autonumber form-control-primary" value="" required="" id="datepicker" name="">
+                                <input type="text" class="form-control autonumber form-control-primary" value="" required="" id="datepicker" name="issue_date">
                                 <span class="form-bar"></span>
                             </div>
                             <div class="col-sm-2">
                                 <label class="col-form-label">Order Delivery Date</label>
                             </div>
                             <div class="col-sm-4">
-                                <input type="text" class="form-control autonumber form-control-primary" value="" required="" id="datepicker_1" name="">
+                                <input type="text" class="form-control autonumber form-control-primary" value="" required="" id="datepicker_1" name="delivery_date">
                                 <span class="form-bar"></span>
                             </div>
                             <div class="col-sm-12">                                
@@ -285,6 +286,7 @@
                     $('.attachDesignCon').append(contentToDump);
 
                     if((cardCount*onCardTakesWidth) > cardContainerwidth) {
+                        $(".designScroller").show();
                         $('.attachDesign').css('overflow-x', 'scroll');
                         $(".attachDesignCon").css('min-width', (cardCount*onCardTakesWidth));
                     }
