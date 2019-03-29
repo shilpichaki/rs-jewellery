@@ -34,8 +34,8 @@
 		                        		</a>
 		                        	</div>
 		                        </td>
-		                        <td></td>
-		                        <td></td>
+		                        <td>{{$design->price_5pcs}}</td>
+								<td>{{$design->unit_avg_price}}</td>
 								<td>
 										<a href="{{route('design.edit', ['design' => $design->design_no])}}" class="btn btn-primary add-row">
 										<i class="fa fa-pencil"></i>&nbsp;&nbsp;Edit
