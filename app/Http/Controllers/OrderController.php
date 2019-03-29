@@ -10,7 +10,16 @@ class OrderController extends Controller
 {
 	public function show(Order $order)
 	{
-		$order['designs'] = json_decode($order['designs']);
+		$designs = Design::all()->groupBy('design_no');
+
+		$order->designs = json_decode($order['designs']);
+		
+		$totalOrderDesigns = count((array)$order->designs);
+
+		return view('order.show')
+			->withOrder($order)
+			->withDesigns($designs)
+			->withTotalDesign($totalOrderDesigns);
 
 		return response()->json([
 					'data' => $order,
