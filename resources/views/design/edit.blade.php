@@ -10,6 +10,7 @@
     </style>
 @endsection
 @section('content')
+    <h2 class="text-center py-3">Edit Design</h2>
  <form action="{{route('design.update-design', ['design' => $design->design_no])}}" method="POST" enctype="multipart/form-data">
     @csrf
     @method('put')
@@ -20,7 +21,7 @@
                     <table class="table table-bordered" id="">
                         <tbody>
                         <tr>
-                            <td>Design number:</td>
+                            <td class="ts">Design number:</td>
                             <td>
                                 {{$design->design_no}}
                             </td>
@@ -31,7 +32,7 @@
             </div>
             <div class="col-md-6 text-center" style="border: 1px solid #aba2d6;background-color: #eaffab;">
                 <div class="row">
-                    <h6 class="pt-3">Bangle Design</h6>
+                    <h6 class="pt-3 ts">Bangle Design</h6>
                 </div>
             </div>
         </div>
@@ -39,8 +40,8 @@
 
         <div class="row">
             <div class="col-md-3">
-                <div class="row">
-                    <div class="preview img-wrapper" style="background-image: url({{asset($design->picture)}});background-size: cover; background-position:center">
+                <div class="row p-2">
+                    <div class="preview img-wrapper rounded" style="background-image: url({{asset($design->picture)}});background-size: cover; background-position:center">
                     </div>
                 </div>
                 <div class="row">
@@ -141,7 +142,7 @@
                     </div>
                     <br><br>
                     <div class="col-sm-12">
-                        <div class="row">
+                        <div class="row py-3">
                             <div class="col-md-12">
                                 <button class="btn btn-primary edit" id="submit_btn"><i class="fa fa-paper-plane"></i>&nbsp;&nbsp; Submit</button>
                                 <button type="button" class="btn btn-primary pull-right add-row" id="rowAddButton">

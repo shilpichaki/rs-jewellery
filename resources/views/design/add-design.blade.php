@@ -10,6 +10,7 @@
 	</style>
 @endsection
 @section('content')
+	<h2 class="text-center py-3">Add Design</h2>
 	<form action="{{route('design.store-design')}}" method="POST" enctype="multipart/form-data">
 		@csrf
 	<div class="container">
@@ -19,7 +20,7 @@
 					<table class="table table-bordered" id="">
 						<tbody>
 						<tr>
-							<td>Design number:</td>
+							<td class="ts">Design number:</td>
 							<td>
 								<input class="form-control form-control-primary" type="text" name="design_no" id="design_no" pattern="[0-9]{3}" title="Design number should be an integer!" required>
 								<a href="#" id="design_no_tooltip" data-toggle="tooltip" data-placement="top" title="Design number already in use!" style="display: none; font-size: 22px; color: red">!</a>
@@ -31,7 +32,7 @@
 			</div>
 			<div class="col-md-6 text-center" style="border: 1px solid #aba2d6;background-color: #eaffab;">
 				<div class="row">
-					<h6 class="pt-3">Bangle Design</h6>
+					<h6 class="pt-3 ts">Bangle Design</h6>
 				</div>
 			</div>
 		</div>
@@ -39,8 +40,8 @@
 
 		<div class="row">
 			<div class="col-md-3">
-				<div class="row">
-					<div class="preview img-wrapper"></div>
+				<div class="row p-2">
+					<div class="preview img-wrapper rounded"></div>
 					<div class="">
 						<br>
 						<input type="file" name="picture" id="picture" required />
@@ -136,7 +137,7 @@
 					</div>
 					<br><br>
 					<div class="col-sm-12">
-						<div class="row">
+						<div class="row py-3">
 							<div class="col-md-12">
 								<button class="btn btn-primary edit" id="submit_btn"><i class="fa fa-paper-plane"></i>&nbsp;&nbsp; Submit</button>
 								<button type="button" class="btn btn-primary pull-right add-row" id="rowAddButton">

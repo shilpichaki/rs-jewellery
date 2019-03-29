@@ -15,11 +15,11 @@
 
             <div class="card" style="position: relative">
 
-                <div class="card-header">
-                    <h4>Stock entry</h4>
+                {{--<div class="card-header">--}}
+                    {{--<h4>Stock entry</h4>--}}
                     {{--<span>Application form for <code>Stock entry</code></span>--}}
 
-                </div>
+                {{--</div>--}}
                 <div class="card-block">
 
                     <form action="{{route('stock.addstock')}}" method="post">

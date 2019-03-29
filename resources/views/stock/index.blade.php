@@ -21,6 +21,7 @@
 
 @section('content')
 
+    <h2 class="text-center py-3">All Stocks</h2>
 	<div class="card-block table-border-style">
 		<div class="table-responsive">
 			<table class="table table-bordered">
