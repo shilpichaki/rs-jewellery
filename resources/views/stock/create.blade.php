@@ -194,6 +194,9 @@
 
     <script type="text/javascript">
         $(document).ready(function() {
+            var stockValue = 0;
+            var todayRate = 0;
+
             $("#material_type").on('change', function(){
                 var rawMaterial = $(this).val();
                 if(rawMaterial != '') {
@@ -238,10 +241,27 @@
                     $("#price").prop('disabled', true);
                     $("#submit_btn").prop('disabled', true);
                 }
-
             });
-            
-            
+
+            $("#stock_value").change(function() {
+                stockValue = $("#stock_value").val();
+                todayRate = $("#today_rate").val();
+                if($(this).val() != '') {
+                    if(stockValue != '' && todayRate != '') {
+                        $("#price").val(stockValue*todayRate);                        
+                    }
+                }
+            });
+
+            $("#today_rate").change(function() {
+                stockValue = $("#stock_value").val();
+                todayRate = $("#today_rate").val();
+                if($(this).val() != '') {
+                    if(stockValue != '' && todayRate != '') {
+                        $("#price").val(stockValue*todayRate);                        
+                    }
+                }
+            });
         });
     </script>
 @endsection
