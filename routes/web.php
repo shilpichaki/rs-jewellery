@@ -30,28 +30,28 @@ Route::get('/dashboard', function () {
  * show, add-stock
  */
 
-Route::get('/stock', 'StockController@index')->name('stock.index');
-Route::get('/stock/add-stock', 'StockController@create')->name('stock.create');
-Route::post('/stock/add-stock', 'StockController@addStock')->name('stock.addstock');
-Route::get('/stock/{stock}', 'StockController@show')->name('stock.show');
+Route::get('/stock', 'StockController@index')->name('stock.index')->middleware('sidemenu');
+Route::get('/stock/add-stock', 'StockController@create')->name('stock.create')->middleware('sidemenu');
+Route::post('/stock/add-stock', 'StockController@addStock')->name('stock.addstock')->middleware('sidemenu');
+Route::get('/stock/{stock}', 'StockController@show')->name('stock.show')->middleware('sidemenu');
 
 /**
  * Design
  * show, add-design
  */
-Route::get('/design', 'DesignController@index')->name('design.index');
-Route::get('/design/add-design', 'DesignController@addDesign')->name('design.add-design');
-Route::post('/design/add-design', 'DesignController@store')->name('design.store-design');
-Route::get('/design/{design}', 'DesignController@show')->name('design.show');
-Route::get('/design/{design}/edit', 'DesignController@edit')->name('design.edit');
-Route::put('/design/{design}/update', 'DesignController@update')->name('design.update-design');
+Route::get('/design', 'DesignController@index')->name('design.index')->middleware('sidemenu');
+Route::get('/design/add-design', 'DesignController@addDesign')->name('design.add-design')->middleware('sidemenu');
+Route::post('/design/add-design', 'DesignController@store')->name('design.store-design')->middleware('sidemenu');
+Route::get('/design/{design}', 'DesignController@show')->name('design.show')->middleware('sidemenu');
+Route::get('/design/{design}/edit', 'DesignController@edit')->name('design.edit')->middleware('sidemenu');
+Route::put('/design/{design}/update', 'DesignController@update')->name('design.update-design')->middleware('sidemenu');
 
 /**
  * Order
  * show, add-order
  */
-Route::get('/order/allocation', 'OrderController@allocation')->name('order.allocation');
-Route::get('/order/receive', 'OrderController@receive')->name('order.receive');
-Route::get('/order/create', 'OrderController@create')->name('order.create');
-Route::get('/order/{order}', 'OrderController@show')->name('order.show');
-Route::post('/order', 'OrderController@store')->name('order.store');
+Route::get('/order/allocation', 'OrderController@allocation')->name('order.allocation')->middleware('sidemenu');
+Route::get('/order/receive', 'OrderController@receive')->name('order.receive')->middleware('sidemenu');
+Route::get('/order/create', 'OrderController@create')->name('order.create')->middleware('sidemenu');
+Route::get('/order/{order}', 'OrderController@show')->name('order.show')->middleware('sidemenu');
+Route::post('/order', 'OrderController@store')->name('order.store')->middleware('sidemenu');
