@@ -48,6 +48,7 @@ Route::put('/design/{design}/update', 'DesignController@update')->name('design.u
  * Order
  * show, add-order
  */
+Route::get('/order', 'OrderController@index')->name('order.index')->middleware('sidemenu');
 Route::get('/order/allocation', 'OrderController@allocation')->name('order.allocation')->middleware('sidemenu');
 Route::get('/order/receive', 'OrderController@receive')->name('order.receive')->middleware('sidemenu');
 Route::get('/order/create', 'OrderController@create')->name('order.create')->middleware('sidemenu');

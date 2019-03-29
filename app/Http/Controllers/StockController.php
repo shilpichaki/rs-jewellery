@@ -62,7 +62,7 @@ class StockController extends Controller
                 'required',
                 Rule::in($this->unitOfMeasurement),
             ],
-            'threshold_value' => 'integer|min:1',
+//            'threshold_value' => 'integer|min:1',
             'stock_value' => 'required|integer|min:1',
             'today_rate' => 'required|integer|min:1',
             'price' => 'required|integer|min:1',
