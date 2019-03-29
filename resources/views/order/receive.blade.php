@@ -66,117 +66,21 @@
 
 
             <div class="col-lg-12" id="allocationtable">
-                <div class="row text-center" style="border: 1px solid #aba2d6;background-color: #eaffab;">
-                    <h6 class="mx-auto pt-3">Allocation Table</h6>
-                </div>
-                <div class="row">
-                    <div class="table-responsive">
-                        <table class="table table-bordered" id="editableTable">
-                            <thead>
-                            <tr>
-                                <th>Design No</th>
-                                <th>2.2</th>
-                                <th>2.4</th>
-                                <th>2.6</th>
-                                <th>2.8</th>
-                                <th>2.10</th>
-                                <th>Allocation Date</th>
-                                <th>Round</th>
-                                <th>Big</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr id="dumpcontent_1">
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td>Total </td>
-                                <td>Total</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                {{----}}
-                {{--<div class="row form-group">--}}
-                {{--<div class="col-md-12 my-3 addDesignDiv">--}}
-                {{--<button type="button" class="btn btn-primary pull-right add-row btnAddDesign">--}}
-                {{--<i class="fa fa-plus"></i>&nbsp;&nbsp; Allocate--}}
-                {{--</button>--}}
-                {{--</div>--}}
-                {{--</div>--}}
+                <div class="row text-center" style="border: 1px solid #aba2d6;background-color: #eaffab;"><h6 class="mx-auto pt-3">Receive No. Bangle Size(In Pcs.)</h6></div><div class="row"><div class="table-responsive"><table class="table table-bordered" id="editableTable"><thead><tr><th>Design No</th><th>2.2</th><th>2.4</th><th>2.6</th><th>2.8</th><th>2.10</th><th>Allocation Date</th><th>Round</th><th>Big</th></tr></thead><tbody id="dumpcontent_1">
 
-
-
-                <div class="row form-group py-2" style="background-color: #eaffab;">
-                    <div class="col-sm-6">
-                        <label class="col-form-label">Wages Calculation / Payment Calculation :</label>
-                    </div>
-                    <div class="col-sm-6">
-
-                        Calculation
-                        <span class="form-bar"></span>
-                    </div>
-                </div>
-
+                            </tbody></table></div></div>
             </div>
         <div class="row">
             <div class="col-sm-12" id="allocateBtn">
                 <div class="my-3">
                     <div class="col-md-12">
                         <button type="submit" class="btn btn-success pull-right add-row" id="submit_btn">
-                            <i class="fa fa-angle-down"></i>&nbsp;&nbsp; Receive Info
+                            <i class="fa fa-paper-plane"></i>&nbsp;&nbsp; Submit
                         </button>
                     </div>
                 </div>
             </div>
         </div>
-
-
-                <div class="col-lg-12 mt-5">
-            <div id="allocateBtnTableOpen">
-                <div class="row text-center" style="border: 1px solid #aba2d6;background-color: #eaffab;">
-                    <h6 class="mx-auto pt-3">Receive No. Bangle Size(In Pcs.)</h6>
-                </div>
-                <div class="row">
-                    <div class="table-responsive">
-                        <table class="table table-bordered" id="editableTable">
-                            <thead>
-                            <tr>
-                                <th>2.2</th>
-                                <th>2.4</th>
-                                <th>2.6</th>
-                                <th>2.8</th>
-                                <th>2.10</th>
-                                <th>Received Date</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr id="dumpcontent_1"><td><input class="form-control form-control-primary" type="text" name="order[0].quantity[0]" required="" pattern="" title="" value="" placeholder="23"></td><td><input class="form-control form-control-primary" type="text" name="order[0].quantity[1]" required="" pattern="" title="" value="" placeholder="34"></td><td><input class="form-control form-control-primary" type="text" name="order[0].quantity[2]" required="" pattern="" title="" value="" placeholder="38"></td><td><input class="form-control form-control-primary" type="text" name="order[0].quantity[3]" required="" pattern="" title="" value="" placeholder="123"></td><td><input class="form-control form-control-primary" type="text" name="order[0].quantity[4]" required="" pattern="" title="" value="65"></td><td><input class="form-control form-control-primary" type="text" name="order[0].[date]" required="" pattern="" title="" value="" placeholder="DD/MM/YYYY"></td></tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-12" id="allocateBtn">
-                            <div class="my-3">
-                                <div class="col-md-12">
-                                    <button type="submit" class="btn btn-success pull-right add-row" id="submit_btn">
-                                        <i class="fa fa-paper-plane"></i>&nbsp;&nbsp; Submit
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            </div>
-
 
         </div>
     </div>
@@ -199,7 +103,7 @@
 
                 $.ajax({success: function(){
 
-                    content += '<td>223</td><td>23</td><td>34</td><td>38</td><td>123</td><td>65</td><td>DD/MM/YYYY</td><td>100</td><td>100</td>';
+                    content += '<tr><td>223</td><td>23</td><td>34</td><td>38</td><td>123</td><td>65</td><td>DD/MM/YYYY</td><td>100</td><td>100</td><tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>Total </td><td>Total</td></tr><tr><td colspan="5">Wages Calculation / Payment Calculation :</td><td colspan="5">Calculation</td></tr><tr><td colspan="1"></td><td><input class="form-control form-control-primary" type="text" name="order[0].quantity[0]" required="" pattern="" title="" value="" placeholder="2.2"></td><td><input class="form-control form-control-primary" type="text" name="order[0].quantity[1]" required="" pattern="" title="" value="" placeholder="2.4"></td><td><input class="form-control form-control-primary" type="text" name="order[0].quantity[2]" required="" pattern="" title="" value="" placeholder="2.6"></td><td><input class="form-control form-control-primary" type="text" name="order[0].quantity[3]" required="" pattern="" title="" value="" placeholder="2.8"></td><td><input class="form-control form-control-primary" type="text" name="order[0].quantity[4]" required="" pattern="" title="" value="2.10"></td><td><input class="form-control form-control-primary" type="text" name="order[0].[date]" required="" pattern="" title="" value="" placeholder="DD/MM/YYYY"></td><td colspan="1"></td><td colspan="1"></td></tr>';
 
 //                    console.log('Content = '+ content);
                     $("#dumpcontent_1").html(content);
