@@ -244,7 +244,7 @@
                 }
             });
 
-            $("#stock_value").change(function() {
+            $("#stock_value").keyup(function() {
                 stockValue = $("#stock_value").val();
                 todayRate = $("#today_rate").val();
                 if($(this).val() != '') {
@@ -254,7 +254,7 @@
                 }
             });
 
-            $("#today_rate").change(function() {
+            $("#today_rate").keyup(function() {
                 stockValue = $("#stock_value").val();
                 todayRate = $("#today_rate").val();
                 if($(this).val() != '') {

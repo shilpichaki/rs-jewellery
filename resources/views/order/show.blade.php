@@ -113,7 +113,7 @@
                                                 <div class="card-block">
                                                     <div class="row align-items-end">
                                                         <div class="col-8">
-                                                            <h4 class="text-white">#{{$designNumber}}</h4>
+                                                            <h4 class="">#{{$designNumber}}</h4>
                                                             <h6 class="text-white m-b-0"></h6>
                                                         </div>
                                                         <div class="col-4 text-right">
