@@ -117,7 +117,8 @@
 									<input class="form-control form-control-primary" type="text" name="stones[0][size]" required>
 								</td>
 								<td>
-									<select class="form-control form-control-primary" name="stones[0][type]" id="">
+									<select class="form-control form-control-primary select-stone-dropdown" name="stones[0][type]">
+										<option value="">SELECT STONE</option>
 										@foreach($stones as $stone)
 											<option class="$color">{{$stone}}</option>
 										@endforeach
@@ -131,19 +132,19 @@
 									</select>
 								</td>
 								<td>
-									<input class="form-control form-control-primary" type="text" name="stones[0][quantity][0]" required pattern="\d+" title="">
+									<input data-stoneType="" data-bangleSize="2.2" class="form-control form-control-primary add_round_type_stone" type="text" name="stones[0][quantity][0]" required pattern="\d+" title="">
 								</td>
 								<td>
-									<input class="form-control form-control-primary" type="text" name="stones[0][quantity][1]" required pattern="\d+">
+									<input data-stoneType="" class="form-control form-control-primary stone_add_foo" type="text" name="stones[0][quantity][1]" required pattern="\d+">
 								</td>
 								<td>
-									<input class="form-control form-control-primary" type="text" name="stones[0][quantity][2]" required pattern="\d+">
+									<input data-stoneType="" class="form-control form-control-primary stone_add_foo" type="text" name="stones[0][quantity][2]" required pattern="\d+">
 								</td>
 								<td>
-									<input class="form-control form-control-primary" type="text" name="stones[0][quantity][3]" required pattern="\d+">
+									<input data-stoneType="" class="form-control form-control-primary stone_add_foo" type="text" name="stones[0][quantity][3]" required pattern="\d+">
 								</td>
 								<td>
-									<input class="form-control form-control-primary" type="text" name="stones[0][quantity][4]" required pattern="\d+">
+									<input data-stoneType="" class="form-control form-control-primary stone_add_foo" type="text" name="stones[0][quantity][4]" required pattern="\d+">
 								</td>
 								<td>
 									<input class="form-control form-control-primary" type="text" name="stones[0][stone_price]" required pattern="\d+.\d{2}" title="Example: 500.00, 1000.70">
@@ -171,6 +172,33 @@
 							</div>
 						</div>
 					</div>
+
+					<div class="table-responsive">
+						<table class="table table-bordered">
+							<thead>
+							<tr>
+								<th class="text-center" colspan="2">TOTAL TYPEWISE STONE COUNT</th>
+							</tr>
+							<tr>
+								<th>Stone type</th>
+								<th class="text-left">Total stones</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>ROUND STONES</td>
+								<td id="total-round-stones"></td>
+							</tr>
+							<tr>
+								<td>BIG STONES</td>
+								<td id="total-big-stones"></td>
+							</tr>
+							<tr>
+								<td>TB STONES</td>
+								<td id="total-tb-stones"></td>
+							</tr>
+						</tbody>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -182,18 +210,6 @@
 	</div>
 	</form>
 
-
-
-@if ($errors->any())
-    <h1>Errors</h1>
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
 @endsection
 
 @section('js')
@@ -207,7 +223,8 @@
             content += '</td>';
             
             content += '<td>';
-            content += 		'<select class="form-control form-control-primary" name="stones['+counter+'][type]" id="">';
+            content += 		'<select class="form-control form-control-primary select-stone-dropdown" name="stones['+counter+'][type]" id="">';
+            	content +=			'<option value="">SELECT STONE</option>'
 	            @foreach($stones as $stone)
 	            content += 			'<option value="{{$stone}}">{{$stone}}</option>';
 				@endforeach
@@ -222,22 +239,22 @@
             content += '</td>';
 
             content += '<td>';
-            content += 		'<input class="form-control form-control-primary" type="text" name="stones['+counter+'][quantity][0]" required pattern="\\d+" title="">';
+            content += 		'<input class="form-control form-control-primary add_round_type_stone" data-stoneType="" data-bangleSize="2.2" type="text" name="stones['+counter+'][quantity][0]" required pattern="\\d+" title="">';
             content += '</td>';
             content += '<td>';
-            content += 		'<input class="form-control form-control-primary" type="text" name="stones['+counter+'][quantity][1]" required pattern="\\d+">';
+            content += 		'<input class="form-control form-control-primary stone_add_foo" data-stoneType="" data-bangleSize="2.4"  type="text" name="stones['+counter+'][quantity][1]" required pattern="\\d+">';
             content += '</td>';
             content += '<td>';
-            content += 		'<input class="form-control form-control-primary" type="text" name="stones['+counter+'][quantity][2]" required pattern="\\d+">';
+            content += 		'<input class="form-control form-control-primary stone_add_foo" data-stoneType="" data-bangleSize="2.6"  type="text" name="stones['+counter+'][quantity][2]" required pattern="\\d+">';
             content += '</td>';
             content += '<td>';
-            content += 		'<input class="form-control form-control-primary" type="text" name="stones['+counter+'][quantity][3]" required pattern="\\d+">';
+            content += 		'<input class="form-control form-control-primary stone_add_foo" data-stoneType="" data-bangleSize="2.8"  type="text" name="stones['+counter+'][quantity][3]" required pattern="\\d+">';
             content += '</td>';
             content += '<td>';
-            content += 		'<input class="form-control form-control-primary" type="text" name="stones['+counter+'][quantity][4]" required pattern="\\d+">';
+            content += 		'<input class="form-control form-control-primary stone_add_foo" data-stoneType="" data-bangleSize="2.10"  type="text" name="stones['+counter+'][quantity][4]" required pattern="\\d+">';
             content += '</td>';
             content += '<td>';
-            content += 		'<input class="form-control form-control-primary" type="text" name="stones['+counter+'][quantity][4]" required pattern="\\d+">';
+            content += 		'<input class="form-control form-control-primary stone_add_foo" type="text" name="stones['+counter+'][quantity][4]" required pattern="\\d+">';
             content += '</td>';
             content += '<td>';
             content += 		'<input class="form-control form-control-primary" type="text" name="stones['+counter+'][price]" required pattern="\\d+.\\d{2}" title="Example: 500.00, 1000.70">';
@@ -306,6 +323,69 @@
 			console.log(dataId);
 			$("#add_stone_row_"+dataId).remove();
 		});
+	});
+
+	// delete row
+	$(document).ready(function() {
+
+		// calculate values
+		var totalRoundStone = 0;
+		var totalBigStone = 0;
+		var totalTbStone = 0;
+
+		$('body').on('keyup', '.add_round_type_stone', function() { // calculating total_round_stones
+			totalRoundStone = 0;
+
+			$('input[data-stonetype="round_stone"][data-bangleSize="2.2"]').each(function() {
+				totalRoundStone = totalRoundStone + parseInt($(this).val());
+			});
+			console.log(totalRoundStone);
+			$("#total-round-stones").html(totalRoundStone);
+		});
+
+		$('body').on('keyup', '.add_round_type_stone', function() { // calculating total_big_stones
+			totalRoundStone = 0;
+
+			$('input[data-stonetype="round_stone"][data-bangleSize="2.2"]').each(function() {
+				totalRoundStone = totalRoundStone + parseInt($(this).val());
+			});
+			console.log(totalRoundStone);
+			$("#total-round-stones").html(totalRoundStone);
+		});
+
+		$('body').on('keyup', '.add_round_type_stone', function() { // calculating total_tb_stones
+			totalRoundStone = 0;
+
+			$('input[data-stonetype="round_stone"][data-bangleSize="2.2"]').each(function() {
+				totalRoundStone = totalRoundStone + parseInt($(this).val());
+			});
+			console.log(totalRoundStone);
+			$("#total-round-stones").html(totalRoundStone);
+		});
+
+
+
+		// change row type to stone type
+
+		$('body').on('change', '.select-stone-dropdown', function() {
+			
+			var stoneType = $(this).val();
+
+				switch(stoneType) {
+				  	case 'ROUND STONE':
+				    	$(this).closest('tr').find('input').attr('data-stonetype', 'round_stone');
+				    break;
+				  	case 'BIG STONE':
+				    	$(this).closest('tr').find('input').attr('data-stonetype', 'big_stone');
+				    break;
+				  	case 'TB STONE':
+				    	$(this).closest('tr').find('input').attr('data-stonetype', 'tb_stone');
+				    break;
+				    default:
+				    	$(this).closest('tr').find('input').attr('data-stonetype', '');
+				}
+		});
+
 	});
 </script>
 @endsection
