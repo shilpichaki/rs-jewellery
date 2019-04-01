@@ -8,6 +8,7 @@ abstract class StoneColor
 	private const BLUE = 'BLUE';
 	private const SAFFRON = 'SAFFRON';
 	private const BLACK = 'BLACK';
+	private const CYAN = 'CYAN';
 
 	private static $allColors = [];
 
@@ -18,6 +19,7 @@ abstract class StoneColor
     	array_push(self::$allColors, self::BLUE);
     	array_push(self::$allColors, self::SAFFRON);
     	array_push(self::$allColors, self::BLACK);
+    	array_push(self::$allColors, self::CYAN);
 	}
 
 	public static function getAllColors()
