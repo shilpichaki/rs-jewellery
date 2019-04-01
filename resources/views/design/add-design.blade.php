@@ -39,7 +39,7 @@
 
 
 		<div class="row">
-			<div class="col-md-3">
+			<div class="col-md-2">
 				<div class="row p-2">
 					<div class="preview img-wrapper rounded"></div>
 					<div class="">
@@ -62,17 +62,7 @@
                     </div>
 					<div class="col-sm-12">
                         <div class="row text-left">
-		                    <label class="col-form-label ml-0"><b>Price(5 pcs)</b></label>
-                        </div>
-                    </div>
-                    <div class="col-sm-12">
-                    	<div class="row">
-		                    <input type="text" class="form-control form-control-primary" value="" id="price_5pcs" name="price_5pcs">
-                    	</div>
-                    </div>
-					<div class="col-sm-12">
-                        <div class="row text-left">
-		                    <label class="col-form-label ml-0"><b>Unit Avg. Price</b></label>
+		                    <label class="col-form-label ml-0"><b>Markup %</b></label>
                         </div>
                     </div>
                     <div class="col-sm-12">
@@ -80,9 +70,19 @@
 	                    	<input type="text" class="form-control form-control-primary" value="" id="unit_avg_price" name="unit_avg_price">
                     	</div>
                     </div>
+					<div class="col-sm-12">
+                        <div class="row text-left">
+		                    <label class="col-form-label ml-0"><b>Price(4 pcs)</b></label>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                    	<div class="row">
+		                    <input type="text" class="form-control form-control-primary" value="" id="price_5pcs" name="price_5pcs">
+                    	</div>
+                    </div>
 				</div>
 			</div>
-			<div class="col-md-9">
+			<div class="col-md-10">
 				<div class="row">
 					<div class="table-responsive">
 						<table class="table table-bordered" id="editableTable">
@@ -90,24 +90,34 @@
 							<tr>
 								<th>Stone Size</th>
 								<th>Stone Type</th>
+								<th>Stone Color</th>
 								<th>2.2</th>
 								<th>2.4</th>
 								<th>2.6</th>
 								<th>2.8</th>
 								<th>2.10</th>
-								<th>Price</th>
+								<th>Stone Price</th>
+								<th>Labour Charge</th>
 								<th></th>
 							</tr>
 							</thead>
 							<tbody id="append_parent">
 							<tr id="add_stone_row_0">
 								<td>
-									<input class="form-control form-control-primary" type="text" name="stones[0][size]" pattern="\d+.\d{2}" title="Example: 1.26, 1.80" required>
+									<input class="form-control form-control-primary" type="text" name="stones[0][size]" required>
 								</td>
 								<td>
 									<select class="form-control form-control-primary" name="stones[0][type]" id="">
-										<option value="BIG">BIG</option>
-										<option value="ROUND">ROUND</option>
+										@foreach($stones as $stone)
+											<option class="$color">{{$stone}}</option>
+										@endforeach
+									</select>
+								</td>
+								<td>
+									<select class="form-control form-control-primary" name="stones[0][stone_color]" id="">
+										@foreach($colors as $color)
+											<option class="$color">{{$color}}</option>
+										@endforeach
 									</select>
 								</td>
 								<td>
@@ -125,7 +135,12 @@
 								<td>
 									<input class="form-control form-control-primary" type="text" name="stones[0][quantity][4]" required pattern="\d+">
 								</td>
-								<td><input class="form-control form-control-primary" type="text" name="stones[0][price]" required pattern="\d+.\d{2}" title="Example: 500.00, 1000.70"></td>
+								<td>
+									<input class="form-control form-control-primary" type="text" name="stones[0][stone_price]" required pattern="\d+.\d{2}" title="Example: 500.00, 1000.70">
+								</td>
+								<td>
+									<input class="form-control form-control-primary" type="text" name="stones[0][labour_charge]" required pattern="\d+.\d{2}" title="Example: 500.00, 1000.70">
+								</td>
 								<td>
 									<button type="button" data-id="0" class="delete_row_btn btn btn-primary button button-small" title="Delete">
 										<i class="fa fa-trash"></i>
@@ -176,7 +191,7 @@
     $(document).ready(function () {
         var counter = 1;
         $("#rowAddButton").click(function () {
-            var content = '<tr id="add_stone_row_'+counter+'"><td><input class="form-control form-control-primary" type="text" name="stones['+counter+'][size]" pattern="\\d+.\\d{2}" title="Example: 1.26, 1.80" required></td><td><select class="form-control form-control-primary" name="stones['+counter+'][type]" id=""><option value="BIG">BIG</option><option value="ROUND">ROUND</option></select></td><td><input class="form-control form-control-primary" type="text" name="stones['+counter+'][quantity][0]" required pattern="\\d+" title=""></td><td><input class="form-control form-control-primary" type="text" name="stones['+counter+'][quantity][1]" required pattern="\\d+"></td><td><input class="form-control form-control-primary" type="text" name="stones['+counter+'][quantity][2]" required pattern="\\d+"></td><td><input class="form-control form-control-primary" type="text" name="stones['+counter+'][quantity][3]" required pattern="\\d+"></td><td><input class="form-control form-control-primary" type="text" name="stones['+counter+'][quantity][4]" required pattern="\\d+"></td><td><input class="form-control form-control-primary" type="text" name="stones['+counter+'][price]" required pattern="\\d+.\\d{2}" title="Example: 500.00, 1000.70"></td><td><button type="button" data-id="'+counter+'" class="delete_row_btn btn btn-primary button button-small" title="Delete"><i class="fa fa-trash"></i></button></td></tr>';
+            var content = '<tr id="add_stone_row_'+counter+'"><td><input class="form-control form-control-primary" type="text" name="stones['+counter+'][size]" required></td><td><select class="form-control form-control-primary" name="stones['+counter+'][type]" id=""><option value="BIG">BIG</option><option value="ROUND">ROUND</option></select></td><td><input class="form-control form-control-primary" type="text" name="stones['+counter+'][quantity][0]" required pattern="\\d+" title=""></td><td><input class="form-control form-control-primary" type="text" name="stones['+counter+'][quantity][1]" required pattern="\\d+"></td><td><input class="form-control form-control-primary" type="text" name="stones['+counter+'][quantity][2]" required pattern="\\d+"></td><td><input class="form-control form-control-primary" type="text" name="stones['+counter+'][quantity][3]" required pattern="\\d+"></td><td><input class="form-control form-control-primary" type="text" name="stones['+counter+'][quantity][4]" required pattern="\\d+"></td><td><input class="form-control form-control-primary" type="text" name="stones['+counter+'][price]" required pattern="\\d+.\\d{2}" title="Example: 500.00, 1000.70"></td><td><button type="button" data-id="'+counter+'" class="delete_row_btn btn btn-primary button button-small" title="Delete"><i class="fa fa-trash"></i></button></td></tr>';
             $("#append_parent").append(content);
             counter++;
         });
