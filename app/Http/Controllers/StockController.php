@@ -17,16 +17,10 @@ class StockController extends Controller
     protected $rawMaterials = [];
     protected $unitOfMeasurement = [];
 
-    public function __construct()
-    {
-        $this->addRawMaterials();
-        $this->addunitOfMeasurement();
-    }
-
     public function index()
     {
         $stocks = Stock::with('transactions')->get();
-//         return $stocks;
+        
         return view('stock.index')->withStocks($stocks);
     }
 
@@ -38,8 +32,8 @@ class StockController extends Controller
     public function create()
     {
         return view('stock.create')
-            ->withRawMaterial($this->rawMaterials)
-            ->withUnitOfMeasurement($this->unitOfMeasurement)
+            ->withRawMaterial(RawMaterial::getAllRawMaterials())
+            ->withUnitOfMeasurement(UnitOfMeasurement::getUomList())
             ->withVendors(Vendor::all());
     }
 
@@ -88,28 +82,6 @@ class StockController extends Controller
         }
 
         return redirect()->back();
-    }
-
-    private function addRawMaterials()
-    {
-        array_push($this->rawMaterials, RawMaterial::WAX);
-        array_push($this->rawMaterials, RawMaterial::INVESTMENT_POWDER);
-        array_push($this->rawMaterials, RawMaterial::BRASS_METAL);
-        array_push($this->rawMaterials, RawMaterial::ROUND_STONE);
-        array_push($this->rawMaterials, RawMaterial::BIG_STONE);
-        array_push($this->rawMaterials, RawMaterial::TOOLS);
-        array_push($this->rawMaterials, RawMaterial::RUBBER);
-        array_push($this->rawMaterials, RawMaterial::CHEMICAL);
-        array_push($this->rawMaterials, RawMaterial::PACKAGING_MATERIAL);
-    }
-
-    private function addunitOfMeasurement()
-    {
-        array_push($this->unitOfMeasurement, UnitOfMeasurement::gm);
-        array_push($this->unitOfMeasurement, UnitOfMeasurement::kg);
-        array_push($this->unitOfMeasurement, UnitOfMeasurement::lt);
-        array_push($this->unitOfMeasurement, UnitOfMeasurement::ml);
-        array_push($this->unitOfMeasurement, UnitOfMeasurement::pcs);
     }
 
     public function addStockValue(int $newStockValue, Stock $stock)
