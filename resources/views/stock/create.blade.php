@@ -208,7 +208,24 @@
                         url: '{{env('ROOT_URL')}}/api/stock/'+rawMaterial,
                         type: "GET",
                         error: function () {
+                            //loader hide
+                            setTimeout(function() {
+                                $("#loaderDiv").hide()
+                            }, 10);
                             console.log('Stock not found! Will add a new type of material in stock!');
+                            // clear field values
+                            $("#current_stock_name").html(rawMaterial);
+                            $("#current_stock_value").val(0);
+                            $("#threshold_value").val(0);
+
+                            // enable input fields
+                            $("#threshold_value").prop('disabled', false);
+                            $("#unit_of_measurement").prop('disabled', false);
+                            $("#stock_value").prop('disabled', false);
+                            $("#vendor_id").prop('disabled', false);
+                            $("#today_rate").prop('disabled', false);
+                            $("#price").prop('disabled', false);
+                            $("#submit_btn").prop('disabled', false);
                         },
                         success: function (data) {
                             //loader hide
@@ -228,7 +245,6 @@
                             $("#today_rate").prop('disabled', false);
                             $("#price").prop('disabled', false);
                             $("#submit_btn").prop('disabled', false);
-
                         }
                     });
                 }else {

@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\DesignAadhaarRequest;
 use App\Http\Requests\DesignAadhaarUpdateRequest;
+use App\Enums\StoneColor;
+use App\Enums\RawMaterial;
 
 class DesignController extends Controller
 {
@@ -18,7 +20,10 @@ class DesignController extends Controller
     }
     public function addDesign()
     {
-    	return view('design.add-design');
+    	return view('design.add-design')->with([
+                'stones' => RawMaterial::getStoneTypes(),
+                'colors' => StoneColor::getAllColors()
+            ]);;
     }
 
     public function show(Design $design)
@@ -26,7 +31,10 @@ class DesignController extends Controller
         $design['stones'] = json_decode($design['stones']);
 
         return view('design.show')
-            ->with(['design' => $design]);
+            ->with([
+                'design' => $design,
+                'colors' => StoneColor::getAllColors()
+            ]);
     }
 
     public function edit(Design $design)
