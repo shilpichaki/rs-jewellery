@@ -62,6 +62,16 @@
                     </div>
 					<div class="col-sm-12">
                         <div class="row text-left">
+                        	<label class="col-form-label ml-0"><b>Misc. price</b></label>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                    	<div class="row">
+                    		<input type="text" class="form-control form-control-primary" value="" id="misc_price" name="misc_price">
+                    	</div>
+                    </div>
+					<div class="col-sm-12">
+                        <div class="row text-left">
 		                    <label class="col-form-label ml-0"><b>Markup %</b></label>
                         </div>
                     </div>
@@ -191,7 +201,52 @@
     $(document).ready(function () {
         var counter = 1;
         $("#rowAddButton").click(function () {
-            var content = '<tr id="add_stone_row_'+counter+'"><td><input class="form-control form-control-primary" type="text" name="stones['+counter+'][size]" required></td><td><select class="form-control form-control-primary" name="stones['+counter+'][type]" id=""><option value="BIG">BIG</option><option value="ROUND">ROUND</option></select></td><td><input class="form-control form-control-primary" type="text" name="stones['+counter+'][quantity][0]" required pattern="\\d+" title=""></td><td><input class="form-control form-control-primary" type="text" name="stones['+counter+'][quantity][1]" required pattern="\\d+"></td><td><input class="form-control form-control-primary" type="text" name="stones['+counter+'][quantity][2]" required pattern="\\d+"></td><td><input class="form-control form-control-primary" type="text" name="stones['+counter+'][quantity][3]" required pattern="\\d+"></td><td><input class="form-control form-control-primary" type="text" name="stones['+counter+'][quantity][4]" required pattern="\\d+"></td><td><input class="form-control form-control-primary" type="text" name="stones['+counter+'][price]" required pattern="\\d+.\\d{2}" title="Example: 500.00, 1000.70"></td><td><button type="button" data-id="'+counter+'" class="delete_row_btn btn btn-primary button button-small" title="Delete"><i class="fa fa-trash"></i></button></td></tr>';
+            var content = '<tr id="add_stone_row_'+counter+'">';
+            content += '<td>';
+            content += 		'<input class="form-control form-control-primary" type="text" name="stones['+counter+'][size]" required>';
+            content += '</td>';
+            
+            content += '<td>';
+            content += 		'<select class="form-control form-control-primary" name="stones['+counter+'][type]" id="">';
+	            @foreach($stones as $stone)
+	            content += 			'<option value="{{$stone}}">{{$stone}}</option>';
+				@endforeach
+            content += 		'</select>';
+            content += '</td>';
+            content += '<td>';
+            content += 		'<select class="form-control form-control-primary" name="stones['+counter+'][type]" id="">';
+	            @foreach($colors as $color)
+	            content += 			'<option value="{{$color}}">{{$color}}</option>';
+				@endforeach
+            content += 		'</select>';
+            content += '</td>';
+
+            content += '<td>';
+            content += 		'<input class="form-control form-control-primary" type="text" name="stones['+counter+'][quantity][0]" required pattern="\\d+" title="">';
+            content += '</td>';
+            content += '<td>';
+            content += 		'<input class="form-control form-control-primary" type="text" name="stones['+counter+'][quantity][1]" required pattern="\\d+">';
+            content += '</td>';
+            content += '<td>';
+            content += 		'<input class="form-control form-control-primary" type="text" name="stones['+counter+'][quantity][2]" required pattern="\\d+">';
+            content += '</td>';
+            content += '<td>';
+            content += 		'<input class="form-control form-control-primary" type="text" name="stones['+counter+'][quantity][3]" required pattern="\\d+">';
+            content += '</td>';
+            content += '<td>';
+            content += 		'<input class="form-control form-control-primary" type="text" name="stones['+counter+'][quantity][4]" required pattern="\\d+">';
+            content += '</td>';
+            content += '<td>';
+            content += 		'<input class="form-control form-control-primary" type="text" name="stones['+counter+'][quantity][4]" required pattern="\\d+">';
+            content += '</td>';
+            content += '<td>';
+            content += 		'<input class="form-control form-control-primary" type="text" name="stones['+counter+'][price]" required pattern="\\d+.\\d{2}" title="Example: 500.00, 1000.70">';
+            content += '</td>';
+            content += '<td>';
+            content += 		'<button type="button" data-id="'+counter+'" class="delete_row_btn btn btn-primary button button-small" title="Delete"><i class="fa fa-trash"></i></button>';
+            content += '</td>';
+            content += '</tr>';
+
             $("#append_parent").append(content);
             counter++;
         });
