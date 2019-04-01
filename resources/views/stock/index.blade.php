@@ -27,9 +27,9 @@
 			<table class="table table-bordered">
 				<thead>
 				<tr>
-					<th>Material name:</th>
-					<th>Material threshold value:</th>
-					<th>Current material stock value:</th>
+					<th style="font-size: 18px;">Material name:</th>
+					<th style="font-size: 18px;">Material threshold value:</th>
+					<th style="font-size: 18px;">Current material stock value:</th>
                     <th></th>
 				</tr>
 				</thead>
