@@ -57,22 +57,32 @@
                     </div>
                     <div class="col-sm-12">
                         <div class="row text-left">
-                            <label class="col-form-label ml-0"><b>Price(5 pcs)</b></label>
+                            <label class="col-form-label ml-0"><b>Misc. price</b></label>
                         </div>
                     </div>
                     <div class="col-sm-12">
                         <div class="row">
-                            <input type="text" class="form-control form-control-primary" value="" id="price_5cs" name="price_5cs">
+                            <input type="text" class="form-control form-control-primary" value="" id="misc_price" name="misc_price">
                         </div>
                     </div>
                     <div class="col-sm-12">
                         <div class="row text-left">
-                            <label class="col-form-label ml-0"><b>Unit Avg. Price</b></label>
+                            <label class="col-form-label ml-0"><b>Markup %</b></label>
                         </div>
                     </div>
                     <div class="col-sm-12">
                         <div class="row">
-                            <input type="text" class="form-control form-control-primary" value="" id="unit_avg_price" name="unit_avg_price">
+                            <input type="text" class="form-control form-control-primary" value="" id="markup_percentage" name="markup_percentage">
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="row text-left">
+                            <label class="col-form-label ml-0"><b>Price(4 pcs)</b></label>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="row">
+                            <input type="text" class="form-control form-control-primary" value="" id="price_4pcs" name="price_4pcs">
                         </div>
                     </div>
                 </div>
@@ -85,13 +95,14 @@
                             <tr>
                                 <th>Stone Size</th>
                                 <th>Stone Type</th>
+                                <th>Stone Color</th>
                                 <th>2.2</th>
                                 <th>2.4</th>
                                 <th>2.6</th>
                                 <th>2.8</th>
                                 <th>2.10</th>
-                                <th>Price</th>
-                                <th></th>
+                                <th>Stone Price</th>
+                                <th>Labour Charge</th>
                             </tr>
                             </thead>
                             <tbody id="append_parent">
@@ -102,16 +113,14 @@
                                     </td>
                                     <td>
                                         <select class="form-control form-control-primary" name="stones[{{$key}}][type]" id="">
-                                            <option value="BIG"
-                                                    @if($stone->type == "BIG")
-                                                    selected
-                                                    @endif
-                                            >BIG</option>
-                                            <option value="ROUND"
-                                                    @if($stone->type == "ROUND")
-                                                    selected
-                                                    @endif
-                                            >ROUND</option>
+                                            @foreach($masterStones as $masterStone)
+                                                <option value="{{$masterStone}}" 
+                                                @if($masterStone == $stone->stone_type)
+                                                 selected 
+                                                @endif
+                                                >
+                                                {{$masterStone}}</option>
+                                            @endforeach
                                         </select>
                                     </td>
                                     <td>
@@ -129,7 +138,7 @@
                                     <td>
                                         <input class="form-control form-control-primary" type="text" name="stones[{{$key}}][quantity][4]" required pattern="\d+" value="{{$stone->quantity[4]}}">
                                     </td>
-                                    <td><input class="form-control form-control-primary" type="text" name="stones[{{$key}}][price]" required pattern="\d+.\d{2}" value="{{$stone->price}}" title="Example: 500.00, 1000.70"></td>
+                                    <td><input class="form-control form-control-primary" type="text" name="stones[{{$key}}][price]" required pattern="\d+.\d{2}" value="{{$stone->stone_price}}" title="Example: 500.00, 1000.70"></td>
                                     <td>
                                         <button type="button" data-id="0" class="delete_row_btn btn btn-primary button button-small" title="Delete">
                                             <i class="fa fa-trash"></i>
@@ -150,6 +159,78 @@
                                 </button>
                             </div>
                         </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th class="text-center" colspan="6">TOTAL TYPEWISE STONE COUNT</th>
+                            </tr>
+                            <tr>
+                                <th>Stone type</th>
+                                <th class="text-center">2.2</th>
+                                <th class="text-center">2.4</th>
+                                <th class="text-center">2.6</th>
+                                <th class="text-center">2.8</th>
+                                <th class="text-center">2.10</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>ROUND STONES</td>
+                                <td class="text-right" id="total-round-stones-22">
+                                    <input type="text" class="form-control form-control-primary" name="total_stone_count[round_stone][0]" value="{{$design->total_stone_count->round_stone[0]}}">
+                                </td>
+                                <td class="text-right" id="total-round-stones-24">
+                                    <input type="text" class="form-control form-control-primary" name="total_stone_count[round_stone][1]" value="{{$design->total_stone_count->round_stone[1]}}">
+                                </td>
+                                <td class="text-right" id="total-round-stones-26">
+                                    <input type="text" class="form-control form-control-primary" name="total_stone_count[round_stone][2]" value="{{$design->total_stone_count->round_stone[2]}}">
+                                </td>
+                                <td class="text-right" id="total-round-stones-28">
+                                    <input type="text" class="form-control form-control-primary" name="total_stone_count[round_stone][3]" value="{{$design->total_stone_count->round_stone[3]}}">
+                                </td>
+                                <td class="text-right" id="total-round-stones-210">
+                                    <input type="text" class="form-control form-control-primary" name="total_stone_count[round_stone][4]" value="{{$design->total_stone_count->round_stone[4]}}">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>BIG STONES</td>
+                                <td class="text-right" id="total-big-stones-22">
+                                    <input type="text" class="form-control form-control-primary" name="total_stone_count[big_stone][0]" value="{{$design->total_stone_count->round_stone[0]}}">
+                                </td>
+                                <td class="text-right" id="total-big-stones-24">
+                                    <input type="text" class="form-control form-control-primary" name="total_stone_count[big_stone][1]" value="{{$design->total_stone_count->round_stone[1]}}">
+                                </td>
+                                <td class="text-right" id="total-big-stones-26">
+                                    <input type="text" class="form-control form-control-primary" name="total_stone_count[big_stone][2]" value="{{$design->total_stone_count->round_stone[2]}}">
+                                </td>
+                                <td class="text-right" id="total-big-stones-28">
+                                    <input type="text" class="form-control form-control-primary" name="total_stone_count[big_stone][3]" value="{{$design->total_stone_count->round_stone[3]}}">
+                                </td>
+                                <td class="text-right" id="total-big-stones-210">
+                                    <input type="text" class="form-control form-control-primary" name="total_stone_count[big_stone][4]" value="{{$design->total_stone_count->round_stone[4]}}">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>TB STONES</td>
+                                <td class="text-right" id="total-tb-stones-22">
+                                    <input type="text" class="form-control form-control-primary" name="total_stone_count[tb_stone][0]" value="{{$design->total_stone_count->round_stone[0]}}">
+                                </td>
+                                <td class="text-right" id="total-tb-stones-24">
+                                    <input type="text" class="form-control form-control-primary" name="total_stone_count[tb_stone][1]" value="{{$design->total_stone_count->round_stone[1]}}">
+                                </td>
+                                <td class="text-right" id="total-tb-stones-26">
+                                    <input type="text" class="form-control form-control-primary" name="total_stone_count[tb_stone][2]" value="{{$design->total_stone_count->round_stone[2]}}">
+                                </td>
+                                <td class="text-right" id="total-tb-stones-28">
+                                    <input type="text" class="form-control form-control-primary" name="total_stone_count[tb_stone][3]" value="{{$design->total_stone_count->round_stone[3]}}">
+                                </td>
+                                <td class="text-right" id="total-tb-stones-210">
+                                    <input type="text" class="form-control form-control-primary" name="total_stone_count[tb_stone][4]" value="{{$design->total_stone_count->round_stone[4]}}">
+                                </td>
+                            </tr>
+                        </tbody>
                     </div>
                 </div>
             </div>

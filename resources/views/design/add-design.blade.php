@@ -17,6 +17,11 @@
 	</style>
 @endsection
 @section('content')
+@if($errors->any())
+	@foreach ($errors->all('<p>:message</p>') as $input_error)
+    {{ $input_error }}
+  @endforeach 
+@endif
 	<h2 class="text-center py-3">Add Design</h2>
 	<form action="{{route('design.store-design')}}" method="POST" enctype="multipart/form-data">
 		@csrf
@@ -84,7 +89,7 @@
                     </div>
                     <div class="col-sm-12">
                     	<div class="row">
-	                    	<input type="text" class="form-control form-control-primary" value="" id="unit_avg_price" name="unit_avg_price">
+	                    	<input type="text" class="form-control form-control-primary" value="" id="markup_percentage" name="markup_percentage">
                     	</div>
                     </div>
 					<div class="col-sm-12">
@@ -94,7 +99,7 @@
                     </div>
                     <div class="col-sm-12">
                     	<div class="row">
-		                    <input type="text" class="form-control form-control-primary" value="" id="price_5pcs" name="price_5pcs">
+		                    <input type="text" class="form-control form-control-primary" value="" id="price_5pc4" name="price_4pcs">
                     	</div>
                     </div>
 				</div>
@@ -124,17 +129,17 @@
 									<input class="form-control form-control-primary" type="text" name="stones[0][size]" required>
 								</td>
 								<td>
-									<select class="form-control form-control-primary select-stone-dropdown" name="stones[0][type]">
+									<select class="form-control form-control-primary select-stone-dropdown" name="stones[0][stone_type]">
 										<option value="">SELECT STONE</option>
 										@foreach($stones as $stone)
-											<option class="$color">{{$stone}}</option>
+											<option value="{{$stone}}">{{$stone}}</option>
 										@endforeach
 									</select>
 								</td>
 								<td>
 									<select class="form-control form-control-primary" name="stones[0][stone_color]" id="">
 										@foreach($colors as $color)
-											<option class="$color">{{$color}}</option>
+											<option value="{{$color}}">{{$color}}</option>
 										@endforeach
 									</select>
 								</td>
@@ -154,10 +159,10 @@
 									<input data-stoneType="" data-bangleSize="2.10" class="form-control form-control-primary add_type_stone_210 form-disabler" type="text" name="stones[0][quantity][4]" required pattern="\d+">
 								</td>
 								<td>
-									<input class="form-control form-control-primary" type="text" name="stones[0][stone_price]" required pattern="\d+.\d{2}" title="Example: 500.00, 1000.70">
+									<input class="form-control form-control-primary" type="text" name="stones[0][stone_price]" required title="Example: 500.00, 1000.70">
 								</td>
 								<td>
-									<input class="form-control form-control-primary" type="text" name="stones[0][labour_charge]" required pattern="\d+.\d{2}" title="Example: 500.00, 1000.70">
+									<input class="form-control form-control-primary" type="text" name="stones[0][labour_charge]" required title="Example: 500.00, 1000.70">
 								</td>
 								<td>
 									<button type="button" data-id="0" class="delete_row_btn btn btn-primary button button-small" title="Delete">
@@ -188,37 +193,67 @@
 							</tr>
 							<tr>
 								<th>Stone type</th>
-								<th class="text-right">2.2</th>
-								<th class="text-right">2.4</th>
-								<th class="text-right">2.6</th>
-								<th class="text-right">2.8</th>
-								<th class="text-right">2.10</th>
+								<th class="text-center">2.2</th>
+								<th class="text-center">2.4</th>
+								<th class="text-center">2.6</th>
+								<th class="text-center">2.8</th>
+								<th class="text-center">2.10</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr>
 								<td>ROUND STONES</td>
-								<td class="text-right" id="total-round-stones-22">50</td>
-								<td class="text-right" id="total-round-stones-24"></td>
-								<td class="text-right" id="total-round-stones-26"></td>
-								<td class="text-right" id="total-round-stones-28"></td>
-								<td class="text-right" id="total-round-stones-210"></td>
+								<td class="text-right" id="total-round-stones-22">
+									<input type="text" class="form-control form-control-primary" name="total_stone_count[round_stone][0]">
+								</td>
+								<td class="text-right" id="total-round-stones-24">
+									<input type="text" class="form-control form-control-primary" name="total_stone_count[round_stone][1]">
+								</td>
+								<td class="text-right" id="total-round-stones-26">
+									<input type="text" class="form-control form-control-primary" name="total_stone_count[round_stone][2]">
+								</td>
+								<td class="text-right" id="total-round-stones-28">
+									<input type="text" class="form-control form-control-primary" name="total_stone_count[round_stone][3]">
+								</td>
+								<td class="text-right" id="total-round-stones-210">
+									<input type="text" class="form-control form-control-primary" name="total_stone_count[round_stone][4]">
+								</td>
 							</tr>
 							<tr>
 								<td>BIG STONES</td>
-								<td class="text-right" id="total-big-stones-22"></td>
-								<td class="text-right" id="total-big-stones-24"></td>
-								<td class="text-right" id="total-big-stones-26"></td>
-								<td class="text-right" id="total-big-stones-28"></td>
-								<td class="text-right" id="total-big-stones-210"></td>
+								<td class="text-right" id="total-big-stones-22">
+									<input type="text" class="form-control form-control-primary" name="total_stone_count[big_stone][0]">
+								</td>
+								<td class="text-right" id="total-big-stones-24">
+									<input type="text" class="form-control form-control-primary" name="total_stone_count[big_stone][1]">
+								</td>
+								<td class="text-right" id="total-big-stones-26">
+									<input type="text" class="form-control form-control-primary" name="total_stone_count[big_stone][2]">
+								</td>
+								<td class="text-right" id="total-big-stones-28">
+									<input type="text" class="form-control form-control-primary" name="total_stone_count[big_stone][3]">
+								</td>
+								<td class="text-right" id="total-big-stones-210">
+									<input type="text" class="form-control form-control-primary" name="total_stone_count[big_stone][4]">
+								</td>
 							</tr>
 							<tr>
 								<td>TB STONES</td>
-								<td class="text-right" id="total-tb-stones-22"></td>
-								<td class="text-right" id="total-tb-stones-24"></td>
-								<td class="text-right" id="total-tb-stones-26"></td>
-								<td class="text-right" id="total-tb-stones-28"></td>
-								<td class="text-right" id="total-tb-stones-210"></td>
+								<td class="text-right" id="total-tb-stones-22">
+									<input type="text" class="form-control form-control-primary" name="total_stone_count[tb_stone][0]">
+								</td>
+								<td class="text-right" id="total-tb-stones-24">
+									<input type="text" class="form-control form-control-primary" name="total_stone_count[tb_stone][1]">
+								</td>
+								<td class="text-right" id="total-tb-stones-26">
+									<input type="text" class="form-control form-control-primary" name="total_stone_count[tb_stone][2]">
+								</td>
+								<td class="text-right" id="total-tb-stones-28">
+									<input type="text" class="form-control form-control-primary" name="total_stone_count[tb_stone][3]">
+								</td>
+								<td class="text-right" id="total-tb-stones-210">
+									<input type="text" class="form-control form-control-primary" name="total_stone_count[tb_stone][4]">
+								</td>
 							</tr>
 						</tbody>
 					</div>
@@ -247,7 +282,7 @@
             content += '</td>';
             
             content += '<td>';
-            content += 		'<select class="form-control form-control-primary select-stone-dropdown" name="stones['+counter+'][type]" id="">';
+            content += 		'<select class="form-control form-control-primary select-stone-dropdown" name="stones['+counter+'][stone_type]" id="">';
             	content +=			'<option value="">SELECT STONE</option>'
 	            @foreach($stones as $stone)
 	            content += 			'<option value="{{$stone}}">{{$stone}}</option>';
@@ -255,7 +290,7 @@
             content += 		'</select>';
             content += '</td>';
             content += '<td>';
-            content += 		'<select class="form-control form-control-primary" name="stones['+counter+'][type]" id="">';
+            content += 		'<select class="form-control form-control-primary" name="stones['+counter+'][stone_color]" id="">';
 	            @foreach($colors as $color)
 	            content += 			'<option value="{{$color}}">{{$color}}</option>';
 				@endforeach
@@ -278,10 +313,10 @@
             content += 		'<input class="form-control form-control-primary add_type_stone_210 form-disabler" data-stoneType="" data-bangleSize="2.10"  type="text" name="stones['+counter+'][quantity][4]" required pattern="\\d+">';
             content += '</td>';
             content += '<td>';
-            content += 		'<input class="form-control form-control-primary stone_add_foo" type="text" name="stones['+counter+'][quantity][4]" required pattern="\\d+">';
+            content += 		'<input class="form-control form-control-primary stone_add_foo" type="text" name="stones['+counter+'][stone_price]" required>';
             content += '</td>';
             content += '<td>';
-            content += 		'<input class="form-control form-control-primary" type="text" name="stones['+counter+'][price]" required pattern="\\d+.\\d{2}" title="Example: 500.00, 1000.70">';
+            content += 		'<input class="form-control form-control-primary" type="text" name="stones['+counter+'][labour_charge]" required title="Example: 500.00, 1000.70">';
             content += '</td>';
             content += '<td>';
             content += 		'<button type="button" data-id="'+counter+'" class="delete_row_btn btn btn-primary button button-small" title="Delete"><i class="fa fa-trash"></i></button>';
@@ -405,9 +440,9 @@
 				totalTbStone22 += inputValue;
 			});
 
-			$("#total-round-stones-22").html(totalRoundStone22);
-			$("#total-big-stones-22").html(totalBigStone22);
-			$("#total-tb-stones-22").html(totalTbStone22);
+			$("#total-round-stones-22").find('input').val(totalRoundStone22);
+			$("#total-big-stones-22").find('input').val(totalBigStone22);
+			$("#total-tb-stones-22").find('input').val(totalTbStone22);
 		});
 
 		$('body').on('keyup', '.add_type_stone_24', function() { // calculating total_round_stones_2.4
@@ -441,9 +476,9 @@
 				totalTbStone24 += inputValue;
 			});
 
-			$("#total-round-stones-24").html(totalRoundStone24);
-			$("#total-big-stones-24").html(totalBigStone24);
-			$("#total-tb-stones-24").html(totalTbStone24);
+			$("#total-round-stones-24").find('input').val(totalRoundStone24);
+			$("#total-big-stones-24").find('input').val(totalBigStone24);
+			$("#total-tb-stones-24").find('input').val(totalTbStone24);
 		});
 
 		$('body').on('keyup', '.add_type_stone_26', function() { // calculating total_round_stones_2.6
@@ -477,9 +512,9 @@
 				totalTbStone26 += inputValue;
 			});
 
-			$("#total-round-stones-26").html(totalRoundStone26);
-			$("#total-big-stones-26").html(totalBigStone26);
-			$("#total-tb-stones-26").html(totalTbStone26);
+			$("#total-round-stones-26").find('input').val(totalRoundStone26);
+			$("#total-big-stones-26").find('input').val(totalBigStone26);
+			$("#total-tb-stones-26").find('input').val(totalTbStone26);
 		});
 
 		$('body').on('keyup', '.add_type_stone_28', function() { // calculating total_round_stones_2.8
@@ -513,9 +548,9 @@
 				totalTbStone28 += inputValue;
 			});
 
-			$("#total-round-stones-28").html(totalRoundStone28);
-			$("#total-big-stones-28").html(totalBigStone28);
-			$("#total-tb-stones-28").html(totalTbStone28);
+			$("#total-round-stones-28").find('input').val(totalRoundStone28);
+			$("#total-big-stones-28").find('input').val(totalBigStone28);
+			$("#total-tb-stones-28").find('input').val(totalTbStone28);
 		});
 
 		$('body').on('keyup', '.add_type_stone_210', function() { // calculating total_round_stones_2.10
@@ -549,9 +584,9 @@
 				totalTbStone210 += inputValue;
 			});
 
-			$("#total-round-stones-210").html(totalRoundStone210);
-			$("#total-big-stones-210").html(totalBigStone210);
-			$("#total-tb-stones-210").html(totalTbStone210);
+			$("#total-round-stones-210").find('input').val(totalRoundStone210);
+			$("#total-big-stones-210").find('input').val(totalBigStone210);
+			$("#total-tb-stones-210").find('input').val(totalTbStone210);
 		});
 
 		// change row type to stone type

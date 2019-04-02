@@ -48,27 +48,37 @@
                         </div>
                         <div class="col-sm-12">
                             <div class="row">
-                                <input type="value" class="form-control form-control-primary" value="" required="" id="rhodium" name="rhodium" disabled>
+                                <input type="value" class="form-control form-control-primary" required="" id="rhodium" name="rhodium" value="{{$design->rhodium}}" disabled>
                             </div>
                         </div>
                         <div class="col-sm-12">
                             <div class="row text-left">
-                                <label class="col-form-label ml-0"><b>Price(5 pcs)</b></label>
+                                <label class="col-form-label ml-0"><b>Misc. price</b></label>
                             </div>
                         </div>
                         <div class="col-sm-12">
                             <div class="row">
-                                <input type="value" class="form-control form-control-primary" value="{{$design->price_5pcs}}" required="" id="price_5cs" name="price_5cs" disabled>
+                                <input type="text" class="form-control form-control-primary" id="misc_price" name="misc_price" value="{{$design->misc_price}}" disabled="">
                             </div>
                         </div>
                         <div class="col-sm-12">
                             <div class="row text-left">
-                                <label class="col-form-label ml-0"><b>Unit Avg. Price</b></label>
+                                <label class="col-form-label ml-0"><b>Markup %</b></label>
                             </div>
                         </div>
                         <div class="col-sm-12">
                             <div class="row">
-                                <input type="value" class="form-control form-control-primary" value="{{$design->unit_avg_price}}" required="" id="unit_avg_price" name="unit_avg_price" disabled>
+                                <input type="text" class="form-control form-control-primary" id="markup_percentage" name="markup_percentage" disabled value="{{$design->markup_percentage}}">
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="row text-left">
+                                <label class="col-form-label ml-0"><b>Price(4 pcs)</b></label>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="row">
+                                <input type="value" class="form-control form-control-primary" required="" id="price_5cs" name="price_5cs" value="{{$design->price_4pcs}}" disabled>
                             </div>
                         </div>
                     </div>
@@ -81,12 +91,14 @@
                                 <tr>
                                     <th>Stone Size</th>
                                     <th>Stone Type</th>
+                                    <th>Stone Color</th>
                                     <th>2.2</th>
                                     <th>2.4</th>
                                     <th>2.6</th>
                                     <th>2.8</th>
                                     <th>2.10</th>
-                                    <th>Price</th>
+                                    <th>Stone Price</th>
+                                    <th>Labour Charge</th>
                                 </tr>
                                 </thead>
                                 <tbody id="append_parent">
@@ -94,22 +106,93 @@
                                     <tr>
                                         <td>{{$stone->size}}</td>
                                         <td>
-                                            @if($stone->type == "BIG")
-                                                <span class="label label-primary">BIG</span>
-                                            @elseif($stone->type == "ROUND")
-                                                <span class="label label-danger">ROUND</span>
-                                            @endif
-
+                                            {{$stone->stone_type}}
+                                        </td>
+                                        <td>
+                                            {{$stone->stone_color}}
                                         </td>
                                         <td>{{$stone->quantity[0]}}</td>
                                         <td>{{$stone->quantity[1]}}</td>
                                         <td>{{$stone->quantity[2]}}</td>
                                         <td>{{$stone->quantity[3]}}</td>
                                         <td>{{$stone->quantity[4]}}</td>
-                                        <td>{{$stone->price}}</td>
+                                        <td>{{$stone->stone_price}}</td>
+                                        <td>{{$stone->labour_charge}}</td>
                                     </tr>
                                 @endforeach
-
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center" colspan="6">TOTAL TYPEWISE STONE COUNT</th>
+                                    </tr>
+                                    <tr>
+                                        <th>Stone type</th>
+                                        <th class="text-center">2.2</th>
+                                        <th class="text-center">2.4</th>
+                                        <th class="text-center">2.6</th>
+                                        <th class="text-center">2.8</th>
+                                        <th class="text-center">2.10</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>ROUND STONES</td>
+                                        <td class="text-right" id="total-round-stones-22">
+                                            <input type="text" class="form-control form-control-primary" name="total_stone_count[round_stone][0]" disabled value="{{$design->total_stone_count->round_stone[0]}}">
+                                        </td>
+                                        <td class="text-right" id="total-round-stones-24">
+                                            <input type="text" class="form-control form-control-primary" name="total_stone_count[round_stone][1]" disabled value="{{$design->total_stone_count->round_stone[1]}}">
+                                        </td>
+                                        <td class="text-right" id="total-round-stones-26">
+                                            <input type="text" class="form-control form-control-primary" name="total_stone_count[round_stone][2]" disabled value="{{$design->total_stone_count->round_stone[2]}}">
+                                        </td>
+                                        <td class="text-right" id="total-round-stones-28">
+                                            <input type="text" class="form-control form-control-primary" name="total_stone_count[round_stone][3]" disabled value="{{$design->total_stone_count->round_stone[3]}}">
+                                        </td>
+                                        <td class="text-right" id="total-round-stones-210">
+                                            <input type="text" class="form-control form-control-primary" name="total_stone_count[round_stone][4]" disabled value="{{$design->total_stone_count->round_stone[4]}}">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>BIG STONES</td>
+                                        <td class="text-right" id="total-big-stones-22">
+                                            <input type="text" class="form-control form-control-primary" name="total_stone_count[big_stone][0]" disabled value="{{$design->total_stone_count->big_stone[0]}}">
+                                        </td>
+                                        <td class="text-right" id="total-big-stones-24">
+                                            <input type="text" class="form-control form-control-primary" name="total_stone_count[big_stone][1]" disabled value="{{$design->total_stone_count->big_stone[1]}}">
+                                        </td>
+                                        <td class="text-right" id="total-big-stones-26">
+                                            <input type="text" class="form-control form-control-primary" name="total_stone_count[big_stone][2]" disabled value="{{$design->total_stone_count->big_stone[2]}}">
+                                        </td>
+                                        <td class="text-right" id="total-big-stones-28">
+                                            <input type="text" class="form-control form-control-primary" name="total_stone_count[big_stone][3]" disabled value="{{$design->total_stone_count->big_stone[3]}}">
+                                        </td>
+                                        <td class="text-right" id="total-big-stones-210">
+                                            <input type="text" class="form-control form-control-primary" name="total_stone_count[big_stone][4]" disabled value="{{$design->total_stone_count->big_stone[4]}}">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>TB STONES</td>
+                                        <td class="text-right" id="total-tb-stones-22">
+                                            <input type="text" class="form-control form-control-primary" name="total_stone_count[tb_stone][0]" disabled value="{{$design->total_stone_count->tb_stone[0]}}">
+                                        </td>
+                                        <td class="text-right" id="total-tb-stones-24">
+                                            <input type="text" class="form-control form-control-primary" name="total_stone_count[tb_stone][1]" disabled value="{{$design->total_stone_count->tb_stone[1]}}">
+                                        </td>
+                                        <td class="text-right" id="total-tb-stones-26">
+                                            <input type="text" class="form-control form-control-primary" name="total_stone_count[tb_stone][2]" disabled value="{{$design->total_stone_count->tb_stone[2]}}">
+                                        </td>
+                                        <td class="text-right" id="total-tb-stones-28">
+                                            <input type="text" class="form-control form-control-primary" name="total_stone_count[tb_stone][3]" disabled value="{{$design->total_stone_count->tb_stone[3]}}">
+                                        </td>
+                                        <td class="text-right" id="total-tb-stones-210">
+                                            <input type="text" class="form-control form-control-primary" name="total_stone_count[tb_stone][4]" disabled value="{{$design->total_stone_count->tb_stone[4]}}">
+                                        </td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>

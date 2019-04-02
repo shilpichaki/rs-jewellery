@@ -29,6 +29,11 @@ class DesignController extends Controller
     public function show(Design $design)
     {
         $design['stones'] = json_decode($design['stones']);
+        $design['total_stone_count'] = json_decode($design['total_stone_count']);
+
+        // return $design;
+
+        // $design['stones'] = json_decode($design['stones']);
 
         return view('design.show')
             ->with([
@@ -40,19 +45,30 @@ class DesignController extends Controller
     public function edit(Design $design)
     {
         $design['stones'] = json_decode($design['stones']);
+        $design['total_stone_count'] = json_decode($design['total_stone_count']);
+
         $lastKey = 0;
 
         foreach ($design['stones'] as $key => $value) {
             $lastKey = $key;
         }
         $lastKey++;
+
+        // return $design;
          
         return view('design.edit')
-            ->with(['design' => $design, 'lastKey' => $lastKey]);
+            ->with([
+                'design' => $design, 
+                'lastKey' => $lastKey,
+                'masterStones' => RawMaterial::getStoneTypes(),
+                'masterColors' => StoneColor::getAllColors(),
+            ]);
     }
 
     public function store(DesignAadhaarRequest $request)
-    {        
+    {
+        // dd($request); 
+        
         $file = request()->file('picture');
 
         $ext = $file->extension();
@@ -64,15 +80,22 @@ class DesignController extends Controller
         $validated = $request->validated();
 
         $design = Design::create([
-            'picture' => $path,
             'design_no' => $request->design_no,
-            'stones' => json_encode($request->stones),
             'rhodium' => $request->rhodium,
-            'price_5pcs' => $request->price_5pcs,
-            'unit_avg_price' => $request->unit_avg_price,
+            'misc_price' => $request->misc_price,
+            'markup_percentage' => $request->markup_percentage,
+            'price_4pcs' => $request->price_4pcs,
+            'stones' => json_encode($request->stones),
+            'total_stone_count' => json_encode($request->total_stone_count),
+            'picture' => $path,
         ]);
 
-        return redirect()->route('design.show', ['design' => $design->design_no]);
+        $design['stones'] = json_decode($design['stones']);
+        $design['total_stone_count'] = json_decode($design['total_stone_count']);
+
+        return $design;
+
+        // return redirect()->route('design.show', ['design' => $design->design_no]);
     }
 
     public function update(Design $design, DesignAadhaarUpdateRequest $request) {
