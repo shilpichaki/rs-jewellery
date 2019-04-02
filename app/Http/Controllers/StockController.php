@@ -54,7 +54,7 @@ class StockController extends Controller
             ],
             'unit_of_measurement' => [
                 'required',
-                Rule::in($this->unitOfMeasurement),
+                Rule::in(UnitOfMeasurement::getUomList()),
             ],
 //            'threshold_value' => 'integer|min:1',
             'stock_value' => 'required|integer|min:1',

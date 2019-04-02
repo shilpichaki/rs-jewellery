@@ -65,7 +65,7 @@ class Stock extends Model
     {
         $this->transactions()->attach(Auth::user()->id, [
             'vendor_id' => $request->vendor_id,
-            'before' => null,
+            'before' => json_encode([]),
             'after' => json_encode($this),
             'rate' => $request->today_rate,
             'price' => $request->price,
