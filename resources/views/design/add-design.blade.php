@@ -132,19 +132,19 @@
 									</select>
 								</td>
 								<td>
-									<input data-stoneType="" data-bangleSize="2.2" class="form-control form-control-primary add_round_type_stone" type="text" name="stones[0][quantity][0]" required pattern="\d+" title="">
+									<input data-stoneType="" data-bangleSize="2.2" class="form-control form-control-primary add_type_stone_22" type="text" name="stones[0][quantity][0]" required pattern="\d+" title="">
 								</td>
 								<td>
-									<input data-stoneType="" class="form-control form-control-primary stone_add_foo" type="text" name="stones[0][quantity][1]" required pattern="\d+">
+									<input data-stoneType="" data-bangleSize="2.4" class="form-control form-control-primary add_type_stone_24" type="text" name="stones[0][quantity][1]" required pattern="\d+">
 								</td>
 								<td>
-									<input data-stoneType="" class="form-control form-control-primary stone_add_foo" type="text" name="stones[0][quantity][2]" required pattern="\d+">
+									<input data-stoneType="" data-bangleSize="2.6" class="form-control form-control-primary add_type_stone_26" type="text" name="stones[0][quantity][2]" required pattern="\d+">
 								</td>
 								<td>
-									<input data-stoneType="" class="form-control form-control-primary stone_add_foo" type="text" name="stones[0][quantity][3]" required pattern="\d+">
+									<input data-stoneType="" data-bangleSize="2.8" class="form-control form-control-primary add_type_stone_28" type="text" name="stones[0][quantity][3]" required pattern="\d+">
 								</td>
 								<td>
-									<input data-stoneType="" class="form-control form-control-primary stone_add_foo" type="text" name="stones[0][quantity][4]" required pattern="\d+">
+									<input data-stoneType="" data-bangleSize="2.10" class="form-control form-control-primary add_type_stone_210" type="text" name="stones[0][quantity][4]" required pattern="\d+">
 								</td>
 								<td>
 									<input class="form-control form-control-primary" type="text" name="stones[0][stone_price]" required pattern="\d+.\d{2}" title="Example: 500.00, 1000.70">
@@ -177,25 +177,41 @@
 						<table class="table table-bordered">
 							<thead>
 							<tr>
-								<th class="text-center" colspan="2">TOTAL TYPEWISE STONE COUNT</th>
+								<th class="text-center" colspan="6">TOTAL TYPEWISE STONE COUNT</th>
 							</tr>
 							<tr>
 								<th>Stone type</th>
-								<th class="text-left">Total stones</th>
+								<th class="text-right">2.2</th>
+								<th class="text-right">2.4</th>
+								<th class="text-right">2.6</th>
+								<th class="text-right">2.8</th>
+								<th class="text-right">2.10</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr>
 								<td>ROUND STONES</td>
-								<td id="total-round-stones"></td>
+								<td class="text-right" id="total-round-stones-22"></td>
+								<td class="text-right" id="total-round-stones-24"></td>
+								<td class="text-right" id="total-round-stones-26"></td>
+								<td class="text-right" id="total-round-stones-28"></td>
+								<td class="text-right" id="total-round-stones-210"></td>
 							</tr>
 							<tr>
 								<td>BIG STONES</td>
-								<td id="total-big-stones"></td>
+								<td class="text-right" id="total-big-stones-22"></td>
+								<td class="text-right" id="total-big-stones-24"></td>
+								<td class="text-right" id="total-big-stones-26"></td>
+								<td class="text-right" id="total-big-stones-28"></td>
+								<td class="text-right" id="total-big-stones-210"></td>
 							</tr>
 							<tr>
 								<td>TB STONES</td>
-								<td id="total-tb-stones"></td>
+								<td class="text-right" id="total-tb-stones-22"></td>
+								<td class="text-right" id="total-tb-stones-24"></td>
+								<td class="text-right" id="total-tb-stones-26"></td>
+								<td class="text-right" id="total-tb-stones-28"></td>
+								<td class="text-right" id="total-tb-stones-210"></td>
 							</tr>
 						</tbody>
 					</div>
@@ -239,19 +255,19 @@
             content += '</td>';
 
             content += '<td>';
-            content += 		'<input class="form-control form-control-primary add_round_type_stone" data-stoneType="" data-bangleSize="2.2" type="text" name="stones['+counter+'][quantity][0]" required pattern="\\d+" title="">';
+            content += 		'<input class="form-control form-control-primary add_type_stone_22" data-stoneType="" data-bangleSize="2.2" type="text" name="stones['+counter+'][quantity][0]" required pattern="\\d+" title="">';
             content += '</td>';
             content += '<td>';
-            content += 		'<input class="form-control form-control-primary stone_add_foo" data-stoneType="" data-bangleSize="2.4"  type="text" name="stones['+counter+'][quantity][1]" required pattern="\\d+">';
+            content += 		'<input class="form-control form-control-primary add_type_stone_24" data-stoneType="" data-bangleSize="2.4"  type="text" name="stones['+counter+'][quantity][1]" required pattern="\\d+">';
             content += '</td>';
             content += '<td>';
-            content += 		'<input class="form-control form-control-primary stone_add_foo" data-stoneType="" data-bangleSize="2.6"  type="text" name="stones['+counter+'][quantity][2]" required pattern="\\d+">';
+            content += 		'<input class="form-control form-control-primary add_type_stone_26" data-stoneType="" data-bangleSize="2.6"  type="text" name="stones['+counter+'][quantity][2]" required pattern="\\d+">';
             content += '</td>';
             content += '<td>';
-            content += 		'<input class="form-control form-control-primary stone_add_foo" data-stoneType="" data-bangleSize="2.8"  type="text" name="stones['+counter+'][quantity][3]" required pattern="\\d+">';
+            content += 		'<input class="form-control form-control-primary add_type_stone_28" data-stoneType="" data-bangleSize="2.8"  type="text" name="stones['+counter+'][quantity][3]" required pattern="\\d+">';
             content += '</td>';
             content += '<td>';
-            content += 		'<input class="form-control form-control-primary stone_add_foo" data-stoneType="" data-bangleSize="2.10"  type="text" name="stones['+counter+'][quantity][4]" required pattern="\\d+">';
+            content += 		'<input class="form-control form-control-primary add_type_stone_210" data-stoneType="" data-bangleSize="2.10"  type="text" name="stones['+counter+'][quantity][4]" required pattern="\\d+">';
             content += '</td>';
             content += '<td>';
             content += 		'<input class="form-control form-control-primary stone_add_foo" type="text" name="stones['+counter+'][quantity][4]" required pattern="\\d+">';
@@ -325,45 +341,207 @@
 		});
 	});
 
-	// delete row
+	// stone counting
 	$(document).ready(function() {
 
 		// calculate values
-		var totalRoundStone = 0;
-		var totalBigStone = 0;
-		var totalTbStone = 0;
+		var totalRoundStone22 = 0;
+		var totalRoundStone24 = 0;
+		var totalRoundStone26 = 0;
+		var totalRoundStone28 = 0;
+		var totalRoundStone210 = 0;
 
-		$('body').on('keyup', '.add_round_type_stone', function() { // calculating total_round_stones
-			totalRoundStone = 0;
+		var totalBigStone22 = 0;
+		var totalBigStone24 = 0;
+		var totalBigStone26 = 0;
+		var totalBigStone28 = 0;
+		var totalBigStone210 = 0;
 
-			$('input[data-stonetype="round_stone"][data-bangleSize="2.2"]').each(function() {
-				totalRoundStone = totalRoundStone + parseInt($(this).val());
+		var totalTbStone22 = 0;
+		var totalTbStone24 = 0;
+		var totalTbStone26 = 0;
+		var totalTbStone28 = 0;
+		var totalTbStone210 = 0;
+
+		$('body').on('keyup', '.add_type_stone_22', function() {
+			totalRoundStone22 = 0;
+			totalBigStone22 = 0;
+			totalTbStone22 = 0;
+
+			var inputValue = 0;
+
+			$('input[data-stonetype="round_stone"][data-bangleSize="2.2"]').each(function() { // calculating total_round_stones_2.2
+
+				inputValue = $(this).val() == '' ? 0 : $(this).val();
+				inputValue = parseInt(inputValue);
+
+				totalRoundStone22 += inputValue;
 			});
-			console.log(totalRoundStone);
-			$("#total-round-stones").html(totalRoundStone);
+
+			$('input[data-stonetype="big_stone"][data-bangleSize="2.2"]').each(function() { // calculating total_big_stones_2.2
+
+				inputValue = $(this).val() == '' ? 0 : $(this).val();
+				inputValue = parseInt(inputValue);
+
+				totalBigStone22 += inputValue;
+			});
+
+			$('input[data-stonetype="tb_stone"][data-bangleSize="2.2"]').each(function() { // calculating total_tb_stones_2.2
+
+				inputValue = $(this).val() == '' ? 0 : $(this).val();
+				inputValue = parseInt(inputValue);
+
+				totalTbStone22 += inputValue;
+			});
+
+			$("#total-round-stones-22").html(totalRoundStone22);
+			$("#total-big-stones-22").html(totalBigStone22);
+			$("#total-tb-stones-22").html(totalTbStone22);
 		});
 
-		$('body').on('keyup', '.add_round_type_stone', function() { // calculating total_big_stones
-			totalRoundStone = 0;
+		$('body').on('keyup', '.add_type_stone_24', function() { // calculating total_round_stones_2.4
+			totalRoundStone24 = 0;
+			totalBigStone24 = 0;
+			totalTbStone24 = 0;
 
-			$('input[data-stonetype="round_stone"][data-bangleSize="2.2"]').each(function() {
-				totalRoundStone = totalRoundStone + parseInt($(this).val());
+			var inputValue = 0;
+
+			$('input[data-stonetype="round_stone"][data-bangleSize="2.4"]').each(function() { // calculating total_round_stones_2.4
+
+				inputValue = $(this).val() == '' ? 0 : $(this).val();
+				inputValue = parseInt(inputValue);
+
+				totalRoundStone24 += inputValue;
 			});
-			console.log(totalRoundStone);
-			$("#total-round-stones").html(totalRoundStone);
+
+			$('input[data-stonetype="big_stone"][data-bangleSize="2.4"]').each(function() { // calculating total_big_stones_2.4
+
+				inputValue = $(this).val() == '' ? 0 : $(this).val();
+				inputValue = parseInt(inputValue);
+
+				totalBigStone24 += inputValue;
+			});
+
+			$('input[data-stonetype="tb_stone"][data-bangleSize="2.4"]').each(function() { // calculating total_tb_stones_2.4
+
+				inputValue = $(this).val() == '' ? 0 : $(this).val();
+				inputValue = parseInt(inputValue);
+
+				totalTbStone24 += inputValue;
+			});
+
+			$("#total-round-stones-24").html(totalRoundStone24);
+			$("#total-big-stones-24").html(totalBigStone24);
+			$("#total-tb-stones-24").html(totalTbStone24);
 		});
 
-		$('body').on('keyup', '.add_round_type_stone', function() { // calculating total_tb_stones
-			totalRoundStone = 0;
+		$('body').on('keyup', '.add_type_stone_26', function() { // calculating total_round_stones_2.6
+			totalRoundStone26 = 0;
+			totalBigStone26 = 0;
+			totalTbStone26 = 0;
 
-			$('input[data-stonetype="round_stone"][data-bangleSize="2.2"]').each(function() {
-				totalRoundStone = totalRoundStone + parseInt($(this).val());
+			var inputValue = 0;
+
+			$('input[data-stonetype="round_stone"][data-bangleSize="2.6"]').each(function() { // calculating total_round_stones_2.6
+
+				inputValue = $(this).val() == '' ? 0 : $(this).val();
+				inputValue = parseInt(inputValue);
+
+				totalRoundStone26 += inputValue;
 			});
-			console.log(totalRoundStone);
-			$("#total-round-stones").html(totalRoundStone);
+
+			$('input[data-stonetype="big_stone"][data-bangleSize="2.6"]').each(function() { // calculating total_big_stones_2.6
+
+				inputValue = $(this).val() == '' ? 0 : $(this).val();
+				inputValue = parseInt(inputValue);
+
+				totalBigStone26 += inputValue;
+			});
+
+			$('input[data-stonetype="tb_stone"][data-bangleSize="2.6"]').each(function() { // calculating total_tb_stones_2.6
+
+				inputValue = $(this).val() == '' ? 0 : $(this).val();
+				inputValue = parseInt(inputValue);
+
+				totalTbStone26 += inputValue;
+			});
+
+			$("#total-round-stones-26").html(totalRoundStone26);
+			$("#total-big-stones-26").html(totalBigStone26);
+			$("#total-tb-stones-26").html(totalTbStone26);
 		});
 
+		$('body').on('keyup', '.add_type_stone_28', function() { // calculating total_round_stones_2.8
+			totalRoundStone28 = 0;
+			totalBigStone28 = 0;
+			totalTbStone28 = 0;
 
+			var inputValue = 0;
+
+			$('input[data-stonetype="round_stone"][data-bangleSize="2.8"]').each(function() { // calculating total_round_stones_2.8
+
+				inputValue = $(this).val() == '' ? 0 : $(this).val();
+				inputValue = parseInt(inputValue);
+
+				totalRoundStone28 += inputValue;
+			});
+
+			$('input[data-stonetype="big_stone"][data-bangleSize="2.8"]').each(function() { // calculating total_big_stones_2.8
+
+				inputValue = $(this).val() == '' ? 0 : $(this).val();
+				inputValue = parseInt(inputValue);
+
+				totalBigStone28 += inputValue;
+			});
+
+			$('input[data-stonetype="tb_stone"][data-bangleSize="2.8"]').each(function() { // calculating total_tb_stones_2.8
+
+				inputValue = $(this).val() == '' ? 0 : $(this).val();
+				inputValue = parseInt(inputValue);
+
+				totalTbStone28 += inputValue;
+			});
+
+			$("#total-round-stones-28").html(totalRoundStone28);
+			$("#total-big-stones-28").html(totalBigStone28);
+			$("#total-tb-stones-28").html(totalTbStone28);
+		});
+
+		$('body').on('keyup', '.add_type_stone_210', function() { // calculating total_round_stones_2.10
+			totalRoundStone210 = 0;
+			totalBigStone210 = 0;
+			totalTbStone210 = 0;
+
+			var inputValue = 0;
+
+			$('input[data-stonetype="round_stone"][data-bangleSize="2.10"]').each(function() { // calculating total_round_stones_2.10
+
+				inputValue = $(this).val() == '' ? 0 : $(this).val();
+				inputValue = parseInt(inputValue);
+
+				totalRoundStone210 += inputValue;
+			});
+
+			$('input[data-stonetype="big_stone"][data-bangleSize="2.10"]').each(function() { // calculating total_big_stones_2.10
+
+				inputValue = $(this).val() == '' ? 0 : $(this).val();
+				inputValue = parseInt(inputValue);
+
+				totalBigStone210 += inputValue;
+			});
+
+			$('input[data-stonetype="tb_stone"][data-bangleSize="2.10"]').each(function() { // calculating total_tb_stones_2.10
+
+				inputValue = $(this).val() == '' ? 0 : $(this).val();
+				inputValue = parseInt(inputValue);
+
+				totalTbStone210 += inputValue;
+			});
+
+			$("#total-round-stones-210").html(totalRoundStone210);
+			$("#total-big-stones-210").html(totalBigStone210);
+			$("#total-tb-stones-210").html(totalTbStone210);
+		});
 
 		// change row type to stone type
 
