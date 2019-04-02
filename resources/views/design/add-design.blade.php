@@ -7,6 +7,13 @@
 		.table-bordered td {
 		    width: 60px !important;
 		}
+		/*.blinkAnimation{
+		    animation: blinkingText 2s infinite;
+		}
+		@keyframes blinkingText{
+		    0%{     background-color: rgba(200, 240, 80, .9);    }
+		    100%{   background-color: rgba(200, 240, 80, .0);    }
+		}*/
 	</style>
 @endsection
 @section('content')
@@ -132,19 +139,19 @@
 									</select>
 								</td>
 								<td>
-									<input data-stoneType="" data-bangleSize="2.2" class="form-control form-control-primary add_type_stone_22" type="text" name="stones[0][quantity][0]" required pattern="\d+" title="">
+									<input data-stoneType="" data-bangleSize="2.2" class="form-control form-control-primary add_type_stone_22 form-disabler" disabled="" type="text" name="stones[0][quantity][0]" required pattern="\d+" title="">
 								</td>
 								<td>
-									<input data-stoneType="" data-bangleSize="2.4" class="form-control form-control-primary add_type_stone_24" type="text" name="stones[0][quantity][1]" required pattern="\d+">
+									<input data-stoneType="" data-bangleSize="2.4" class="form-control form-control-primary add_type_stone_24 form-disabler" type="text" name="stones[0][quantity][1]" required pattern="\d+">
 								</td>
 								<td>
-									<input data-stoneType="" data-bangleSize="2.6" class="form-control form-control-primary add_type_stone_26" type="text" name="stones[0][quantity][2]" required pattern="\d+">
+									<input data-stoneType="" data-bangleSize="2.6" class="form-control form-control-primary add_type_stone_26 form-disabler" type="text" name="stones[0][quantity][2]" required pattern="\d+">
 								</td>
 								<td>
-									<input data-stoneType="" data-bangleSize="2.8" class="form-control form-control-primary add_type_stone_28" type="text" name="stones[0][quantity][3]" required pattern="\d+">
+									<input data-stoneType="" data-bangleSize="2.8" class="form-control form-control-primary add_type_stone_28 form-disabler" type="text" name="stones[0][quantity][3]" required pattern="\d+">
 								</td>
 								<td>
-									<input data-stoneType="" data-bangleSize="2.10" class="form-control form-control-primary add_type_stone_210" type="text" name="stones[0][quantity][4]" required pattern="\d+">
+									<input data-stoneType="" data-bangleSize="2.10" class="form-control form-control-primary add_type_stone_210 form-disabler" type="text" name="stones[0][quantity][4]" required pattern="\d+">
 								</td>
 								<td>
 									<input class="form-control form-control-primary" type="text" name="stones[0][stone_price]" required pattern="\d+.\d{2}" title="Example: 500.00, 1000.70">
@@ -191,7 +198,7 @@
 						<tbody>
 							<tr>
 								<td>ROUND STONES</td>
-								<td class="text-right" id="total-round-stones-22"></td>
+								<td class="text-right" id="total-round-stones-22">50</td>
 								<td class="text-right" id="total-round-stones-24"></td>
 								<td class="text-right" id="total-round-stones-26"></td>
 								<td class="text-right" id="total-round-stones-28"></td>
@@ -232,6 +239,7 @@
 <script>
     $(document).ready(function () {
         var counter = 1;
+
         $("#rowAddButton").click(function () {
             var content = '<tr id="add_stone_row_'+counter+'">';
             content += '<td>';
@@ -255,19 +263,19 @@
             content += '</td>';
 
             content += '<td>';
-            content += 		'<input class="form-control form-control-primary add_type_stone_22" data-stoneType="" data-bangleSize="2.2" type="text" name="stones['+counter+'][quantity][0]" required pattern="\\d+" title="">';
+            content += 		'<input class="form-control form-control-primary add_type_stone_22 form-disabler" data-stoneType="" data-bangleSize="2.2" type="text" name="stones['+counter+'][quantity][0]" required pattern="\\d+" title="">';
             content += '</td>';
             content += '<td>';
-            content += 		'<input class="form-control form-control-primary add_type_stone_24" data-stoneType="" data-bangleSize="2.4"  type="text" name="stones['+counter+'][quantity][1]" required pattern="\\d+">';
+            content += 		'<input class="form-control form-control-primary add_type_stone_24 form-disabler" data-stoneType="" data-bangleSize="2.4"  type="text" name="stones['+counter+'][quantity][1]" required pattern="\\d+">';
             content += '</td>';
             content += '<td>';
-            content += 		'<input class="form-control form-control-primary add_type_stone_26" data-stoneType="" data-bangleSize="2.6"  type="text" name="stones['+counter+'][quantity][2]" required pattern="\\d+">';
+            content += 		'<input class="form-control form-control-primary add_type_stone_26 form-disabler" data-stoneType="" data-bangleSize="2.6"  type="text" name="stones['+counter+'][quantity][2]" required pattern="\\d+">';
             content += '</td>';
             content += '<td>';
-            content += 		'<input class="form-control form-control-primary add_type_stone_28" data-stoneType="" data-bangleSize="2.8"  type="text" name="stones['+counter+'][quantity][3]" required pattern="\\d+">';
+            content += 		'<input class="form-control form-control-primary add_type_stone_28 form-disabler" data-stoneType="" data-bangleSize="2.8"  type="text" name="stones['+counter+'][quantity][3]" required pattern="\\d+">';
             content += '</td>';
             content += '<td>';
-            content += 		'<input class="form-control form-control-primary add_type_stone_210" data-stoneType="" data-bangleSize="2.10"  type="text" name="stones['+counter+'][quantity][4]" required pattern="\\d+">';
+            content += 		'<input class="form-control form-control-primary add_type_stone_210 form-disabler" data-stoneType="" data-bangleSize="2.10"  type="text" name="stones['+counter+'][quantity][4]" required pattern="\\d+">';
             content += '</td>';
             content += '<td>';
             content += 		'<input class="form-control form-control-primary stone_add_foo" type="text" name="stones['+counter+'][quantity][4]" required pattern="\\d+">';
@@ -281,6 +289,9 @@
             content += '</tr>';
 
             $("#append_parent").append(content);
+
+            formDisabler($("#add_stone_row_"+counter));
+
             counter++;
         });
     });
@@ -549,6 +560,13 @@
 			
 			var stoneType = $(this).val();
 
+			if(stoneType != '') {
+				parentTr = $(this).closest('tr');
+				formEnabler(parentTr);
+			} else {
+				formDisabler(parentTr);
+			}
+
 				switch(stoneType) {
 				  	case 'ROUND STONE':
 				    	$(this).closest('tr').find('input').attr('data-stonetype', 'round_stone');
@@ -563,7 +581,24 @@
 				    	$(this).closest('tr').find('input').attr('data-stonetype', '');
 				}
 		});
-
 	});
+
+	$(document).ready(function() {
+        formDisabler($("#add_stone_row_0"));
+	});
+
+	function formDisabler(parentElement)
+	{
+		var childs = parentElement.find(".form-disabler");
+		
+		childs.prop('disabled', true);
+	}
+
+	function formEnabler(parentElement)
+	{
+		var childs = parentElement.find(".form-disabler");
+		
+		childs.prop('disabled', false);
+	}
 </script>
 @endsection
