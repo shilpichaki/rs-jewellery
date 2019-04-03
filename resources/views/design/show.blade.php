@@ -102,24 +102,26 @@
                                 </tr>
                                 </thead>
                                 <tbody id="append_parent">
-                                @foreach($design->stones as $stone)
-                                    <tr>
-                                        <td>{{$stone->size}}</td>
-                                        <td>
-                                            {{$stone->stone_type}}
-                                        </td>
-                                        <td>
-                                            {{$stone->stone_color}}
-                                        </td>
-                                        <td>{{$stone->quantity[0]}}</td>
-                                        <td>{{$stone->quantity[1]}}</td>
-                                        <td>{{$stone->quantity[2]}}</td>
-                                        <td>{{$stone->quantity[3]}}</td>
-                                        <td>{{$stone->quantity[4]}}</td>
-                                        <td>{{$stone->stone_price}}</td>
-                                        <td>{{$stone->labour_charge}}</td>
-                                    </tr>
-                                @endforeach
+                                @if($stonesCount > 0)
+                                    @foreach($design->stones as $stone)
+                                        <tr>
+                                            <td>{{$stone->size}}</td>
+                                            <td>
+                                                {{$stone->stone_type}}
+                                            </td>
+                                            <td>
+                                                {{$stone->stone_color}}
+                                            </td>
+                                            <td>{{$stone->quantity[0]}}</td>
+                                            <td>{{$stone->quantity[1]}}</td>
+                                            <td>{{$stone->quantity[2]}}</td>
+                                            <td>{{$stone->quantity[3]}}</td>
+                                            <td>{{$stone->quantity[4]}}</td>
+                                            <td>{{$stone->stone_price}}</td>
+                                            <td>{{$stone->labour_charge}}</td>
+                                        </tr>
+                                    @endforeach
+                                @endif
                                 </tbody>
                             </table>
                         </div>

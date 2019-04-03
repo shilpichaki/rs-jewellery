@@ -41,6 +41,9 @@ class DesignAadhaarRequest extends FormRequest
             'stones.*.quantity.*' => 'required|integer',
             'stones.*.stone_price' => 'required',
             'stones.*.labour_charge' => 'required',
+            'rhodium' => 'required',
+            'misc_price' => 'required',
+            'markup_percentage' => 'required',
         ];
 
         return $rules;
