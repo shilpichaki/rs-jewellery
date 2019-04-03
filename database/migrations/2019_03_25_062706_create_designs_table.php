@@ -16,11 +16,13 @@ class CreateDesignsTable extends Migration
         Schema::create('designs', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('design_no')->unique()->unsigned();
+            $table->double('rhodium', 8, 2);
+            $table->integer('markup_percentage');
+            $table->double('misc_price', 8, 2);
+            $table->double('price_4pcs', 8, 2);
             $table->text('stones');
+            $table->text('total_stone_count');
             $table->string('picture')->nullable();
-            $table->string('rhodium')->nullable();
-            $table->double('price_5pcs', 8, 2)->nullable();
-            $table->double('unit_avg_price', 8, 2)->nullable();
             $table->timestamps();
         });
     }

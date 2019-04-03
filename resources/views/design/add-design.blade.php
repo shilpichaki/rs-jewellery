@@ -7,9 +7,21 @@
 		.table-bordered td {
 		    width: 60px !important;
 		}
+		/*.blinkAnimation{
+		    animation: blinkingText 2s infinite;
+		}
+		@keyframes blinkingText{
+		    0%{     background-color: rgba(200, 240, 80, .9);    }
+		    100%{   background-color: rgba(200, 240, 80, .0);    }
+		}*/
 	</style>
 @endsection
 @section('content')
+@if($errors->any())
+	@foreach ($errors->all('<p>:message</p>') as $input_error)
+    {{ $input_error }}
+  @endforeach 
+@endif
 	<h2 class="text-center py-3">Add Design</h2>
 	<form action="{{route('design.store-design')}}" method="POST" enctype="multipart/form-data">
 		@csrf
@@ -44,7 +56,10 @@
 					<div class="preview img-wrapper rounded"></div>
 					<div class="">
 						<br>
-						<input type="file" name="picture" id="picture" required />
+						<label for="picture">
+							<input type="file" name="picture" id="picture" style="display:none" required />
+							<span style="font-size: 26px; cursor: pointer;" class="fa fa-upload" aria-hidden="true"></span>
+						</label>
 						<br>
 						<br>
 					</div>
@@ -77,17 +92,7 @@
                     </div>
                     <div class="col-sm-12">
                     	<div class="row">
-	                    	<input type="text" class="form-control form-control-primary" value="" id="unit_avg_price" name="unit_avg_price">
-                    	</div>
-                    </div>
-					<div class="col-sm-12">
-                        <div class="row text-left">
-		                    <label class="col-form-label ml-0"><b>Price(4 pcs)</b></label>
-                        </div>
-                    </div>
-                    <div class="col-sm-12">
-                    	<div class="row">
-		                    <input type="text" class="form-control form-control-primary" value="" id="price_5pcs" name="price_5pcs">
+	                    	<input type="text" class="form-control form-control-primary" value="" id="markup_percentage" name="markup_percentage">
                     	</div>
                     </div>
 				</div>
@@ -112,45 +117,45 @@
 							</tr>
 							</thead>
 							<tbody id="append_parent">
-							<tr id="add_stone_row_0">
+							<tr id="add_stone_row_0" data-rowstonetype="">
 								<td>
 									<input class="form-control form-control-primary" type="text" name="stones[0][size]" required>
 								</td>
 								<td>
-									<select class="form-control form-control-primary select-stone-dropdown" name="stones[0][type]">
+									<select class="form-control form-control-primary select-stone-dropdown" name="stones[0][stone_type]">
 										<option value="">SELECT STONE</option>
 										@foreach($stones as $stone)
-											<option class="$color">{{$stone}}</option>
+											<option value="{{$stone}}">{{$stone}}</option>
 										@endforeach
 									</select>
 								</td>
 								<td>
 									<select class="form-control form-control-primary" name="stones[0][stone_color]" id="">
 										@foreach($colors as $color)
-											<option class="$color">{{$color}}</option>
+											<option value="{{$color}}">{{$color}}</option>
 										@endforeach
 									</select>
 								</td>
 								<td>
-									<input data-stoneType="" data-bangleSize="2.2" class="form-control form-control-primary add_type_stone_22" type="text" name="stones[0][quantity][0]" required pattern="\d+" title="">
+									<input data-stoneType="" data-bangleSize="2.2" class="form-control form-control-primary add_type_stone_22 add_type_stone form-disabler" disabled="" type="text" name="stones[0][quantity][0]" required pattern="\d+" title="">
 								</td>
 								<td>
-									<input data-stoneType="" data-bangleSize="2.4" class="form-control form-control-primary add_type_stone_24" type="text" name="stones[0][quantity][1]" required pattern="\d+">
+									<input data-stoneType="" data-bangleSize="2.4" class="form-control form-control-primary add_type_stone_24 add_type_stone form-disabler" type="text" name="stones[0][quantity][1]" required pattern="\d+">
 								</td>
 								<td>
-									<input data-stoneType="" data-bangleSize="2.6" class="form-control form-control-primary add_type_stone_26" type="text" name="stones[0][quantity][2]" required pattern="\d+">
+									<input data-stoneType="" data-bangleSize="2.6" class="form-control form-control-primary add_type_stone_26 add_type_stone form-disabler" type="text" name="stones[0][quantity][2]" required pattern="\d+">
 								</td>
 								<td>
-									<input data-stoneType="" data-bangleSize="2.8" class="form-control form-control-primary add_type_stone_28" type="text" name="stones[0][quantity][3]" required pattern="\d+">
+									<input data-stoneType="" data-bangleSize="2.8" class="form-control form-control-primary add_type_stone_28 add_type_stone form-disabler" type="text" name="stones[0][quantity][3]" required pattern="\d+">
 								</td>
 								<td>
-									<input data-stoneType="" data-bangleSize="2.10" class="form-control form-control-primary add_type_stone_210" type="text" name="stones[0][quantity][4]" required pattern="\d+">
+									<input data-stoneType="" data-bangleSize="2.10" class="form-control form-control-primary add_type_stone_210 add_type_stone form-disabler" type="text" name="stones[0][quantity][4]" required pattern="\d+">
 								</td>
 								<td>
-									<input class="form-control form-control-primary" type="text" name="stones[0][stone_price]" required pattern="\d+.\d{2}" title="Example: 500.00, 1000.70">
+									<input class="form-control form-control-primary stone_price_input" type="text" name="stones[0][stone_price]" required title="Example: 500.00, 1000.70">
 								</td>
 								<td>
-									<input class="form-control form-control-primary" type="text" name="stones[0][labour_charge]" required pattern="\d+.\d{2}" title="Example: 500.00, 1000.70">
+									<input class="form-control form-control-primary labour_charge_input" type="text" name="stones[0][labour_charge]" required title="Example: 500.00, 1000.70">
 								</td>
 								<td>
 									<button type="button" data-id="0" class="delete_row_btn btn btn-primary button button-small" title="Delete">
@@ -181,37 +186,67 @@
 							</tr>
 							<tr>
 								<th>Stone type</th>
-								<th class="text-right">2.2</th>
-								<th class="text-right">2.4</th>
-								<th class="text-right">2.6</th>
-								<th class="text-right">2.8</th>
-								<th class="text-right">2.10</th>
+								<th class="text-center">2.2</th>
+								<th class="text-center">2.4</th>
+								<th class="text-center">2.6</th>
+								<th class="text-center">2.8</th>
+								<th class="text-center">2.10</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr>
 								<td>ROUND STONES</td>
-								<td class="text-right" id="total-round-stones-22"></td>
-								<td class="text-right" id="total-round-stones-24"></td>
-								<td class="text-right" id="total-round-stones-26"></td>
-								<td class="text-right" id="total-round-stones-28"></td>
-								<td class="text-right" id="total-round-stones-210"></td>
+								<td class="text-right" id="total-round-stones-22">
+									<input type="text" class="form-control form-control-primary" name="total_stone_count[round_stone][0]">
+								</td>
+								<td class="text-right" id="total-round-stones-24">
+									<input type="text" class="form-control form-control-primary" name="total_stone_count[round_stone][1]">
+								</td>
+								<td class="text-right" id="total-round-stones-26">
+									<input type="text" class="form-control form-control-primary" name="total_stone_count[round_stone][2]">
+								</td>
+								<td class="text-right" id="total-round-stones-28">
+									<input type="text" class="form-control form-control-primary" name="total_stone_count[round_stone][3]">
+								</td>
+								<td class="text-right" id="total-round-stones-210">
+									<input type="text" class="form-control form-control-primary" name="total_stone_count[round_stone][4]">
+								</td>
 							</tr>
 							<tr>
 								<td>BIG STONES</td>
-								<td class="text-right" id="total-big-stones-22"></td>
-								<td class="text-right" id="total-big-stones-24"></td>
-								<td class="text-right" id="total-big-stones-26"></td>
-								<td class="text-right" id="total-big-stones-28"></td>
-								<td class="text-right" id="total-big-stones-210"></td>
+								<td class="text-right" id="total-big-stones-22">
+									<input type="text" class="form-control form-control-primary" name="total_stone_count[big_stone][0]">
+								</td>
+								<td class="text-right" id="total-big-stones-24">
+									<input type="text" class="form-control form-control-primary" name="total_stone_count[big_stone][1]">
+								</td>
+								<td class="text-right" id="total-big-stones-26">
+									<input type="text" class="form-control form-control-primary" name="total_stone_count[big_stone][2]">
+								</td>
+								<td class="text-right" id="total-big-stones-28">
+									<input type="text" class="form-control form-control-primary" name="total_stone_count[big_stone][3]">
+								</td>
+								<td class="text-right" id="total-big-stones-210">
+									<input type="text" class="form-control form-control-primary" name="total_stone_count[big_stone][4]">
+								</td>
 							</tr>
 							<tr>
 								<td>TB STONES</td>
-								<td class="text-right" id="total-tb-stones-22"></td>
-								<td class="text-right" id="total-tb-stones-24"></td>
-								<td class="text-right" id="total-tb-stones-26"></td>
-								<td class="text-right" id="total-tb-stones-28"></td>
-								<td class="text-right" id="total-tb-stones-210"></td>
+								<td class="text-right" id="total-tb-stones-22">
+									<input type="text" class="form-control form-control-primary" name="total_stone_count[tb_stone][0]">
+								</td>
+								<td class="text-right" id="total-tb-stones-24">
+									<input type="text" class="form-control form-control-primary" name="total_stone_count[tb_stone][1]">
+								</td>
+								<td class="text-right" id="total-tb-stones-26">
+									<input type="text" class="form-control form-control-primary" name="total_stone_count[tb_stone][2]">
+								</td>
+								<td class="text-right" id="total-tb-stones-28">
+									<input type="text" class="form-control form-control-primary" name="total_stone_count[tb_stone][3]">
+								</td>
+								<td class="text-right" id="total-tb-stones-210">
+									<input type="text" class="form-control form-control-primary" name="total_stone_count[tb_stone][4]">
+								</td>
 							</tr>
 						</tbody>
 					</div>
@@ -232,14 +267,16 @@
 <script>
     $(document).ready(function () {
         var counter = 1;
+
         $("#rowAddButton").click(function () {
-            var content = '<tr id="add_stone_row_'+counter+'">';
+            var content = '<tr id="add_stone_row_'+counter+'" data-rowstonetype="">';
+
             content += '<td>';
             content += 		'<input class="form-control form-control-primary" type="text" name="stones['+counter+'][size]" required>';
             content += '</td>';
             
             content += '<td>';
-            content += 		'<select class="form-control form-control-primary select-stone-dropdown" name="stones['+counter+'][type]" id="">';
+            content += 		'<select class="form-control form-control-primary select-stone-dropdown" name="stones['+counter+'][stone_type]" id="">';
             	content +=			'<option value="">SELECT STONE</option>'
 	            @foreach($stones as $stone)
 	            content += 			'<option value="{{$stone}}">{{$stone}}</option>';
@@ -247,7 +284,7 @@
             content += 		'</select>';
             content += '</td>';
             content += '<td>';
-            content += 		'<select class="form-control form-control-primary" name="stones['+counter+'][type]" id="">';
+            content += 		'<select class="form-control form-control-primary" name="stones['+counter+'][stone_color]" id="">';
 	            @foreach($colors as $color)
 	            content += 			'<option value="{{$color}}">{{$color}}</option>';
 				@endforeach
@@ -255,25 +292,25 @@
             content += '</td>';
 
             content += '<td>';
-            content += 		'<input class="form-control form-control-primary add_type_stone_22" data-stoneType="" data-bangleSize="2.2" type="text" name="stones['+counter+'][quantity][0]" required pattern="\\d+" title="">';
+            content += 		'<input class="form-control form-control-primary add_type_stone_22 add_type_stone form-disabler" data-stoneType="" data-bangleSize="2.2" type="text" name="stones['+counter+'][quantity][0]" required pattern="\\d+" title="">';
             content += '</td>';
             content += '<td>';
-            content += 		'<input class="form-control form-control-primary add_type_stone_24" data-stoneType="" data-bangleSize="2.4"  type="text" name="stones['+counter+'][quantity][1]" required pattern="\\d+">';
+            content += 		'<input class="form-control form-control-primary add_type_stone_24 add_type_stone form-disabler" data-stoneType="" data-bangleSize="2.4"  type="text" name="stones['+counter+'][quantity][1]" required pattern="\\d+">';
             content += '</td>';
             content += '<td>';
-            content += 		'<input class="form-control form-control-primary add_type_stone_26" data-stoneType="" data-bangleSize="2.6"  type="text" name="stones['+counter+'][quantity][2]" required pattern="\\d+">';
+            content += 		'<input class="form-control form-control-primary add_type_stone_26 add_type_stone form-disabler" data-stoneType="" data-bangleSize="2.6"  type="text" name="stones['+counter+'][quantity][2]" required pattern="\\d+">';
             content += '</td>';
             content += '<td>';
-            content += 		'<input class="form-control form-control-primary add_type_stone_28" data-stoneType="" data-bangleSize="2.8"  type="text" name="stones['+counter+'][quantity][3]" required pattern="\\d+">';
+            content += 		'<input class="form-control form-control-primary add_type_stone_28 add_type_stone form-disabler" data-stoneType="" data-bangleSize="2.8"  type="text" name="stones['+counter+'][quantity][3]" required pattern="\\d+">';
             content += '</td>';
             content += '<td>';
-            content += 		'<input class="form-control form-control-primary add_type_stone_210" data-stoneType="" data-bangleSize="2.10"  type="text" name="stones['+counter+'][quantity][4]" required pattern="\\d+">';
+            content += 		'<input class="form-control form-control-primary add_type_stone_210 add_type_stone form-disabler" data-stoneType="" data-bangleSize="2.10"  type="text" name="stones['+counter+'][quantity][4]" required pattern="\\d+">';
             content += '</td>';
             content += '<td>';
-            content += 		'<input class="form-control form-control-primary stone_add_foo" type="text" name="stones['+counter+'][quantity][4]" required pattern="\\d+">';
+            content += 		'<input class="form-control form-control-primary stone_add_foo" type="text" name="stones['+counter+'][stone_price]" required>';
             content += '</td>';
             content += '<td>';
-            content += 		'<input class="form-control form-control-primary" type="text" name="stones['+counter+'][price]" required pattern="\\d+.\\d{2}" title="Example: 500.00, 1000.70">';
+            content += 		'<input class="form-control form-control-primary" type="text" name="stones['+counter+'][labour_charge]" required title="Example: 500.00, 1000.70">';
             content += '</td>';
             content += '<td>';
             content += 		'<button type="button" data-id="'+counter+'" class="delete_row_btn btn btn-primary button button-small" title="Delete"><i class="fa fa-trash"></i></button>';
@@ -281,6 +318,9 @@
             content += '</tr>';
 
             $("#append_parent").append(content);
+
+            formDisabler($("#add_stone_row_"+counter));
+
             counter++;
         });
     });
@@ -334,10 +374,13 @@
 	$(document).ready(function() {
 		var dataId  = 0; 
 		$('body').on('click','.delete_row_btn',function(){
-		// $('.delete_row_btn').click(function() {
 			dataId = $(this).attr('data-id');
-			console.log(dataId);
-			$("#add_stone_row_"+dataId).remove();
+			console.log($("#add_stone_row_"+dataId).attr("data-rowstonetype"));
+			if($("#add_stone_row_"+dataId).attr("data-rowstonetype") != "") {
+                deductStoneCount($("#add_stone_row_"+dataId));
+            }
+
+            $("#add_stone_row_"+dataId).remove();
 		});
 	});
 
@@ -363,7 +406,7 @@
 		var totalTbStone28 = 0;
 		var totalTbStone210 = 0;
 
-		$('body').on('keyup', '.add_type_stone_22', function() {
+		$('body').on('keyup blur', '.add_type_stone_22', function() {
 			totalRoundStone22 = 0;
 			totalBigStone22 = 0;
 			totalTbStone22 = 0;
@@ -394,9 +437,9 @@
 				totalTbStone22 += inputValue;
 			});
 
-			$("#total-round-stones-22").html(totalRoundStone22);
-			$("#total-big-stones-22").html(totalBigStone22);
-			$("#total-tb-stones-22").html(totalTbStone22);
+			$("#total-round-stones-22").find('input').val(totalRoundStone22);
+			$("#total-big-stones-22").find('input').val(totalBigStone22);
+			$("#total-tb-stones-22").find('input').val(totalTbStone22);
 		});
 
 		$('body').on('keyup', '.add_type_stone_24', function() { // calculating total_round_stones_2.4
@@ -430,9 +473,9 @@
 				totalTbStone24 += inputValue;
 			});
 
-			$("#total-round-stones-24").html(totalRoundStone24);
-			$("#total-big-stones-24").html(totalBigStone24);
-			$("#total-tb-stones-24").html(totalTbStone24);
+			$("#total-round-stones-24").find('input').val(totalRoundStone24);
+			$("#total-big-stones-24").find('input').val(totalBigStone24);
+			$("#total-tb-stones-24").find('input').val(totalTbStone24);
 		});
 
 		$('body').on('keyup', '.add_type_stone_26', function() { // calculating total_round_stones_2.6
@@ -466,9 +509,9 @@
 				totalTbStone26 += inputValue;
 			});
 
-			$("#total-round-stones-26").html(totalRoundStone26);
-			$("#total-big-stones-26").html(totalBigStone26);
-			$("#total-tb-stones-26").html(totalTbStone26);
+			$("#total-round-stones-26").find('input').val(totalRoundStone26);
+			$("#total-big-stones-26").find('input').val(totalBigStone26);
+			$("#total-tb-stones-26").find('input').val(totalTbStone26);
 		});
 
 		$('body').on('keyup', '.add_type_stone_28', function() { // calculating total_round_stones_2.8
@@ -502,9 +545,9 @@
 				totalTbStone28 += inputValue;
 			});
 
-			$("#total-round-stones-28").html(totalRoundStone28);
-			$("#total-big-stones-28").html(totalBigStone28);
-			$("#total-tb-stones-28").html(totalTbStone28);
+			$("#total-round-stones-28").find('input').val(totalRoundStone28);
+			$("#total-big-stones-28").find('input').val(totalBigStone28);
+			$("#total-tb-stones-28").find('input').val(totalTbStone28);
 		});
 
 		$('body').on('keyup', '.add_type_stone_210', function() { // calculating total_round_stones_2.10
@@ -538,9 +581,9 @@
 				totalTbStone210 += inputValue;
 			});
 
-			$("#total-round-stones-210").html(totalRoundStone210);
-			$("#total-big-stones-210").html(totalBigStone210);
-			$("#total-tb-stones-210").html(totalTbStone210);
+			$("#total-round-stones-210").find('input').val(totalRoundStone210);
+			$("#total-big-stones-210").find('input').val(totalBigStone210);
+			$("#total-tb-stones-210").find('input').val(totalTbStone210);
 		});
 
 		// change row type to stone type
@@ -549,21 +592,91 @@
 			
 			var stoneType = $(this).val();
 
+			if(stoneType != '') {
+				parentTr = $(this).closest('tr');
+				formEnabler(parentTr);
+			} else {
+				formDisabler(parentTr);
+			}
+
 				switch(stoneType) {
 				  	case 'ROUND STONE':
 				    	$(this).closest('tr').find('input').attr('data-stonetype', 'round_stone');
+				    	parentTr.attr('data-rowStoneType', 'round_stone');
 				    break;
 				  	case 'BIG STONE':
 				    	$(this).closest('tr').find('input').attr('data-stonetype', 'big_stone');
+				    	parentTr.attr('data-rowStoneType', 'big_stone');
 				    break;
 				  	case 'TB STONE':
 				    	$(this).closest('tr').find('input').attr('data-stonetype', 'tb_stone');
+				    	parentTr.attr('data-rowStoneType', 'tb_stone');
 				    break;
 				    default:
 				    	$(this).closest('tr').find('input').attr('data-stonetype', '');
 				}
 		});
-
 	});
+
+	$(document).ready(function() {
+        formDisabler($("#add_stone_row_0"));
+	});
+
+	function formDisabler(parentElement)
+	{
+		var childs = parentElement.find(".form-disabler");
+		
+		childs.prop('disabled', true);
+	}
+
+	function formEnabler(parentElement)
+	{
+		var childs = parentElement.find(".form-disabler");
+		
+		childs.prop('disabled', false);
+	}
+
+	function deductStoneCount(row)
+    {
+    	console.log('dadnjkank');
+        var rowStoneType = row.attr('data-rowstonetype');
+        var rowStoneType = rowStoneType.replace("_", "-"); 
+
+        var removedRow22 = row.find('input[data-bangleSize="2.2"]').val();
+        var removedRow24 = row.find('input[data-bangleSize="2.4"]').val();
+        var removedRow26 = row.find('input[data-bangleSize="2.6"]').val();
+        var removedRow28 = row.find('input[data-bangleSize="2.8"]').val();
+        var removedRow210 = row.find('input[data-bangleSize="2.10"]').val();
+
+        var prevValue22 = $('#total-'+rowStoneType+'s-22').find('input').val();
+        var prevValue24 = $('#total-'+rowStoneType+'s-24').find('input').val();
+        var prevValue26 = $('#total-'+rowStoneType+'s-26').find('input').val();
+        var prevValue28 = $('#total-'+rowStoneType+'s-28').find('input').val();
+        var prevValue210 = $('#total-'+rowStoneType+'s-210').find('input').val();
+        
+        var currentValue22 = ((prevValue22 - removedRow22) < 0) ? 0 : prevValue22 - removedRow22;
+        $('#total-'+rowStoneType+'s-22').find('input').val(currentValue22);
+        
+        var currentValue24 = ((prevValue24 - removedRow24) < 0) ? 0 : prevValue24 - removedRow24;
+        $('#total-'+rowStoneType+'s-24').find('input').val(currentValue24);
+
+        var currentValue26 = ((prevValue26 - removedRow26) < 0) ? 0 : prevValue26 - removedRow26;
+        $('#total-'+rowStoneType+'s-26').find('input').val(currentValue26);
+        
+        var currentValue28 = ((prevValue28 - removedRow28) < 0) ? 0 : prevValue28 - removedRow28;
+        $('#total-'+rowStoneType+'s-28').find('input').val(currentValue28);
+        
+        var currentValue210 = ((prevValue210 - removedRow210) < 0) ? 0 : prevValue210 - removedRow210;
+        $('#total-'+rowStoneType+'s-210').find('input').val(currentValue210);
+
+        /*on deleting a row calculation*/
+        console.log(" => Deleted a row => ");
+        console.log(removedRow22+'-'+removedRow24+'-'+removedRow26+'-'+removedRow28+'-'+removedRow210);
+        console.log(prevValue22+'-'+prevValue24+'-'+prevValue26+'-'+prevValue28+'-'+prevValue210);
+        console.log("----------")
+        console.log(currentValue22+'-'+currentValue24+'-'+currentValue26+'-'+currentValue28+'-'+currentValue210);
+        console.log(" =< Deleted a row =< ");
+        /*on deleting a row calculation*/
+    }
 </script>
 @endsection

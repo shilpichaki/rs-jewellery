@@ -8,11 +8,13 @@ class Design extends Model
 {
     protected $fillable = [
     	'design_no',
-		'stones',
-		'picture',
         'rhodium',
-        'price_5pcs',
-        'unit_avg_price'
+        'markup_percentage',
+        'misc_price',
+        'price_4pcs',
+		'stones',
+		'total_stone_count',
+        'picture',
     ];
 
     protected $hidden = [

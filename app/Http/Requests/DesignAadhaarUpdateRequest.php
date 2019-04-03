@@ -4,6 +4,8 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use App\Enums\RawMaterial;
+use App\Enums\StoneColor;
 
 class DesignAadhaarUpdateRequest extends FormRequest
 {
@@ -28,12 +30,20 @@ class DesignAadhaarUpdateRequest extends FormRequest
             'picture' => 'mimetypes:image/jpeg,image/png|image|max:8192',
             'design_no' => 'integer|unique:designs',
             'stones.*.size' => 'required',
-            'stones.*.type' => [
+            'stones.*.stone_type' => [
                 'required',
-                Rule::in(['ROUND', 'BIG'])
+                Rule::in(RawMaterial::getStoneTypes())
             ],
-            'stones.*.quantity.*' => 'required|integer',
-            'stones.*.price' => 'required|regex:/^\d*(\.\d{1,2})?$/'
+            'stones.*.stone_color' => [
+                'required',
+                Rule::in(StoneColor::getAllColors())
+            ],
+            'stones.*.quantity.*' => 'integer',
+            'stones.*.stone_price' => 'required',
+            'stones.*.labour_charge' => 'required',
+            'rhodium' => 'required',
+            'misc_price' => 'required',
+            'markup_percentage' => 'required',
         ];
 
         return $rules;
