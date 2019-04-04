@@ -209,7 +209,7 @@
         $(document).ready(function() {
             var design_no = '';
             var rootUrl = '{{env('ROOT_URL')}}';
-            console.log(rootUrl);
+            
             $('#designNo').on('change', function() {
                 var content = '';
                 cardContainerwidth = $(".attachDesignCon").width();
@@ -226,21 +226,138 @@
 
                                 totalStones = Object.keys(data.data.stones).length;
 
-                                content += '<div class="container"><div class="row"><div class="col-md-5"><div class="row"><table class="table table-bordered" id=""><tbody><tr><td class="ts">Design Number:</td><td id="get_design_no" data-design_no='+data.data.design_no+'>'+data.data.design_no+'</td></tr></tbody></table></div></div><div class="col-md-7 text-center" style="border: 1px solid #8577cc;background-color: #eaffab;"><div class="row"><h6 class="pt-3 ts">Bangle Design</h6></div></div></div><div class="row"><div class="col-md-3"><div class="row p-2"><div data-imgurl="'+rootUrl+'/'+data.data.picture+'" id="img_preview" class="preview img-wrapper rounded" style="background-image: url('+rootUrl+'/'+data.data.picture+');background-size: cover; background-position:center"></div></div></div><div class="col-md-9"><div class="row"><table class="table table-bordered" id="editableTable"><thead><tr><th>Stone Size</th><th>Stone Type</th><th>2.2</th><th>2.4</th><th>2.6</th><th>2.8</th><th>2.10</th><th class="text-left" id="total_stone_count" data-totalStoneCount="'+totalStones+'">Stone count</th></tr></thead><tbody>';
+                                content += '<div class="container">';
+                                content += '<div class="row">';
+                                content += '<div class="col-md-5">';
+                                content += '<div class="row">';
+                                content += '<table class="table table-bordered" id="">';
+                                content += '<tbody>';
+                                content += '<tr>';
+                                content += '<td class="ts">Design Number:</td>';
+                                content += '<td id="get_design_no" data-design_no='+data.data.design_no+'>'+data.data.design_no+'</td>';
+                                content += '</tr>';
+                                content += '</tbody>';
+                                content += '</table>';
+                                content += '</div>';
+                                content += '</div>';
+                                content += '<div class="col-md-7 text-center" style="border: 1px solid #8577cc;background-color: #eaffab;">';
+                                content += '<div class="row">';
+                                content += '<h6 class="pt-3 ts">Bangle Design</h6>';
+                                content += '</div>';
+                                content += '</div>';
+                                content += '</div>';
+                                content += '<div class="row">';
+                                content += '<div class="col-md-2">';
+                                content += '<div class="row p-2">';
+                                content += '<div data-imgurl="'+rootUrl+'/'+data.data.picture+'" id="img_preview" class="preview img-wrapper rounded" style="background-image: url('+rootUrl+'/'+data.data.picture+');background-size: cover; background-position:center">';
+                                content += '</div>';
+                                content += '</div>';
+                                content += '</div>';
+                                content += '<div class="col-md-10">';
+                                content += '<div class="row">';
+                                content += '<table class="table table-bordered" id="editableTable">';
+                                content += '<thead>';
+                                content += '<tr>';
+                                content += '<th>Stone Size</th>';
+                                content += '<th>Stone Type</th>';
+                                content += '<th>Stone Color</th>';
+                                content += '<th>2.2</th>';
+                                content += '<th>2.4</th>';
+                                content += '<th>2.6</th>';
+                                content += '<th>2.8</th>';
+                                content += '<th>2.10</th>';
+                                content += '<th class="text-left" id="total_stone_count" data-totalStoneCount="'+totalStones+'">Stone count';
+                                content += '</th>';
+                                content += '</tr>';
+                                content += '</thead>';
+                                content += '<tbody>';
+
                                 var input_index_counter = 0;
+
                                 $.each(data.data.stones, function (index, value) {
-                                    content += '<tr><td>'+value.size+'</td><td><span class="label label-danger">'+value.type+'</span></td><td>'+value.quantity[0]+'</td><td>'+value.quantity[1]+'</td><td>'+value.quantity[2]+'</td><td>'+value.quantity[3]+'</td><td>'+value.quantity[4]+'</td><td><input id="stone_count_'+input_index_counter+'" class="form-control form-control-primary" type="text" required="" title=""></td></tr>';
+                                    content += '<tr>';
+                                    content += '<td>'+value.size+'</td>';
+                                    content += '<td><span class="label label-danger">'+value.stone_type+'</span></td>';
+                                    content += '<td>'+value.stone_color+'</td>';
+                                    content += '<td data-stone-row="'+input_index_counter+'" data-bangle-size="2.2">'+value.quantity[0]+'</td>';
+                                    content += '<td data-stone-row="'+input_index_counter+'"  data-bangle-size="2.4">'+value.quantity[1]+'</td>';
+                                    content += '<td data-stone-row="'+input_index_counter+'"  data-bangle-size="2.6">'+value.quantity[2]+'</td>';
+                                    content += '<td data-stone-row="'+input_index_counter+'"  data-bangle-size="2.8">'+value.quantity[3]+'</td>';
+                                    content += '<td data-stone-row="'+input_index_counter+'"  data-bangle-size="2.10">'+value.quantity[4]+'</td>';
+                                    content += '<td>';
+                                    content += '<input id="stone_count_'+input_index_counter+'" class="form-control form-control-primary calc_stone_count_input" data-stone-size="'+value.size+'" type="text" required="" title="">';
+                                    content += '</td>';
+                                    content += '</tr>';
 
                                     input_index_counter++;
                                 });
 
-                                content += '<tr><td colspan="2">Order Quantity Set.</td><td><input class="form-control form-control-primary" type="text" required="" title="" id="oqs22"></td><td><input class="form-control form-control-primary" type="text" required="" title="" id="oqs24"></td><td><input id="oqs26" class="form-control form-control-primary" type="text" required="" title=""></td><td><input id="oqs28" class="form-control form-control-primary" type="text" required="" title=""></td><td><input id="oqs210" class="form-control form-control-primary" type="text" required="" title=""></td><td></td></tr><tr><td colspan="2">Order Quantity Pcs.</td><td><input  id="oqp22" class="form-control form-control-primary" type="text" required="" title=""></td><td><input id="oqp24" class="form-control form-control-primary" type="text"  required="" title=""></td><td><input id="oqp26" class="form-control form-control-primary" type="text" required="" title=""></td><td><input id="oqp28" class="form-control form-control-primary" type="text" required="" title=""></td><td><input id="oqp210" class="form-control form-control-primary" type="text"  required="" title=""></td><td></td></tr>';
+                                content += '<tr>';
+                                content += '<td colspan="3">Order Quantity Set.</td>';
+                                content += '<td><input class="form-control form-control-primary input_oqs input-required" data-bangle-size="2.2" type="text" required="" title="" id="oqs22">';
+                                content += '</td>';
+                                content += '<td>';
+                                content += '<input class="form-control form-control-primary input_oqs input-required" data-bangle-size="2.4" type="text" required="" title="" id="oqs24">';
+                                content += '</td>';
+                                content += '<td>';
+                                content += '<input id="oqs26" class="form-control form-control-primary input_oqs input-required" data-bangle-size="2.6" type="text" required="" title="">';
+                                content += '</td>';
+                                content += '<td>';
+                                content += '<input id="oqs28" class="form-control form-control-primary input_oqs input-required" data-bangle-size="2.8" type="text" required="" title="">';
+                                content += '</td>';
+                                content += '<td>';
+                                content += '<input id="oqs210" class="form-control form-control-primary input_oqs input-required" data-bangle-size="2.10" type="text" required="" title="">';
+                                content += '</td>';
+                                content += '<td>';
+                                content += '<button style="width: 100%;" class="btn btn-success" id="calc_st_cnt" data-total-rows="'+input_index_counter+'">Calculate Stone Count</button>';
+                                content += '</td>';
+                                content += '</tr>';
+                                content += '<tr>';
+                                content += '<td colspan="3">Order Quantity Pcs.</td>';
+                                content += '<td>';
+                                content += '<input  id="oqp22" class="form-control form-control-primary input_oqp" data-bangle-size="2.2" type="text" required="" title="">';
+                                content += '</td>';
+                                content += '<td>';
+                                content += '<input id="oqp24" class="form-control form-control-primary input_oqp" data-bangle-size="2.4" type="text"  required="" title="">';
+                                content += '</td>';
+                                content += '<td>';
+                                content += '<input id="oqp26" class="form-control form-control-primary input_oqp" data-bangle-size="2.6" type="text" required="" title="">';
+                                content += '</td>';
+                                content += '<td>';
+                                content += '<input id="oqp28" class="form-control form-control-primary input_oqp" data-bangle-size="2.8" type="text" required="" title="">';
+                                content += '</td>';
+                                content += '<td>';
+                                content += '<input id="oqp210" class="form-control form-control-primary input_oqp" data-bangle-size="2.10" type="text"  required="" title="">';
+                                content += '</td>';
+                                content += '<td>';
+                                content += '</td>';
+                                content += '</tr>';
 
-                                // $.each(data.data.stones, function(index, value) {
-                                //     content += '<tr><td>Stone count '+value.size+'</td><td colspan="6"><input class="form-control form-control-primary" type="text" name="stones[0][quantity][0]" required="" pattern="\d+" title=""></td></tr>'
-                                // });
+                                content += '<tr>';
+                                content += '<td>Rhodium</td>';
+                                content += '<td>';
+                                content += '<input id="rhodium1" class="form-control form-control-primary" type="text">';
+                                content += '</td>';
+                                content += '<td>';
+                                content += '<input id="rhodium2" class="form-control form-control-primary" type="text">';
+                                content += '</td>';
+                                content += '<td colspan="2">';
+                                content += '<input id="rhodium3" class="form-control form-control-primary" type="text">';
+                                content += '</td>';
+                                content += '<td colspan="5">';
+                                content += '</td>';
+                                content += '</tr>';
 
-                                content += '</tbody></table><button style="margin-top:15px; margin-left:10px;" class="btn btn-success" id="choosing_complete"><i class="fa fa-paper-plane"></i>Confirm</button><button style="margin-top:15px; margin-left:10px;" class="btn btn-primary" id="choosing_more"><i class="fa fa-plus"></i>Add more design</button></div></div></div></div><br><br></div>';
+                                content += '</tbody>';
+                                content +='</table>';
+                                content +='<button style="margin-top:15px; margin-left:10px;" class="btn btn-success" id="choosing_complete"><i class="fa fa-paper-plane"></i>Confirm</button>';
+                                content +='<button style="margin-top:15px; margin-left:10px;" class="btn btn-primary" id="choosing_more"><i class="fa fa-plus"></i>Add more design</button>';
+                                content +='</div>';
+                                content +='</div>';
+                                content +='</div>';
+                                content +='</div>';
+                                content +='<br><br>';
+                                content +='</div>';
 
                                 // $('#dumpcontent').html('');
                                 $('#dumpcontent').html(content);
@@ -273,10 +390,28 @@
                 var get_design_no = $("#get_design_no").attr('data-design_no');
                 var total_stone_count =$("#total_stone_count").attr('data-totalStoneCount');
 
-                contentToDump += '<div class="mycards" style="background-image: url('+img_preview_url+')" ><div class="card-block"><div class="row align-items-end"><div class="col-8"><h4 class="">#'+get_design_no+'</h4><h6 class="text-white m-b-0"></h6></div><div class="col-4 text-right">';
+                contentToDump += '<div class="mycards" style="background-image: url('+img_preview_url+')" >';
+                contentToDump += '<div class="card-block">';
+                contentToDump += '<div class="row align-items-end">';
+                contentToDump += '<div class="col-8">';
+                contentToDump += '<h4 class="">#'+get_design_no+'</h4>';
+                contentToDump += '<h6 class="text-white m-b-0">';
+                contentToDump += '</h6>';
+                contentToDump += '</div>';
+                contentToDump += '<div class="col-4 text-right">';
                 
 
-                contentToDump += '<input type="hidden" name="designs['+get_design_no+'][design_no]" value="'+get_design_no+'"><input type="hidden" name="designs['+get_design_no+'][oc][0][oqs]" value="'+$("#oqs22").val()+'"><input type="hidden" name="designs['+get_design_no+'][oc][1][oqs]" value="'+$("#oqs24").val()+'"><input type="hidden" name="designs['+get_design_no+'][oc][2][oqs]" value="'+$("#oqs26").val()+'"><input type="hidden" name="designs['+get_design_no+'][oc][3][oqs]" value="'+$("#oqs28").val()+'"><input type="hidden" name="designs['+get_design_no+'][oc][4][oqs]" value="'+$("#oqs210").val()+'"><input type="hidden" name="designs['+get_design_no+'][oc][0][oqp]" value="'+$("#oqp22").val()+'"><input type="hidden" name="designs['+get_design_no+'][oc][1][oqp]" value="'+$("#oqp24").val()+'"><input type="hidden" name="designs['+get_design_no+'][oc][2][oqp]" value="'+$("#oqp26").val()+'"><input type="hidden" name="designs['+get_design_no+'][oc][3][oqp]" value="'+$("#oqp28").val()+'"><input type="hidden" name="designs['+get_design_no+'][oc][4][oqp]" value="'+$("#oqp210").val()+'">';
+                contentToDump += '<input type="hidden" name="designs['+get_design_no+'][design_no]" value="'+get_design_no+'">';
+                contentToDump += '<input type="hidden" name="designs['+get_design_no+'][oc][0][oqs]" value="'+$("#oqs22").val()+'">';
+                contentToDump += '<input type="hidden" name="designs['+get_design_no+'][oc][1][oqs]" value="'+$("#oqs24").val()+'">';
+                contentToDump += '<input type="hidden" name="designs['+get_design_no+'][oc][2][oqs]" value="'+$("#oqs26").val()+'">';
+                contentToDump += '<input type="hidden" name="designs['+get_design_no+'][oc][3][oqs]" value="'+$("#oqs28").val()+'">';
+                contentToDump += '<input type="hidden" name="designs['+get_design_no+'][oc][4][oqs]" value="'+$("#oqs210").val()+'">';
+                contentToDump += '<input type="hidden" name="designs['+get_design_no+'][oc][0][oqp]" value="'+$("#oqp22").val()+'">';
+                contentToDump += '<input type="hidden" name="designs['+get_design_no+'][oc][1][oqp]" value="'+$("#oqp24").val()+'">';
+                contentToDump += '<input type="hidden" name="designs['+get_design_no+'][oc][2][oqp]" value="'+$("#oqp26").val()+'">';
+                contentToDump += '<input type="hidden" name="designs['+get_design_no+'][oc][3][oqp]" value="'+$("#oqp28").val()+'">';
+                contentToDump += '<input type="hidden" name="designs['+get_design_no+'][oc][4][oqp]" value="'+$("#oqp210").val()+'">';
 
                 for (var i = 0; i < total_stone_count; i++) {
                     contentToDump += '<input type="hidden" name="designs['+get_design_no+'][stone_count]['+i+']" value="'+$("#stone_count_"+i).val()+'">';
@@ -337,6 +472,61 @@
                 }
                 console.log(scrollerPosition+'  '+firstScrollerWidth+'    '+cardContainerwidth);                
             });
+
+            // on change order quantity set
+            $("body").on('keyup', '.input_oqs', function() {
+                var bangleSize = $(this).attr('data-bangle-size');
+                var value = $(this).val();
+
+                if(value != '') {
+                    var quantity = parseInt(value);
+                    $('.input_oqp[data-bangle-size="'+bangleSize+'"]').val((quantity*4));
+                }
+            });
+
+            $("body").on('click', '#calc_st_cnt', function() {
+                var totalRows = $(this).attr("data-total-rows");
+
+                var show = checkIfEverythingFilledUp();
+
+                calculateStoneCount(totalRows);
+            });
         });
+    </script>
+    <script type="text/javascript">
+        function checkIfEverythingFilledUp()
+        {
+            status = 1;
+            $("input.input-required").each(function() {
+                if($(this).val() == '') {
+                    $(this).addClass("border-danger");
+
+                    if(status == 1) {
+                        status = 0;
+                    }
+                } else {
+                    $(this).removeClass("border-danger");               
+                }
+            });
+
+            return status;
+        }
+        $("body").on('keyup blur', '.input-required', function() {
+            if($(this).val() != '') {
+                $(this).removeClass('border-danger');
+            }
+        });
+
+        function calculateStoneCount(totalRows)
+        {
+            console.log("foo2:"+totalRows);
+            for (var i = 0 ; i < totalRows; i++) {
+                var total = 0;
+                for (var j = 2; j <= 10; j=j+2) {
+                    var value = $('td[data-stone-row="'+i+'"][data-bangle-size="2.'+j+'"]').html();
+                    console.log(value);
+                }
+            }
+        }
     </script>
 @endsection
