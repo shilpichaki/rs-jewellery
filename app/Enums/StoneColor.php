@@ -28,5 +28,10 @@ abstract class StoneColor
 
 		return self::$allColors;
 	}
+
+	public static function getUniqueStoneColors($colors)
+	{
+		return array_unique($colors);
+	}
 }
  ?>

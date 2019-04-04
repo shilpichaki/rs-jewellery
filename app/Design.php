@@ -15,6 +15,7 @@ class Design extends Model
 		'stones',
 		'total_stone_count',
         'picture',
+        'unique_stone_colors'
     ];
 
     protected $hidden = [

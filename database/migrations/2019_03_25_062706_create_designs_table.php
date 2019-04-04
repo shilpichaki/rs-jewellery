@@ -23,6 +23,7 @@ class CreateDesignsTable extends Migration
             $table->text('stones');
             $table->text('total_stone_count');
             $table->string('picture')->nullable();
+            $table->string('unique_stone_colors')->nullable();
             $table->timestamps();
         });
     }
