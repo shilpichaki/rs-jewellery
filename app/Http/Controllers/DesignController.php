@@ -76,7 +76,7 @@ class DesignController extends Controller
     }
 
     public function store(DesignAadhaarRequest $request)
-    {        
+    {
         $file = request()->file('picture');
 
         $ext = $file->extension();
