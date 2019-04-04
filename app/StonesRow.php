@@ -51,4 +51,32 @@ class StonesRow extends Model
 
     	return $totalStonePrice;
     }
+
+    public static function getAllStoneColors($stones)
+    {
+        $stoneColors = [];
+
+        foreach ($stones as $key => $stone) {
+            array_push($stoneColors, $stone['stone_color']);
+        }
+
+        return $stoneColors;
+    }
+
+    public static function getLastRowKey($stones)
+    {
+        $stonesCount = $stones ==  null ? 0 : sizeof($stones);
+
+        $lastKey = 0;
+        
+        if($stonesCount > 0) {
+            foreach ($stones as $key => $value) {
+                $lastKey = $key;
+            }
+        }
+        
+        $lastKey++;
+
+        return $lastKey;
+    }
 }

@@ -29,12 +29,14 @@ class DesignController extends Controller
 
     public function show(Design $design)
     {
+        // json_decode
         $design['stones'] = json_decode($design['stones']);
+        $design['total_stone_count'] = json_decode($design['total_stone_count']);
         
+        // cast object to array        
         $design['stones'] = (array) $design['stones'];
 
-        $design['total_stone_count'] = json_decode($design['total_stone_count']);
-
+        // get stones count
         $stonesCount = $design['stones'] ==  null ? 0 : sizeof($design['stones']);
 
         return view('design.show')
@@ -47,28 +49,23 @@ class DesignController extends Controller
 
     public function edit(Design $design)
     {
+        // json decode
         $design['stones'] = json_decode($design['stones']);
+        $design['total_stone_count'] = json_decode($design['total_stone_count']);
         
+        // cast object to array
         $design['stones'] = (array) $design['stones'];
 
-        $design['total_stone_count'] = json_decode($design['total_stone_count']);
-
+        // get stones count
         $stonesCount = $design['stones'] ==  null ? 0 : sizeof($design['stones']);
 
-        $lastKey = 0;
-
-        if($stonesCount > 0) {
-            foreach ($design['stones'] as $key => $value) {
-                $lastKey = $key;
-            }
-        }
-
-        $lastKey++;
+        // get last inserted row key
+        $lastRowKey = StonesRow::getLastRowKey($design['stones']);
 
         return view('design.edit')
             ->with([
                 'design' => $design, 
-                'lastKey' => $lastKey,
+                'lastKey' => $lastRowKey,
                 'masterStones' => RawMaterial::getStoneTypes(),
                 'masterColors' => StoneColor::getAllColors(),
                 'stonesCount' => $stonesCount,
@@ -76,21 +73,25 @@ class DesignController extends Controller
     }
 
     public function store(DesignAadhaarRequest $request)
-    {        
-        $file = request()->file('picture');
-
-        $ext = $file->extension();
-
-        $path = $file->storeAs('pictures/', Auth::user()->id . time() . '.' . $ext);
-
-        $path = 'storage/'.$path;
-
+    {
         $validated = $request->validated();
 
+        // storing picture
+        $file = request()->file('picture');
+        $ext = $file->extension();
+        $path = $file->storeAs('pictures/', Auth::user()->id . time() . '.' . $ext);
+        $path = 'storage/'.$path;
+
+        // calculating price
         $price4pcs = StonesRow::calculatePrice4Pcs(
             $request->stones, $request->rhodium, $request->misc_price, $request->markup_percentage
         );
 
+        // getting unique stone colors
+        $stoneColors = StonesRow::getAllStoneColors($request->stones);
+        $uniqueStoneColors = StoneColor::getUniqueStoneColors($stoneColors);
+
+        // storing design
         $design = Design::create([
             'design_no' => $request->design_no,
             'rhodium' => $request->rhodium,
@@ -100,31 +101,38 @@ class DesignController extends Controller
             'stones' => json_encode($request->stones),
             'total_stone_count' => json_encode($request->total_stone_count),
             'picture' => $path,
+            'unique_stone_colors' => json_encode($uniqueStoneColors)
         ]);
 
-        $design['stones'] = json_decode($design['stones']);
-        $design['total_stone_count'] = json_decode($design['total_stone_count']);
-
+        // redirecting to design show page
         return redirect()->route('design.show', ['design' => $design->design_no]);
     }
 
-    public function update(Design $design, DesignAadhaarUpdateRequest $request) {
-
+    public function update(Design $design, DesignAadhaarUpdateRequest $request) 
+    {
         $validated = $request->validated();
         
+        // calculating price
         $price4pcs = StonesRow::calculatePrice4Pcs(
             $request->stones, $request->rhodium, $request->misc_price, $request->markup_percentage
         );
 
+        // getting unique stone colors
+        $stoneColors = StonesRow::getAllStoneColors($request->stones);
+        $uniqueStoneColors = StoneColor::getUniqueStoneColors($stoneColors);
+
+        // updating design
         $design->rhodium = $request->rhodium;
         $design->misc_price = $request->misc_price;
         $design->markup_percentage = $request->markup_percentage;
         $design->price_4pcs = $price4pcs;
         $design->stones = json_encode($request->stones);
         $design->total_stone_count = json_encode($request->total_stone_count);
+        $design->unique_stone_colors = json_encode($uniqueStoneColors);
 
         $design->update();
         
+        // redirecting to design show page
         return redirect()->route('design.show', ['design' => $design->design_no]);
     }
 }

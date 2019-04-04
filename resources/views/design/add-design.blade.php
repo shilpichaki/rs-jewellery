@@ -14,6 +14,9 @@
 		    0%{     background-color: rgba(200, 240, 80, .9);    }
 		    100%{   background-color: rgba(200, 240, 80, .0);    }
 		}*/
+		.showPriceDivs{
+			display: none;
+		}
 	</style>
 @endsection
 @section('content')
@@ -23,7 +26,7 @@
   @endforeach 
 @endif
 	<h2 class="text-center py-3">Add Design</h2>
-	<form action="{{route('design.store-design')}}" method="POST" enctype="multipart/form-data">
+	<form id="add-deisgn-form" action="{{route('design.store-design')}}" method="POST" enctype="multipart/form-data">
 		@csrf
 	<div class="container">
 		<div class="row">
@@ -34,7 +37,7 @@
 						<tr>
 							<td class="ts">Design number:</td>
 							<td>
-								<input class="form-control form-control-primary" type="text" name="design_no" id="design_no" pattern="[0-9]{3}" title="Design number should be an integer!" required>
+								<input class="form-control form-control-primary input-required" type="text" name="design_no" id="design_no" pattern="[0-9]{3}" title="Design number should be an integer!" required>
 								<a href="#" id="design_no_tooltip" data-toggle="tooltip" data-placement="top" title="Design number already in use!" style="display: none; font-size: 22px; color: red">!</a>
 							</td>
 						</tr>
@@ -72,7 +75,7 @@
                     </div>
                     <div class="col-sm-12">
                     	<div class="row">
-                    		<input type="text" class="form-control form-control-primary" value="" id="rhodium" name="rhodium">
+                    		<input type="text" class="form-control form-control-primary input-required" value="" id="rhodium" name="rhodium">
                     	</div>
                     </div>
 					<div class="col-sm-12">
@@ -82,7 +85,7 @@
                     </div>
                     <div class="col-sm-12">
                     	<div class="row">
-                    		<input type="text" class="form-control form-control-primary" value="" id="misc_price" name="misc_price">
+                    		<input type="text" class="form-control form-control-primary input-required" value="" id="misc_price" name="misc_price">
                     	</div>
                     </div>
 					<div class="col-sm-12">
@@ -92,7 +95,24 @@
                     </div>
                     <div class="col-sm-12">
                     	<div class="row">
-	                    	<input type="text" class="form-control form-control-primary" value="" id="markup_percentage" name="markup_percentage">
+	                    	<input type="text" class="form-control form-control-primary input-required" value="" id="markup_percentage" name="markup_percentage">
+                    	</div>
+                    </div>
+                    <div class="col-sm-12 showPriceDivs">
+						<div class="row">
+							<label class="col-form-label ml-0"><b>Price (4pcs)</b></label>
+						</div>
+					</div>
+                    <div class="col-sm-12 showPriceDivs">
+						<div class="row">
+							<div class="form-control form-control-primary" id="calcPrice4Pcs" style="height: 36px;">
+								<span></span>
+							</div>
+						</div>
+					</div>
+                    <div class="col-sm-12">
+                    	<div class="row">
+                    		<button type="button" class="btn btn-primary mt-3" id="calcPrice4PcsBtn" style="width: 100%">Calculate price</button>
                     	</div>
                     </div>
 				</div>
@@ -119,10 +139,10 @@
 							<tbody id="append_parent">
 							<tr id="add_stone_row_0" data-rowstonetype="">
 								<td>
-									<input class="form-control form-control-primary" type="text" name="stones[0][size]" required>
+									<input class="form-control form-control-primary input-required" type="text" name="stones[0][size]" required>
 								</td>
 								<td>
-									<select class="form-control form-control-primary select-stone-dropdown" name="stones[0][stone_type]">
+									<select class="form-control form-control-primary select-stone-dropdown input-required" name="stones[0][stone_type]">
 										<option value="">SELECT STONE</option>
 										@foreach($stones as $stone)
 											<option value="{{$stone}}">{{$stone}}</option>
@@ -130,32 +150,32 @@
 									</select>
 								</td>
 								<td>
-									<select class="form-control form-control-primary" name="stones[0][stone_color]" id="">
+									<select class="form-control form-control-primary input-required" name="stones[0][stone_color]" id="">
 										@foreach($colors as $color)
 											<option value="{{$color}}">{{$color}}</option>
 										@endforeach
 									</select>
 								</td>
 								<td>
-									<input data-stoneType="" data-bangleSize="2.2" class="form-control form-control-primary add_type_stone_22 add_type_stone form-disabler" disabled="" type="text" name="stones[0][quantity][0]" required pattern="\d+" title="">
+									<input data-stoneType="" data-bangleSize="2.2" class="form-control form-control-primary input-required add_type_stone_22 add_type_stone form-disabler" disabled="" type="text" name="stones[0][quantity][0]" required pattern="\d+" title="">
 								</td>
 								<td>
-									<input data-stoneType="" data-bangleSize="2.4" class="form-control form-control-primary add_type_stone_24 add_type_stone form-disabler" type="text" name="stones[0][quantity][1]" required pattern="\d+">
+									<input data-stoneType="" data-bangleSize="2.4" class="form-control form-control-primary input-required add_type_stone_24 add_type_stone form-disabler" type="text" name="stones[0][quantity][1]" required pattern="\d+">
 								</td>
 								<td>
-									<input data-stoneType="" data-bangleSize="2.6" class="form-control form-control-primary add_type_stone_26 add_type_stone form-disabler" type="text" name="stones[0][quantity][2]" required pattern="\d+">
+									<input data-stoneType="" data-bangleSize="2.6" class="form-control form-control-primary input-required add_type_stone_26 add_type_stone form-disabler" type="text" name="stones[0][quantity][2]" required pattern="\d+">
 								</td>
 								<td>
-									<input data-stoneType="" data-bangleSize="2.8" class="form-control form-control-primary add_type_stone_28 add_type_stone form-disabler" type="text" name="stones[0][quantity][3]" required pattern="\d+">
+									<input data-stoneType="" data-bangleSize="2.8" class="form-control form-control-primary input-required add_type_stone_28 add_type_stone form-disabler" type="text" name="stones[0][quantity][3]" required pattern="\d+">
 								</td>
 								<td>
-									<input data-stoneType="" data-bangleSize="2.10" class="form-control form-control-primary add_type_stone_210 add_type_stone form-disabler" type="text" name="stones[0][quantity][4]" required pattern="\d+">
+									<input data-stoneType="" data-bangleSize="2.10" class="form-control form-control-primary input-required add_type_stone_210 add_type_stone form-disabler" type="text" name="stones[0][quantity][4]" required pattern="\d+">
 								</td>
 								<td>
-									<input class="form-control form-control-primary stone_price_input" type="text" name="stones[0][stone_price]" required title="Example: 500.00, 1000.70">
+									<input class="form-control form-control-primary input-required stone_price_input" type="text" name="stones[0][stone_price]" required title="Example: 500.00, 1000.70">
 								</td>
 								<td>
-									<input class="form-control form-control-primary labour_charge_input" type="text" name="stones[0][labour_charge]" required title="Example: 500.00, 1000.70">
+									<input class="form-control form-control-primary input-required labour_charge_input" type="text" name="stones[0][labour_charge]" required title="Example: 500.00, 1000.70">
 								</td>
 								<td>
 									<button type="button" data-id="0" class="delete_row_btn btn btn-primary button button-small" title="Delete">
@@ -253,11 +273,6 @@
 				</div>
 			</div>
 		</div>
-
-
-		<div class="row">
-			
-		</div>
 	</div>
 	</form>
 
@@ -272,11 +287,11 @@
             var content = '<tr id="add_stone_row_'+counter+'" data-rowstonetype="">';
 
             content += '<td>';
-            content += 		'<input class="form-control form-control-primary" type="text" name="stones['+counter+'][size]" required>';
+            content += 		'<input class="form-control form-control-primary input-required" type="text" name="stones['+counter+'][size]" required>';
             content += '</td>';
             
             content += '<td>';
-            content += 		'<select class="form-control form-control-primary select-stone-dropdown" name="stones['+counter+'][stone_type]" id="">';
+            content += 		'<select class="form-control form-control-primary select-stone-dropdown input-required" name="stones['+counter+'][stone_type]" id="">';
             	content +=			'<option value="">SELECT STONE</option>'
 	            @foreach($stones as $stone)
 	            content += 			'<option value="{{$stone}}">{{$stone}}</option>';
@@ -284,7 +299,7 @@
             content += 		'</select>';
             content += '</td>';
             content += '<td>';
-            content += 		'<select class="form-control form-control-primary" name="stones['+counter+'][stone_color]" id="">';
+            content += 		'<select class="form-control form-control-primary input-required" name="stones['+counter+'][stone_color]" id="">';
 	            @foreach($colors as $color)
 	            content += 			'<option value="{{$color}}">{{$color}}</option>';
 				@endforeach
@@ -292,25 +307,25 @@
             content += '</td>';
 
             content += '<td>';
-            content += 		'<input class="form-control form-control-primary add_type_stone_22 add_type_stone form-disabler" data-stoneType="" data-bangleSize="2.2" type="text" name="stones['+counter+'][quantity][0]" required pattern="\\d+" title="">';
+            content += 		'<input class="form-control form-control-primary add_type_stone_22 add_type_stone form-disabler input-required" data-stoneType="" data-bangleSize="2.2" type="text" name="stones['+counter+'][quantity][0]" required pattern="\\d+" title="">';
             content += '</td>';
             content += '<td>';
-            content += 		'<input class="form-control form-control-primary add_type_stone_24 add_type_stone form-disabler" data-stoneType="" data-bangleSize="2.4"  type="text" name="stones['+counter+'][quantity][1]" required pattern="\\d+">';
+            content += 		'<input class="form-control form-control-primary add_type_stone_24 add_type_stone form-disabler input-required" data-stoneType="" data-bangleSize="2.4"  type="text" name="stones['+counter+'][quantity][1]" required pattern="\\d+">';
             content += '</td>';
             content += '<td>';
-            content += 		'<input class="form-control form-control-primary add_type_stone_26 add_type_stone form-disabler" data-stoneType="" data-bangleSize="2.6"  type="text" name="stones['+counter+'][quantity][2]" required pattern="\\d+">';
+            content += 		'<input class="form-control form-control-primary add_type_stone_26 add_type_stone form-disabler input-required" data-stoneType="" data-bangleSize="2.6"  type="text" name="stones['+counter+'][quantity][2]" required pattern="\\d+">';
             content += '</td>';
             content += '<td>';
-            content += 		'<input class="form-control form-control-primary add_type_stone_28 add_type_stone form-disabler" data-stoneType="" data-bangleSize="2.8"  type="text" name="stones['+counter+'][quantity][3]" required pattern="\\d+">';
+            content += 		'<input class="form-control form-control-primary add_type_stone_28 add_type_stone form-disabler input-required" data-stoneType="" data-bangleSize="2.8"  type="text" name="stones['+counter+'][quantity][3]" required pattern="\\d+">';
             content += '</td>';
             content += '<td>';
-            content += 		'<input class="form-control form-control-primary add_type_stone_210 add_type_stone form-disabler" data-stoneType="" data-bangleSize="2.10"  type="text" name="stones['+counter+'][quantity][4]" required pattern="\\d+">';
+            content += 		'<input class="form-control form-control-primary add_type_stone_210 add_type_stone form-disabler input-required" data-stoneType="" data-bangleSize="2.10"  type="text" name="stones['+counter+'][quantity][4]" required pattern="\\d+">';
             content += '</td>';
             content += '<td>';
-            content += 		'<input class="form-control form-control-primary stone_add_foo" type="text" name="stones['+counter+'][stone_price]" required>';
+            content += 		'<input class="form-control form-control-primary stone_add_foo input-required" type="text" name="stones['+counter+'][stone_price]" required>';
             content += '</td>';
             content += '<td>';
-            content += 		'<input class="form-control form-control-primary" type="text" name="stones['+counter+'][labour_charge]" required title="Example: 500.00, 1000.70">';
+            content += 		'<input class="form-control form-control-primary input-required" type="text" name="stones['+counter+'][labour_charge]" required title="Example: 500.00, 1000.70">';
             content += '</td>';
             content += '<td>';
             content += 		'<button type="button" data-id="'+counter+'" class="delete_row_btn btn btn-primary button button-small" title="Delete"><i class="fa fa-trash"></i></button>';
@@ -677,6 +692,50 @@
         console.log(currentValue22+'-'+currentValue24+'-'+currentValue26+'-'+currentValue28+'-'+currentValue210);
         console.log(" =< Deleted a row =< ");
         /*on deleting a row calculation*/
+    }
+
+    $("#calcPrice4PcsBtn").click(function() {
+    	var show = checkIfEverythingFilledUp();
+
+    	if(show == 1) {
+    		var formData = $('#add-deisgn-form').serialize();
+    		
+    		$.ajax({
+	            url: '{{env('ROOT_URL')}}/api/design/calculate-price',
+	            type: "POST",
+	            data : formData,
+	            error: function () {
+	            },
+	            success: function (data) {
+	            	var price = data.data.price;
+
+	            	price = price.toFixed(2);
+
+	            	$("#calcPrice4Pcs").find("span").html(price);
+		    		$(".showPriceDivs").show();
+	            }
+	        });
+    	} else if (show == 0) {
+    		$(".showPriceDivs").hide();
+    	}
+    });
+
+    function checkIfEverythingFilledUp()
+    {
+    	status = 1;
+    	$("input.input-required").each(function() {
+    		if($(this).val() == '') {
+    			$(this).addClass("border-danger");
+
+    			if(status == 1) {
+    				status = 0;
+    			}
+    		} else {
+				$(this).removeClass("border-danger");    			
+    		}
+    	});
+
+		return status;
     }
 </script>
 @endsection

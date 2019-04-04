@@ -11,7 +11,7 @@
 @endsection
 @section('content')
     <h2 class="text-center py-3">Edit Design</h2>
- <form action="{{route('design.update-design', ['design' => $design->design_no])}}" method="POST" enctype="multipart/form-data">
+ <form id="add-deisgn-form" action="{{route('design.update-design', ['design' => $design->design_no])}}" method="POST" enctype="multipart/form-data">
     @csrf
     @method('put')
     <div class="container">
@@ -52,7 +52,7 @@
                     </div>
                     <div class="col-sm-12">
                         <div class="row">
-                            <input type="text" class="form-control form-control-primary" value="{{$design->rhodium}}" id="rhodium" name="rhodium">
+                            <input type="text" class="form-control form-control-primary input-required" value="{{$design->rhodium}}" id="rhodium" name="rhodium">
                         </div>
                     </div>
                     <div class="col-sm-12">
@@ -62,7 +62,7 @@
                     </div>
                     <div class="col-sm-12">
                         <div class="row">
-                            <input type="text" class="form-control form-control-primary" value="{{$design->misc_price}}" id="misc_price" name="misc_price">
+                            <input type="text" class="form-control form-control-primary input-required" value="{{$design->misc_price}}" id="misc_price" name="misc_price">
                         </div>
                     </div>
                     <div class="col-sm-12">
@@ -72,17 +72,24 @@
                     </div>
                     <div class="col-sm-12">
                         <div class="row">
-                            <input type="text" class="form-control form-control-primary" value="{{$design->markup_percentage}}" id="markup_percentage" name="markup_percentage">
+                            <input type="text" class="form-control form-control-primary input-required" value="{{$design->markup_percentage}}" id="markup_percentage" name="markup_percentage">
                         </div>
                     </div>
-                    <div class="col-sm-12">
-                        <div class="row text-left">
-                            <label class="col-form-label ml-0"><b>Price(4 pcs)</b></label>
+                    <div class="col-sm-12 showPriceDivs">
+                        <div class="row">
+                            <label class="col-form-label ml-0"><b>Price (4pcs)</b></label>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 showPriceDivs">
+                        <div class="row">
+                            <div class="form-control form-control-primary input-required" id="calcPrice4Pcs" style="height: 36px;">
+                                <span>{{$design->price_4pcs}}</span>
+                            </div>
                         </div>
                     </div>
                     <div class="col-sm-12">
                         <div class="row">
-                            <input type="text" class="form-control form-control-primary" value="{{$design->price_4pcs}}" id="price_4pcs" name="price_4pcs" disabled>
+                            <button type="button" class="btn btn-primary mt-3" id="calcPrice4PcsBtn" style="width: 100%">Calculate price</button>
                         </div>
                     </div>
                 </div>
@@ -136,25 +143,25 @@
                                             </select>
                                         </td>
                                         <td>
-                                            <input data-stoneType="<?php if($stone->stone_type == "ROUND STONE"){echo 'round_stone';} else if($stone->stone_type == "BIG STONE"){echo 'big_stone';} else if($stone->stone_type == "TB STONE"){echo 'tb_stone';} ?>" data-bangleSize="2.2" class="form-control form-control-primary add_type_stone_22" type="text" name="stones[{{$key}}][quantity][0]" required pattern="\d+" title="" value="{{$stone->quantity[0]}}">
+                                            <input data-stoneType="<?php if($stone->stone_type == "ROUND STONE"){echo 'round_stone';} else if($stone->stone_type == "BIG STONE"){echo 'big_stone';} else if($stone->stone_type == "TB STONE"){echo 'tb_stone';} ?>" data-bangleSize="2.2" class="form-control form-control-primary add_type_stone_22 input-required" type="text" name="stones[{{$key}}][quantity][0]" required pattern="\d+" title="" value="{{$stone->quantity[0]}}">
                                         </td>
                                         <td>
-                                            <input data-stoneType="<?php if($stone->stone_type == "ROUND STONE"){echo 'round_stone';} else if($stone->stone_type == "BIG STONE"){echo 'big_stone';} else if($stone->stone_type == "TB STONE"){echo 'tb_stone';} ?>" data-bangleSize="2.4" class="form-control form-control-primary add_type_stone_24" type="text" name="stones[{{$key}}][quantity][1]" required pattern="\d+" value="{{$stone->quantity[1]}}">
+                                            <input data-stoneType="<?php if($stone->stone_type == "ROUND STONE"){echo 'round_stone';} else if($stone->stone_type == "BIG STONE"){echo 'big_stone';} else if($stone->stone_type == "TB STONE"){echo 'tb_stone';} ?>" data-bangleSize="2.4" class="form-control form-control-primary add_type_stone_24 input-required" type="text" name="stones[{{$key}}][quantity][1]" required pattern="\d+" value="{{$stone->quantity[1]}}">
                                         </td>
                                         <td>
-                                            <input data-stoneType="<?php if($stone->stone_type == "ROUND STONE"){echo 'round_stone';} else if($stone->stone_type == "BIG STONE"){echo 'big_stone';} else if($stone->stone_type == "TB STONE"){echo 'tb_stone';} ?>" data-bangleSize="2.6" class="form-control form-control-primary add_type_stone_26" type="text" name="stones[{{$key}}][quantity][2]" required pattern="\d+" value="{{$stone->quantity[2]}}">
+                                            <input data-stoneType="<?php if($stone->stone_type == "ROUND STONE"){echo 'round_stone';} else if($stone->stone_type == "BIG STONE"){echo 'big_stone';} else if($stone->stone_type == "TB STONE"){echo 'tb_stone';} ?>" data-bangleSize="2.6" class="form-control form-control-primary add_type_stone_26 input-required" type="text" name="stones[{{$key}}][quantity][2]" required pattern="\d+" value="{{$stone->quantity[2]}}">
                                         </td>
                                         <td>
-                                            <input data-stoneType="<?php if($stone->stone_type == "ROUND STONE"){echo 'round_stone';} else if($stone->stone_type == "BIG STONE"){echo 'big_stone';} else if($stone->stone_type == "TB STONE"){echo 'tb_stone';} ?>" data-bangleSize="2.8" class="form-control form-control-primary add_type_stone_28" type="text" name="stones[{{$key}}][quantity][3]" required pattern="\d+" value="{{$stone->quantity[3]}}">
+                                            <input data-stoneType="<?php if($stone->stone_type == "ROUND STONE"){echo 'round_stone';} else if($stone->stone_type == "BIG STONE"){echo 'big_stone';} else if($stone->stone_type == "TB STONE"){echo 'tb_stone';} ?>" data-bangleSize="2.8" class="form-control form-control-primary add_type_stone_28 input-required" type="text" name="stones[{{$key}}][quantity][3]" required pattern="\d+" value="{{$stone->quantity[3]}}">
                                         </td>
                                         <td>
-                                            <input data-stoneType="<?php if($stone->stone_type == "ROUND STONE"){echo 'round_stone';} else if($stone->stone_type == "BIG STONE"){echo 'big_stone';} else if($stone->stone_type == "TB STONE"){echo 'tb_stone';} ?>" data-bangleSize="2.10" class="form-control form-control-primary add_type_stone_210" type="text" name="stones[{{$key}}][quantity][4]" required pattern="\d+" value="{{$stone->quantity[4]}}">
+                                            <input data-stoneType="<?php if($stone->stone_type == "ROUND STONE"){echo 'round_stone';} else if($stone->stone_type == "BIG STONE"){echo 'big_stone';} else if($stone->stone_type == "TB STONE"){echo 'tb_stone';} ?>" data-bangleSize="2.10" class="form-control form-control-primary add_type_stone_210 input-required" type="text" name="stones[{{$key}}][quantity][4]" required pattern="\d+" value="{{$stone->quantity[4]}}">
                                         </td>
                                         <td>
-                                            <input class="form-control form-control-primary" type="text" name="stones[{{$key}}][stone_price]" required title="Example: 500.00, 1000.70" value="{{$stone->stone_price}}">
+                                            <input class="form-control form-control-primary input-required" type="text" name="stones[{{$key}}][stone_price]" required title="Example: 500.00, 1000.70" value="{{$stone->stone_price}}">
                                         </td>
                                         <td>
-                                            <input class="form-control form-control-primary" type="text" name="stones[{{$key}}][labour_charge]" required title="Example: 500.00, 1000.70" value="{{$stone->labour_charge}}">
+                                            <input class="form-control form-control-primary input-required" type="text" name="stones[{{$key}}][labour_charge]" required title="Example: 500.00, 1000.70" value="{{$stone->labour_charge}}">
                                         </td>
                                         <td>
                                             <button type="button" data-id="{{$key}}" class="delete_row_btn btn btn-primary button button-small" title="Delete">
@@ -277,11 +284,11 @@
 
                 var content = '<tr id="add_stone_row_'+counter+'" data-rowstonetype="">';
                 content += '<td>';
-                content +=      '<input class="form-control form-control-primary" type="text" name="stones['+counter+'][size]" required>';
+                content +=      '<input class="form-control form-control-primary input-required" type="text" name="stones['+counter+'][size]" required>';
                 content += '</td>';
                 
                 content += '<td>';
-                content +=      '<select class="form-control form-control-primary select-stone-dropdown" name="stones['+counter+'][stone_type]" id="">';
+                content +=      '<select class="form-control form-control-primary input-required select-stone-dropdown" name="stones['+counter+'][stone_type]" id="">';
                     content +=          '<option value="">SELECT STONE</option>'
                     @foreach($masterStones as $masterStone)
                     content +=          '<option value="{{$masterStone}}">{{$masterStone}}</option>';
@@ -289,7 +296,7 @@
                 content +=      '</select>';
                 content += '</td>';
                 content += '<td>';
-                content +=      '<select class="form-control form-control-primary" name="stones['+counter+'][stone_color]" id="">';
+                content +=      '<select class="form-control form-control-primary input-required" name="stones['+counter+'][stone_color]" id="">';
                     @foreach($masterColors as $masterColor)
                     content +=          '<option value="{{$masterColor}}">{{$masterColor}}</option>';
                     @endforeach
@@ -297,25 +304,25 @@
                 content += '</td>';
 
                 content += '<td>';
-                content +=      '<input class="form-control form-control-primary add_type_stone_22 form-disabler" data-stoneType="" data-bangleSize="2.2" type="text" name="stones['+counter+'][quantity][0]" required pattern="\\d+" title="">';
+                content +=      '<input class="form-control form-control-primary input-required add_type_stone_22 form-disabler" data-stoneType="" data-bangleSize="2.2" type="text" name="stones['+counter+'][quantity][0]" required pattern="\\d+" title="">';
                 content += '</td>';
                 content += '<td>';
-                content +=      '<input class="form-control form-control-primary add_type_stone_24 form-disabler" data-stoneType="" data-bangleSize="2.4"  type="text" name="stones['+counter+'][quantity][1]" required pattern="\\d+">';
+                content +=      '<input class="form-control form-control-primary input-required add_type_stone_24 form-disabler" data-stoneType="" data-bangleSize="2.4"  type="text" name="stones['+counter+'][quantity][1]" required pattern="\\d+">';
                 content += '</td>';
                 content += '<td>';
-                content +=      '<input class="form-control form-control-primary add_type_stone_26 form-disabler" data-stoneType="" data-bangleSize="2.6"  type="text" name="stones['+counter+'][quantity][2]" required pattern="\\d+">';
+                content +=      '<input class="form-control form-control-primary input-required add_type_stone_26 form-disabler" data-stoneType="" data-bangleSize="2.6"  type="text" name="stones['+counter+'][quantity][2]" required pattern="\\d+">';
                 content += '</td>';
                 content += '<td>';
-                content +=      '<input class="form-control form-control-primary add_type_stone_28 form-disabler" data-stoneType="" data-bangleSize="2.8"  type="text" name="stones['+counter+'][quantity][3]" required pattern="\\d+">';
+                content +=      '<input class="form-control form-control-primary input-required add_type_stone_28 form-disabler" data-stoneType="" data-bangleSize="2.8"  type="text" name="stones['+counter+'][quantity][3]" required pattern="\\d+">';
                 content += '</td>';
                 content += '<td>';
-                content +=      '<input class="form-control form-control-primary add_type_stone_210 form-disabler" data-stoneType="" data-bangleSize="2.10"  type="text" name="stones['+counter+'][quantity][4]" required pattern="\\d+">';
+                content +=      '<input class="form-control form-control-primary input-required add_type_stone_210 form-disabler" data-stoneType="" data-bangleSize="2.10"  type="text" name="stones['+counter+'][quantity][4]" required pattern="\\d+">';
                 content += '</td>';
                 content += '<td>';
-                content +=      '<input class="form-control form-control-primary stone_add_foo" type="text" name="stones['+counter+'][stone_price]" required>';
+                content +=      '<input class="form-control form-control-primary input-required stone_add_foo" type="text" name="stones['+counter+'][stone_price]" required>';
                 content += '</td>';
                 content += '<td>';
-                content +=      '<input class="form-control form-control-primary" type="text" name="stones['+counter+'][labour_charge]" required title="Example: 500.00, 1000.70">';
+                content +=      '<input class="form-control form-control-primary input-required" type="text" name="stones['+counter+'][labour_charge]" required title="Example: 500.00, 1000.70">';
                 content += '</td>';
                 content += '<td>';
                 content +=      '<button type="button" data-id="'+counter+'" class="delete_row_btn btn btn-primary button button-small" title="Delete"><i class="fa fa-trash"></i></button>';
@@ -634,6 +641,49 @@
             console.log(currentValue22+'-'+currentValue24+'-'+currentValue26+'-'+currentValue28+'-'+currentValue210);
             console.log(" =< Deleted a row =< ");
             /*on deleting a row calculation*/
+        }
+        $("#calcPrice4PcsBtn").click(function() {
+            var show = checkIfEverythingFilledUp();
+
+            if(show == 1) {
+                var formData = $('#add-deisgn-form').serialize();
+                
+                $.ajax({
+                    url: '{{env('ROOT_URL')}}/api/design/calculate-price',
+                    type: "POST",
+                    data : formData,
+                    error: function () {
+                    },
+                    success: function (data) {
+                        var price = data.data.price;
+
+                        price = price.toFixed(2);
+
+                        $("#calcPrice4Pcs").find("span").html(price);
+                        $(".showPriceDivs").show();
+                    }
+                });
+            } else if (show == 0) {
+                $(".showPriceDivs").hide();
+            }
+        });
+
+        function checkIfEverythingFilledUp()
+        {
+            status = 1;
+            $("input.input-required").each(function() {
+                if($(this).val() == '') {
+                    $(this).addClass("border-danger");
+
+                    if(status == 1) {
+                        status = 0;
+                    }
+                } else {
+                    $(this).removeClass("border-danger");               
+                }
+            });
+
+            return status;
         }
     </script>
 @endsection

@@ -48,7 +48,9 @@
                         </div>
                         <div class="col-sm-12">
                             <div class="row">
-                                <input type="value" class="form-control form-control-primary" required="" id="rhodium" name="rhodium" value="{{$design->rhodium}}" disabled>
+                                <div class="form-control form-control-primary" id="calcPrice4Pcs" style="height: 36px;">
+                                    <span>{{$design->rhodium}}</span>
+                                </div>
                             </div>
                         </div>
                         <div class="col-sm-12">
@@ -58,7 +60,9 @@
                         </div>
                         <div class="col-sm-12">
                             <div class="row">
-                                <input type="text" class="form-control form-control-primary" id="misc_price" name="misc_price" value="{{$design->misc_price}}" disabled="">
+                                <div class="form-control form-control-primary" id="calcPrice4Pcs" style="height: 36px;">
+                                    <span>{{$design->misc_price}}</span>
+                                </div>
                             </div>
                         </div>
                         <div class="col-sm-12">
@@ -68,7 +72,9 @@
                         </div>
                         <div class="col-sm-12">
                             <div class="row">
-                                <input type="text" class="form-control form-control-primary" id="markup_percentage" name="markup_percentage" disabled value="{{$design->markup_percentage}}">
+                                <div class="form-control form-control-primary" id="calcPrice4Pcs" style="height: 36px;">
+                                    <span>{{$design->markup_percentage}}</span>
+                                </div>
                             </div>
                         </div>
                         <div class="col-sm-12">
@@ -78,7 +84,9 @@
                         </div>
                         <div class="col-sm-12">
                             <div class="row">
-                                <input type="value" class="form-control form-control-primary" required="" id="price_5cs" name="price_5cs" value="{{$design->price_4pcs}}" disabled>
+                                <div class="form-control form-control-primary" id="calcPrice4Pcs" style="height: 36px;">
+                                    <span>{{$design->price_4pcs}}</span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -144,55 +152,55 @@
                                     <tr>
                                         <td>ROUND STONES</td>
                                         <td class="text-right" id="total-round-stones-22">
-                                            <input type="text" class="form-control form-control-primary" name="total_stone_count[round_stone][0]" disabled value="{{$design->total_stone_count->round_stone[0]}}">
+                                            {{$design->total_stone_count->round_stone[0]}}
                                         </td>
                                         <td class="text-right" id="total-round-stones-24">
-                                            <input type="text" class="form-control form-control-primary" name="total_stone_count[round_stone][1]" disabled value="{{$design->total_stone_count->round_stone[1]}}">
+                                            {{$design->total_stone_count->round_stone[1]}}
                                         </td>
                                         <td class="text-right" id="total-round-stones-26">
-                                            <input type="text" class="form-control form-control-primary" name="total_stone_count[round_stone][2]" disabled value="{{$design->total_stone_count->round_stone[2]}}">
+                                            {{$design->total_stone_count->round_stone[2]}}
                                         </td>
                                         <td class="text-right" id="total-round-stones-28">
-                                            <input type="text" class="form-control form-control-primary" name="total_stone_count[round_stone][3]" disabled value="{{$design->total_stone_count->round_stone[3]}}">
+                                            {{$design->total_stone_count->round_stone[3]}}
                                         </td>
                                         <td class="text-right" id="total-round-stones-210">
-                                            <input type="text" class="form-control form-control-primary" name="total_stone_count[round_stone][4]" disabled value="{{$design->total_stone_count->round_stone[4]}}">
+                                            {{$design->total_stone_count->round_stone[4]}}
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>BIG STONES</td>
                                         <td class="text-right" id="total-big-stones-22">
-                                            <input type="text" class="form-control form-control-primary" name="total_stone_count[big_stone][0]" disabled value="{{$design->total_stone_count->big_stone[0]}}">
+                                            {{$design->total_stone_count->big_stone[0]}}
                                         </td>
                                         <td class="text-right" id="total-big-stones-24">
-                                            <input type="text" class="form-control form-control-primary" name="total_stone_count[big_stone][1]" disabled value="{{$design->total_stone_count->big_stone[1]}}">
+                                            {{$design->total_stone_count->big_stone[1]}}
                                         </td>
                                         <td class="text-right" id="total-big-stones-26">
-                                            <input type="text" class="form-control form-control-primary" name="total_stone_count[big_stone][2]" disabled value="{{$design->total_stone_count->big_stone[2]}}">
+                                            {{$design->total_stone_count->big_stone[2]}}
                                         </td>
                                         <td class="text-right" id="total-big-stones-28">
-                                            <input type="text" class="form-control form-control-primary" name="total_stone_count[big_stone][3]" disabled value="{{$design->total_stone_count->big_stone[3]}}">
+                                            {{$design->total_stone_count->big_stone[3]}}
                                         </td>
                                         <td class="text-right" id="total-big-stones-210">
-                                            <input type="text" class="form-control form-control-primary" name="total_stone_count[big_stone][4]" disabled value="{{$design->total_stone_count->big_stone[4]}}">
+                                            {{$design->total_stone_count->big_stone[4]}}
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>TB STONES</td>
                                         <td class="text-right" id="total-tb-stones-22">
-                                            <input type="text" class="form-control form-control-primary" name="total_stone_count[tb_stone][0]" disabled value="{{$design->total_stone_count->tb_stone[0]}}">
+                                            {{$design->total_stone_count->tb_stone[0]}}
                                         </td>
                                         <td class="text-right" id="total-tb-stones-24">
-                                            <input type="text" class="form-control form-control-primary" name="total_stone_count[tb_stone][1]" disabled value="{{$design->total_stone_count->tb_stone[1]}}">
+                                            {{$design->total_stone_count->tb_stone[1]}}
                                         </td>
                                         <td class="text-right" id="total-tb-stones-26">
-                                            <input type="text" class="form-control form-control-primary" name="total_stone_count[tb_stone][2]" disabled value="{{$design->total_stone_count->tb_stone[2]}}">
+                                            {{$design->total_stone_count->tb_stone[2]}}
                                         </td>
                                         <td class="text-right" id="total-tb-stones-28">
-                                            <input type="text" class="form-control form-control-primary" name="total_stone_count[tb_stone][3]" disabled value="{{$design->total_stone_count->tb_stone[3]}}">
+                                            {{$design->total_stone_count->tb_stone[3]}}
                                         </td>
                                         <td class="text-right" id="total-tb-stones-210">
-                                            <input type="text" class="form-control form-control-primary" name="total_stone_count[tb_stone][4]" disabled value="{{$design->total_stone_count->tb_stone[4]}}">
+                                            {{$design->total_stone_count->tb_stone[4]}}
                                         </td>
                                     </tr>
                                 </tbody>
