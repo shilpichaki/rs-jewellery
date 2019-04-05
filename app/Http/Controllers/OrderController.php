@@ -52,7 +52,7 @@ class OrderController extends Controller
 	
   	public function store(Request $request)
   	{
-		// dd($request);
+		dd($request);
 		// echo '<pre>';
 		// print_r($request->design);
 		// echo '</pre>';
@@ -73,5 +73,26 @@ class OrderController extends Controller
 					'data' => $order,
 					'code' => 201
 				]);
+	}
+
+	public function edit(Order $order)
+	{
+		$designs = Design::all()->groupBy('design_no');
+
+		$order->designs = json_decode($order['designs']);
+		
+		$totalOrderDesigns = count((array)$order->designs);
+
+		// return $order;
+
+		return view('order.edit')
+				->withOrder($order)
+				->withMasterDesigns($designs)
+				->withTotalDesign($totalOrderDesigns);
+	}
+
+	public function update(Order $order, Request $request)
+	{
+		dd($request);
 	}
 }
