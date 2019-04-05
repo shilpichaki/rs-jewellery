@@ -413,6 +413,10 @@
                 contentToDump += '<input type="hidden" name="designs['+get_design_no+'][oc][3][oqp]" value="'+$("#oqp28").val()+'">';
                 contentToDump += '<input type="hidden" name="designs['+get_design_no+'][oc][4][oqp]" value="'+$("#oqp210").val()+'">';
 
+                contentToDump += '<input type="hidden" name="designs['+get_design_no+'][rhodium][1]" value="'+$("#rhodium1").val()+'">';
+                contentToDump += '<input type="hidden" name="designs['+get_design_no+'][rhodium][2]" value="'+$("#rhodium2").val()+'">';
+                contentToDump += '<input type="hidden" name="designs['+get_design_no+'][rhodium][3]" value="'+$("#rhodium3").val()+'">';
+
                 for (var i = 0; i < total_stone_count; i++) {
                     contentToDump += '<input type="hidden" name="designs['+get_design_no+'][stone_count]['+i+']" value="'+$("#stone_count_"+i).val()+'">';
                 }
