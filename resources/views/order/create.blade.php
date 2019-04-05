@@ -519,13 +519,15 @@
 
         function calculateStoneCount(totalRows)
         {
-            console.log("foo2:"+totalRows);
             for (var i = 0 ; i < totalRows; i++) {
                 var total = 0;
                 for (var j = 2; j <= 10; j=j+2) {
                     var value = $('td[data-stone-row="'+i+'"][data-bangle-size="2.'+j+'"]').html();
-                    console.log(value);
+                    var value = value * $("#oqp2"+j).val();
+                    total = total + value;
                 }
+                $("#stone_count_"+i).val(total);
+                console.log(total);
             }
         }
     </script>
