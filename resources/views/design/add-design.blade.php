@@ -37,7 +37,7 @@
 						<tr>
 							<td class="ts">Design number:</td>
 							<td>
-								<input class="form-control form-control-primary input-required" type="text" name="design_no" id="design_no" pattern="[0-9]{3}" title="Design number should be an integer!" required>
+								<input class="form-control form-control-primary input-required" type="text" name="design_no" id="design_no" title="Design number should be an integer!" required>
 								<a href="#" id="design_no_tooltip" data-toggle="tooltip" data-placement="top" title="Design number already in use!" style="display: none; font-size: 22px; color: red">!</a>
 							</td>
 						</tr>

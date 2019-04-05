@@ -28,7 +28,7 @@ class DesignAadhaarRequest extends FormRequest
     {
         $rules = [
             'picture' => 'mimetypes:image/jpeg,image/png|required|image|max:8192',
-            'design_no' => 'required|integer|unique:designs',
+            'design_no' => 'required|unique:designs',
             'stones.*.size' => 'required',
             'stones.*.stone_type' => [
                 'required',

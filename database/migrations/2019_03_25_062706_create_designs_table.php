@@ -15,7 +15,7 @@ class CreateDesignsTable extends Migration
     {
         Schema::create('designs', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('design_no')->unique()->unsigned();
+            $table->string('design_no', 50)->unique();
             $table->double('rhodium', 8, 2);
             $table->integer('markup_percentage');
             $table->double('misc_price', 8, 2);

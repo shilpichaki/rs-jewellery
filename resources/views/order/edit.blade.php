@@ -79,8 +79,8 @@
     }
 
     .card-list-img {
-        height: 150px;
-        width: 150px;
+        height: 100px;
+        width: 100px;
         border-radius: 10px;
         background-size: cover;
         background-position: center;
@@ -101,6 +101,9 @@
 </style>
 @endsection
 @section('content')
+<form action="{{route('order.update', ['order' => $order->order_no])}}" method="post">
+    @csrf
+    @method('put')
 <div class="main-body">
     <div class="container">
         <div class="row">
@@ -115,13 +118,13 @@
                                 <label class="col-form-label">Order No.</label>
                             </div>
                             <div class="col-sm-4">
-                                <div class="form-control autonumber form-control-primary">{{$order->order_no}}</div>
+                                <input type="number" class="form-control autonumber form-control-primary" name="order_no" value="{{$order->order_no}}">
                             </div>
                             <div class="col-sm-2">
                                 <label class="col-form-label">Party name</label>
                             </div>
                             <div class="col-sm-4">
-                                <div class="form-control autonumber form-control-primary">{{$order->party_name}}</div>
+                                <input type="text" class="form-control autonumber form-control-primary" name="party_name" value="{{$order->party_name}}">
                             </div>
                         </div>
                         <div class="row form-group">
@@ -129,18 +132,18 @@
                                 <label class="col-form-label">Order Issue Date</label>
                             </div>
                             <div class="col-sm-4">
-                                <div class="form-control autonumber form-control-primary">{{$order->issue_date}}</div>
+                                <input type="date" class="form-control autonumber form-control-primary" name="issue_date" value="{{$order->issue_date}}">
                             </div>
                             <div class="col-sm-2">
                                 <label class="col-form-label">Order Delivery Date</label>
                             </div>
                             <div class="col-sm-4">
-                                <div class="form-control autonumber form-control-primary">{{$order->delivery_date}}</div>
+                                <input type="date" class="form-control autonumber form-control-primary" name="delivery_date" value="{{$order->delivery_date}}">
                             </div>
                             <div class="col-sm-12">
-                                <a href="{{route('order.edit', ['order' => $order->order_no])}}" style="width: 170px;" class="btn btn-success pull-right add-row">
-                                    <i class="fa fa-pencil"></i>&nbsp;&nbsp; Edit order
-                                </a>
+                                <button style="width: 195px;" class="btn btn-success pull-right add-row">
+                                    <i class="fa fa-paper-plane"></i>&nbsp;&nbsp; Update order
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -156,6 +159,7 @@
                         <div class="col-md-12">
                             <ul class="list-view">
                                 @foreach($order->designs as $designNumber => $design)
+                                <input type="hidden" name="designs[{{$design->design_no}}][design_no]" value="{{$design->design_no}}">
                                 <li>
                                     <div class="card list-view-media">
                                         <div class="card-block w-100">
@@ -181,58 +185,106 @@
                                                                 <th>2.8</th>
                                                                 <th>2.10</th>
                                                                 <th class="text-left" id="total_stone_count"
-                                                                    data-totalstonecount="4">Stone count</th>
+                                                                    data-totalstonecount="">Stone count</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
+                                                            <?php $totalRows = 0; ?>
                                                             @foreach($design->stone_count as $scKey => $stoneCount)
                                                             <tr>
                                                                 <td>{{json_decode($masterDesigns[$designNumber][0]->stones)[$scKey]->size}}</td>
                                                                 <td>{{json_decode($masterDesigns[$designNumber][0]->stones)[$scKey]->stone_type}}
                                                                 </td>
                                                                 <td>{{json_decode($masterDesigns[$designNumber][0]->stones)[$scKey]->stone_color}}</td>
-                                                                <td data-stone-row="0" data-bangle-size="2.2">{{json_decode($masterDesigns[$designNumber][0]->stones)[$scKey]->quantity[0]}}</td>
-                                                                <td data-stone-row="0" data-bangle-size="2.4">{{json_decode($masterDesigns[$designNumber][0]->stones)[$scKey]->quantity[1]}}</td>
-                                                                <td data-stone-row="0" data-bangle-size="2.6">{{json_decode($masterDesigns[$designNumber][0]->stones)[$scKey]->quantity[2]}}</td>
-                                                                <td data-stone-row="0" data-bangle-size="2.8">{{json_decode($masterDesigns[$designNumber][0]->stones)[$scKey]->quantity[3]}}</td>
-                                                                <td data-stone-row="0" data-bangle-size="2.10">{{json_decode($masterDesigns[$designNumber][0]->stones)[$scKey]->quantity[4]}}</td>
-                                                                <td><div class="form-control form-control-primary"><span>{{$stoneCount}}</span></div></td>
+                                                                <td data-stone-row="{{$totalRows}}"
+                                                                     data-design-no="{{$design->design_no}}" 
+                                                                     data-bangle-size="2.2"
+                                                                     data-value="{{json_decode($masterDesigns[$designNumber][0]->stones)[$scKey]->quantity[0]}}">
+                                                                     {{json_decode($masterDesigns[$designNumber][0]->stones)[$scKey]->quantity[0]}}
+                                                                 </td>
+                                                                    <td data-stone-row="{{$totalRows}}"
+                                                                     data-design-no="{{$design->design_no}}" 
+                                                                     data-bangle-size="2.4"
+                                                                     data-value="{{json_decode($masterDesigns[$designNumber][0]->stones)[$scKey]->quantity[1]}}">
+                                                                     {{json_decode($masterDesigns[$designNumber][0]->stones)[$scKey]->quantity[1]}}
+                                                                 </td>
+                                                                    <td data-stone-row="{{$totalRows}}"
+                                                                     data-design-no="{{$design->design_no}}" 
+                                                                     data-bangle-size="2.6"
+                                                                     data-value="{{json_decode($masterDesigns[$designNumber][0]->stones)[$scKey]->quantity[2]}}">
+                                                                     {{json_decode($masterDesigns[$designNumber][0]->stones)[$scKey]->quantity[2]}}
+                                                                 </td>
+                                                                    <td data-stone-row="{{$totalRows}}"
+                                                                     data-design-no="{{$design->design_no}}" 
+                                                                     data-bangle-size="2.8"
+                                                                     data-value="{{json_decode($masterDesigns[$designNumber][0]->stones)[$scKey]->quantity[3]}}">
+                                                                     {{json_decode($masterDesigns[$designNumber][0]->stones)[$scKey]->quantity[3]}}
+                                                                 </td>
+                                                                    <td data-stone-row="{{$totalRows}}"
+                                                                     data-design-no="{{$design->design_no}}" 
+                                                                     data-bangle-size="2.10"
+                                                                     data-value="{{json_decode($masterDesigns[$designNumber][0]->stones)[$scKey]->quantity[4]}}">
+                                                                     {{json_decode($masterDesigns[$designNumber][0]->stones)[$scKey]->quantity[4]}}
+                                                                 </td>
+                                                                <td>
+                                                                    <input 
+                                                                    type="text" 
+                                                                    name="designs[{{$design->design_no}}][stone_count][{{$scKey}}]" 
+                                                                    class="form-control form-control-primary" 
+                                                                    data-design-number="{{$design->design_no}}" 
+                                                                    data-row="{{$totalRows}}"
+                                                                    value="{{$stoneCount}}">
+                                                                </td>
                                                             </tr>
+                                                            <?php $totalRows++; ?>
                                                             @endforeach
                                                             <tr>
                                                                 <td colspan="3" class="text-left">Order Quantity Set.</td>
+                                                                <?php $columnOqs = 2; ?>
+                                                                <?php $columnOqs1 = 0; ?>
                                                                 @foreach($design->oc as $orderCount)
                                                                 <td>
-                                                                    <div class="form-control form-control-primary">
-                                                                        <span>{{$orderCount->oqs}}</span>
-                                                                    </div>
+                                                                    <input 
+                                                                    class="form-control form-control-primary input_oqs input-required oqs2{{$columnOqs}}" data-bangle-size="2.{{$columnOqs}}" 
+                                                                    data-design-no="{{$design->design_no}}"
+                                                                    type="text" 
+                                                                    required="" 
+                                                                    name="designs[{{$design->design_no}}][oc][{{$columnOqs1}}][oqs]"
+                                                                    value="{{$orderCount->oqs}}">
                                                                 </td>
+                                                                <?php $columnOqs += 2; ?>
+                                                                <?php $columnOqs1++; ?>
                                                                 @endforeach
-                                                                <td></td>
+                                                                <td rowspan="2">
+                                                                    <button style="width: 100%;" class="btn btn-success calc_st_cnt"  data-total-rows="{{$totalRows}}" data-design-no={{$design->design_no}} >Calculate Stone Count</button>
+                                                                </td>
                                                             </tr>
                                                             <tr>
                                                                 <td colspan="3" class="text-left">Order Quantity Pcs.</td>
+                                                                <?php $columnOqp = 2; ?>
+                                                                <?php $columnOqp1 = 0; ?>
                                                                 @foreach($design->oc as $orderCount)
                                                                 <td>
-                                                                    <div class="form-control form-control-primary">
-                                                                        <span>{{$orderCount->oqp}}</span>
-                                                                    </div>
+                                                                    <input 
+                                                                    class="form-control form-control-primary input_oqp oqp2{{$columnOqp}}" 
+                                                                    data-design-no="{{$design->design_no}}" 
+                                                                    data-bangle-size="2.{{$columnOqp}}" 
+                                                                    type="text"
+                                                                    name="designs[{{$design->design_no}}][oc][{{$columnOqp1}}][oqp]"
+                                                                    value="{{$orderCount->oqp}}">
                                                                 </td>
+                                                                <?php $columnOqp += 2; ?>
+                                                                <?php $columnOqp1++; ?>
                                                                 @endforeach
                                                             </tr>
                                                             <tr>
                                                                 <td>Rhodium</td>
+                                                                <?php $columnRhodium = 1; ?>
                                                                 @foreach($design->rhodium as $rhodium)
                                                                 <td>
-                                                                    <div class="form-control form-control-primary">
-                                                                        <span>
-                                                                            @if($rhodium == null)
-                                                                                
-                                                                            @endif
-                                                                            {{$rhodium}}
-                                                                        </span>
-                                                                    </div>
+                                                                    <input type="text" name="designs[{{$design->design_no}}][rhodium][{{$columnRhodium}}]" class="form-control form-control-primary" value="{{$rhodium}}">
                                                                 </td>
+                                                                <?php $columnRhodium++; ?>
                                                                 @endforeach
                                                                 <td colspan="5"></td>
                                                             </tr>
@@ -252,18 +304,16 @@
             </div>
         </div>
     </div>
-</div>
+</div>    
+</form>
+
 @endsection
 
 @section('js')
 <script type="text/javascript">
     var scrollerPosition = 0;
     var firstScrollerWidth = Math.round($(".attachDesign").width());
-    var designCount = {
-        {
-            $totalDesign
-        }
-    };
+    var designCount = {{$totalDesign}};
     var totalRequiredWidth = designCount * 220;
     var designContainerWidth = $(".attachDesignCon").width();
 
@@ -295,11 +345,62 @@
 </script>
 <script type="text/javascript">
     $(document).ready(function () {
-        $(".mycards").click(function () {
-            var designNumber = $(this).attr("data-design-number");
-            $('#dumpcontent').html("<h1>" + designNumber + "</h1>");
+        $(".calc_st_cnt").click(function () {
+            var totalRows = $(this).attr("data-total-rows");
+            var designNumber = $(this).attr("data-design-no");
+
+            var show = checkIfEverythingFilledUp();
+
+            calculateStoneCount(totalRows, designNumber);
         });
     });
+    function calculateStoneCount(totalRows, designNumber)
+    {
+        // console.log(totalRows);
+        for (var i = 0 ; i < totalRows; i++) {
+            var total = 0;
+            for (var j = 2; j <= 10; j=j+2) {
+                // $('td[data-design-no="'+designNumber+'"][data-stone-row="'+i+'"][data-bangle-size="2.'+j+'"]').css("background-color", 'red');
+                var value = $('td[data-design-no="'+designNumber+'"][data-stone-row="'+i+'"][data-bangle-size="2.'+j+'"]').attr("data-value");
+                value = value.trim();
 
+                var multiplyBy = $(".oqp2"+j+'[data-design-no="'+designNumber+'"]').val();
+                
+                value *= multiplyBy;
+
+                total += value;
+            }
+            $('input[data-design-number="'+designNumber+'"][data-row="'+i+'"]').val(total);
+            console.log(total);
+        }
+    }
+    function checkIfEverythingFilledUp()
+    {
+        status = 1;
+        $("input.input-required").each(function() {
+            if($(this).val() == '') {
+                $(this).addClass("border-danger");
+
+                if(status == 1) {
+                    status = 0;
+                }
+            } else {
+                $(this).removeClass("border-danger");               
+            }
+        });
+        return status;
+    }
+
+    // on change order quantity set
+    $("body").on('keyup', '.input_oqs', function() {
+        var bangleSize = $(this).attr('data-bangle-size');
+        var designNumber = $(this).attr('data-design-no');
+        var value = $(this).val();
+
+        if(value != '') {
+            var quantity = parseInt(value);
+            $('.input_oqp[data-design-no="'+designNumber+'"][data-bangle-size="'+bangleSize+'"]').val((quantity*4));
+        }
+    });
 </script>
 @endsection
