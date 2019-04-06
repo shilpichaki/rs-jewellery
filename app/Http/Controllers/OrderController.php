@@ -52,7 +52,7 @@ class OrderController extends Controller
 	
   	public function store(Request $request)
   	{
-		dd($request);
+		// dd($request);
 		// echo '<pre>';
 		// print_r($request->design);
 		// echo '</pre>';
@@ -67,7 +67,7 @@ class OrderController extends Controller
 
 		$order['designs'] = json_decode($order['designs']);
 
-		// return redirect()->route('order.show', ['order' => $order->order_no]);
+		return redirect()->route('order.show', ['order' => $order->order_no]);
 
 		return response()->json([
 					'data' => $order,
@@ -93,6 +93,15 @@ class OrderController extends Controller
 
 	public function update(Order $order, Request $request)
 	{
-		dd($request);
+		// dd($request);
+
+		$order->designs = json_encode($request->designs);
+		$order->issue_date = $request->issue_date;
+		$order->delivery_date = $request->delivery_date;
+		$order->party_name = $request->party_name;
+
+		$order->update();
+
+		return redirect()->route('order.show', ['design' => $order->order_no]);
 	}
 }
