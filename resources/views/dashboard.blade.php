@@ -16,10 +16,7 @@
 @endsection
 
 @section('content')
- <h2 class="text-center my-5" style="font-size: 3vw;">Welcome to <span class="text-white" style="font-family: 'Romanesco', cursive;        background: linear-gradient(to right, #f2ec32 0%, #f3c958 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-size: 5vw;"><b>RPS-JEWELLERY</b></span></h2> 
+ <h2 class="text-center my-5" style="font-size: 3vw;">Welcome to <img src="{{asset('image/RPS.png')}}"  alt="logo.png"> Jewellery</h2>
 
  <div class="row"> 
 
