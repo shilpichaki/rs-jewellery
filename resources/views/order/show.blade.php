@@ -221,19 +221,28 @@
                                                                 @endforeach
                                                             </tr>
                                                             <tr>
-                                                                <td>Rhodium</td>
-                                                                @foreach($design->rhodium as $rhodium)
+                                                                <td class="text-left">Rhodium</td>
                                                                 <td>
                                                                     <div class="form-control form-control-primary">
                                                                         <span>
-                                                                            @if($rhodium == null)
-                                                                                
-                                                                            @endif
-                                                                            {{$rhodium}}
+                                                                            <?php echo ((array) $design->rhodium)[1]; ?>
                                                                         </span>
                                                                     </div>
                                                                 </td>
-                                                                @endforeach
+                                                                <td>
+                                                                    <div class="form-control form-control-primary">
+                                                                        <span>
+                                                                            <?php echo ((array) $design->rhodium)[2]; ?>
+                                                                        </span>
+                                                                    </div>
+                                                                </td>
+                                                                <td colspan="2">
+                                                                    <div class="form-control form-control-primary">
+                                                                        <span>
+                                                                            <?php echo ((array) $design->rhodium)[3]; ?>
+                                                                        </span>
+                                                                    </div>
+                                                                </td>
                                                                 <td colspan="5"></td>
                                                             </tr>
                                                         </tbody>
