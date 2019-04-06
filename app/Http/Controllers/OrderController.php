@@ -40,9 +40,10 @@ class OrderController extends Controller
 			->withDesigns(Design::all());
 	}
 
-	public function allocation()
+	public function allocation(Order $order)
 	{
-		return view('order.allocation');
+		return view('order.allocation')
+			->withOrder($order);
 	}
 
 	public function receive()

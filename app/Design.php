@@ -26,4 +26,12 @@ class Design extends Model
     {
     	return 'design_no';
     }
+
+    public static function sortStonesArray($stones)
+    {
+        $stonesArray = [];
+        foreach ($stones as $stone) {
+            array_push($stonesArray, $stone);
+        }
+    }
 }
