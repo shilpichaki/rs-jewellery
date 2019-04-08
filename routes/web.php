@@ -56,3 +56,4 @@ Route::get('/order/{order}', 'OrderController@show')->name('order.show')->middle
 Route::get('/order/{order}/edit', 'OrderController@edit')->name('order.edit')->middleware(['sidemenu', 'auth']);
 Route::put('/order/{order}/update', 'OrderController@update')->name('order.update')->middleware(['sidemenu', 'auth']);
 Route::post('/order', 'OrderController@store')->name('order.store')->middleware(['sidemenu', 'auth']);
+Route::post('/order/{order}/allocation', 'OrderController@storeallocation')->name('order.storeallocation')->middleware(['sidemenu', 'auth']);

@@ -4,9 +4,16 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!--jquery-ui css-->
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <style type="text/css">
+        .table td, .table th{
+            padding: 0.25rem !important;
+        }
+    </style>
 @endsection
 
 @section('content')
+<form action="{{route('order.storeallocation', ['order' => $order->order_no])}}" method="post">
+    @csrf
     <h2 class="text-center py-3">Order Allocation</h2>
     <div class="row">
         <div class="offset-lg-1 col-lg-10">
@@ -21,7 +28,6 @@
                                 <div class="form-control autonumber form-control-primary">
                                     <span>{{$order->order_no}}</span>
                                 </div>
-
                                 <span class="form-bar"></span>
                             </div>
                             <div class="col-sm-2">
@@ -42,6 +48,11 @@
                                     <span>{{$order->delivery_date}}</span>
                                 </div>
                             </div>
+                            <div class="col-sm-12">
+                                <button type="submit" style="width: 170px;" class="btn btn-success pull-right add-row">
+                                    <i class="fa fa-paper-plane"></i>&nbsp;&nbsp; Submit
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -55,293 +66,87 @@
                     <div class="row card-block">
                         <div class="col-md-12">
                             <ul class="list-view">
-                                                                <li>
+                                @foreach($order->designs as $design)
+                                <li>
                                     <div class="card list-view-media">
                                         <div class="card-block w-100">
                                             <div class="media">
-                                                <a class="media-left" href="#">
-                                                    <div class="card-list-img" style="background-image: url(http://127.0.0.1:8000/storage/pictures//11554378125.jpeg)">
-                                                    </div>
-                                                </a>
                                                 <div class="media-body">
-                                                    <div class="col-xs-12">
-                                                        <h2 class="d-inline-block">#423da</h2>
-                                                    </div>
                                                     <table class="table table-bordered" id="editableTable">
                                                         <thead>
                                                             <tr>
-                                                                <th>Stone Size</th>
-                                                                <th>Stone Type</th>
-                                                                <th>Stone Color</th>
+                                                                <th>Design no. #{{$design->design_no}}</th>
                                                                 <th>2.2</th>
                                                                 <th>2.4</th>
                                                                 <th>2.6</th>
                                                                 <th>2.8</th>
                                                                 <th>2.10</th>
-                                                                <th class="text-left" id="total_stone_count" data-totalstonecount="4">Stone count</th>
+                                                                <th colspan="3"></th>
+                                                            </tr>
+                                                            <tr>
+                                                                <th>Allocate to</th>
+                                                                <th class="leftCountCalc" data-design-no="{{$design->design_no}}" data-bangle-size="2.2" data-alloc-left="{{$design->oc[0]->oqs}}">{{$design->oc[0]->oqs}}</th>
+                                                                <th class="leftCountCalc" data-design-no="{{$design->design_no}}" data-bangle-size="2.4" data-alloc-left="{{$design->oc[1]->oqs}}">{{$design->oc[1]->oqs}}</th>
+                                                                <th class="leftCountCalc" data-design-no="{{$design->design_no}}" data-bangle-size="2.6" data-alloc-left="{{$design->oc[2]->oqs}}">{{$design->oc[2]->oqs}}</th>
+                                                                <th class="leftCountCalc" data-design-no="{{$design->design_no}}" data-bangle-size="2.8" data-alloc-left="{{$design->oc[3]->oqs}}">{{$design->oc[3]->oqs}}</th>
+                                                                <th class="leftCountCalc" data-design-no="{{$design->design_no}}" data-bangle-size="2.10" data-alloc-left="{{$design->oc[4]->oqs}}">{{$design->oc[4]->oqs}}</th>
+                                                                <th>Round Stones</th>
+                                                                <th>Big Stones</th>
+                                                                <th>TB Stone</th>
                                                             </tr>
                                                         </thead>
-                                                        <tbody>
-                                                                                                                        <tr>
-                                                                <td>1.60</td>
-                                                                <td>BIG STONE
-                                                                </td>
-                                                                <td>GREEN</td>
-                                                                <td data-stone-row="0" data-bangle-size="2.2">1</td>
-                                                                <td data-stone-row="0" data-bangle-size="2.4">3</td>
-                                                                <td data-stone-row="0" data-bangle-size="2.6">5</td>
-                                                                <td data-stone-row="0" data-bangle-size="2.8">4</td>
-                                                                <td data-stone-row="0" data-bangle-size="2.10">7</td>
-                                                                <td><div class="form-control form-control-primary"><span>352</span></div></td>
-                                                            </tr>
-                                                                                                                        <tr>
-                                                                <td colspan="3" class="text-left">Order Quantity Set.</td>
-                                                                                                                                <td>
-                                                                    <div class="form-control form-control-primary">
-                                                                        <span>5</span>
-                                                                    </div>
-                                                                </td>
-                                                                                                                                <td>
-                                                                    <div class="form-control form-control-primary">
-                                                                        <span>9</span>
-                                                                    </div>
-                                                                </td>
-                                                                                                                                <td>
-                                                                    <div class="form-control form-control-primary">
-                                                                        <span>1</span>
-                                                                    </div>
-                                                                </td>
-                                                                                                                                <td>
-                                                                    <div class="form-control form-control-primary">
-                                                                        <span>4</span>
-                                                                    </div>
-                                                                </td>
-                                                                                                                                <td>
-                                                                    <div class="form-control form-control-primary">
-                                                                        <span>5</span>
-                                                                    </div>
-                                                                </td>
-                                                                                                                                <td></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td colspan="3" class="text-left">Order Quantity Pcs.</td>
-                                                                                                                                <td>
-                                                                    <div class="form-control form-control-primary">
-                                                                        <span>20</span>
-                                                                    </div>
-                                                                </td>
-                                                                                                                                <td>
-                                                                    <div class="form-control form-control-primary">
-                                                                        <span>36</span>
-                                                                    </div>
-                                                                </td>
-                                                                                                                                <td>
-                                                                    <div class="form-control form-control-primary">
-                                                                        <span>4</span>
-                                                                    </div>
-                                                                </td>
-                                                                                                                                <td>
-                                                                    <div class="form-control form-control-primary">
-                                                                        <span>16</span>
-                                                                    </div>
-                                                                </td>
-                                                                                                                                <td>
-                                                                    <div class="form-control form-control-primary">
-                                                                        <span>20</span>
-                                                                    </div>
-                                                                </td>
-                                                                                                                            </tr>
-                                                            <tr>
-                                                                <td class="text-left">Rhodium</td>
+                                                        <tbody data-total-rows="1">
+                                                            <tr data-row-index="1">
                                                                 <td>
-                                                                    <div class="form-control form-control-primary">
-                                                                        <span>
-                                                                            5                                                                        </span>
-                                                                    </div>
+                                                                    <select class="form-control form-control-primary"
+                                                                    name="allocation[{{$design->design_no}}][1][worker]">
+                                                                        <option value="Mota">Mota</option>
+                                                                        <option value="Aru">Aru</option>
+                                                                        <option class="Susmita">Susmita</option>
+                                                                        <option class="Shilpi">Shilpi</option>
+                                                                    </select>
                                                                 </td>
                                                                 <td>
-                                                                    <div class="form-control form-control-primary">
-                                                                        <span>
-                                                                            5                                                                        </span>
-                                                                    </div>
+                                                                    <input type="" class="form-control form-control-primary input-required input-field-allocate-count" name="allocation[{{$design->design_no}}][1][allocation][0]" data-design-no="{{$design->design_no}}" data-bangle-size="2.2" data-max-length="{{$design->oc[0]->oqs}}" placeholder="Max: {{$design->oc[0]->oqs}}">
                                                                 </td>
-                                                                <td colspan="2">
-                                                                    <div class="form-control form-control-primary">
-                                                                        <span>
-                                                                            7                                                                        </span>
-                                                                    </div>
+                                                                <td>
+                                                                    <input type="" class="form-control form-control-primary input-required input-field-allocate-count" name="allocation[{{$design->design_no}}][1][allocation][1]" data-design-no="{{$design->design_no}}" data-max-length="{{$design->oc[1]->oqs}}" data-bangle-size="2.4" placeholder="Max: {{$design->oc[1]->oqs}}">
                                                                 </td>
-                                                                <td colspan="5"></td>
+                                                                <td>
+                                                                    <input type="" class="form-control form-control-primary input-required input-field-allocate-count" name="allocation[{{$design->design_no}}][1][allocation][2]" data-design-no="{{$design->design_no}}" data-max-length="{{$design->oc[2]->oqs}}" data-bangle-size="2.6" placeholder="Max: {{$design->oc[2]->oqs}}">
+                                                                </td>
+                                                                <td>
+                                                                    <input type="" class="form-control form-control-primary input-required input-field-allocate-count" name="allocation[{{$design->design_no}}][1][allocation][3]" data-design-no="{{$design->design_no}}" data-max-length="{{$design->oc[3]->oqs}}" data-bangle-size="2.8" placeholder="Max: {{$design->oc[3]->oqs}}">
+                                                                </td>
+                                                                <td>
+                                                                    <input type="" class="form-control form-control-primary input-required input-field-allocate-count" name="allocation[{{$design->design_no}}][1][allocation][4]" data-design-no="{{$design->design_no}}" data-max-length="{{$design->oc[4]->oqs}}" data-bangle-size="2.10" placeholder="Max: {{$design->oc[4]->oqs}}">
+                                                                </td>
+                                                                <td>
+                                                                    <input type="" class="form-control form-control-primary input-required" name="allocation[{{$design->design_no}}][1][round_stone]" data-stone-type="round_stone">
+                                                                </td>
+                                                                <td>
+                                                                    <input type="" class="form-control form-control-primary input-required" name="allocation[{{$design->design_no}}][1][big_stone]" data-stone-type="big_stone">
+                                                                </td>
+                                                                <td>
+                                                                    <input type="" class="form-control form-control-primary input-required" name="allocation[{{$design->design_no}}][1][tb_stone]" data-stone-type="tb_stone">
+                                                                </td>
                                                             </tr>
                                                         </tbody>
                                                     </table>
+                                                    <button 
+                                                        type="button" 
+                                                        class="btn btn-primary pull-right add-row allocateMoreBtn" 
+                                                        style="margin-top: 10px"
+                                                        data-design-no="{{$design->design_no}}">
+                                                        <i class="fa fa-plus"></i>&nbsp;&nbsp; Allocate more
+                                                    </button>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </li>
-                                                                <li>
-                                    <div class="card list-view-media">
-                                        <div class="card-block w-100">
-                                            <div class="media">
-                                                <a class="media-left" href="#">
-                                                    <div class="card-list-img" style="background-image: url(http://127.0.0.1:8000/storage/pictures//11554368030.jpeg)">
-                                                    </div>
-                                                </a>
-                                                <div class="media-body">
-                                                    <div class="col-xs-12">
-                                                        <h2 class="d-inline-block">#423</h2>
-                                                    </div>
-                                                    <table class="table table-bordered" id="editableTable">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>Stone Size</th>
-                                                                <th>Stone Type</th>
-                                                                <th>Stone Color</th>
-                                                                <th>2.2</th>
-                                                                <th>2.4</th>
-                                                                <th>2.6</th>
-                                                                <th>2.8</th>
-                                                                <th>2.10</th>
-                                                                <th class="text-left" id="total_stone_count" data-totalstonecount="4">Stone count</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                                                                                        <tr>
-                                                                <td>1.60</td>
-                                                                <td>ROUND STONE
-                                                                </td>
-                                                                <td>GREEN</td>
-                                                                <td data-stone-row="0" data-bangle-size="2.2">1</td>
-                                                                <td data-stone-row="0" data-bangle-size="2.4">1</td>
-                                                                <td data-stone-row="0" data-bangle-size="2.6">1</td>
-                                                                <td data-stone-row="0" data-bangle-size="2.8">1</td>
-                                                                <td data-stone-row="0" data-bangle-size="2.10">1</td>
-                                                                <td><div class="form-control form-control-primary"><span>60</span></div></td>
-                                                            </tr>
-                                                                                                                        <tr>
-                                                                <td>1.80</td>
-                                                                <td>ROUND STONE
-                                                                </td>
-                                                                <td>GREEN</td>
-                                                                <td data-stone-row="0" data-bangle-size="2.2">1</td>
-                                                                <td data-stone-row="0" data-bangle-size="2.4">5</td>
-                                                                <td data-stone-row="0" data-bangle-size="2.6">3</td>
-                                                                <td data-stone-row="0" data-bangle-size="2.8">11</td>
-                                                                <td data-stone-row="0" data-bangle-size="2.10">5</td>
-                                                                <td><div class="form-control form-control-primary"><span>252</span></div></td>
-                                                            </tr>
-                                                                                                                        <tr>
-                                                                <td>1.40</td>
-                                                                <td>BIG STONE
-                                                                </td>
-                                                                <td>BLUE</td>
-                                                                <td data-stone-row="0" data-bangle-size="2.2">2</td>
-                                                                <td data-stone-row="0" data-bangle-size="2.4">5</td>
-                                                                <td data-stone-row="0" data-bangle-size="2.6">7</td>
-                                                                <td data-stone-row="0" data-bangle-size="2.8">8</td>
-                                                                <td data-stone-row="0" data-bangle-size="2.10">7</td>
-                                                                <td><div class="form-control form-control-primary"><span>352</span></div></td>
-                                                            </tr>
-                                                                                                                        <tr>
-                                                                <td>1.85</td>
-                                                                <td>TB STONE
-                                                                </td>
-                                                                <td>RED</td>
-                                                                <td data-stone-row="0" data-bangle-size="2.2">5</td>
-                                                                <td data-stone-row="0" data-bangle-size="2.4">7</td>
-                                                                <td data-stone-row="0" data-bangle-size="2.6">8</td>
-                                                                <td data-stone-row="0" data-bangle-size="2.8">9</td>
-                                                                <td data-stone-row="0" data-bangle-size="2.10">4</td>
-                                                                <td><div class="form-control form-control-primary"><span>412</span></div></td>
-                                                            </tr>
-                                                                                                                        <tr>
-                                                                <td colspan="3" class="text-left">Order Quantity Set.</td>
-                                                                                                                                <td>
-                                                                    <div class="form-control form-control-primary">
-                                                                        <span>3</span>
-                                                                    </div>
-                                                                </td>
-                                                                                                                                <td>
-                                                                    <div class="form-control form-control-primary">
-                                                                        <span>2</span>
-                                                                    </div>
-                                                                </td>
-                                                                                                                                <td>
-                                                                    <div class="form-control form-control-primary">
-                                                                        <span>6</span>
-                                                                    </div>
-                                                                </td>
-                                                                                                                                <td>
-                                                                    <div class="form-control form-control-primary">
-                                                                        <span>2</span>
-                                                                    </div>
-                                                                </td>
-                                                                                                                                <td>
-                                                                    <div class="form-control form-control-primary">
-                                                                        <span>2</span>
-                                                                    </div>
-                                                                </td>
-                                                                                                                                <td></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td colspan="3" class="text-left">Order Quantity Pcs.</td>
-                                                                                                                                <td>
-                                                                    <div class="form-control form-control-primary">
-                                                                        <span>12</span>
-                                                                    </div>
-                                                                </td>
-                                                                                                                                <td>
-                                                                    <div class="form-control form-control-primary">
-                                                                        <span>8</span>
-                                                                    </div>
-                                                                </td>
-                                                                                                                                <td>
-                                                                    <div class="form-control form-control-primary">
-                                                                        <span>24</span>
-                                                                    </div>
-                                                                </td>
-                                                                                                                                <td>
-                                                                    <div class="form-control form-control-primary">
-                                                                        <span>8</span>
-                                                                    </div>
-                                                                </td>
-                                                                                                                                <td>
-                                                                    <div class="form-control form-control-primary">
-                                                                        <span>8</span>
-                                                                    </div>
-                                                                </td>
-                                                                                                                            </tr>
-                                                            <tr>
-                                                                <td class="text-left">Rhodium</td>
-                                                                <td>
-                                                                    <div class="form-control form-control-primary">
-                                                                        <span>
-                                                                            5                                                                        </span>
-                                                                    </div>
-                                                                </td>
-                                                                <td>
-                                                                    <div class="form-control form-control-primary">
-                                                                        <span>
-                                                                            8                                                                        </span>
-                                                                    </div>
-                                                                </td>
-                                                                <td colspan="2">
-                                                                    <div class="form-control form-control-primary">
-                                                                        <span>
-                                                                            7                                                                        </span>
-                                                                    </div>
-                                                                </td>
-                                                                <td colspan="5"></td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                                            </ul>
+                                @endforeach
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -349,8 +154,162 @@
             </div>
         </div>
     </div>
+</form>
 @endsection
 
 @section('js')
-    
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $(".allocateMoreBtn").click(function() {
+                var designNo = $(this).attr("data-design-no");
+                var prevTotalRows = $(this).closest(".media-body").find("tbody").attr("data-total-rows");
+                prevTotalRows = parseInt(prevTotalRows);
+                var currentTotalRows = prevTotalRows + 1;
+
+                calcStonesCount($('tr[data-row-index="'+prevTotalRows+'"]'), designNo);
+                
+                $(this).closest(".media-body").find("tbody").attr("data-total-rows", currentTotalRows);
+
+                var leftCounts = calculateMaxLengthNextFow(designNo, prevTotalRows);
+
+                var newAllocationContent = '<tr data-row-index='+currentTotalRows+'>';
+                newAllocationContent    +=      '<th>';
+                newAllocationContent    +=              '<select class="form-control form-control-primary" name="allocation['+designNo+']['+currentTotalRows+'][worker]">';
+                newAllocationContent    +=                  '<option value="Mota">Mota</option>';
+                newAllocationContent    +=                  '<option value="Aru">Aru</option>';
+                newAllocationContent    +=                  '<option value="Susmita">Susmita</option>';
+                newAllocationContent    +=                  '<option value="Shilpi">Shilpi</option>';
+                newAllocationContent    +=              '<select/>';
+                newAllocationContent    +=      '</th>';
+                newAllocationContent    +=      '<th>'
+                newAllocationContent    +=          '<input type="" class="form-control form-control-primary input-required input-field-allocate-count" name="" data-design-no="'+designNo+'" data-bangle-size="2.2" data-max-length="'+leftCounts[0]+'" placeholder="Max: '+leftCounts[0]+'">';
+                newAllocationContent    +=      '</th>';
+                newAllocationContent    +=      '<th>'
+                newAllocationContent    +=          '<input type="" class="form-control form-control-primary input-required input-field-allocate-count" name="" data-design-no="'+designNo+'" data-bangle-size="2.4" data-max-length="'+leftCounts[1]+'" placeholder="Max: '+leftCounts[1]+'">';
+                newAllocationContent    +=      '</th>';
+                newAllocationContent    +=      '<th>'
+                newAllocationContent    +=          '<input type="" class="form-control form-control-primary input-required input-field-allocate-count" name="" data-design-no="'+designNo+'" data-bangle-size="2.6" data-max-length="'+leftCounts[2]+'" placeholder="Max: '+leftCounts[2]+'">';
+                newAllocationContent    +=      '</th>';
+                newAllocationContent    +=      '<th>'
+                newAllocationContent    +=          '<input type="" class="form-control form-control-primary input-required input-field-allocate-count" name="" data-design-no="'+designNo+'" data-bangle-size="2.8" data-max-length="'+leftCounts[3]+'" placeholder="Max: '+leftCounts[3]+'">';
+                newAllocationContent    +=      '</th>';
+                newAllocationContent    +=      '<th>'
+                newAllocationContent    +=          '<input type="" class="form-control form-control-primary input-required input-field-allocate-count" name="" data-design-no="'+designNo+'" data-bangle-size="2.10" data-max-length="'+leftCounts[4]+'" placeholder="Max: '+leftCounts[4]+'">';
+                newAllocationContent    +=      '</th>';
+                newAllocationContent    +=      '<th>'
+                newAllocationContent    +=          '<input type="" class="form-control form-control-primary input-required" data-stone-type="round_stone" name="">'
+                newAllocationContent    +=      '</th>';
+                newAllocationContent    +=      '<th>'
+                newAllocationContent    +=          '<input type="" class="form-control form-control-primary input-required" data-stone-type="big_stone" name="">'
+                newAllocationContent    +=      '</th>';
+                newAllocationContent    +=      '<th>'
+                newAllocationContent    +=          '<input type="" class="form-control form-control-primary input-required" data-stone-type="tb_stone" name="">'
+                newAllocationContent    +=      '</th>';
+                newAllocationContent    +=  '</tr>'
+
+
+                if(canAllocateMore(leftCounts) == 1){
+                    $(this).closest(".media-body").find("tbody").append(newAllocationContent);
+                } else {
+                    $(this).prop('disabled', true);
+                }
+            });
+        });
+        function calculateMaxLengthNextFow(designNumber, rowIndex)
+        {
+            var leftCount = [];
+            for (var i = 2; i <= 10; i = i+2) {
+                var bs = '2.'+i;
+
+                var currentLeftCount = $('th.leftCountCalc[data-design-no="'+designNumber+'"][data-bangle-size="'+bs+'"]').attr("data-alloc-left");
+
+                var valueOfLastRow = $('tr[data-row-index="'+rowIndex+'"]').find('input[data-design-no="'+designNumber+'"][data-bangle-size="'+bs+'"]').val();
+
+                if(valueOfLastRow == '') {
+                    $('tr[data-row-index="'+rowIndex+'"]').find('input[data-design-no="'+designNumber+'"][data-bangle-size="'+bs+'"]').val('0');
+                    valueOfLastRow = 0;                    
+                }
+
+                var subtract = currentLeftCount - valueOfLastRow;
+
+                $('th.leftCountCalc[data-design-no="'+designNumber+'"][data-bangle-size="'+bs+'"]').attr("data-alloc-left", subtract);
+
+                leftCount.push(subtract);
+            }
+            return leftCount;
+        }
+        function canAllocateMore(leftCounts)
+        {
+            var canAllocateMore = 0;
+            $.each(leftCounts, function (index, value) {
+                if(value >= 1) {
+                    canAllocateMore = 1;
+                    return false;
+                }
+            });
+            return canAllocateMore;
+        }
+    </script>
+    <script type="text/javascript">
+        $("body").on("keyup", ".input-field-allocate-count", function() {
+            validateMaxValue($(this));
+        });
+        function validateMaxValue(element) {
+            var maxLength = element.attr("data-max-length");
+            var value = element.val();
+            value = value.trim();
+            element.val(value);
+            value = parseInt(value);
+
+            if(isNaN(value)) {
+                element.addClass("border-danger");   
+                element.val(0);
+                element.removeClass("border-danger");
+            } else {
+                if(value > maxLength) {
+                    element.addClass("border-danger");
+                    setTimeout(function() {
+                        element.val(maxLength);
+                        element.removeClass("border-danger");
+                    }, 500);
+                } else {
+                    element.removeClass("border-danger");
+                }
+            }
+        }
+    </script>
+
+    <script type="text/javascript">
+        function calcStonesCount(row, designNumber)
+        {
+            row.addClass("border-success");
+            var leftCount = [];
+            for (var i = 2; i <= 10; i = i+2) {
+                var bs = '2.'+i;
+
+                var valueOfLastRow = row.find('input[data-bangle-size="'+bs+'"]').val();
+
+                if(valueOfLastRow == '') {
+                    row.find('input[data-bangle-size="'+bs+'"]').val('0');
+                    valueOfLastRow = 0;                    
+                }
+                leftCount.push(valueOfLastRow);
+            }
+            
+            leftCount = JSON.stringify(leftCount);
+
+            $.ajax({
+                url: '{{env('ROOT_URL')}}/api/stones/alocation-stonecount',
+                type: "POST",
+                data : {leftCount: leftCount, designNumber: designNumber},
+                error: function () {
+                },
+                success: function (data) {
+                    row.find('input[data-stone-type="round_stone"]').val(data.data.round_stone);
+                    row.find('input[data-stone-type="big_stone"]').val(data.data.big_stone);
+                    row.find('input[data-stone-type="tb_stone"]').val(data.data.tb_stone);
+                }
+            });
+        }
+    </script>
 @endsection

@@ -42,6 +42,13 @@ class OrderController extends Controller
 
 	public function allocation(Order $order)
 	{
+		$order['designs'] = json_decode($order['designs']);
+		// echo "<pre>";
+		// print_r($order);
+		// echo "</pre>";
+
+		// exit;
+
 		return view('order.allocation')
 			->withOrder($order);
 	}
@@ -104,5 +111,10 @@ class OrderController extends Controller
 		$order->update();
 
 		return redirect()->route('order.show', ['design' => $order->order_no]);
+	}
+	
+  	public function storeallocation(Request $request)
+  	{
+		dd($request);
 	}
 }
