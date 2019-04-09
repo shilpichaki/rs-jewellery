@@ -55,11 +55,6 @@
                             <span class="pcoded-mtext">All Order</span>
                         </a>
                     </li>
-                    <li class="@if($routeAction == 'allocation' && $routeName == 'order' ) active @endif">
-                        <a href="{{route('order.allocation')}}">
-                            <span class="pcoded-mtext">Order Allocation</span>
-                        </a>
-                    </li>
                     <li class="@if($routeAction == 'receive' ) active @endif">
                         <a href="{{route('order.receive')}}">
                             <span class="pcoded-mtext">Receive order</span>

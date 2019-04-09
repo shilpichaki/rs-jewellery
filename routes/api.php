@@ -20,3 +20,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('/stock/{stock}', 'Api\StockController@show');
 Route::get('/design/{design}', 'Api\DesignController@show');
 Route::match(['post', 'put'], '/design/calculate-price', 'Api\DesignController@calculatePrice');
+
+Route::post('/stones/alocation-stonecount', 'Api\StonesController@alocationStonecount');

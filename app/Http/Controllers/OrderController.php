@@ -40,9 +40,17 @@ class OrderController extends Controller
 			->withDesigns(Design::all());
 	}
 
-	public function allocation()
+	public function allocation(Order $order)
 	{
-		return view('order.allocation');
+		$order['designs'] = json_decode($order['designs']);
+		// echo "<pre>";
+		// print_r($order);
+		// echo "</pre>";
+
+		// exit;
+
+		return view('order.allocation')
+			->withOrder($order);
 	}
 
 	public function receive()
@@ -103,5 +111,10 @@ class OrderController extends Controller
 		$order->update();
 
 		return redirect()->route('order.show', ['design' => $order->order_no]);
+	}
+	
+  	public function storeallocation(Request $request)
+  	{
+		dd($request);
 	}
 }
