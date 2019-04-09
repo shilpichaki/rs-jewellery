@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Design;
 use App\Order;
+use App\Allocation;
+use App\Worker;
+use App\AllocationReceiveTransaction;
 
 class OrderController extends Controller
 {
@@ -38,19 +41,6 @@ class OrderController extends Controller
 	{
 		return view('order.create')
 			->withDesigns(Design::all());
-	}
-
-	public function allocation(Order $order)
-	{
-		$order['designs'] = json_decode($order['designs']);
-		// echo "<pre>";
-		// print_r($order);
-		// echo "</pre>";
-
-		// exit;
-
-		return view('order.allocation')
-			->withOrder($order);
 	}
 
 	public function receive()
@@ -101,8 +91,6 @@ class OrderController extends Controller
 
 	public function update(Order $order, Request $request)
 	{
-		// dd($request);
-
 		$order->designs = json_encode($request->designs);
 		$order->issue_date = $request->issue_date;
 		$order->delivery_date = $request->delivery_date;
@@ -112,9 +100,39 @@ class OrderController extends Controller
 
 		return redirect()->route('order.show', ['design' => $order->order_no]);
 	}
+
+	public function allocation(Order $order)
+	{
+		$order['designs'] = json_decode($order['designs']);
+
+		$arr = [];
+		foreach ($order->designs as $key => $value) {
+			$arr1 = [];
+			foreach ($value->oc as $k => $v) {
+				array_push($arr1, $v->oqs);
+			}
+			$arr[$key] = ['max_set_count' => $arr1];
+		}
+
+		if(count($order->Allocations) != 0) {
+			return view('order.editAllocation')
+				->withOrder($order)
+				->withAllocations($order->Allocations->groupBy('design_no'))
+				->withWorkers(Worker::all())
+				->withMaxSetCount($arr);
+		} else {
+			return view('order.newAllocation')
+				->withOrder($order);	
+		}		
+	}
 	
-  	public function storeallocation(Request $request)
+  	public function storeAllocation(Request $request)
   	{
-		dd($request);
+  		// dd($request->allocation);
+  		$allocations = Allocation::sortAllocationsByWorkerName($request->allocation);
+  		
+  		Allocation::storeAllocationsWithTransaction($allocations, $request->order_id);  		
+
+		dd($allocations);
 	}
 }

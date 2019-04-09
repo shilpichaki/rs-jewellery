@@ -27,6 +27,7 @@
                             <div class="col-sm-4">
                                 <div class="form-control autonumber form-control-primary">
                                     <span>{{$order->order_no}}</span>
+                                    <input type="hidden" name="order_id" value="{{$order->id}}">
                                 </div>
                                 <span class="form-bar"></span>
                             </div>
@@ -100,10 +101,9 @@
                                                                 <td>
                                                                     <select class="form-control form-control-primary"
                                                                     name="allocation[{{$design->design_no}}][1][worker]">
-                                                                        <option value="Mota">Mota</option>
-                                                                        <option value="Aru">Aru</option>
-                                                                        <option class="Susmita">Susmita</option>
-                                                                        <option class="Shilpi">Shilpi</option>
+                                                                        <option value="1">Ram</option>
+                                                                        <option value="2">Sam</option>
+                                                                        <option value="3">Amit</option>
                                                                     </select>
                                                                 </td>
                                                                 <td>
@@ -177,10 +177,9 @@
                 var newAllocationContent = '<tr data-row-index='+currentTotalRows+' data-design-no="'+designNo+'">';
                 newAllocationContent    +=      '<th>';
                 newAllocationContent    +=              '<select class="form-control form-control-primary" name="allocation['+designNo+']['+currentTotalRows+'][worker]">';
-                newAllocationContent    +=                  '<option value="Mota">Mota</option>';
-                newAllocationContent    +=                  '<option value="Aru">Aru</option>';
-                newAllocationContent    +=                  '<option value="Susmita">Susmita</option>';
-                newAllocationContent    +=                  '<option value="Shilpi">Shilpi</option>';
+                newAllocationContent    +=                  '<option value="1">Ram</option>';
+                newAllocationContent    +=                  '<option value="2">Sam</option>';
+                newAllocationContent    +=                  '<option value="3">Amit</option>';
                 newAllocationContent    +=              '<select/>';
                 newAllocationContent    +=      '</th>';
                 newAllocationContent    +=      '<th>';

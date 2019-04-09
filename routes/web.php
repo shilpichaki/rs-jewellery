@@ -49,11 +49,12 @@ Route::put('/design/{design}/update', 'DesignController@update')->name('design.u
  * show, add-order
  */
 Route::get('/order', 'OrderController@index')->name('order.index')->middleware(['sidemenu', 'auth']);
-Route::get('/order/{order}/allocation', 'OrderController@allocation')->name('order.allocation')->middleware(['sidemenu', 'auth']);
 Route::get('/order/receive', 'OrderController@receive')->name('order.receive')->middleware(['sidemenu', 'auth']);
 Route::get('/order/create', 'OrderController@create')->name('order.create')->middleware(['sidemenu', 'auth']);
 Route::get('/order/{order}', 'OrderController@show')->name('order.show')->middleware(['sidemenu', 'auth']);
 Route::get('/order/{order}/edit', 'OrderController@edit')->name('order.edit')->middleware(['sidemenu', 'auth']);
 Route::put('/order/{order}/update', 'OrderController@update')->name('order.update')->middleware(['sidemenu', 'auth']);
 Route::post('/order', 'OrderController@store')->name('order.store')->middleware(['sidemenu', 'auth']);
-Route::post('/order/{order}/allocation', 'OrderController@storeallocation')->name('order.storeallocation')->middleware(['sidemenu', 'auth']);
+
+Route::get('/order/{order}/allocation', 'OrderController@allocation')->name('order.allocation')->middleware(['sidemenu', 'auth']);
+Route::post('/order/{order}/allocation', 'OrderController@storeAllocation')->name('order.storeallocation')->middleware(['sidemenu', 'auth']);
