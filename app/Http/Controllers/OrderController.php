@@ -15,7 +15,6 @@ class OrderController extends Controller
     {
         return view('order.index')->withOrders(Order::all());
     }
-
 	public function show(Order $order)
 	{
 		$designs = Design::all()->groupBy('design_no');

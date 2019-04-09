@@ -122,7 +122,7 @@
                                 </div>
                             </div>
                             <div class="col-sm-12">
-                                <button type="submit" style="width: 170px;" class="btn btn-success pull-right add-row">
+                                <button type="submit" style="width: 170px;" class="btn btn-success pull-right add-row" id="btn_submit">
                                     <i class="fa fa-paper-plane"></i>&nbsp;&nbsp; Submit
                                 </button>
                             </div>
@@ -205,6 +205,7 @@
         var cardContainerwidth = 0;
         var scrollerPosition = 0;
         var firstScrollerWidth = Math.round($(".attachDesign").width());
+        $('#btn_submit').attr('disabled', true);
 
         $(document).ready(function() {
             var design_no = '';
@@ -285,7 +286,7 @@
                                     content += '<td data-stone-row="'+input_index_counter+'"  data-bangle-size="2.8">'+value.quantity[3]+'</td>';
                                     content += '<td data-stone-row="'+input_index_counter+'"  data-bangle-size="2.10">'+value.quantity[4]+'</td>';
                                     content += '<td>';
-                                    content += '<input id="stone_count_'+input_index_counter+'" class="form-control form-control-primary calc_stone_count_input" data-stone-size="'+value.size+'" type="text" required="" title="">';
+                                    content += '<input id="stone_count_'+input_index_counter+'" class="form-control form-control-primary calc_stone_count_input" data-stone-size="'+value.size+'" type="text" required="" title="" readonly>';
                                     content += '</td>';
                                     content += '</tr>';
 
@@ -294,19 +295,19 @@
 
                                 content += '<tr>';
                                 content += '<td colspan="3">Order Quantity Set.</td>';
-                                content += '<td><input class="form-control form-control-primary input_oqs input-required" data-bangle-size="2.2" type="text" required="" title="" id="oqs22">';
+                                content += '<td><input class="form-control form-control-primary input_oqs input-required checkData" data-bangle-size="2.2" type="text" required="" title="" id="oqs22">';
                                 content += '</td>';
                                 content += '<td>';
-                                content += '<input class="form-control form-control-primary input_oqs input-required" data-bangle-size="2.4" type="text" required="" title="" id="oqs24">';
+                                content += '<input class="form-control form-control-primary input_oqs input-required checkData" data-bangle-size="2.4" type="text" required="" title="" id="oqs24">';
                                 content += '</td>';
                                 content += '<td>';
-                                content += '<input id="oqs26" class="form-control form-control-primary input_oqs input-required" data-bangle-size="2.6" type="text" required="" title="">';
+                                content += '<input id="oqs26" class="form-control form-control-primary input_oqs input-required checkData" data-bangle-size="2.6" type="text" required="" title="">';
                                 content += '</td>';
                                 content += '<td>';
-                                content += '<input id="oqs28" class="form-control form-control-primary input_oqs input-required" data-bangle-size="2.8" type="text" required="" title="">';
+                                content += '<input id="oqs28" class="form-control form-control-primary input_oqs input-required checkData" data-bangle-size="2.8" type="text" required="" title="">';
                                 content += '</td>';
                                 content += '<td>';
-                                content += '<input id="oqs210" class="form-control form-control-primary input_oqs input-required" data-bangle-size="2.10" type="text" required="" title="">';
+                                content += '<input id="oqs210" class="form-control form-control-primary input_oqs input-required checkData" data-bangle-size="2.10" type="text" required="" title="">';
                                 content += '</td>';
                                 content += '<td>';
                                 content += '<button style="width: 100%;" class="btn btn-success" id="calc_st_cnt" data-total-rows="'+input_index_counter+'">Calculate Stone Count</button>';
@@ -365,9 +366,28 @@
                                 
                                 $('.btnAddDesign').hide();
                                 $('.addDesign').hide();
+                                //confirm button disable 
+                                $('#choosing_complete').attr('disabled', true);
                                 $('html, body').animate({
                                     scrollTop: ($("#dumpcontent").offset().top - 60)
                                 }, 500);
+
+                                //confirm enable after all value filled
+                                $('input.checkData').on('keyup blur', function() {
+                                    var empty = false;
+                                    $('input.checkData').each(function() {
+                                        if($(this).val() == '') {
+                                            empty = true;
+                                        }
+                                    });
+
+                                    if(empty) {
+                                        $('#choosing_complete').attr('disabled', true);
+                                    }
+                                    else {
+                                        $('#choosing_complete').removeAttr('disabled');
+                                    }
+                                });
                             }
                         }
                     });
@@ -377,6 +397,7 @@
             $('body').on('click', '#choosing_complete', function() {
                 $("#choosing_more").trigger('click');
                 $(".addDesign").hide();
+                $('#btn_submit').removeAttr('disabled');
             });
 
             // onclick of addMore

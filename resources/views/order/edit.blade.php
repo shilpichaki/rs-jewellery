@@ -153,9 +153,11 @@
                                 <input type="date" class="form-control autonumber form-control-primary" name="delivery_date" value="{{$order->delivery_date}}">
                             </div>
                             <div class="col-sm-12">
-                                <button style="width: 195px;" class="btn btn-success pull-right add-row">
+                            <button style="width: 195px; margin-top: 12px;" class="btn btn-success pull-right" id="cancle"><i class="fa fa-window-close"></i>Cancle</button>
+                                <button style="width: 195px; margin-top: 12px; margin-right: 15px;" class="btn btn-success pull-right add-row" id="btn_update">
                                     <i class="fa fa-paper-plane"></i>&nbsp;&nbsp; Update order
                                 </button>
+                                
                             </div>
                         </div>
                     </div>
@@ -251,7 +253,7 @@
                                                                     value="{{$stoneCount}}">
                                                                     <div class="text-left form-control form-control-primary" 
                                                                     data-design-number="{{$design->design_no}}" 
-                                                                    data-row="{{$totalRows}}">
+                                                                    data-row="{{$totalRows}}" readonly>
                                                                         <span>{{$stoneCount}}</span>
                                                                     </div>
                                                                 </td>
@@ -276,7 +278,7 @@
                                                                 <?php $columnOqs1++; ?>
                                                                 @endforeach
                                                                 <td rowspan="2">
-                                                                    <button style="width: 100%;" type="button" class="btn btn-success calc_st_cnt"  data-total-rows="{{$totalRows}}" data-design-no={{$design->design_no}} >Calculate Stone Count</button>
+                                                                    <button style="width: 100%;" type="button" class="btn btn-success calc_st_cnt" id="calc_btn"  data-total-rows="{{$totalRows}}" data-design-no={{$design->design_no}} >Calculate Stone Count</button>
                                                                 </td>
                                                             </tr>
                                                             <tr>
@@ -307,13 +309,13 @@
                                                             <tr>
                                                                 <td class="text-left">Rhodium</td>
                                                                 <td>
-                                                                    <input type="text" name="designs[{{$design->design_no}}][rhodium][1]" class="form-control form-control-primary" value="<?php echo ((array) $design->rhodium)[1]; ?>">
+                                                                    <input type="text" name="designs[{{$design->design_no}}][rhodium][1]" class="form-control form-control-primary" value="<?php echo((array) $design->rhodium)[1]; ?>">
                                                                 </td>
                                                                 <td>
-                                                                    <input type="text" name="designs[{{$design->design_no}}][rhodium][2]" class="form-control form-control-primary" value="<?php echo ((array) $design->rhodium)[2]; ?>">
+                                                                    <input type="text" name="designs[{{$design->design_no}}][rhodium][2]" class="form-control form-control-primary" value="<?php echo((array) $design->rhodium)[2]; ?>">
                                                                 </td>
                                                                 <td colspan="2">
-                                                                    <input type="text" name="designs[{{$design->design_no}}][rhodium][3]" class="form-control form-control-primary" value="<?php echo ((array) $design->rhodium)[3]; ?>">
+                                                                    <input type="text" name="designs[{{$design->design_no}}][rhodium][3]" class="form-control form-control-primary" value="<?php echo((array) $design->rhodium)[3]; ?>">
                                                                 </td>
                                                                 <td colspan="5"></td>
                                                             </tr>
@@ -374,6 +376,9 @@
 </script>
 <script type="text/javascript">
     $(document).ready(function () {
+        $('#btn_update').attr('disabled', 'disabled');
+        $('#calc_btn').attr('disabled', 'disabled');
+
         $(".calc_st_cnt").click(function () {
             var totalRows = $(this).attr("data-total-rows");
             var designNumber = $(this).attr("data-design-no");
@@ -423,6 +428,12 @@
         return status;
     }
 
+    $(".input_oqs").change(function() {
+        if($(this).val()) {
+            $("#calc_btn").removeAttr('disabled');
+        }
+    })
+
     // on change order quantity set
     $("body").on('keyup', '.input_oqs', function() {
         var bangleSize = $(this).attr('data-bangle-size');
@@ -435,6 +446,10 @@
             $('.input_oqp[data-design-no="'+designNumber+'"][data-bangle-size="'+bangleSize+'"]').val((quantity*4));
         }
     });
+
+    $('body').on('click', '#calc_btn', function() {
+        $('#btn_update').removeAttr('disabled');
+    })
 
     // // on deleteing design
     // $("body").on("click", ".remove-design-btn", function() {

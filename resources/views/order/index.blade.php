@@ -24,6 +24,11 @@
                         </tr>
                         </thead>
                         <tbody>
+                        @if($orders->count() == 0)
+                        <tr>
+                            <th colspan="5" class="text-center">No Data Found!</th>
+                        </tr>
+                        @else
                         @foreach($orders as $order)
                             <tr>
                                 <th scope="row" style="max-width: 30px;" class="text-center">
@@ -43,6 +48,7 @@
                                 </td>
                             </tr>
                         @endforeach
+                        @endif
                         </tbody>
                     </table>
                 </div>

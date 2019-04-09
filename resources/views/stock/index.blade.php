@@ -34,6 +34,11 @@
 				</tr>
 				</thead>
 				<tbody>
+                @if($stocks->count() == 0)
+                    <tr>
+                        <th colspan="4" class="text-center">No Data Found!</th>
+                    </tr>
+                @else
                 <?php $counter=1; ?>
                 @foreach ($stocks as $stock)
                     <tr>
@@ -86,6 +91,7 @@
                     </tr>
                     <?php $counter++; ?>
                 @endforeach
+                @endif
 				</tbody>
 			</table>
 		</div>
