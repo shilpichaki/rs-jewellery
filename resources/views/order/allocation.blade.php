@@ -107,28 +107,28 @@
                                                                     </select>
                                                                 </td>
                                                                 <td>
-                                                                    <input type="" class="form-control form-control-primary input-required input-field-allocate-count" name="allocation[{{$design->design_no}}][1][allocation][0]" data-design-no="{{$design->design_no}}" data-bangle-size="2.2" data-max-length="{{$design->oc[0]->oqs}}" placeholder="Max: {{$design->oc[0]->oqs}}">
+                                                                    <input type="" class="form-control form-control-primary input-required input-field-allocate-count" name="allocation[{{$design->design_no}}][1][allocation][0]" data-design-no="{{$design->design_no}}" data-bangle-size="2.2" data-max-length="{{$design->oc[0]->oqs}}" placeholder="Max: {{$design->oc[0]->oqs}}" required>
                                                                 </td>
                                                                 <td>
-                                                                    <input type="" class="form-control form-control-primary input-required input-field-allocate-count" name="allocation[{{$design->design_no}}][1][allocation][1]" data-design-no="{{$design->design_no}}" data-max-length="{{$design->oc[1]->oqs}}" data-bangle-size="2.4" placeholder="Max: {{$design->oc[1]->oqs}}">
+                                                                    <input type="" class="form-control form-control-primary input-required input-field-allocate-count" name="allocation[{{$design->design_no}}][1][allocation][1]" data-design-no="{{$design->design_no}}" data-max-length="{{$design->oc[1]->oqs}}" data-bangle-size="2.4" placeholder="Max: {{$design->oc[1]->oqs}}" required>
                                                                 </td>
                                                                 <td>
-                                                                    <input type="" class="form-control form-control-primary input-required input-field-allocate-count" name="allocation[{{$design->design_no}}][1][allocation][2]" data-design-no="{{$design->design_no}}" data-max-length="{{$design->oc[2]->oqs}}" data-bangle-size="2.6" placeholder="Max: {{$design->oc[2]->oqs}}">
+                                                                    <input type="" class="form-control form-control-primary input-required input-field-allocate-count" name="allocation[{{$design->design_no}}][1][allocation][2]" data-design-no="{{$design->design_no}}" data-max-length="{{$design->oc[2]->oqs}}" data-bangle-size="2.6" placeholder="Max: {{$design->oc[2]->oqs}}" required>
                                                                 </td>
                                                                 <td>
-                                                                    <input type="" class="form-control form-control-primary input-required input-field-allocate-count" name="allocation[{{$design->design_no}}][1][allocation][3]" data-design-no="{{$design->design_no}}" data-max-length="{{$design->oc[3]->oqs}}" data-bangle-size="2.8" placeholder="Max: {{$design->oc[3]->oqs}}">
+                                                                    <input type="" class="form-control form-control-primary input-required input-field-allocate-count" name="allocation[{{$design->design_no}}][1][allocation][3]" data-design-no="{{$design->design_no}}" data-max-length="{{$design->oc[3]->oqs}}" data-bangle-size="2.8" placeholder="Max: {{$design->oc[3]->oqs}}" required>
                                                                 </td>
                                                                 <td>
-                                                                    <input type="" class="form-control form-control-primary input-required input-field-allocate-count" name="allocation[{{$design->design_no}}][1][allocation][4]" data-design-no="{{$design->design_no}}" data-max-length="{{$design->oc[4]->oqs}}" data-bangle-size="2.10" placeholder="Max: {{$design->oc[4]->oqs}}">
+                                                                    <input type="" class="form-control form-control-primary input-required input-field-allocate-count" name="allocation[{{$design->design_no}}][1][allocation][4]" data-design-no="{{$design->design_no}}" data-max-length="{{$design->oc[4]->oqs}}" data-bangle-size="2.10" placeholder="Max: {{$design->oc[4]->oqs}}" required>
                                                                 </td>
                                                                 <td>
-                                                                    <input type="" class="form-control form-control-primary input-required" name="allocation[{{$design->design_no}}][1][round_stone]" data-stone-type="round_stone">
+                                                                    <input type="" class="form-control form-control-primary input-required" name="allocation[{{$design->design_no}}][1][round_stone]" data-stone-type="round_stone" required>
                                                                 </td>
                                                                 <td>
-                                                                    <input type="" class="form-control form-control-primary input-required" name="allocation[{{$design->design_no}}][1][big_stone]" data-stone-type="big_stone">
+                                                                    <input type="" class="form-control form-control-primary input-required" name="allocation[{{$design->design_no}}][1][big_stone]" data-stone-type="big_stone" required>
                                                                 </td>
                                                                 <td>
-                                                                    <input type="" class="form-control form-control-primary input-required" name="allocation[{{$design->design_no}}][1][tb_stone]" data-stone-type="tb_stone">
+                                                                    <input type="" class="form-control form-control-primary input-required" name="allocation[{{$design->design_no}}][1][tb_stone]" data-stone-type="tb_stone" required>
                                                                 </td>
                                                             </tr>
                                                         </tbody>
@@ -181,32 +181,33 @@
                 newAllocationContent    +=                  '<option value="Shilpi">Shilpi</option>';
                 newAllocationContent    +=              '<select/>';
                 newAllocationContent    +=      '</th>';
-                newAllocationContent    +=      '<th>'
-                newAllocationContent    +=          '<input type="" class="form-control form-control-primary input-required input-field-allocate-count" name="" data-design-no="'+designNo+'" data-bangle-size="2.2" data-max-length="'+leftCounts[0]+'" placeholder="Max: '+leftCounts[0]+'">';
+                newAllocationContent    +=      '<th>';
+                newAllocationContent    +=          '<input type="" class="form-control form-control-primary input-required input-field-allocate-count" name="allocation['+designNo+']['+currentTotalRows+'][allocation][0]" data-design-no="'+designNo+'" data-bangle-size="2.2" data-max-length="'+leftCounts[0]+'" placeholder="Max: '+leftCounts[0]+'" value="0">';
                 newAllocationContent    +=      '</th>';
-                newAllocationContent    +=      '<th>'
-                newAllocationContent    +=          '<input type="" class="form-control form-control-primary input-required input-field-allocate-count" name="" data-design-no="'+designNo+'" data-bangle-size="2.4" data-max-length="'+leftCounts[1]+'" placeholder="Max: '+leftCounts[1]+'">';
+                newAllocationContent    +=      '<th>';
+                newAllocationContent    +=          '<input type="" class="form-control form-control-primary input-required input-field-allocate-count" name="allocation['+designNo+']['+currentTotalRows+'][allocation][1]" data-design-no="'+designNo+'" data-bangle-size="2.4" data-max-length="'+leftCounts[1]+'" placeholder="Max: '+leftCounts[1]+'" value="0">';
                 newAllocationContent    +=      '</th>';
-                newAllocationContent    +=      '<th>'
-                newAllocationContent    +=          '<input type="" class="form-control form-control-primary input-required input-field-allocate-count" name="" data-design-no="'+designNo+'" data-bangle-size="2.6" data-max-length="'+leftCounts[2]+'" placeholder="Max: '+leftCounts[2]+'">';
+                newAllocationContent    +=      '<th>';
+                newAllocationContent    +=          '<input type="" class="form-control form-control-primary input-required input-field-allocate-count" name="allocation['+designNo+']['+currentTotalRows+'][allocation][2]" data-design-no="'+designNo+'" data-bangle-size="2.6" data-max-length="'+leftCounts[2]+'" placeholder="Max: '+leftCounts[2]+'" value="0">';
                 newAllocationContent    +=      '</th>';
-                newAllocationContent    +=      '<th>'
-                newAllocationContent    +=          '<input type="" class="form-control form-control-primary input-required input-field-allocate-count" name="" data-design-no="'+designNo+'" data-bangle-size="2.8" data-max-length="'+leftCounts[3]+'" placeholder="Max: '+leftCounts[3]+'">';
+                newAllocationContent    +=      '<th>';
+                newAllocationContent    +=          '<input type="" class="form-control form-control-primary input-required input-field-allocate-count" name="allocation['+designNo+']['+currentTotalRows+'][allocation][3]" data-design-no="'+designNo+'" data-bangle-size="2.8" data-max-length="'+leftCounts[3]+'" placeholder="Max: '+leftCounts[3]+'" value="0">';
                 newAllocationContent    +=      '</th>';
-                newAllocationContent    +=      '<th>'
-                newAllocationContent    +=          '<input type="" class="form-control form-control-primary input-required input-field-allocate-count" name="" data-design-no="'+designNo+'" data-bangle-size="2.10" data-max-length="'+leftCounts[4]+'" placeholder="Max: '+leftCounts[4]+'">';
+                newAllocationContent    +=      '<th>';
+                newAllocationContent    +=          '<input type="" class="form-control form-control-primary input-required input-field-allocate-count" name="allocation['+designNo+']['+currentTotalRows+'][allocation][4]" data-design-no="'+designNo+'" data-bangle-size="2.10" data-max-length="'+leftCounts[4]+'" placeholder="Max: '+leftCounts[4]+'" value="0">';
                 newAllocationContent    +=      '</th>';
-                newAllocationContent    +=      '<th>'
-                newAllocationContent    +=          '<input type="" class="form-control form-control-primary input-required" data-stone-type="round_stone" name="">'
+                newAllocationContent    +=      '<th>';
+                newAllocationContent    +=          '<input type="" class="form-control form-control-primary input-required" data-stone-type="round_stone" name="allocation['+designNo+']['+currentTotalRows+'][round_stone]" value="0">';
                 newAllocationContent    +=      '</th>';
-                newAllocationContent    +=      '<th>'
-                newAllocationContent    +=          '<input type="" class="form-control form-control-primary input-required" data-stone-type="big_stone" name="">'
+                newAllocationContent    +=      '<th>';
+                newAllocationContent    +=          '<input type="" class="form-control form-control-primary input-required" data-stone-type="big_stone" name="allocation['+designNo+']['+currentTotalRows+'][big_stone]" value="0">';
                 newAllocationContent    +=      '</th>';
-                newAllocationContent    +=      '<th>'
-                newAllocationContent    +=          '<input type="" class="form-control form-control-primary input-required" data-stone-type="tb_stone" name="">'
+                newAllocationContent    +=      '<th>';
+                newAllocationContent    +=          '<input type="" class="form-control form-control-primary input-required" data-stone-type="tb_stone" name="allocation['+designNo+']['+currentTotalRows+'][tb_stone]" value="0">';
                 newAllocationContent    +=      '</th>';
                 newAllocationContent    +=  '</tr>'
 
+                // canClickToAllocate()
 
                 if(canAllocateMore(leftCounts) == 1){
                     $(this).closest(".media-body").find("tbody").append(newAllocationContent);
@@ -257,21 +258,17 @@
         function validateMaxValue(element) {
             var maxLength = element.attr("data-max-length");
             var value = element.val();
-            value = value.trim();
-            element.val(value);
             value = parseInt(value);
 
             if(isNaN(value)) {
-                element.addClass("border-danger");   
-                element.val(0);
-                element.removeClass("border-danger");
+                element.addClass("border-danger");
             } else {
                 if(value > maxLength) {
                     element.addClass("border-danger");
                     setTimeout(function() {
                         element.val(maxLength);
                         element.removeClass("border-danger");
-                    }, 500);
+                    }, 10);
                 } else {
                     element.removeClass("border-danger");
                 }
