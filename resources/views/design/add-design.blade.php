@@ -62,6 +62,7 @@
 			<div class="col-md-2">
 				<div class="row p-2">
 					<div class="preview img-wrapper rounded"></div>
+					<span class='required-picture' id="design_no_tooltip" style='color:red; display: none; margin-bottom: 20px;'><b>Design Image required!</b></span>
 					<div class="">
 						<br>
 						<label for="picture">
@@ -72,7 +73,7 @@
 						<br>
 					</div>
 				</div>
-				<div class="row">
+				<div class="row right-padding">
 					<div class="col-sm-12">
                         <div class="row text-left">
                         	<label class="col-form-label ml-0"><b>Rhodium</b></label>
@@ -80,7 +81,7 @@
                     </div>
                     <div class="col-sm-12">
                     	<div class="row">
-                    		<input type="text" class="form-control form-control-primary input-required" value="" id="rhodium" name="rhodium">
+                    		<input type="text" class="form-control form-control-primary input-required" value="" id="rhodium" name="rhodium" required>
                     	</div>
                     </div>
 					<div class="col-sm-12">
@@ -90,7 +91,7 @@
                     </div>
                     <div class="col-sm-12">
                     	<div class="row">
-                    		<input type="text" class="form-control form-control-primary input-required" value="" id="misc_price" name="misc_price">
+                    		<input type="text" class="form-control form-control-primary input-required" value="" id="misc_price" name="misc_price" required>
                     	</div>
                     </div>
 					<div class="col-sm-12">
@@ -100,7 +101,7 @@
                     </div>
                     <div class="col-sm-12">
                     	<div class="row">
-	                    	<input type="text" class="form-control form-control-primary input-required" value="" id="markup_percentage" name="markup_percentage">
+	                    	<input type="text" class="form-control form-control-primary input-required" value="" id="markup_percentage" name="markup_percentage" required>
                     	</div>
                     </div>
                     <div class="col-sm-12 showPriceDivs">
@@ -361,6 +362,7 @@
 
     $("#picture").change(function() {
 		$(".img-wrapper").removeClass("border-danger");
+		$(".required-picture").hide();
         readURL(this);
     });
 
@@ -754,6 +756,7 @@
 		
 		if(!picture){
 			$(".img-wrapper").addClass("border-danger");
+			$(".required-picture").show();
 			e.preventDefault();
 		}	
 	});

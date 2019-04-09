@@ -40,7 +40,7 @@
                     <div class="row p-2">
                         <div class="preview img-wrapper rounded" style="background-image: url({{asset($design->picture)}});background-size: cover; background-position:center"></div>
                     </div>
-                    <div class="row">
+                    <div class="row right-padding">
                         <div class="col-sm-12">
                             <div class="row text-left">
                                 <label class="col-form-label ml-0"><b>Rhodium</b></label>

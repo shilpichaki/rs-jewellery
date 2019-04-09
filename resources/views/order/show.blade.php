@@ -138,7 +138,7 @@
                                 <div class="form-control autonumber form-control-primary">{{$order->delivery_date}}</div>
                             </div>
                             <div class="col-sm-12">
-                                <a href="{{route('order.edit', ['order' => $order->order_no])}}" style="width: 170px;" class="btn btn-success pull-right add-row">
+                                <a href="{{route('order.edit', ['order' => $order->order_no])}}" style="width: 170px; margin-top: 12px;" class="btn btn-success pull-right add-row">
                                     <i class="fa fa-pencil"></i>&nbsp;&nbsp; Edit order
                                 </a>
                             </div>
@@ -225,21 +225,21 @@
                                                                 <td>
                                                                     <div class="form-control form-control-primary">
                                                                         <span>
-                                                                            <?php echo ((array) $design->rhodium)[1]; ?>
+                                                                            <?php echo((array) $design->rhodium)[1]; ?>
                                                                         </span>
                                                                     </div>
                                                                 </td>
                                                                 <td>
                                                                     <div class="form-control form-control-primary">
                                                                         <span>
-                                                                            <?php echo ((array) $design->rhodium)[2]; ?>
+                                                                            <?php echo((array) $design->rhodium)[2]; ?>
                                                                         </span>
                                                                     </div>
                                                                 </td>
                                                                 <td colspan="2">
                                                                     <div class="form-control form-control-primary">
                                                                         <span>
-                                                                            <?php echo ((array) $design->rhodium)[3]; ?>
+                                                                            <?php echo((array) $design->rhodium)[3]; ?>
                                                                         </span>
                                                                     </div>
                                                                 </td>

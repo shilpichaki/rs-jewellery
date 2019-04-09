@@ -44,7 +44,7 @@
                     <div class="preview img-wrapper rounded" style="background-image: url({{asset($design->picture)}});background-size: cover; background-position:center">
                     </div>
                 </div>
-                <div class="row">
+                <div class="row right-padding">
                     <div class="col-sm-12">
                         <div class="row text-left">
                             <label class="col-form-label ml-0"><b>Rhodium</b></label>
@@ -115,7 +115,13 @@
                             <tbody id="append_parent">
                             @if($stonesCount > 0)
                                 @foreach($design->stones as $key => $stone)
-                                    <tr id="add_stone_row_{{$key}}" data-rowStoneType="<?php if($stone->stone_type == "ROUND STONE"){echo 'round_stone';} else if($stone->stone_type == "BIG STONE"){echo 'big_stone';} else if($stone->stone_type == "TB STONE"){echo 'tb_stone';} ?>">
+                                    <tr id="add_stone_row_{{$key}}" data-rowStoneType="<?php if ($stone->stone_type == "ROUND STONE") {
+    echo 'round_stone';
+} elseif ($stone->stone_type == "BIG STONE") {
+    echo 'big_stone';
+} elseif ($stone->stone_type == "TB STONE") {
+    echo 'tb_stone';
+} ?>">
                                         <td>
                                             <input class="form-control form-control-primary" type="text" name="stones[{{$key}}][size]" required value="{{$stone->size}}">
                                         </td>
@@ -143,19 +149,49 @@
                                             </select>
                                         </td>
                                         <td>
-                                            <input data-stoneType="<?php if($stone->stone_type == "ROUND STONE"){echo 'round_stone';} else if($stone->stone_type == "BIG STONE"){echo 'big_stone';} else if($stone->stone_type == "TB STONE"){echo 'tb_stone';} ?>" data-bangleSize="2.2" class="form-control form-control-primary add_type_stone_22 input-required" type="text" name="stones[{{$key}}][quantity][0]" required pattern="\d+" title="" value="{{$stone->quantity[0]}}">
+                                            <input data-stoneType="<?php if ($stone->stone_type == "ROUND STONE") {
+    echo 'round_stone';
+} elseif ($stone->stone_type == "BIG STONE") {
+    echo 'big_stone';
+} elseif ($stone->stone_type == "TB STONE") {
+    echo 'tb_stone';
+} ?>" data-bangleSize="2.2" class="form-control form-control-primary add_type_stone_22 input-required" type="text" name="stones[{{$key}}][quantity][0]" required pattern="\d+" title="" value="{{$stone->quantity[0]}}">
                                         </td>
                                         <td>
-                                            <input data-stoneType="<?php if($stone->stone_type == "ROUND STONE"){echo 'round_stone';} else if($stone->stone_type == "BIG STONE"){echo 'big_stone';} else if($stone->stone_type == "TB STONE"){echo 'tb_stone';} ?>" data-bangleSize="2.4" class="form-control form-control-primary add_type_stone_24 input-required" type="text" name="stones[{{$key}}][quantity][1]" required pattern="\d+" value="{{$stone->quantity[1]}}">
+                                            <input data-stoneType="<?php if ($stone->stone_type == "ROUND STONE") {
+    echo 'round_stone';
+} elseif ($stone->stone_type == "BIG STONE") {
+    echo 'big_stone';
+} elseif ($stone->stone_type == "TB STONE") {
+    echo 'tb_stone';
+} ?>" data-bangleSize="2.4" class="form-control form-control-primary add_type_stone_24 input-required" type="text" name="stones[{{$key}}][quantity][1]" required pattern="\d+" value="{{$stone->quantity[1]}}">
                                         </td>
                                         <td>
-                                            <input data-stoneType="<?php if($stone->stone_type == "ROUND STONE"){echo 'round_stone';} else if($stone->stone_type == "BIG STONE"){echo 'big_stone';} else if($stone->stone_type == "TB STONE"){echo 'tb_stone';} ?>" data-bangleSize="2.6" class="form-control form-control-primary add_type_stone_26 input-required" type="text" name="stones[{{$key}}][quantity][2]" required pattern="\d+" value="{{$stone->quantity[2]}}">
+                                            <input data-stoneType="<?php if ($stone->stone_type == "ROUND STONE") {
+    echo 'round_stone';
+} elseif ($stone->stone_type == "BIG STONE") {
+    echo 'big_stone';
+} elseif ($stone->stone_type == "TB STONE") {
+    echo 'tb_stone';
+} ?>" data-bangleSize="2.6" class="form-control form-control-primary add_type_stone_26 input-required" type="text" name="stones[{{$key}}][quantity][2]" required pattern="\d+" value="{{$stone->quantity[2]}}">
                                         </td>
                                         <td>
-                                            <input data-stoneType="<?php if($stone->stone_type == "ROUND STONE"){echo 'round_stone';} else if($stone->stone_type == "BIG STONE"){echo 'big_stone';} else if($stone->stone_type == "TB STONE"){echo 'tb_stone';} ?>" data-bangleSize="2.8" class="form-control form-control-primary add_type_stone_28 input-required" type="text" name="stones[{{$key}}][quantity][3]" required pattern="\d+" value="{{$stone->quantity[3]}}">
+                                            <input data-stoneType="<?php if ($stone->stone_type == "ROUND STONE") {
+    echo 'round_stone';
+} elseif ($stone->stone_type == "BIG STONE") {
+    echo 'big_stone';
+} elseif ($stone->stone_type == "TB STONE") {
+    echo 'tb_stone';
+} ?>" data-bangleSize="2.8" class="form-control form-control-primary add_type_stone_28 input-required" type="text" name="stones[{{$key}}][quantity][3]" required pattern="\d+" value="{{$stone->quantity[3]}}">
                                         </td>
                                         <td>
-                                            <input data-stoneType="<?php if($stone->stone_type == "ROUND STONE"){echo 'round_stone';} else if($stone->stone_type == "BIG STONE"){echo 'big_stone';} else if($stone->stone_type == "TB STONE"){echo 'tb_stone';} ?>" data-bangleSize="2.10" class="form-control form-control-primary add_type_stone_210 input-required" type="text" name="stones[{{$key}}][quantity][4]" required pattern="\d+" value="{{$stone->quantity[4]}}">
+                                            <input data-stoneType="<?php if ($stone->stone_type == "ROUND STONE") {
+    echo 'round_stone';
+} elseif ($stone->stone_type == "BIG STONE") {
+    echo 'big_stone';
+} elseif ($stone->stone_type == "TB STONE") {
+    echo 'tb_stone';
+} ?>" data-bangleSize="2.10" class="form-control form-control-primary add_type_stone_210 input-required" type="text" name="stones[{{$key}}][quantity][4]" required pattern="\d+" value="{{$stone->quantity[4]}}">
                                         </td>
                                         <td>
                                             <input class="form-control form-control-primary input-required" type="text" name="stones[{{$key}}][stone_price]" required title="Example: 500.00, 1000.70" value="{{$stone->stone_price}}">
