@@ -352,7 +352,7 @@
                                 content +='</table>';
                                 content +='<button style="margin-top:15px; margin-left:10px;" class="btn btn-success" id="choosing_complete"><i class="fa fa-paper-plane"></i>Confirm</button>';
                                 content +='<button style="margin-top:15px; margin-left:10px;" class="btn btn-primary" id="choosing_more"><i class="fa fa-plus"></i>Add more design</button>';
-                                content +='<button style="margin-top:15px; margin-left:10px;" class="btn btn-success" id="cancle"><i class="fa fa-window-close"></i>Cancle</button>';
+                                content +='<button style="margin-top:15px; margin-left:10px;" class="btn btn-success" id="cancle"><i class="fa fa-window-close"></i>Cancel</button>';
                                 content +='</div>';
                                 content +='</div>';
                                 content +='</div>';

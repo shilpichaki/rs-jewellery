@@ -7,7 +7,10 @@
 		.table-bordered td {
 		    width: 60px !important;
 		}
-		/*.blinkAnimation{
+		/*.table td {
+			padding: .25rem !important;
+		}
+		.blinkAnimation{
 		    animation: blinkingText 2s infinite;
 		}
 		@keyframes blinkingText{
