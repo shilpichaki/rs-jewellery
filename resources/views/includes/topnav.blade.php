@@ -6,8 +6,8 @@
             <a class="mobile-menu" id="mobile-collapse" href="#!">
                 <i class="feather icon-menu"></i>
             </a>
-            <a href="/dashboard">
-                <img src="{{asset('image/RPSJewelleryW.png')}}" style="height: 50px;width: 150px" alt="logo.png">
+            <a href="/dashboard" class="ml-0">
+                <img src="{{asset('image/rpsLogo.png')}}" style="height: 50px;width: 70px;" alt="RPS Jewellery Logo">
             </a>
             <a class="mobile-options">
                 <i class="feather icon-more-horizontal"></i>

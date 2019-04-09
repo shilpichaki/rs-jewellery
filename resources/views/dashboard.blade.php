@@ -16,7 +16,7 @@
 @endsection
 
 @section('content')
- <h2 class="text-center my-5" style="font-size: 3vw;">Welcome to <img src="{{asset('image/RPS.png')}}"  alt="logo.png"> Jewellery</h2>
+ <h2 class="text-center my-5" style="font-size: 3vw;">Welcome to <img src="{{asset('image/fa-fa-rps.png')}}"  style="height: 182px;width: 250px;" alt="RPS Jewellery Logo"> Jewellery</h2>
 
  <div class="row"> 
 
