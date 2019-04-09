@@ -96,7 +96,7 @@
                                                             </tr>
                                                         </thead>
                                                         <tbody data-total-rows="1">
-                                                            <tr data-row-index="1">
+                                                            <tr data-row-index="1" data-design-no="{{$design->design_no}}">
                                                                 <td>
                                                                     <select class="form-control form-control-primary"
                                                                     name="allocation[{{$design->design_no}}][1][worker]">
@@ -166,13 +166,15 @@
                 prevTotalRows = parseInt(prevTotalRows);
                 var currentTotalRows = prevTotalRows + 1;
 
+                makeEveryFieldReadOnly(prevTotalRows, designNo);
+
                 calcStonesCount($('tr[data-row-index="'+prevTotalRows+'"]'), designNo);
                 
                 $(this).closest(".media-body").find("tbody").attr("data-total-rows", currentTotalRows);
 
                 var leftCounts = calculateMaxLengthNextFow(designNo, prevTotalRows);
 
-                var newAllocationContent = '<tr data-row-index='+currentTotalRows+'>';
+                var newAllocationContent = '<tr data-row-index='+currentTotalRows+' data-design-no="'+designNo+'">';
                 newAllocationContent    +=      '<th>';
                 newAllocationContent    +=              '<select class="form-control form-control-primary" name="allocation['+designNo+']['+currentTotalRows+'][worker]">';
                 newAllocationContent    +=                  '<option value="Mota">Mota</option>';
@@ -182,28 +184,28 @@
                 newAllocationContent    +=              '<select/>';
                 newAllocationContent    +=      '</th>';
                 newAllocationContent    +=      '<th>';
-                newAllocationContent    +=          '<input type="" class="form-control form-control-primary input-required input-field-allocate-count" name="allocation['+designNo+']['+currentTotalRows+'][allocation][0]" data-design-no="'+designNo+'" data-bangle-size="2.2" data-max-length="'+leftCounts[0]+'" placeholder="Max: '+leftCounts[0]+'" value="0">';
+                newAllocationContent    +=          '<input type="" class="form-control form-control-primary input-required input-field-allocate-count" name="allocation['+designNo+']['+currentTotalRows+'][allocation][0]" data-design-no="'+designNo+'" data-bangle-size="2.2" data-max-length="'+leftCounts[0]+'" placeholder="Max: '+leftCounts[0]+'">';
                 newAllocationContent    +=      '</th>';
                 newAllocationContent    +=      '<th>';
-                newAllocationContent    +=          '<input type="" class="form-control form-control-primary input-required input-field-allocate-count" name="allocation['+designNo+']['+currentTotalRows+'][allocation][1]" data-design-no="'+designNo+'" data-bangle-size="2.4" data-max-length="'+leftCounts[1]+'" placeholder="Max: '+leftCounts[1]+'" value="0">';
+                newAllocationContent    +=          '<input type="" class="form-control form-control-primary input-required input-field-allocate-count" name="allocation['+designNo+']['+currentTotalRows+'][allocation][1]" data-design-no="'+designNo+'" data-bangle-size="2.4" data-max-length="'+leftCounts[1]+'" placeholder="Max: '+leftCounts[1]+'">';
                 newAllocationContent    +=      '</th>';
                 newAllocationContent    +=      '<th>';
-                newAllocationContent    +=          '<input type="" class="form-control form-control-primary input-required input-field-allocate-count" name="allocation['+designNo+']['+currentTotalRows+'][allocation][2]" data-design-no="'+designNo+'" data-bangle-size="2.6" data-max-length="'+leftCounts[2]+'" placeholder="Max: '+leftCounts[2]+'" value="0">';
+                newAllocationContent    +=          '<input type="" class="form-control form-control-primary input-required input-field-allocate-count" name="allocation['+designNo+']['+currentTotalRows+'][allocation][2]" data-design-no="'+designNo+'" data-bangle-size="2.6" data-max-length="'+leftCounts[2]+'" placeholder="Max: '+leftCounts[2]+'">';
                 newAllocationContent    +=      '</th>';
                 newAllocationContent    +=      '<th>';
-                newAllocationContent    +=          '<input type="" class="form-control form-control-primary input-required input-field-allocate-count" name="allocation['+designNo+']['+currentTotalRows+'][allocation][3]" data-design-no="'+designNo+'" data-bangle-size="2.8" data-max-length="'+leftCounts[3]+'" placeholder="Max: '+leftCounts[3]+'" value="0">';
+                newAllocationContent    +=          '<input type="" class="form-control form-control-primary input-required input-field-allocate-count" name="allocation['+designNo+']['+currentTotalRows+'][allocation][3]" data-design-no="'+designNo+'" data-bangle-size="2.8" data-max-length="'+leftCounts[3]+'" placeholder="Max: '+leftCounts[3]+'">';
                 newAllocationContent    +=      '</th>';
                 newAllocationContent    +=      '<th>';
-                newAllocationContent    +=          '<input type="" class="form-control form-control-primary input-required input-field-allocate-count" name="allocation['+designNo+']['+currentTotalRows+'][allocation][4]" data-design-no="'+designNo+'" data-bangle-size="2.10" data-max-length="'+leftCounts[4]+'" placeholder="Max: '+leftCounts[4]+'" value="0">';
+                newAllocationContent    +=          '<input type="" class="form-control form-control-primary input-required input-field-allocate-count" name="allocation['+designNo+']['+currentTotalRows+'][allocation][4]" data-design-no="'+designNo+'" data-bangle-size="2.10" data-max-length="'+leftCounts[4]+'" placeholder="Max: '+leftCounts[4]+'">';
                 newAllocationContent    +=      '</th>';
                 newAllocationContent    +=      '<th>';
-                newAllocationContent    +=          '<input type="" class="form-control form-control-primary input-required" data-stone-type="round_stone" name="allocation['+designNo+']['+currentTotalRows+'][round_stone]" value="0">';
+                newAllocationContent    +=          '<input type="" class="form-control form-control-primary input-required" data-stone-type="round_stone" name="allocation['+designNo+']['+currentTotalRows+'][round_stone]">';
                 newAllocationContent    +=      '</th>';
                 newAllocationContent    +=      '<th>';
-                newAllocationContent    +=          '<input type="" class="form-control form-control-primary input-required" data-stone-type="big_stone" name="allocation['+designNo+']['+currentTotalRows+'][big_stone]" value="0">';
+                newAllocationContent    +=          '<input type="" class="form-control form-control-primary input-required" data-stone-type="big_stone" name="allocation['+designNo+']['+currentTotalRows+'][big_stone]">';
                 newAllocationContent    +=      '</th>';
                 newAllocationContent    +=      '<th>';
-                newAllocationContent    +=          '<input type="" class="form-control form-control-primary input-required" data-stone-type="tb_stone" name="allocation['+designNo+']['+currentTotalRows+'][tb_stone]" value="0">';
+                newAllocationContent    +=          '<input type="" class="form-control form-control-primary input-required" data-stone-type="tb_stone" name="allocation['+designNo+']['+currentTotalRows+'][tb_stone]">';
                 newAllocationContent    +=      '</th>';
                 newAllocationContent    +=  '</tr>'
 
@@ -216,6 +218,11 @@
                 }
             });
         });
+        function makeEveryFieldReadOnly(row, designNumber)
+        {
+            console.log(row+"  "+designNumber)
+            $('tr[data-row-index="'+row+'"][data-design-no="'+designNumber+'"]').find("input").prop("readonly", true);
+        }
         function calculateMaxLengthNextFow(designNumber, rowIndex)
         {
             var leftCount = [];
