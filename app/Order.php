@@ -16,4 +16,9 @@ class Order extends Model
     {
     	return 'order_no';
     }
+
+    public function Allocations()
+    {
+    	return $this->hasMany(Allocation::class);
+    }
 }

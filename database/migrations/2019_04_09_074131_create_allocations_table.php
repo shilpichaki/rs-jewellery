@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAllocationReceiveTransactionsTable extends Migration
+class CreateAllocationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,15 @@ class CreateAllocationReceiveTransactionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('allocation_receive_transactions', function (Blueprint $table) {
+        Schema::create('allocations', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->bigInteger('order_id')->unsigned();
+            $table->string('set_count');
+            $table->string('design_no');
+            $table->text('allocations');
             $table->timestamps();
+
+            $table->foreign('order_id')->references('id')->on('orders');
         });
     }
 
@@ -26,6 +32,6 @@ class CreateAllocationReceiveTransactionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('allocation_receive_transactions');
+        Schema::dropIfExists('allocations');
     }
 }
