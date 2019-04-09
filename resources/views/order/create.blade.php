@@ -105,7 +105,7 @@
                                 <span class="form-bar"></span>
                             </div>
                             <div class="col-sm-2">
-                                <label class="col-form-label">Order Delivery Date</label>
+                                <label class="col-form-label">Order Delivery<br> Date</label>
                             </div>
                             <div class="col-sm-4">
                                 <input type="date" class="form-control autonumber form-control-primary" value="" required="" id="" name="delivery_date">
@@ -222,7 +222,7 @@
                         type: "GET",
                         success: function (data) {
                             if(data.code == 200) {
-                                console.log(data.data);
+//                                console.log(data.data);
 
                                 totalStones = Object.keys(data.data.stones).length;
 
@@ -352,6 +352,7 @@
                                 content +='</table>';
                                 content +='<button style="margin-top:15px; margin-left:10px;" class="btn btn-success" id="choosing_complete"><i class="fa fa-paper-plane"></i>Confirm</button>';
                                 content +='<button style="margin-top:15px; margin-left:10px;" class="btn btn-primary" id="choosing_more"><i class="fa fa-plus"></i>Add more design</button>';
+                                content +='<button style="margin-top:15px; margin-left:10px;" class="btn btn-success" id="cancle"><i class="fa fa-window-close"></i>Cancle</button>';
                                 content +='</div>';
                                 content +='</div>';
                                 content +='</div>';
@@ -391,10 +392,11 @@
                 var total_stone_count =$("#total_stone_count").attr('data-totalStoneCount');
 
                 contentToDump += '<div class="mycards" style="background-image: url('+img_preview_url+')" >';
+                contentToDump += '<div style="background: #0808081f;height: 100%;">';
                 contentToDump += '<div class="card-block">';
                 contentToDump += '<div class="row align-items-end">';
-                contentToDump += '<div class="col-8">';
-                contentToDump += '<h4 class="">#'+get_design_no+'</h4>';
+                contentToDump += '<div class="col-6">';
+                contentToDump += '<h4 class="text-white">#'+get_design_no+'</h4>';
                 contentToDump += '<h6 class="text-white m-b-0">';
                 contentToDump += '</h6>';
                 contentToDump += '</div>';
@@ -421,7 +423,13 @@
                     contentToDump += '<input type="hidden" name="designs['+get_design_no+'][stone_count]['+i+']" value="'+$("#stone_count_"+i).val()+'">';
                 }
 
-                contentToDump +='</div></div></div></div>';
+                contentToDump += '</div>';
+                contentToDump += '<div class="col-2">';
+                contentToDump += '<div class="row">';
+                contentToDump += '<button type="button" class="closeCard" data-design="'+get_design_no+'">';
+                contentToDump += '<i style="cursor:pointer" class="fa fa-times p-2"></i>';
+                contentToDump += '</button></div></div>';
+                contentToDump += '</div></div></div></div>';
 
                 $('#dumpcontent').html('');
 
@@ -440,7 +448,7 @@
         });
         function isDesignAlreadyAdded (design_no) {
             var added_designs = $(".attachDesign").attr("data-designs");
-            var added_designs = added_designs.split(',')
+            var added_designs = added_designs.split(',');
 
             if ($.inArray(design_no, added_designs) != -1) {
                 return true;
@@ -534,5 +542,32 @@
                 console.log(total);
             }
         }
+
+        $(document).ready(function() {
+            $( 'body' ).on("click",".closeCard",function() {
+                var designNumberToBeRemoved = $(this).attr('data-design');
+                var designNumbers = $('.attachDesign').attr('data-designs');
+                designNumbers = designNumbers.split(',');
+                console.log(designNumbers);
+                var index = designNumbers.indexOf(designNumberToBeRemoved);
+                console.log(index);
+                if (index > -1) {
+                    designNumbers.splice(index, 1);
+                }
+                $('.attachDesign').attr('data-designs', designNumbers );
+                $(this).closest( '.mycards' ).remove();
+            });
+        });
+
+        //cancling the content dumped
+        $(document).ready(function() {
+            $( 'body' ).on("click","#cancle",function() {
+                $('#dumpcontent').html('');
+                $('.addDesign').show();
+                $('html, body').animate({
+                    scrollTop: $(".btnAddDesign").offset().top
+                }, 500);
+            });
+        });
     </script>
 @endsection

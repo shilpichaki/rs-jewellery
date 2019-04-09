@@ -7,7 +7,7 @@
                 <i class="feather icon-menu"></i>
             </a>
             <a href="/dashboard">
-                RPS-Jewellery
+                <img src="{{asset('image/RPSJewelleryW.png')}}" style="height: 50px;width: 150px" alt="logo.png">
             </a>
             <a class="mobile-options">
                 <i class="feather icon-more-horizontal"></i>
