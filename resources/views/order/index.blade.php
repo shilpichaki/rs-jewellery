@@ -37,6 +37,9 @@
                                     <a href="{{route('order.show', ['order' => $order->order_no])}}" class="btn btn-primary add-row">
                                         <i class="fa fa-eye"></i>&nbsp;&nbsp;Show Order
                                     </a>
+                                    <a href="{{route('order.allocation', ['order' => $order->order_no])}}" class="btn btn-primary add-row">
+                                        <i class="fa fa-tasks"></i>&nbsp;&nbsp;Allocate Order
+                                    </a>
                                 </td>
                             </tr>
                         @endforeach

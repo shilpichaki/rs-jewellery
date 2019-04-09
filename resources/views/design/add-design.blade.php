@@ -23,10 +23,14 @@
 	</style>
 @endsection
 @section('content')
-@if($errors->any())
-	@foreach ($errors->all('<p>:message</p>') as $input_error)
-    {{ $input_error }}
-  @endforeach 
+@if ($errors->any())
+	<div class="alert alert-danger">
+		<ul>
+			@foreach ($errors->all() as $error)
+			<li>{{ $error }}</li>
+			@endforeach
+		</ul>
+	</div>
 @endif
 	<h2 class="text-center py-3">Add Design</h2>
 	<form id="add-deisgn-form" action="{{route('design.store-design')}}" method="POST" enctype="multipart/form-data">
@@ -39,9 +43,10 @@
 						<tbody>
 						<tr>
 							<td class="ts">Design number:</td>
-							<td>
+							<td colspan="2">
 								<input class="form-control form-control-primary input-required" type="text" name="design_no" id="design_no" title="Design number should be an integer!" required>
-								<a href="#" id="design_no_tooltip" data-toggle="tooltip" data-placement="top" title="Design number already in use!" style="display: none; font-size: 22px; color: red">!</a>
+								<span class='validation' id="design_no_tooltip" style='color:red; display: none; margin-bottom: 20px;'><b>Design number already in use!</b></span>
+								<!-- <a href="#" id="design_no_tooltip" data-toggle="tooltip" data-placement="top" title="Design number already in use!" style="display: none; font-size: 22px; color: red">!</a> -->
 							</td>
 						</tr>
 						</tbody>
@@ -63,7 +68,7 @@
 					<div class="">
 						<br>
 						<label for="picture">
-							<input type="file" name="picture" id="picture" style="display:none" required />
+							<input type="file" name="picture" id="picture" style="display:none">
 							<span style="font-size: 26px; cursor: pointer;" class="fa fa-upload" aria-hidden="true"></span>
 						</label>
 						<br>
@@ -145,7 +150,7 @@
 									<input class="form-control form-control-primary input-required" type="text" name="stones[0][size]" required>
 								</td>
 								<td>
-									<select class="form-control form-control-primary select-stone-dropdown input-required" name="stones[0][stone_type]">
+									<select class="form-control form-control-primary select-stone-dropdown input-required" name="stones[0][stone_type]" required>
 										<option value="">SELECT STONE</option>
 										@foreach($stones as $stone)
 											<option value="{{$stone}}">{{$stone}}</option>
@@ -358,6 +363,7 @@
     }
 
     $("#picture").change(function() {
+		$(".img-wrapper").removeClass("border-danger");
         readURL(this);
     });
 
@@ -367,24 +373,27 @@
     		design_no = $(this).val();
     		design_no_length = design_no.toString().length;
 
-    		if(design_no_length === 3) {
+    		// if(design_no_length === 3) {
     			$.ajax({
                 url: '{{env('ROOT_URL')}}/api/design/'+design_no,
                 type: "GET",
                 error: function () {
                 	$('#design_no').removeClass('border-danger');
-                    // $('#design_no_tooltip').hide();
+                    $('#design_no_tooltip').hide();
                 	$('#submit_btn').prop('disabled', false);
                 },
                 success: function (data) {
                     if(data.code == 200) {
                     	$('#design_no').addClass('border-danger');
-                    	// $('#design_no_tooltip').show();
+						$('#design_no_tooltip').show();
+                    	// setTimeout(() => {
+						// 	$('#design_no_tooltip').hide();
+						// }, 2000);
                     	$('#submit_btn').prop('disabled', true);
                     }
                 }
             });
-    		}
+    		// }
         });
 	});
 
@@ -740,5 +749,22 @@
 
 		return status;
     }
+
+	$("#submit_btn").on("click", function(e){
+		var picture = $("#picture").val();
+		// var inputs = $('#add-deisgn-form').find('input.input-required');
+		// console.log(inputs);
+		
+		if(!picture){
+			$(".img-wrapper").addClass("border-danger");
+			e.preventDefault();
+		}	
+	});
+
+	$("body").on('keyup blur', '.input-required', function() {
+		if($(this).val() != '') {
+			$(this).removeClass('border-danger');
+		}
+    });
 </script>
 @endsection

@@ -110,16 +110,14 @@
      <div class="col-xl-6 col-md-6">
          <div class="card bg-c-green text-white"> 
          <div class="card-block"> 
-                         <a href="{{route('order.allocation')}}">
-                 <div class="row align-items-center"> 
-                     <div class="col"> 
-                         <h5 class="m-b-0">Order Allocation</h5> 
-                     </div> 
-                     <div class="col col-auto text-right"> 
-                         <i class="fa fa-angle-double-right f-50"></i> 
-                     </div> 
+             <div class="row align-items-center"> 
+                 <div class="col"> 
+                     <h5 class="m-b-0">Order Allocation</h5> 
                  </div> 
-                 </a> 
+                 <div class="col col-auto text-right"> 
+                     <i class="fa fa-angle-double-right f-50"></i> 
+                 </div> 
+             </div> 
              </div> 
          </div> 
      </div>

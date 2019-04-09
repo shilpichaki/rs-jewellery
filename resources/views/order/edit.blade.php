@@ -98,6 +98,18 @@
     .form-control.form-control-primary{
         min-height: 35.5px;
     }
+
+    .remove-design-btn{
+        position: absolute;
+        right: 0px;
+        z-index: 1;
+        top: 0;
+        display: none;
+    }
+
+    .list-view li{
+        position: relative;
+    }
 </style>
 @endsection
 @section('content')
@@ -118,7 +130,7 @@
                                 <label class="col-form-label">Order No.</label>
                             </div>
                             <div class="col-sm-4">
-                                <input type="number" class="form-control autonumber form-control-primary" name="order_no" value="{{$order->order_no}}">
+                                <input type="number" class="form-control autonumber form-control-primary" name="order_no" value="{{$order->order_no}}" disabled="">
                             </div>
                             <div class="col-sm-2">
                                 <label class="col-form-label">Party name</label>
@@ -161,6 +173,9 @@
                                 @foreach($order->designs as $designNumber => $design)
                                 <input type="hidden" name="designs[{{$design->design_no}}][design_no]" value="{{$design->design_no}}">
                                 <li>
+                                    <button type="button" class="close remove-design-btn">
+                                        <i class="fa fa-close"></i>
+                                    </button>
                                     <div class="card list-view-media">
                                         <div class="card-block w-100">
                                             <div class="media">
@@ -228,12 +243,17 @@
                                                                  </td>
                                                                 <td>
                                                                     <input 
-                                                                    type="text" 
+                                                                    type="hidden" 
                                                                     name="designs[{{$design->design_no}}][stone_count][{{$scKey}}]" 
                                                                     class="form-control form-control-primary" 
                                                                     data-design-number="{{$design->design_no}}" 
                                                                     data-row="{{$totalRows}}"
                                                                     value="{{$stoneCount}}">
+                                                                    <div class="text-left form-control form-control-primary" 
+                                                                    data-design-number="{{$design->design_no}}" 
+                                                                    data-row="{{$totalRows}}">
+                                                                        <span>{{$stoneCount}}</span>
+                                                                    </div>
                                                                 </td>
                                                             </tr>
                                                             <?php $totalRows++; ?>
@@ -256,7 +276,7 @@
                                                                 <?php $columnOqs1++; ?>
                                                                 @endforeach
                                                                 <td rowspan="2">
-                                                                    <button style="width: 100%;" class="btn btn-success calc_st_cnt"  data-total-rows="{{$totalRows}}" data-design-no={{$design->design_no}} >Calculate Stone Count</button>
+                                                                    <button style="width: 100%;" type="button" class="btn btn-success calc_st_cnt"  data-total-rows="{{$totalRows}}" data-design-no={{$design->design_no}} >Calculate Stone Count</button>
                                                                 </td>
                                                             </tr>
                                                             <tr>
@@ -269,23 +289,32 @@
                                                                     class="form-control form-control-primary input_oqp oqp2{{$columnOqp}}" 
                                                                     data-design-no="{{$design->design_no}}" 
                                                                     data-bangle-size="2.{{$columnOqp}}" 
-                                                                    type="text"
+                                                                    type="hidden"
                                                                     name="designs[{{$design->design_no}}][oc][{{$columnOqp1}}][oqp]"
                                                                     value="{{$orderCount->oqp}}">
+                                                                    
+                                                                    <div class="form-control form-control-primary input_oqp oqp2{{$columnOqp}}" 
+                                                                    data-design-no="{{$design->design_no}}" 
+                                                                    data-bangle-size="2.{{$columnOqp}}" 
+                                                                    name="designs[{{$design->design_no}}][oc][{{$columnOqp1}}][oqp]">
+                                                                        <span>{{$orderCount->oqp}}</span>
+                                                                    </div>
                                                                 </td>
                                                                 <?php $columnOqp += 2; ?>
                                                                 <?php $columnOqp1++; ?>
                                                                 @endforeach
                                                             </tr>
                                                             <tr>
-                                                                <td>Rhodium</td>
-                                                                <?php $columnRhodium = 1; ?>
-                                                                @foreach($design->rhodium as $rhodium)
+                                                                <td class="text-left">Rhodium</td>
                                                                 <td>
-                                                                    <input type="text" name="designs[{{$design->design_no}}][rhodium][{{$columnRhodium}}]" class="form-control form-control-primary" value="{{$rhodium}}">
+                                                                    <input type="text" name="designs[{{$design->design_no}}][rhodium][1]" class="form-control form-control-primary" value="<?php echo ((array) $design->rhodium)[1]; ?>">
                                                                 </td>
-                                                                <?php $columnRhodium++; ?>
-                                                                @endforeach
+                                                                <td>
+                                                                    <input type="text" name="designs[{{$design->design_no}}][rhodium][2]" class="form-control form-control-primary" value="<?php echo ((array) $design->rhodium)[2]; ?>">
+                                                                </td>
+                                                                <td colspan="2">
+                                                                    <input type="text" name="designs[{{$design->design_no}}][rhodium][3]" class="form-control form-control-primary" value="<?php echo ((array) $design->rhodium)[3]; ?>">
+                                                                </td>
                                                                 <td colspan="5"></td>
                                                             </tr>
                                                         </tbody>
@@ -365,11 +394,14 @@
                 value = value.trim();
 
                 var multiplyBy = $(".oqp2"+j+'[data-design-no="'+designNumber+'"]').val();
+                // multiplyBy = multiplyBy.trim();
                 
                 value *= multiplyBy;
 
                 total += value;
             }
+
+            $('div[data-design-number="'+designNumber+'"][data-row="'+i+'"]').find("span").html(total);
             $('input[data-design-number="'+designNumber+'"][data-row="'+i+'"]').val(total);
             console.log(total);
         }
@@ -399,8 +431,14 @@
 
         if(value != '') {
             var quantity = parseInt(value);
+            $('.input_oqp[data-design-no="'+designNumber+'"][data-bangle-size="'+bangleSize+'"]').find("span").html((quantity*4));
             $('.input_oqp[data-design-no="'+designNumber+'"][data-bangle-size="'+bangleSize+'"]').val((quantity*4));
         }
     });
+
+    // // on deleteing design
+    // $("body").on("click", ".remove-design-btn", function() {
+    //     $(this).closest("li").remove();
+    // });
 </script>
 @endsection

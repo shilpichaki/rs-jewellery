@@ -111,6 +111,10 @@ class DesignController extends Controller
     public function update(Design $design, DesignAadhaarUpdateRequest $request) 
     {
         $validated = $request->validated();
+
+        // sorting stones so it does 
+        // not cast the array to an object
+        $stonesArray = Design::sortStonesArray($request->stones);
         
         // calculating price
         $price4pcs = StonesRow::calculatePrice4Pcs(
@@ -126,7 +130,7 @@ class DesignController extends Controller
         $design->misc_price = $request->misc_price;
         $design->markup_percentage = $request->markup_percentage;
         $design->price_4pcs = $price4pcs;
-        $design->stones = json_encode($request->stones);
+        $design->stones = json_encode($stonesArray);
         $design->total_stone_count = json_encode($request->total_stone_count);
         $design->unique_stone_colors = json_encode($uniqueStoneColors);
 
