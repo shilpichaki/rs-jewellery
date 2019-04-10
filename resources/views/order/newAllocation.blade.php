@@ -107,29 +107,29 @@
                                                                         <option value="3">Amit</option>
                                                                     </select>
                                                                 </td>
-                                                                <td>
+                                                                <td class="allocate-count">
                                                                     <input type="" class="form-control form-control-primary input-required input-field-allocate-count" name="allocation[{{$design->design_no}}][1][allocation][0]" data-design-no="{{$design->design_no}}" data-bangle-size="2.2" data-max-length="{{$design->oc[0]->oqs}}" placeholder="Max: {{$design->oc[0]->oqs}}" required>
                                                                 </td>
-                                                                <td>
+                                                                <td class="allocate-count">
                                                                     <input type="" class="form-control form-control-primary input-required input-field-allocate-count" name="allocation[{{$design->design_no}}][1][allocation][1]" data-design-no="{{$design->design_no}}" data-max-length="{{$design->oc[1]->oqs}}" data-bangle-size="2.4" placeholder="Max: {{$design->oc[1]->oqs}}" required>
                                                                 </td>
-                                                                <td>
+                                                                <td class="allocate-count">
                                                                     <input type="" class="form-control form-control-primary input-required input-field-allocate-count" name="allocation[{{$design->design_no}}][1][allocation][2]" data-design-no="{{$design->design_no}}" data-max-length="{{$design->oc[2]->oqs}}" data-bangle-size="2.6" placeholder="Max: {{$design->oc[2]->oqs}}" required>
                                                                 </td>
-                                                                <td>
+                                                                <td class="allocate-count">
                                                                     <input type="" class="form-control form-control-primary input-required input-field-allocate-count" name="allocation[{{$design->design_no}}][1][allocation][3]" data-design-no="{{$design->design_no}}" data-max-length="{{$design->oc[3]->oqs}}" data-bangle-size="2.8" placeholder="Max: {{$design->oc[3]->oqs}}" required>
                                                                 </td>
-                                                                <td>
+                                                                <td class="allocate-count">
                                                                     <input type="" class="form-control form-control-primary input-required input-field-allocate-count" name="allocation[{{$design->design_no}}][1][allocation][4]" data-design-no="{{$design->design_no}}" data-max-length="{{$design->oc[4]->oqs}}" data-bangle-size="2.10" placeholder="Max: {{$design->oc[4]->oqs}}" required>
                                                                 </td>
                                                                 <td>
-                                                                    <input type="" class="form-control form-control-primary input-required" name="allocation[{{$design->design_no}}][1][round_stone]" data-stone-type="round_stone" required>
+                                                                    <input type="" class="form-control form-control-primary input-required" name="allocation[{{$design->design_no}}][1][round_stone]" data-stone-type="round_stone" required readonly>
                                                                 </td>
                                                                 <td>
-                                                                    <input type="" class="form-control form-control-primary input-required" name="allocation[{{$design->design_no}}][1][big_stone]" data-stone-type="big_stone" required>
+                                                                    <input type="" class="form-control form-control-primary input-required" name="allocation[{{$design->design_no}}][1][big_stone]" data-stone-type="big_stone" required readonly>
                                                                 </td>
                                                                 <td>
-                                                                    <input type="" class="form-control form-control-primary input-required" name="allocation[{{$design->design_no}}][1][tb_stone]" data-stone-type="tb_stone" required>
+                                                                    <input type="" class="form-control form-control-primary input-required" name="allocation[{{$design->design_no}}][1][tb_stone]" data-stone-type="tb_stone" required readonly>
                                                                 </td>
                                                             </tr>
                                                         </tbody>
@@ -138,7 +138,7 @@
                                                         type="button" 
                                                         class="btn btn-primary pull-right add-row allocateMoreBtn" 
                                                         style="margin-top: 10px"
-                                                        data-design-no="{{$design->design_no}}">
+                                                        data-design-no="{{$design->design_no}}" disabled>
                                                         <i class="fa fa-plus"></i>&nbsp;&nbsp; Allocate more
                                                     </button>
                                                 </div>
@@ -162,7 +162,79 @@
     <script type="text/javascript">
         $(document).ready(function() {
 
-            function removeSelectedWorker(button, selectedWorker){
+            $(".allocateMoreBtn").click(function() {
+                $(this).prop("disabled", true);
+                var designNo = $(this).attr("data-design-no");
+                var prevTotalRows = $(this).closest(".media-body").find("tbody").attr("data-total-rows");
+                prevTotalRows = parseInt(prevTotalRows);
+                var currentTotalRows = prevTotalRows + 1;
+
+                var selectedWorker = new Object();
+                selectedWorker.id = $(this).closest(".media-body").find("tbody").children("tr").last().children("td").first().find("select").val();
+                selectedWorker.name = $(this).closest(".media-body").find("tbody").children("tr").last().children("td").first().find("select option:selected").text();
+                
+                workerList = removeSelectedWorker($(this), selectedWorker);
+                var content = '';
+                if(workerList != ''){
+                    $.each(workerList, function(key, worker){
+                        content += '<option value="'+worker.id+'">'+worker.name+'</option>';
+                    });
+                }else{
+                    content += '<option value="">Empty</option>';
+                }
+
+                makeEveryFieldReadOnly(prevTotalRows, designNo);
+
+                
+                
+                $(this).closest(".media-body").find("tbody").attr("data-total-rows", currentTotalRows);
+
+                var leftCounts = calculateMaxLengthNextFow(designNo, prevTotalRows);
+
+                var newAllocationContent = '<tr data-row-index='+currentTotalRows+' data-design-no="'+designNo+'">';
+
+                newAllocationContent    +=      '<td class="worker">';
+                newAllocationContent    +=              '<select class="form-control form-control-primary" name="allocation['+designNo+']['+currentTotalRows+'][worker]">';
+                newAllocationContent    +=                  content;
+                newAllocationContent    +=              '<select/>';
+                newAllocationContent    +=      '</td>';
+                newAllocationContent    +=      '<td class="allocate-count">';
+                newAllocationContent    +=          '<input type="" class="form-control form-control-primary input-required input-field-allocate-count" name="allocation['+designNo+']['+currentTotalRows+'][allocation][0]" data-design-no="'+designNo+'" data-bangle-size="2.2" data-max-length="'+leftCounts[0]+'" placeholder="Max: '+leftCounts[0]+'" required>';
+                newAllocationContent    +=      '</td>';
+                newAllocationContent    +=      '<td class="allocate-count">';
+                newAllocationContent    +=          '<input type="" class="form-control form-control-primary input-required input-field-allocate-count" name="allocation['+designNo+']['+currentTotalRows+'][allocation][1]" data-design-no="'+designNo+'" data-bangle-size="2.4" data-max-length="'+leftCounts[1]+'" placeholder="Max: '+leftCounts[1]+'" required>';
+                newAllocationContent    +=      '</td>';
+                newAllocationContent    +=      '<td class="allocate-count">';
+                newAllocationContent    +=          '<input type="" class="form-control form-control-primary input-required input-field-allocate-count" name="allocation['+designNo+']['+currentTotalRows+'][allocation][2]" data-design-no="'+designNo+'" data-bangle-size="2.6" data-max-length="'+leftCounts[2]+'" placeholder="Max: '+leftCounts[2]+'" required>';
+                newAllocationContent    +=      '</td>';
+                newAllocationContent    +=      '<td class="allocate-count">';
+                newAllocationContent    +=          '<input type="" class="form-control form-control-primary input-required input-field-allocate-count" name="allocation['+designNo+']['+currentTotalRows+'][allocation][3]" data-design-no="'+designNo+'" data-bangle-size="2.8" data-max-length="'+leftCounts[3]+'" placeholder="Max: '+leftCounts[3]+'" required>';
+                newAllocationContent    +=      '</td>';
+                newAllocationContent    +=      '<td class="allocate-count">';
+                newAllocationContent    +=          '<input type="" class="form-control form-control-primary input-required input-field-allocate-count" name="allocation['+designNo+']['+currentTotalRows+'][allocation][4]" data-design-no="'+designNo+'" data-bangle-size="2.10" data-max-length="'+leftCounts[4]+'" placeholder="Max: '+leftCounts[4]+'" required>';
+                newAllocationContent    +=      '</td>';
+                newAllocationContent    +=      '<td>';
+                newAllocationContent    +=          '<input type="" class="form-control form-control-primary input-required" data-stone-type="round_stone" name="allocation['+designNo+']['+currentTotalRows+'][round_stone]" required readonly>';
+                newAllocationContent    +=      '</td>';
+                newAllocationContent    +=      '<td>';
+                newAllocationContent    +=          '<input type="" class="form-control form-control-primary input-required" data-stone-type="big_stone" name="allocation['+designNo+']['+currentTotalRows+'][big_stone]" required readonly>';
+                newAllocationContent    +=      '</td>';
+                newAllocationContent    +=      '<td>';
+                newAllocationContent    +=          '<input type="" class="form-control form-control-primary input-required" data-stone-type="tb_stone" name="allocation['+designNo+']['+currentTotalRows+'][tb_stone]" required readonly>';
+                newAllocationContent    +=      '</td>';
+                newAllocationContent    +=  '</tr>'
+
+                // canClickToAllocate()
+
+                if(canAllocateMore(leftCounts) == 1){
+                    $(this).closest(".media-body").find("tbody").append(newAllocationContent);
+                } else {
+                    $(this).prop('disabled', true);
+                }
+            });
+        });
+
+        function removeSelectedWorker(button, selectedWorker){
                 
                 var array = new Array();
                 var workerListOptions = button.closest(".media-body").find("tbody").children("tr").last().children("td").first().find("select option");
@@ -184,82 +256,11 @@
                 return array;
             }
 
-
-            $(".allocateMoreBtn").click(function() {
-                var designNo = $(this).attr("data-design-no");
-                var prevTotalRows = $(this).closest(".media-body").find("tbody").attr("data-total-rows");
-                prevTotalRows = parseInt(prevTotalRows);
-                var currentTotalRows = prevTotalRows + 1;
-
-                var selectedWorker = new Object();
-                selectedWorker.id = $(this).closest(".media-body").find("tbody").children("tr").last().children("td").first().find("select").val();
-                selectedWorker.name = $(this).closest(".media-body").find("tbody").children("tr").last().children("td").first().find("select option:selected").text();
-                
-                workerList = removeSelectedWorker($(this), selectedWorker);
-                var content = '';
-                if(workerList != ''){
-                    $.each(workerList, function(key, worker){
-                        content += '<option value="'+worker.id+'">'+worker.name+'</option>';
-                    });
-                }else{
-                    content += '<option value="">Empty</option>';
-                }
-
-
-                makeEveryFieldReadOnly(prevTotalRows, designNo);
-
-                calcStonesCount($('tr[data-row-index="'+prevTotalRows+'"]'), designNo);
-                
-                $(this).closest(".media-body").find("tbody").attr("data-total-rows", currentTotalRows);
-
-                var leftCounts = calculateMaxLengthNextFow(designNo, prevTotalRows);
-
-                var newAllocationContent = '<tr data-row-index='+currentTotalRows+' data-design-no="'+designNo+'">';
-
-                newAllocationContent    +=      '<td>';
-                newAllocationContent    +=              '<select class="form-control form-control-primary" name="allocation['+designNo+']['+currentTotalRows+'][worker]">';
-                newAllocationContent    +=                  content;
-                newAllocationContent    +=              '<select/>';
-                newAllocationContent    +=      '</td>';
-                newAllocationContent    +=      '<td>';
-                newAllocationContent    +=          '<input type="" class="form-control form-control-primary input-required input-field-allocate-count" name="allocation['+designNo+']['+currentTotalRows+'][allocation][0]" data-design-no="'+designNo+'" data-bangle-size="2.2" data-max-length="'+leftCounts[0]+'" placeholder="Max: '+leftCounts[0]+'">';
-                newAllocationContent    +=      '</td>';
-                newAllocationContent    +=      '<td>';
-                newAllocationContent    +=          '<input type="" class="form-control form-control-primary input-required input-field-allocate-count" name="allocation['+designNo+']['+currentTotalRows+'][allocation][1]" data-design-no="'+designNo+'" data-bangle-size="2.4" data-max-length="'+leftCounts[1]+'" placeholder="Max: '+leftCounts[1]+'">';
-                newAllocationContent    +=      '</td>';
-                newAllocationContent    +=      '<td>';
-                newAllocationContent    +=          '<input type="" class="form-control form-control-primary input-required input-field-allocate-count" name="allocation['+designNo+']['+currentTotalRows+'][allocation][2]" data-design-no="'+designNo+'" data-bangle-size="2.6" data-max-length="'+leftCounts[2]+'" placeholder="Max: '+leftCounts[2]+'">';
-                newAllocationContent    +=      '</td>';
-                newAllocationContent    +=      '<td>';
-                newAllocationContent    +=          '<input type="" class="form-control form-control-primary input-required input-field-allocate-count" name="allocation['+designNo+']['+currentTotalRows+'][allocation][3]" data-design-no="'+designNo+'" data-bangle-size="2.8" data-max-length="'+leftCounts[3]+'" placeholder="Max: '+leftCounts[3]+'">';
-                newAllocationContent    +=      '</td>';
-                newAllocationContent    +=      '<td>';
-                newAllocationContent    +=          '<input type="" class="form-control form-control-primary input-required input-field-allocate-count" name="allocation['+designNo+']['+currentTotalRows+'][allocation][4]" data-design-no="'+designNo+'" data-bangle-size="2.10" data-max-length="'+leftCounts[4]+'" placeholder="Max: '+leftCounts[4]+'">';
-                newAllocationContent    +=      '</td>';
-                newAllocationContent    +=      '<td>';
-                newAllocationContent    +=          '<input type="" class="form-control form-control-primary input-required" data-stone-type="round_stone" name="allocation['+designNo+']['+currentTotalRows+'][round_stone]">';
-                newAllocationContent    +=      '</td>';
-                newAllocationContent    +=      '<td>';
-                newAllocationContent    +=          '<input type="" class="form-control form-control-primary input-required" data-stone-type="big_stone" name="allocation['+designNo+']['+currentTotalRows+'][big_stone]">';
-                newAllocationContent    +=      '</td>';
-                newAllocationContent    +=      '<td>';
-                newAllocationContent    +=          '<input type="" class="form-control form-control-primary input-required" data-stone-type="tb_stone" name="allocation['+designNo+']['+currentTotalRows+'][tb_stone]">';
-                newAllocationContent    +=      '</td>';
-                newAllocationContent    +=  '</tr>'
-
-                // canClickToAllocate()
-
-                if(canAllocateMore(leftCounts) == 1){
-                    $(this).closest(".media-body").find("tbody").append(newAllocationContent);
-                } else {
-                    $(this).prop('disabled', true);
-                }
-            });
-        });
         function makeEveryFieldReadOnly(row, designNumber)
         {
             $('tr[data-row-index="'+row+'"][data-design-no="'+designNumber+'"]').find("input").prop("readonly", true);
         }
+
         function calculateMaxLengthNextFow(designNumber, rowIndex)
         {
             var leftCount = [];
@@ -283,6 +284,7 @@
             }
             return leftCount;
         }
+
         function canAllocateMore(leftCounts)
         {
             var canAllocateMore = 0;
@@ -294,9 +296,43 @@
             });
             return canAllocateMore;
         }
+
+        function inputValid(inputs){
+            var inputsCount = inputs.length;
+            var counter = 0;
+            $.each(inputs, function(key, input){
+                if(input.value == 0){
+                    counter++;
+                }
+            });
+            var valid = inputsCount == counter ? 0 : 1;
+            return valid;
+        }
+
+        function allocationCheck(inputs){
+            var allFieldCheck = 1;
+            $.each(inputs, function(key, input){
+                if(input.value == ''){
+                    allFieldCheck = 0;
+                    return false;
+                }
+            });
+            return allFieldCheck;
+        }
     </script>
     <script type="text/javascript">
         $("body").on("keyup", ".input-field-allocate-count", function() {
+            var inputs = $(this).closest("tr").find('td[class="allocate-count"]').children("input");
+            value = allocationCheck(inputs);
+            valid = inputValid(inputs);
+            // console.log(value);
+            var designNo = $(this).closest("tr").attr("data-design-no");
+            var prevTotalRows = $(this).closest("tbody").attr("data-total-rows");
+            if(value == 1 && valid == 1){
+                calcStonesCount($('tr[data-row-index="'+prevTotalRows+'"]'), designNo);
+                $(this).closest(".media-body").find("button").prop("disabled", false);
+            }
+            
             validateMaxValue($(this));
         });
         function validateMaxValue(element) {
@@ -352,5 +388,5 @@
                 }
             });
         }
-    </script>
+    </script>    
 @endsection
