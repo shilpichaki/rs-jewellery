@@ -278,7 +278,7 @@
                                                                 <?php $columnOqs1++; ?>
                                                                 @endforeach
                                                                 <td rowspan="2">
-                                                                    <button style="width: 100%;" type="button" class="btn btn-success calc_st_cnt" id="calc_btn"  data-total-rows="{{$totalRows}}" data-design-no={{$design->design_no}} >Calculate Stone Count</button>
+                                                                    <button style="width: 100%;" type="button" class="btn btn-success calc_st_cnt" id="calc_btn"  data-total-rows="{{$totalRows}}" data-design-no={{$design->design_no}} disabled >Calculate Stone Count</button>
                                                                 </td>
                                                             </tr>
                                                             <tr>
@@ -377,7 +377,6 @@
 <script type="text/javascript">
     $(document).ready(function () {
         $('#btn_update').attr('disabled', 'disabled');
-        $('#calc_btn').attr('disabled', 'disabled');
 
         $(".calc_st_cnt").click(function () {
             var totalRows = $(this).attr("data-total-rows");
@@ -428,9 +427,11 @@
         return status;
     }
 
-    $(".input_oqs").change(function() {
+    $(".input_oqs").keyup(function() {
         if($(this).val()) {
-            $("#calc_btn").removeAttr('disabled');
+            $(this).closest("tbody").find(".calc_st_cnt").removeAttr('disabled');
+            $(this).closest("tbody").find(".calc_st_cnt").trigger( "click" );
+            // $("#calc_btn").removeAttr('disabled');
         }
     })
 
@@ -446,10 +447,6 @@
             $('.input_oqp[data-design-no="'+designNumber+'"][data-bangle-size="'+bangleSize+'"]').val((quantity*4));
         }
     });
-
-    $('body').on('click', '#calc_btn', function() {
-        $('#btn_update').removeAttr('disabled');
-    })
 
     // // on deleteing design
     // $("body").on("click", ".remove-design-btn", function() {
