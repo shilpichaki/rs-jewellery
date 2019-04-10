@@ -222,6 +222,7 @@
                                 <button type="button" class="btn btn-primary pull-right add-row" id="rowAddButton">
                                     <i class="fa fa-plus"></i>&nbsp;&nbsp; Add Row
                                 </button>
+                                <a href="{{route('design.show', ['design' => $design->design_no])}}" class="btn btn-success" id="cancle" style="margin-left:10px;"><i class="fa fa-window-close"></i>Cancel</a>
                             </div>
                         </div>
                     </div>
