@@ -16,6 +16,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        DB::statement('SET FOREIGN_KEY_CHECKS = 0');
+
         Vendor::truncate();
         factory(Vendor::class, 10)->create();
 
@@ -47,7 +49,7 @@ class DatabaseSeeder extends Seeder
 
         Worker::truncate();
         $workerNames = ['Ram', 'Sam', 'Amit'];
-        for ($i=0; $i < 3; $i++) { 
+        for ($i=0; $i < 3; $i++) {
             Worker::create([
                 'name' => $workerNames[$i]
             ]);
