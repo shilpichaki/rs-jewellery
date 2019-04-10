@@ -19,7 +19,7 @@
     <meta name="keywords" content="Admin , Responsive, Landing, Bootstrap, App, Template, Mobile, iOS, Android, apple, creative app">
     <meta name="author" content="#">
     <!-- Favicon icon -->
-    <link rel="icon" href="{{asset('image/RPSl.png')}}" type="image/x-icon">
+    <link rel="icon" href="{{asset('image/fa-fa-rps.png')}}" type="image/x-icon">
     <!-- Google font-->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,800" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Romanesco" rel="stylesheet">
@@ -48,7 +48,7 @@
                 <form class="md-float-material form-material" action="{{ route('login') }}" method="POST">
                     @csrf
                     <div class="text-center">
-                        <img src="{{asset('image/RPSJewellery.png')}}" alt="logo.png">
+                        <img style="height: 200px;width: 200px;" src="{{asset('image/rpsLogo.png')}}" alt="RPS Jewellery Logo">
                         {{--<img src="../files/assets/images/logo.png" alt="logo.png">--}}
                         {{--<h4 class="text-white" style="font-family: 'Romanesco', cursive;        background: linear-gradient(to right, #f2ec32 0%, #f3c958 100%);--}}
     {{---webkit-background-clip: text;--}}
