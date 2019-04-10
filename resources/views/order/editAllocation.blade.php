@@ -8,6 +8,10 @@
         .table td, .table th{
             padding: 0.25rem !important;
         }
+        .max-length-error{
+            color: red;
+            display: block;
+        }
     </style>
 @endsection
 
@@ -86,11 +90,18 @@
                                                             </tr>
                                                             <tr>
                                                                 <th>Allocate to</th>
-                                                                <th class="leftCountCalc" data-design-no="{{$allocation[0]->design_no}}" data-bangle-size="2.2" data-max-set-limit="{{$maxSetCount[$allocation[0]->design_no]['max_set_count'][0]}}">{{$maxSetCount[$allocation[0]->design_no]['max_set_count'][0]}}</th>
-                                                                <th class="leftCountCalc" data-design-no="{{$allocation[0]->design_no}}" data-bangle-size="2.4" data-max-set-limit="{{$maxSetCount[$allocation[0]->design_no]['max_set_count'][1]}}">{{$maxSetCount[$allocation[0]->design_no]['max_set_count'][1]}}</th>
-                                                                <th class="leftCountCalc" data-design-no="{{$allocation[0]->design_no}}" data-bangle-size="2.6" data-max-set-limit="{{$maxSetCount[$allocation[0]->design_no]['max_set_count'][2]}}">{{$maxSetCount[$allocation[0]->design_no]['max_set_count'][2]}}</th>
-                                                                <th class="leftCountCalc" data-design-no="{{$allocation[0]->design_no}}" data-bangle-size="2.8" data-max-set-limit="{{$maxSetCount[$allocation[0]->design_no]['max_set_count'][3]}}">{{$maxSetCount[$allocation[0]->design_no]['max_set_count'][3]}}</th>
-                                                                <th class="leftCountCalc" data-design-no="{{$allocation[0]->design_no}}" data-bangle-size="2.10" data-max-set-limit="{{$maxSetCount[$allocation[0]->design_no]['max_set_count'][4]}}">{{$maxSetCount[$allocation[0]->design_no]['max_set_count'][4]}}</th>
+                                                                <th class="leftCountCalc" data-design-no="{{$allocation[0]->design_no}}" data-bangle-size="2.2" data-max-set-limit="{{$maxSetCount[$allocation[0]->design_no]['max_set_count'][0]}}">
+                                                                    {{$maxSetCount[$allocation[0]->design_no]['max_set_count'][0]}}
+                                                                    <span class="max-length-error"><b>Maximum allocation limit exceeded!</b></span>
+                                                                </th>
+                                                                <th class="leftCountCalc" data-design-no="{{$allocation[0]->design_no}}" data-bangle-size="2.4" data-max-set-limit="{{$maxSetCount[$allocation[0]->design_no]['max_set_count'][1]}}">{{$maxSetCount[$allocation[0]->design_no]['max_set_count'][1]}}<span class="max-length-error"><b>Maximum allocation limit exceeded!</b></span>
+                                                                </th>
+                                                                <th class="leftCountCalc" data-design-no="{{$allocation[0]->design_no}}" data-bangle-size="2.6" data-max-set-limit="{{$maxSetCount[$allocation[0]->design_no]['max_set_count'][2]}}">{{$maxSetCount[$allocation[0]->design_no]['max_set_count'][2]}}<span class="max-length-error"><b>Maximum allocation limit exceeded!</b></span>
+                                                                </th>
+                                                                <th class="leftCountCalc" data-design-no="{{$allocation[0]->design_no}}" data-bangle-size="2.8" data-max-set-limit="{{$maxSetCount[$allocation[0]->design_no]['max_set_count'][3]}}">{{$maxSetCount[$allocation[0]->design_no]['max_set_count'][3]}}<span class="max-length-error"><b>Maximum allocation limit exceeded!</b></span>
+                                                                </th>
+                                                                <th class="leftCountCalc" data-design-no="{{$allocation[0]->design_no}}" data-bangle-size="2.10" data-max-set-limit="{{$maxSetCount[$allocation[0]->design_no]['max_set_count'][4]}}">{{$maxSetCount[$allocation[0]->design_no]['max_set_count'][4]}}<span class="max-length-error"><b>Maximum allocation limit exceeded!</b></span>
+                                                                </th>
                                                                 <th>Round Stones</th>
                                                                 <th>Big Stones</th>
                                                                 <th>TB Stone</th>
@@ -105,35 +116,35 @@
                                                             @foreach(json_decode($allocation[0]->allocations) as $alloc)
                                                             <tr data-row-index="{{$counterAlloc}}" data-design-no="{{$allocation[0]->design_no}}">
                                                                 <td>
-                                                                    <select class="form-control form-control-primary" name="allocation[{{$allocation[0]->design_no}}][{{$counterAlloc}}][worker]">
+                                                                    <select class="form-control form-control-primary" name="allocation[{{$allocation[0]->design_no}}][{{$counterAlloc}}][worker]" readonly autocomplete="off">
                                                                         @foreach($workers as $worker)
                                                                         <option value="{{$worker->id}}" @if($worker->id == $alloc->worker) selected @endif>{{$worker->name}}</option>
                                                                         @endforeach
                                                                     </select>
                                                                 </td>
                                                                 <td>
-                                                                    <input type="" class="form-control form-control-primary input-required input-field-allocate-count" name="allocation[{{$allocation[0]->design_no}}][{{$counterAlloc}}][allocation][0]" data-design-no="{{$allocation[0]->design_no}}" data-bangle-size="2.2" data-max-length="7" placeholder="Max: 7" value="{{$alloc->allocation[0]}}">
+                                                                    <input type="" class="form-control form-control-primary input-required input-field-allocate-count" name="allocation[{{$allocation[0]->design_no}}][{{$counterAlloc}}][allocation][0]" data-design-no="{{$allocation[0]->design_no}}" data-bangle-size="2.2" data-max-length="7" value="{{$alloc->allocation[0]}}" autocomplete="off" >
                                                                 </td>
                                                                 <td>
-                                                                    <input type="" class="form-control form-control-primary input-required input-field-allocate-count" name="allocation[{{$allocation[0]->design_no}}][{{$counterAlloc}}][allocation][1]" data-design-no="{{$allocation[0]->design_no}}" data-max-length="8" data-bangle-size="2.4" placeholder="Max: 8" required="" value="{{$alloc->allocation[1]}}">
+                                                                    <input type="" class="form-control form-control-primary input-required input-field-allocate-count" name="allocation[{{$allocation[0]->design_no}}][{{$counterAlloc}}][allocation][1]" data-design-no="{{$allocation[0]->design_no}}" data-max-length="8" data-bangle-size="2.4" required="" value="{{$alloc->allocation[1]}}" autocomplete="off" >
                                                                 </td>
                                                                 <td>
-                                                                    <input type="" class="form-control form-control-primary input-required input-field-allocate-count" name="allocation[{{$allocation[0]->design_no}}][{{$counterAlloc}}][allocation][2]" data-design-no="{{$allocation[0]->design_no}}" data-max-length="9" data-bangle-size="2.6" placeholder="Max: 9" required="" value="{{$alloc->allocation[2]}}">
+                                                                    <input type="" class="form-control form-control-primary input-required input-field-allocate-count" name="allocation[{{$allocation[0]->design_no}}][{{$counterAlloc}}][allocation][2]" data-design-no="{{$allocation[0]->design_no}}" data-max-length="9" data-bangle-size="2.6" required="" value="{{$alloc->allocation[2]}}" autocomplete="off" >
                                                                 </td>
                                                                 <td>
-                                                                    <input type="" class="form-control form-control-primary input-required input-field-allocate-count" name="allocation[{{$allocation[0]->design_no}}][{{$counterAlloc}}][allocation][3]" data-design-no="{{$allocation[0]->design_no}}" data-max-length="1" data-bangle-size="2.8" placeholder="Max: 1" required="" value="{{$alloc->allocation[3]}}">
+                                                                    <input type="" class="form-control form-control-primary input-required input-field-allocate-count" name="allocation[{{$allocation[0]->design_no}}][{{$counterAlloc}}][allocation][3]" data-design-no="{{$allocation[0]->design_no}}" data-max-length="1" data-bangle-size="2.8" required="" value="{{$alloc->allocation[3]}}" autocomplete="off" >
                                                                 </td>
                                                                 <td>
-                                                                    <input type="" class="form-control form-control-primary input-required input-field-allocate-count" name="allocation[{{$allocation[0]->design_no}}][{{$counterAlloc}}][allocation][4]" data-design-no="{{$allocation[0]->design_no}}" data-max-length="1" data-bangle-size="2.10" placeholder="Max: 1" required="" value="{{$alloc->allocation[4]}}">
+                                                                    <input type="" class="form-control form-control-primary input-required input-field-allocate-count" name="allocation[{{$allocation[0]->design_no}}][{{$counterAlloc}}][allocation][4]" data-design-no="{{$allocation[0]->design_no}}" data-max-length="1" data-bangle-size="2.10" required="" value="{{$alloc->allocation[4]}}" autocomplete="off" >
                                                                 </td>
                                                                 <td>
-                                                                    <input type="" class="form-control form-control-primary input-required" name="allocation[{{$allocation[0]->design_no}}][{{$counterAlloc}}][round_stone]" data-stone-type="round_stone" required="" value="{{$alloc->round_stone}}">
+                                                                    <input type="" class="form-control form-control-primary input-required" name="allocation[{{$allocation[0]->design_no}}][{{$counterAlloc}}][round_stone]" data-stone-type="round_stone" required="" value="{{$alloc->round_stone}}" autocomplete="off" >
                                                                 </td>
                                                                 <td>
-                                                                    <input type="" class="form-control form-control-primary input-required" name="allocation[{{$allocation[0]->design_no}}][{{$counterAlloc}}][big_stone]" data-stone-type="big_stone" required="" value="{{$alloc->big_stone}}">
+                                                                    <input type="" class="form-control form-control-primary input-required" name="allocation[{{$allocation[0]->design_no}}][{{$counterAlloc}}][big_stone]" data-stone-type="big_stone" required="" value="{{$alloc->big_stone}}" autocomplete="off" >
                                                                 </td>
                                                                 <td>
-                                                                    <input type="" class="form-control form-control-primary input-required" name="allocation[{{$allocation[0]->design_no}}][{{$counterAlloc}}][tb_stone]" data-stone-type="tb_stone" required="" value="{{$alloc->tb_stone}}">
+                                                                    <input type="" class="form-control form-control-primary input-required" name="allocation[{{$allocation[0]->design_no}}][{{$counterAlloc}}][tb_stone]" data-stone-type="tb_stone" required="" value="{{$alloc->tb_stone}}" autocomplete="off" >
                                                                 </td>
                                                             </tr>
                                                             <?php $counterAlloc++ ?>
@@ -163,125 +174,56 @@
 @section('js')
     <script type="text/javascript">
         $(document).ready(function() {
-            $(".allocateMoreBtn").click(function() {
-                var designNo = $(this).attr("data-design-no");
-                var prevTotalRows = $(this).closest(".media-body").find("tbody").attr("data-total-rows");
-                prevTotalRows = parseInt(prevTotalRows);
-                var currentTotalRows = prevTotalRows + 1;
-
-                makeEveryFieldReadOnly(prevTotalRows, designNo);
-
-                calcStonesCount($('tr[data-row-index="'+prevTotalRows+'"]'), designNo);
-                
-                $(this).closest(".media-body").find("tbody").attr("data-total-rows", currentTotalRows);
-
-                var leftCounts = calculateMaxLengthNextFow(designNo, prevTotalRows);
-
-                var newAllocationContent = '<tr data-row-index='+currentTotalRows+' data-design-no="'+designNo+'">';
-                newAllocationContent    +=      '<th>';
-                newAllocationContent    +=              '<select class="form-control form-control-primary" name="allocation['+designNo+']['+currentTotalRows+'][worker]">';
-                newAllocationContent    +=                  '<option value="1">Ram</option>';
-                newAllocationContent    +=                  '<option value="2">Sam</option>';
-                newAllocationContent    +=                  '<option value="3">Amit</option>';
-                newAllocationContent    +=              '<select/>';
-                newAllocationContent    +=      '</th>';
-                newAllocationContent    +=      '<th>';
-                newAllocationContent    +=          '<input type="" class="form-control form-control-primary input-required input-field-allocate-count" name="allocation['+designNo+']['+currentTotalRows+'][allocation][0]" data-design-no="'+designNo+'" data-bangle-size="2.2" data-max-length="'+leftCounts[0]+'" placeholder="Max: '+leftCounts[0]+'">';
-                newAllocationContent    +=      '</th>';
-                newAllocationContent    +=      '<th>';
-                newAllocationContent    +=          '<input type="" class="form-control form-control-primary input-required input-field-allocate-count" name="allocation['+designNo+']['+currentTotalRows+'][allocation][1]" data-design-no="'+designNo+'" data-bangle-size="2.4" data-max-length="'+leftCounts[1]+'" placeholder="Max: '+leftCounts[1]+'">';
-                newAllocationContent    +=      '</th>';
-                newAllocationContent    +=      '<th>';
-                newAllocationContent    +=          '<input type="" class="form-control form-control-primary input-required input-field-allocate-count" name="allocation['+designNo+']['+currentTotalRows+'][allocation][2]" data-design-no="'+designNo+'" data-bangle-size="2.6" data-max-length="'+leftCounts[2]+'" placeholder="Max: '+leftCounts[2]+'">';
-                newAllocationContent    +=      '</th>';
-                newAllocationContent    +=      '<th>';
-                newAllocationContent    +=          '<input type="" class="form-control form-control-primary input-required input-field-allocate-count" name="allocation['+designNo+']['+currentTotalRows+'][allocation][3]" data-design-no="'+designNo+'" data-bangle-size="2.8" data-max-length="'+leftCounts[3]+'" placeholder="Max: '+leftCounts[3]+'">';
-                newAllocationContent    +=      '</th>';
-                newAllocationContent    +=      '<th>';
-                newAllocationContent    +=          '<input type="" class="form-control form-control-primary input-required input-field-allocate-count" name="allocation['+designNo+']['+currentTotalRows+'][allocation][4]" data-design-no="'+designNo+'" data-bangle-size="2.10" data-max-length="'+leftCounts[4]+'" placeholder="Max: '+leftCounts[4]+'">';
-                newAllocationContent    +=      '</th>';
-                newAllocationContent    +=      '<th>';
-                newAllocationContent    +=          '<input type="" class="form-control form-control-primary input-required" data-stone-type="round_stone" name="allocation['+designNo+']['+currentTotalRows+'][round_stone]">';
-                newAllocationContent    +=      '</th>';
-                newAllocationContent    +=      '<th>';
-                newAllocationContent    +=          '<input type="" class="form-control form-control-primary input-required" data-stone-type="big_stone" name="allocation['+designNo+']['+currentTotalRows+'][big_stone]">';
-                newAllocationContent    +=      '</th>';
-                newAllocationContent    +=      '<th>';
-                newAllocationContent    +=          '<input type="" class="form-control form-control-primary input-required" data-stone-type="tb_stone" name="allocation['+designNo+']['+currentTotalRows+'][tb_stone]">';
-                newAllocationContent    +=      '</th>';
-                newAllocationContent    +=  '</tr>'
-
-                // canClickToAllocate()
-
-                if(canAllocateMore(leftCounts) == 1){
-                    $(this).closest(".media-body").find("tbody").append(newAllocationContent);
-                } else {
-                    $(this).prop('disabled', true);
+            $(".max-length-error").each(function() {
+                $(this).hide();
+            });
+            $("body").on("keyup", ".input-field-allocate-count", function() {
+                var inputField = $(this);
+                updateStonesCount(inputField);
+                var thisRow = $(this).closest("tr");
+                var thisRowDesignNumber = $(this).closest("tr").attr("data-design-no");
+                if(checkARowHasAtLeastOneBangleSize(thisRow) == 1) {
+                    calcStonesCount(thisRow, thisRowDesignNumber);
                 }
             });
         });
-        function makeEveryFieldReadOnly(row, designNumber)
+        function updateStonesCount(inputField)
         {
-            console.log(row+"  "+designNumber)
-            $('tr[data-row-index="'+row+'"][data-design-no="'+designNumber+'"]').find("input").prop("readonly", true);
-        }
-        function calculateMaxLengthNextFow(designNumber, rowIndex)
-        {
-            var leftCount = [];
-            for (var i = 2; i <= 10; i = i+2) {
-                var bs = '2.'+i;
-
-                var currentLeftCount = $('th.leftCountCalc[data-design-no="'+designNumber+'"][data-bangle-size="'+bs+'"]').attr("data-alloc-left");
-
-                var valueOfLastRow = $('tr[data-row-index="'+rowIndex+'"]').find('input[data-design-no="'+designNumber+'"][data-bangle-size="'+bs+'"]').val();
-
-                if(valueOfLastRow == '') {
-                    $('tr[data-row-index="'+rowIndex+'"]').find('input[data-design-no="'+designNumber+'"][data-bangle-size="'+bs+'"]').val('0');
-                    valueOfLastRow = 0;                    
-                }
-
-                var subtract = currentLeftCount - valueOfLastRow;
-
-                $('th.leftCountCalc[data-design-no="'+designNumber+'"][data-bangle-size="'+bs+'"]').attr("data-alloc-left", subtract);
-
-                leftCount.push(subtract);
-            }
-            return leftCount;
-        }
-        function canAllocateMore(leftCounts)
-        {
-            var canAllocateMore = 0;
-            $.each(leftCounts, function (index, value) {
-                if(value >= 1) {
-                    canAllocateMore = 1;
-                    return false;
-                }
-            });
-            return canAllocateMore;
-        }
-    </script>
-    <script type="text/javascript">
-        $("body").on("keyup", ".input-field-allocate-count", function() {
-            validateMaxValue($(this));
-        });
-        function validateMaxValue(element) {
-            var maxLength = element.attr("data-max-length");
-            var value = element.val();
-            value = parseInt(value);
-
-            if(isNaN(value)) {
-                element.addClass("border-danger");
+            if(inputField.val() == '') {
+                inputField.addClass("border-danger");
             } else {
-                if(value > maxLength) {
-                    element.addClass("border-danger");
-                    setTimeout(function() {
-                        element.val(maxLength);
-                        element.removeClass("border-danger");
-                    }, 10);
-                } else {
-                    element.removeClass("border-danger");
+                inputField.removeClass("border-danger");
+            }
+            
+            var inputBangleSize = inputField.attr("data-bangle-size");
+
+            validateMaxLengthWithTotal(inputField, inputBangleSize);
+        }
+        function validateMaxLengthWithTotal(inputField, bangleSize)
+        {
+            var total = 0;
+            var maxLength = inputField.closest("table").find('th.leftCountCalc[data-bangle-size="'+bangleSize+'"]').attr("data-max-set-limit");
+            inputField.closest("tbody").find('input[data-bangle-size="'+bangleSize+'"]').each(function() {
+                total += parseInt($(this).val());
+            });
+            if(total > maxLength) {
+                inputField.closest("table").find('th.leftCountCalc[data-bangle-size="'+bangleSize+'"]').find("span").show();
+            } else {
+                inputField.closest("table").find('th.leftCountCalc[data-bangle-size="'+bangleSize+'"]').find("span").hide();
+            }
+        }
+
+        function checkARowHasAtLeastOneBangleSize(row)
+        {
+            var status = 0;
+            for (var i = 2; i <= 10; i = i+2) {
+                var value = row.find('input[data-bangle-size="2.'+i+'"]').val();
+                if(value >= 1) {
+                    status = 1;
+                    break;
                 }
             }
+            return status;
         }
     </script>
 
@@ -296,7 +238,6 @@
                 var valueOfLastRow = row.find('input[data-bangle-size="'+bs+'"]').val();
 
                 if(valueOfLastRow == '') {
-                    row.find('input[data-bangle-size="'+bs+'"]').val('0');
                     valueOfLastRow = 0;                    
                 }
                 leftCount.push(valueOfLastRow);

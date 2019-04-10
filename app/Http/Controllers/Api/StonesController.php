@@ -22,7 +22,6 @@ class StonesController extends Controller
     	$totalTbStoneCount = 0;
 
 		for ($i=0; $i < 5; $i++) {
-			// for ($j=0; $j < 3; $j++) {
 			foreach ($desingStoneCount as $stoneType => $stoneValue) {
 				if($stoneType == 'round_stone') {
 					$count = ($leftCounts[$i]*4) * $stoneValue[$i];

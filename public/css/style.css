@@ -61,3 +61,7 @@ body{background-color:#f3f3f3;font-size:.875em;overflow-x:hidden;color:#4330a2;f
 .bg-c-yellow .fa,.bg-c-green .fa,.bg-c-pink .fa,.bg-c-blue .fa {
     font-size: 2rem !important;
 }
+
+tr, th, td{
+	vertical-align: top !important;
+}
