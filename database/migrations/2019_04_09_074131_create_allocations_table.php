@@ -16,7 +16,6 @@ class CreateAllocationsTable extends Migration
         Schema::create('allocations', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('order_id')->unsigned();
-            $table->string('set_count');
             $table->string('design_no');
             $table->text('allocations');
             $table->timestamps();
