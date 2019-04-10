@@ -20,7 +20,9 @@ class Allocation extends Model
 
     		// creating/sorting allocations rows by index of worker id 
   			foreach ($allocation as $rowId => $value) {
-  				$newAllocationArray[$value['worker']] = $value;
+          if($value['worker'] != null){
+            $newAllocationArray[$value['worker']] = $value;            
+          }
   			}
 
   			// re-assigning allocations[{design_no} by newArray of allocations sorted by index worker_in]

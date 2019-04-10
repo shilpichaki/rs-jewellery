@@ -121,15 +121,17 @@ class OrderController extends Controller
 				->withMaxSetCount($arr);
 		} else {
 			return view('order.newAllocation')
-				->withOrder($order);	
-		}		
+				->withOrder($order);
+		}
 	}
 	
   	public function storeAllocation(Request $request)
   	{
   		// dd($request->allocation);
   		$allocations = Allocation::sortAllocationsByWorkerName($request->allocation);
-  		
+		
+		// dd($allocations);
+
   		Allocation::storeAllocationsWithTransaction($allocations, $request->order_id);  		
 
 		dd($allocations);
