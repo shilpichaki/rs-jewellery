@@ -325,16 +325,16 @@
             var inputs = $(this).closest("tr").find('td[class="allocate-count"]').children("input");
             value = allocationCheck(inputs);
             valid = inputValid(inputs);
-            // console.log(value);
             var designNo = $(this).closest("tr").attr("data-design-no");
-            var prevTotalRows = $(this).closest("tbody").attr("data-total-rows");
+            var row = $(this).closest("tr");
             if(value == 1 && valid == 1){
-                calcStonesCount($('tr[data-row-index="'+prevTotalRows+'"]'), designNo);
+                calcStonesCount(row, designNo);
                 $(this).closest(".media-body").find("button").prop("disabled", false);
             }
             
             validateMaxValue($(this));
         });
+        
         function validateMaxValue(element) {
             var maxLength = element.attr("data-max-length");
             var value = element.val();
