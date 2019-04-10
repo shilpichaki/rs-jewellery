@@ -115,7 +115,7 @@ class DesignController extends Controller
         // sorting stones so it does 
         // not cast the array to an object
         $stonesArray = Design::sortStonesArray($request->stones);
-        
+
         // calculating price
         $price4pcs = StonesRow::calculatePrice4Pcs(
             $request->stones, $request->rhodium, $request->misc_price, $request->markup_percentage

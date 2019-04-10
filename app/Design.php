@@ -33,5 +33,6 @@ class Design extends Model
         foreach ($stones as $stone) {
             array_push($stonesArray, $stone);
         }
+        return $stonesArray;
     }
 }
