@@ -166,25 +166,25 @@
 									</select>
 								</td>
 								<td>
-									<input data-stoneType="" data-bangleSize="2.2" class="form-control form-control-primary input-required add_type_stone_22 add_type_stone form-disabler" disabled="" type="text" name="stones[0][quantity][0]" required pattern="\d+" title="">
+									<input data-stoneType="" data-bangleSize="2.2" class="form-control form-control-primary input-required add_type_stone_22 add_type_stone form-disabler" disabled="" type="text" name="stones[0][quantity][0]" required pattern="\d+" title="" autocomplete="off">
 								</td>
 								<td>
-									<input data-stoneType="" data-bangleSize="2.4" class="form-control form-control-primary input-required add_type_stone_24 add_type_stone form-disabler" type="text" name="stones[0][quantity][1]" required pattern="\d+">
+									<input data-stoneType="" data-bangleSize="2.4" class="form-control form-control-primary input-required add_type_stone_24 add_type_stone form-disabler" type="text" name="stones[0][quantity][1]" required pattern="\d+" autocomplete="off">
 								</td>
 								<td>
-									<input data-stoneType="" data-bangleSize="2.6" class="form-control form-control-primary input-required add_type_stone_26 add_type_stone form-disabler" type="text" name="stones[0][quantity][2]" required pattern="\d+">
+									<input data-stoneType="" data-bangleSize="2.6" class="form-control form-control-primary input-required add_type_stone_26 add_type_stone form-disabler" type="text" name="stones[0][quantity][2]" required pattern="\d+" autocomplete="off">
 								</td>
 								<td>
-									<input data-stoneType="" data-bangleSize="2.8" class="form-control form-control-primary input-required add_type_stone_28 add_type_stone form-disabler" type="text" name="stones[0][quantity][3]" required pattern="\d+">
+									<input data-stoneType="" data-bangleSize="2.8" class="form-control form-control-primary input-required add_type_stone_28 add_type_stone form-disabler" type="text" name="stones[0][quantity][3]" required pattern="\d+" autocomplete="off">
 								</td>
 								<td>
-									<input data-stoneType="" data-bangleSize="2.10" class="form-control form-control-primary input-required add_type_stone_210 add_type_stone form-disabler" type="text" name="stones[0][quantity][4]" required pattern="\d+">
+									<input data-stoneType="" data-bangleSize="2.10" class="form-control form-control-primary input-required add_type_stone_210 add_type_stone form-disabler" type="text" name="stones[0][quantity][4]" required pattern="\d+" autocomplete="off">
 								</td>
 								<td>
-									<input class="form-control form-control-primary input-required stone_price_input" type="text" name="stones[0][stone_price]" required title="Example: 500.00, 1000.70">
+									<input class="form-control form-control-primary input-required stone_price_input" type="text" name="stones[0][stone_price]" required title="Example: 500.00, 1000.70" autocomplete="off">
 								</td>
 								<td>
-									<input class="form-control form-control-primary input-required labour_charge_input" type="text" name="stones[0][labour_charge]" required title="Example: 500.00, 1000.70">
+									<input class="form-control form-control-primary input-required labour_charge_input" type="text" name="stones[0][labour_charge]" required title="Example: 500.00, 1000.70" autocomplete="off">
 								</td>
 								<td>
 									<button type="button" data-id="0" class="delete_row_btn btn btn-primary button button-small" title="Delete">
@@ -226,55 +226,55 @@
 							<tr>
 								<td>ROUND STONES</td>
 								<td class="text-right" id="total-round-stones-22">
-									<input type="text" class="form-control form-control-primary" name="total_stone_count[round_stone][0]">
+									<input type="text" class="form-control form-control-primary" name="total_stone_count[round_stone][0]" autocomplete="off">
 								</td>
 								<td class="text-right" id="total-round-stones-24">
-									<input type="text" class="form-control form-control-primary" name="total_stone_count[round_stone][1]">
+									<input type="text" class="form-control form-control-primary" name="total_stone_count[round_stone][1]" autocomplete="off">
 								</td>
 								<td class="text-right" id="total-round-stones-26">
-									<input type="text" class="form-control form-control-primary" name="total_stone_count[round_stone][2]">
+									<input type="text" class="form-control form-control-primary" name="total_stone_count[round_stone][2]" autocomplete="off">
 								</td>
 								<td class="text-right" id="total-round-stones-28">
-									<input type="text" class="form-control form-control-primary" name="total_stone_count[round_stone][3]">
+									<input type="text" class="form-control form-control-primary" name="total_stone_count[round_stone][3]" autocomplete="off">
 								</td>
 								<td class="text-right" id="total-round-stones-210">
-									<input type="text" class="form-control form-control-primary" name="total_stone_count[round_stone][4]">
+									<input type="text" class="form-control form-control-primary" name="total_stone_count[round_stone][4]" autocomplete="off">
 								</td>
 							</tr>
 							<tr>
 								<td>BIG STONES</td>
 								<td class="text-right" id="total-big-stones-22">
-									<input type="text" class="form-control form-control-primary" name="total_stone_count[big_stone][0]">
+									<input type="text" class="form-control form-control-primary" name="total_stone_count[big_stone][0]" autocomplete="off">
 								</td>
 								<td class="text-right" id="total-big-stones-24">
-									<input type="text" class="form-control form-control-primary" name="total_stone_count[big_stone][1]">
+									<input type="text" class="form-control form-control-primary" name="total_stone_count[big_stone][1]" autocomplete="off">
 								</td>
 								<td class="text-right" id="total-big-stones-26">
-									<input type="text" class="form-control form-control-primary" name="total_stone_count[big_stone][2]">
+									<input type="text" class="form-control form-control-primary" name="total_stone_count[big_stone][2]" autocomplete="off">
 								</td>
 								<td class="text-right" id="total-big-stones-28">
-									<input type="text" class="form-control form-control-primary" name="total_stone_count[big_stone][3]">
+									<input type="text" class="form-control form-control-primary" name="total_stone_count[big_stone][3]" autocomplete="off">
 								</td>
 								<td class="text-right" id="total-big-stones-210">
-									<input type="text" class="form-control form-control-primary" name="total_stone_count[big_stone][4]">
+									<input type="text" class="form-control form-control-primary" name="total_stone_count[big_stone][4]" autocomplete="off">
 								</td>
 							</tr>
 							<tr>
 								<td>TB STONES</td>
 								<td class="text-right" id="total-tb-stones-22">
-									<input type="text" class="form-control form-control-primary" name="total_stone_count[tb_stone][0]">
+									<input type="text" class="form-control form-control-primary" name="total_stone_count[tb_stone][0]" autocomplete="off">
 								</td>
 								<td class="text-right" id="total-tb-stones-24">
-									<input type="text" class="form-control form-control-primary" name="total_stone_count[tb_stone][1]">
+									<input type="text" class="form-control form-control-primary" name="total_stone_count[tb_stone][1]" autocomplete="off">
 								</td>
 								<td class="text-right" id="total-tb-stones-26">
-									<input type="text" class="form-control form-control-primary" name="total_stone_count[tb_stone][2]">
+									<input type="text" class="form-control form-control-primary" name="total_stone_count[tb_stone][2]" autocomplete="off">
 								</td>
 								<td class="text-right" id="total-tb-stones-28">
-									<input type="text" class="form-control form-control-primary" name="total_stone_count[tb_stone][3]">
+									<input type="text" class="form-control form-control-primary" name="total_stone_count[tb_stone][3]" autocomplete="off">
 								</td>
 								<td class="text-right" id="total-tb-stones-210">
-									<input type="text" class="form-control form-control-primary" name="total_stone_count[tb_stone][4]">
+									<input type="text" class="form-control form-control-primary" name="total_stone_count[tb_stone][4]" autocomplete="off">
 								</td>
 							</tr>
 						</tbody>
@@ -435,7 +435,7 @@
 		var totalTbStone28 = 0;
 		var totalTbStone210 = 0;
 
-		$('body').on('keyup blur', '.add_type_stone_22', function() {
+		$('body').on('keyup blur change', '.add_type_stone_22', function() {
 			totalRoundStone22 = 0;
 			totalBigStone22 = 0;
 			totalTbStone22 = 0;
