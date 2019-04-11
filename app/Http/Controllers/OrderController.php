@@ -127,11 +127,8 @@ class OrderController extends Controller
 	
   	public function storeAllocation(Request $request)
   	{
-  		// dd($request->allocation);
   		$allocations = Allocation::sortAllocationsByWorkerName($request->allocation);
 		
-		// dd($allocations);
-
   		Allocation::storeAllocationsWithTransaction($allocations, $request->order_id);  		
 
 		dd($allocations);

@@ -259,4 +259,67 @@
             });
         }
     </script>
+    <script type="text/javascript">
+        $("body").on("click", ".allocateMoreBtn", function() {
+            var totalListWorkers = new Array();
+            
+            @foreach($workers as $worker)
+                    var values = new Object();
+                    values.id = '{{$worker->id}}';
+                    values.name = '{{$worker->name}}';
+                    totalListWorkers.push(values);
+            @endforeach
+
+            var foo = $(this).closest(".media-body").find("tbody").find('tr').each(function() {
+                var values = $(this).find('td').first().find("select").children("option:selected").val();
+                for( var i = 0; i < totalListWorkers.length; i++) {
+                   if ( totalListWorkers[i].id === values) {
+                        totalListWorkers.splice(i, 1); 
+                        i--;
+                    }
+                }
+            });
+            console.log(totalListWorkers);
+
+            // var rowCount = $(this).closest(".media-body").find("table").find("tbody tr").length;
+            // var nextIndex = rowCount + 1;
+
+            // var newContent = '';
+
+            // newContent += '<tr data-row-index="2" data-design-no="423">';
+            // newContent +=   '<td>';
+            // newContent +=       '<select class="form-control form-control-primary" name="allocation[423]['+nextIndex+'][worker]"  autocomplete="off">';
+            // @foreach($workers as $worker)
+            // newContent +=           '<option value="{{$worker->id}}">{{$worker->name}}</option>';
+            // @endforeach
+            // newContent +=           '<option value="55">Static name</option>';
+
+            // newContent +=       '</select>';
+            // newContent +=   '</td>';
+            // newContent +=   '<td>';
+            // newContent +=       '<input type="" class="form-control form-control-primary input-required input-field-allocate-count" name="allocation[423][2][allocation][0]" data-design-no="423" data-bangle-size="2.2" data-max-length="7" value="5" autocomplete="off">';
+            // newContent +=   '</td>';
+            // newContent +=   '<td>';
+            // newContent +=       '<input type="" class="form-control form-control-primary input-required input-field-allocate-count" name="allocation[423][2][allocation][1]" data-design-no="423" data-max-length="8" data-bangle-size="2.4" required="" value="5" autocomplete="off">';
+            // newContent +=   '</td>'
+            // newContent +=   '<td>';
+            // newContent +=       '<input type="" class="form-control form-control-primary input-required input-field-allocate-count" name="allocation[423][2][allocation][2]" data-design-no="423" data-max-length="9" data-bangle-size="2.6" required="" value="7" autocomplete="off">';
+            // newContent +=   '</td>'
+            // newContent +=   '<td>';
+            // newContent +=       '<input type="" class="form-control form-control-primary input-required input-field-allocate-count" name="allocation[423][2][allocation][3]" data-design-no="423" data-max-length="1" data-bangle-size="2.8" required="" value="6" autocomplete="off">';
+            // newContent +=   '</td>';
+            // newContent +=   '<td>';
+            // newContent +=       '<input type="" class="form-control form-control-primary input-required input-field-allocate-count" name="allocation[423][2][allocation][4]" data-design-no="423" data-max-length="1" data-bangle-size="2.10" required="" value="1" autocomplete="off">';
+            // newContent +=   '</td>';
+            // newContent +=   '<td>';
+            // newContent +=       '<input type="" class="form-control form-control-primary input-required" name="allocation[423][2][round_stone]" data-stone-type="round_stone" required="" value="544" autocomplete="off"></td><td><input type="" class="form-control form-control-primary input-required" name="allocation[423][2][big_stone]" data-stone-type="big_stone" required="" value="0" autocomplete="off">';
+            // newContent +=   '</td>';
+            // newContent +=   '<td>';
+            // newContent +=       '<input type="" class="form-control form-control-primary input-required" name="allocation[423][2][tb_stone]" data-stone-type="tb_stone" required="" value="0" autocomplete="off">';
+            // newContent +=   '</td>';
+            // newContent +='</tr>';
+
+            // $(this).closest(".media-body").find("tbody").append(newContent);
+        });
+    </script>
 @endsection
