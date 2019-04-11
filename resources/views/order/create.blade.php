@@ -85,14 +85,14 @@
                                 <label class="col-form-label">Order No.</label>
                             </div>
                             <div class="col-sm-4">
-                                <input type="number" class="form-control autonumber form-control-primary" value="" required="" id="" name="order_no">
+                                <input type="number" class="form-control autonumber form-control-primary" value="" required="" id="" name="order_no" pattern="[a-zA-Z0-9]+" autocomplete="off">
                                 <span class="form-bar"></span>
                             </div>
                             <div class="col-sm-2">
                                 <label class="col-form-label">Party Name</label>
                             </div>
                             <div class="col-sm-4">
-                                <input type="text" class="form-control autonumber form-control-primary" value="" required="" id="" name="party_name">
+                                <input type="text" class="form-control autonumber form-control-primary" value="" required="" id="" name="party_name" pattern="[a-zA-Z\s]{2,50}" autocomplete="off">
                                 <span class="form-bar"></span>
                             </div>
                         </div>
@@ -101,19 +101,19 @@
                                 <label class="col-form-label">Order Issue Date</label>
                             </div>
                             <div class="col-sm-4">
-                                <input type="date" class="form-control autonumber form-control-primary" value="" required="" id="" name="issue_date">
+                                <input type="date" class="form-control autonumber form-control-primary" value="" required="" id="" name="issue_date" pattern="(0[1-9]|1[0-9]|2[0-9]|3[01])-(0[1-9]|1[012])-[0-9]{4}" autocomplete="off">
                                 <span class="form-bar"></span>
                             </div>
                             <div class="col-sm-2">
                                 <label class="col-form-label">Order Delivery<br> Date</label>
                             </div>
                             <div class="col-sm-4">
-                                <input type="date" class="form-control autonumber form-control-primary" value="" required="" id="" name="delivery_date">
+                                <input type="date" class="form-control autonumber form-control-primary" value="" required="" id="" name="delivery_date" pattern="(0[1-9]|1[0-9]|2[0-9]|3[01])-(0[1-9]|1[012])-[0-9]{4}" autocomplete="off">
                                 <span class="form-bar"></span>
                             </div>
                             <div class="col-sm-12">                                
                                 <div class="attBox">
-                                    <div class="attachDesign" data-designs="">
+                                    <div class="attachDesign" data-designs="" id="attach_design">
                                         <div class="attachDesignCon">
                                         </div>
                                         <div class="designScroller scrollRight"></div>
@@ -160,7 +160,7 @@
                         <label class="col-form-label">Design Rate (Unit Avg. Price)</label>
                     </div>
                     <div class="col-sm-4">
-                        <input type="number" class="form-control autonumber form-control-primary" value="" required="" id="" name="">
+                        <input type="number" class="form-control autonumber form-control-primary" value="" required="" id="" name="" autocomplete="off">
                         <span class="form-bar"></span>
                     </div>
                 </div>
@@ -295,40 +295,40 @@
 
                                 content += '<tr>';
                                 content += '<td colspan="3">Order Quantity Set.</td>';
-                                content += '<td><input class="form-control form-control-primary input_oqs input-required checkData" data-bangle-size="2.2" type="text" required="" title="" id="oqs22">';
+                                content += '<td><input class="form-control form-control-primary input_oqs input-required checkData" data-bangle-size="2.2" type="text" required="" title="" id="oqs22" autocomplete="off">';
                                 content += '</td>';
                                 content += '<td>';
-                                content += '<input class="form-control form-control-primary input_oqs input-required checkData" data-bangle-size="2.4" type="text" required="" title="" id="oqs24">';
+                                content += '<input class="form-control form-control-primary input_oqs input-required checkData" data-bangle-size="2.4" type="text" required="" title="" id="oqs24" autocomplete="off">';
                                 content += '</td>';
                                 content += '<td>';
-                                content += '<input id="oqs26" class="form-control form-control-primary input_oqs input-required checkData" data-bangle-size="2.6" type="text" required="" title="">';
+                                content += '<input id="oqs26" class="form-control form-control-primary input_oqs input-required checkData" data-bangle-size="2.6" type="text" required="" title="" autocomplete="off">';
                                 content += '</td>';
                                 content += '<td>';
-                                content += '<input id="oqs28" class="form-control form-control-primary input_oqs input-required checkData" data-bangle-size="2.8" type="text" required="" title="">';
+                                content += '<input id="oqs28" class="form-control form-control-primary input_oqs input-required checkData" data-bangle-size="2.8" type="text" required="" title="" autocomplete="off">';
                                 content += '</td>';
                                 content += '<td>';
-                                content += '<input id="oqs210" class="form-control form-control-primary input_oqs input-required checkData" data-bangle-size="2.10" type="text" required="" title="">';
+                                content += '<input id="oqs210" class="form-control form-control-primary input_oqs input-required checkData" data-bangle-size="2.10" type="text" required="" title="" autocomplete="off">';
                                 content += '</td>';
                                 content += '<td>';
-                                content += '<button style="width: 100%;" class="btn btn-success" id="calc_st_cnt" data-total-rows="'+input_index_counter+'">Calculate Stone Count</button>';
+                                content += '<button style="width: 100%;" class="btn btn-success" id="calc_st_cnt" data-total-rows="'+input_index_counter+'" disabled>Calculate Stone Count</button autocomplete="off">';
                                 content += '</td>';
                                 content += '</tr>';
                                 content += '<tr>';
                                 content += '<td colspan="3">Order Quantity Pcs.</td>';
                                 content += '<td>';
-                                content += '<input  id="oqp22" class="form-control form-control-primary input_oqp" data-bangle-size="2.2" type="text" required="" title="">';
+                                content += '<input  id="oqp22" class="form-control form-control-primary input_oqp" data-bangle-size="2.2" type="text" required="" title="" autocomplete="off">';
                                 content += '</td>';
                                 content += '<td>';
-                                content += '<input id="oqp24" class="form-control form-control-primary input_oqp" data-bangle-size="2.4" type="text"  required="" title="">';
+                                content += '<input id="oqp24" class="form-control form-control-primary input_oqp" data-bangle-size="2.4" type="text"  required="" title="" autocomplete="off">';
                                 content += '</td>';
                                 content += '<td>';
-                                content += '<input id="oqp26" class="form-control form-control-primary input_oqp" data-bangle-size="2.6" type="text" required="" title="">';
+                                content += '<input id="oqp26" class="form-control form-control-primary input_oqp" data-bangle-size="2.6" type="text" required="" title="" autocomplete="off">';
                                 content += '</td>';
                                 content += '<td>';
-                                content += '<input id="oqp28" class="form-control form-control-primary input_oqp" data-bangle-size="2.8" type="text" required="" title="">';
+                                content += '<input id="oqp28" class="form-control form-control-primary input_oqp" data-bangle-size="2.8" type="text" required="" title="" autocomplete="off">';
                                 content += '</td>';
                                 content += '<td>';
-                                content += '<input id="oqp210" class="form-control form-control-primary input_oqp" data-bangle-size="2.10" type="text"  required="" title="">';
+                                content += '<input id="oqp210" class="form-control form-control-primary input_oqp" data-bangle-size="2.10" type="text"  required="" title="" autocomplete="off">';
                                 content += '</td>';
                                 content += '<td>';
                                 content += '</td>';
@@ -337,13 +337,13 @@
                                 content += '<tr>';
                                 content += '<td>Rhodium</td>';
                                 content += '<td>';
-                                content += '<input id="rhodium1" class="form-control form-control-primary" type="text">';
+                                content += '<input id="rhodium1" class="form-control form-control-primary" type="text" autocomplete="off">';
                                 content += '</td>';
                                 content += '<td>';
-                                content += '<input id="rhodium2" class="form-control form-control-primary" type="text">';
+                                content += '<input id="rhodium2" class="form-control form-control-primary" type="text" autocomplete="off">';
                                 content += '</td>';
                                 content += '<td colspan="2">';
-                                content += '<input id="rhodium3" class="form-control form-control-primary" type="text">';
+                                content += '<input id="rhodium3" class="form-control form-control-primary" type="text" autocomplete="off">';
                                 content += '</td>';
                                 content += '<td colspan="5">';
                                 content += '</td>';
@@ -366,13 +366,14 @@
                                 
                                 $('.btnAddDesign').hide();
                                 $('.addDesign').hide();
-                                //confirm button disable 
+                                //confirm and add more button disable 
                                 $('#choosing_complete').attr('disabled', true);
+                                $('#choosing_more').attr('disabled', true);
                                 $('html, body').animate({
                                     scrollTop: ($("#dumpcontent").offset().top - 60)
                                 }, 500);
 
-                                //confirm enable after all value filled
+                                //calculate stone count button enable after all value filled
                                 $('input.checkData').on('keyup blur', function() {
                                     var empty = false;
                                     $('input.checkData').each(function() {
@@ -382,10 +383,12 @@
                                     });
 
                                     if(empty) {
-                                        $('#choosing_complete').attr('disabled', true);
+                                        $('#calc_st_cnt').attr('disabled', true);
                                     }
                                     else {
-                                        $('#choosing_complete').removeAttr('disabled');
+                                        $('#calc_st_cnt').removeAttr('disabled');
+                                        // console.log(1);
+                                        $('#calc_st_cnt').trigger('click');
                                     }
                                 });
                             }
@@ -397,8 +400,21 @@
             $('body').on('click', '#choosing_complete', function() {
                 $("#choosing_more").trigger('click');
                 $(".addDesign").hide();
-                $('#btn_submit').removeAttr('disabled');
+
+                var addedDesigns = $(this).attr('data-designs');
+                var designsToBeAdded = $(".attachDesign").attr('data-designs');
+                designsToBeAdded = designsToBeAdded.split(',');
+                console.log(designsToBeAdded);
+                if(designsToBeAdded.length > 1)
+                {
+                    $('#btn_submit').removeAttr('disabled');
+                }
+                else {
+                    $('#btn_submit').attr('disabled', 'disabled');
+                }
+
             });
+
 
             // onclick of addMore
             $('body').on('click', '#choosing_more', function() {
@@ -406,6 +422,7 @@
                 $('html, body').animate({
                     scrollTop: $(".btnAddDesign").offset().top
                 }, 500);
+                
                 
                 var contentToDump = '';
                 var img_preview_url = $("#img_preview").attr('data-imgurl');
@@ -421,7 +438,7 @@
                 contentToDump += '<h6 class="text-white m-b-0">';
                 contentToDump += '</h6>';
                 contentToDump += '</div>';
-                contentToDump += '<div class="col-4 text-right">';
+                contentToDump += '<div class="col-4 text-right content_div">';
                 
 
                 contentToDump += '<input type="hidden" name="designs['+get_design_no+'][design_no]" value="'+get_design_no+'">';
@@ -457,6 +474,17 @@
                 if(isDesignAlreadyAdded(get_design_no) == false) {
                     
                     $('.attachDesignCon').append(contentToDump);
+                    var addedDesigns = $(this).attr('data-designs');
+                    var designsToBeAdded = $(".attachDesign").attr('data-designs');
+                    designsToBeAdded = designsToBeAdded.split(',');
+                    console.log(designsToBeAdded);
+                    if(designsToBeAdded.length > 1)
+                    {
+                        $('#btn_submit').removeAttr('disabled');
+                    }
+                    else {
+                        $('#btn_submit').attr('disabled', 'disabled');
+                    }
 
                     if((cardCount*onCardTakesWidth) > cardContainerwidth) {
                         $(".designScroller").show();
@@ -518,6 +546,8 @@
             });
 
             $("body").on('click', '#calc_st_cnt', function() {
+                $('#choosing_complete').removeAttr('disabled');
+                $('#choosing_more').removeAttr('disabled');
                 var totalRows = $(this).attr("data-total-rows");
 
                 var show = checkIfEverythingFilledUp();
@@ -560,7 +590,7 @@
                     total = total + value;
                 }
                 $("#stone_count_"+i).val(total);
-                console.log(total);
+                // console.log(total);
             }
         }
 
@@ -571,12 +601,23 @@
                 designNumbers = designNumbers.split(',');
                 console.log(designNumbers);
                 var index = designNumbers.indexOf(designNumberToBeRemoved);
-                console.log(index);
+                // console.log(index);
                 if (index > -1) {
                     designNumbers.splice(index, 1);
+                    console.log(designNumbers);
+                    // $('#btn_submit').attr('disabled', 'disabled');
                 }
+                if(designNumbers.length > 1) {
+                    $("#btn_submit").removeAttr('disabled');
+                }
+                else {
+                    $("#btn_submit").attr('disabled', 'disabled');
+                    $('.addDesign').show();
+                }
+
                 $('.attachDesign').attr('data-designs', designNumbers );
                 $(this).closest( '.mycards' ).remove();
+                
             });
         });
 
@@ -590,5 +631,6 @@
                 }, 500);
             });
         });
+
     </script>
 @endsection

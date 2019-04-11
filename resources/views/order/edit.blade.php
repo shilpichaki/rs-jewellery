@@ -379,6 +379,8 @@
         $('#btn_update').attr('disabled', 'disabled');
 
         $(".calc_st_cnt").click(function () {
+            $('#btn_update').removeAttr('disabled');
+
             var totalRows = $(this).attr("data-total-rows");
             var designNumber = $(this).attr("data-design-no");
 
@@ -427,13 +429,7 @@
         return status;
     }
 
-    $(".input_oqs").keyup(function() {
-        if($(this).val()) {
-            $(this).closest("tbody").find(".calc_st_cnt").removeAttr('disabled');
-            $(this).closest("tbody").find(".calc_st_cnt").trigger( "click" );
-            // $("#calc_btn").removeAttr('disabled');
-        }
-    })
+    
 
     // on change order quantity set
     $("body").on('keyup', '.input_oqs', function() {
@@ -445,12 +441,12 @@
             var quantity = parseInt(value);
             $('.input_oqp[data-design-no="'+designNumber+'"][data-bangle-size="'+bangleSize+'"]').find("span").html((quantity*4));
             $('.input_oqp[data-design-no="'+designNumber+'"][data-bangle-size="'+bangleSize+'"]').val((quantity*4));
+
+            $(this).closest("tbody").find(".calc_st_cnt").removeAttr('disabled');
+            $(this).closest("tbody").find(".calc_st_cnt").trigger( "click" );
         }
     });
 
-    // // on deleteing design
-    // $("body").on("click", ".remove-design-btn", function() {
-    //     $(this).closest("li").remove();
-    // });
+
 </script>
 @endsection
